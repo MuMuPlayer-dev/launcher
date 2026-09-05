@@ -166,12 +166,62 @@ button:focus-visible{outline:2px solid rgba(255,255,255,.45);outline-offset:2px}
 .rp-start:hover{background:var(--cyan-hi)}
 .rp-start:active{background:#31b1c3;transform:translateY(1px)}
 
-/* ---------- simulator windows (frameless: no URL, no toolbar) ---------- */
-.simwin{position:fixed;z-index:70;border-radius:14px;overflow:hidden;background:#060a17;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.08);animation:winIn .38s var(--ease) both}
-.simwin iframe{width:100%;height:100%;border:0;display:block;background:#060a17}
+/* ================= SIMULATOR WINDOWS ================= */
+.simwin{position:fixed;z-index:70;display:flex;flex-direction:column;border-radius:12px;overflow:hidden;background:#060a17;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.08);animation:winIn .38s var(--ease) both}
+.simwin.max{border-radius:0}
 .simwin.closing{animation:winOut .22s ease forwards}
-@keyframes winIn{from{opacity:0;transform:scale(.94)}}
-@keyframes winOut{to{opacity:0;transform:scale(.95)}}
+@keyframes winIn{from{opacity:0;transform:scale(.95) translateY(10px)}}
+@keyframes winOut{to{opacity:0;transform:scale(.96)}}
+.simbody{flex:1;min-height:0;position:relative;background:#060a17}
+.simbody iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+/* custom title bar (replaces native chrome) */
+.simbar{height:40px;flex:none;background:#2b2b30;display:flex;align-items:stretch;touch-action:none}
+.sb-left{flex:1;min-width:0;display:flex;align-items:stretch}
+.sb-idle{display:flex;align-items:center;gap:9px;padding:0 12px;min-width:0;width:100%}
+.sbl-logo{height:20px;width:auto;display:block;flex:none}
+.sbl-name{font-size:13px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* tab mode: home tab (logo + device name) + open app tabs */
+.sbtabs{display:flex;align-items:flex-end;height:100%;min-width:0;overflow:hidden}
+.tab2{position:relative;display:flex;align-items:center;gap:8px;height:32px;padding:0 10px;margin-right:9px;color:#c9c9cc;font-size:12.5px;font-weight:600;white-space:nowrap;cursor:default}
+.tab2:first-child{margin-left:8px}
+.tab2 .hv{position:absolute;left:4px;right:4px;top:3px;bottom:3px;border-radius:7px;background:rgba(255,255,255,.09);opacity:0;transition:opacity .15s;pointer-events:none}
+.tab2:not(.sel):hover .hv{opacity:1}
+.tab2>*:not(.hv){position:relative}
+.tab2.sel{background:#43434a;color:#fff;border-radius:9px 9px 0 0}
+.tab2.sel::before{content:"";position:absolute;left:-7px;bottom:0;width:7px;height:7px;background:#43434a;border-top-left-radius:7px}
+.tab2.sel::after{content:"";position:absolute;right:-7px;bottom:0;width:7px;height:7px;background:#43434a;border-top-right-radius:7px}
+.tlogo{height:15px;width:auto;display:block;flex:none}
+.tic{width:16px;height:16px;flex:none}
+.tic svg{width:100%;height:100%;display:block}
+.tname{overflow:hidden;text-overflow:ellipsis}
+.tx{width:18px;height:18px;flex:none;border-radius:4px;display:flex;align-items:center;justify-content:center;color:#c9c9cc;opacity:.65;transition:background .12s,color .12s,opacity .12s}
+.tx:hover{background:#d5432f;color:#fff;opacity:1}
+.tx svg{width:8px;height:8px;display:block}
+.tdiv{width:1px;height:16px;margin:0 9px 8px;background:#4a4a52;flex:none}
+
+/* window control buttons */
+.sb-ctrl{display:flex;align-items:center;flex:none;padding-left:4px}
+.wbtn{width:44px;height:40px;display:flex;align-items:center;justify-content:center;color:#fff;transition:background .13s}
+.wbtn:hover{background:rgba(255,255,255,.09)}
+.wbtn:active{background:rgba(255,255,255,.05)}
+.wbtn.wx:hover{background:#d5432f}
+.wbtn.wx:active{background:#bd3a2a}
+.wbtn svg{width:15px;height:15px;display:block}
+.wmini{width:34px;height:30px;margin:0 3px;border-radius:4px;display:flex;align-items:center;justify-content:center;color:#e2e3e7;transition:background .13s}
+.wmini:hover{background:rgba(255,255,255,.10)}
+.wmini:active{background:rgba(255,255,255,.06)}
+.wmini svg{width:18px;height:14px;display:block}
+.wdiv{width:1px;height:20px;background:#45454b;margin:0 7px;flex:none}
+
+/* taskbar for minimized simulator windows */
+#taskbar{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);display:flex;gap:10px;z-index:200}
+#taskbar[hidden]{display:none}
+.taskbtn{display:flex;align-items:center;gap:9px;height:40px;padding:0 16px 0 12px;border-radius:12px;background:#333439;border:1px solid rgba(255,255,255,.1);box-shadow:0 10px 26px rgba(0,0,0,.4);font-size:13px;font-weight:600;color:#e9e9ec;transition:background .15s,transform .1s}
+.taskbtn:hover{background:#3d3e45}
+.taskbtn:active{transform:translateY(1px)}
+.taskbtn img{height:20px;width:auto;display:block}
 
 /* ---------- toasts ---------- */
 .toasts{position:fixed;right:26px;bottom:26px;display:flex;flex-direction:column;gap:10px;z-index:320}
@@ -389,7 +439,7 @@ button:focus-visible{outline:2px solid rgba(255,255,255,.45);outline-offset:2px}
       <p>No devices yet</p>
       <span>Click New to create an Android device.</span>
     </div>
-    <p class="hint" id="gridHint">Press the play button to power on a device — its window opens here. Press Esc to power it off.</p>
+    <p class="hint" id="gridHint">Press the play button to power on a device — its window opens here. Press Esc or the window's X to power it off.</p>
   </section>
 
   <!-- ================= REMOTE PLAY ================= -->
@@ -503,6 +553,7 @@ button:focus-visible{outline:2px solid rgba(255,255,255,.45);outline-offset:2px}
   </div>
 </div>
 
+<div id="taskbar" hidden></div>
 <div class="toasts" id="toasts"></div>
 
 <script>
@@ -639,7 +690,6 @@ function paintWall(g, W, H){
   g.strokeStyle = 'rgba(255,255,255,.35)'; g.lineWidth = 2.5;
   g.beginPath(); g.arc(mcx, mcy, mr - 1.2, -0.785 - 0.65, -0.785 + 0.65); g.stroke();
 
-  /* the mumu logo trio — bottoms aligned, equal gaps */
   const ROT = 15 * Math.PI / 180;
   const PW = m * 0.085, PL = m * 0.36, gap = m * 0.05;
   const halfW = (PW / 2) * Math.cos(ROT) + (PL / 2) * Math.sin(ROT);
@@ -817,8 +867,22 @@ function setState(inst, state) {
   saveDevices();
 }
 
-/* ---------------- simulator windows (frameless, no URL) ----------------
-   simulator.html must live in the same folder as this launcher file. */
+/* ============ SIMULATOR WINDOWS (independent, custom title bar, no URL) ============ */
+const LOGO_TOP  = 'https://mumu-player.fileion.com/storage/software/logos/2026/05/mumuplayer-logo.png';
+const LOGO_ALT  = 'https://images.dwncdn.net/images/t_app-icon-l/p/d520014e-daf4-451a-8a8c-9aacc33f4d25/2693453914/mumuplayer-1-logo';
+const barLogo = cls => `<img class="${cls}" src="${LOGO_TOP}" onerror="this.onerror=null;this.src='${LOGO_ALT}'" alt="" draggable="false">`;
+
+const WIC = {
+  keys: `<svg viewBox="0 0 22 16" aria-hidden="true"><rect x="1" y="1" width="20" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/><g fill="currentColor"><circle cx="4.6" cy="5.2" r=".95"/><circle cx="7.8" cy="5.2" r=".95"/><circle cx="11" cy="5.2" r=".95"/><circle cx="14.2" cy="5.2" r=".95"/><circle cx="17.4" cy="5.2" r=".95"/><circle cx="4.6" cy="7.9" r=".95"/><circle cx="7.8" cy="7.9" r=".95"/><circle cx="11" cy="7.9" r=".95"/><circle cx="14.2" cy="7.9" r=".95"/><circle cx="17.4" cy="7.9" r=".95"/></g><rect x="6.2" y="10.6" width="9.6" height="2" rx="1" fill="currentColor"/></svg>`,
+  sound: `<svg viewBox="0 0 20 16" aria-hidden="true"><path d="M2.5 5.8 H5.3 L9.3 2.6 V13.4 L5.3 10.2 H2.5 Z" fill="currentColor"/><path d="M12 5.6 a3.6 3.6 0 0 1 0 4.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M14.3 3.6 a6.6 6.6 0 0 1 0 8.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>`,
+  cast: `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M11.6 3 L4.6 8 L11.6 13 Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>`,
+  more: `<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><circle cx="3.4" cy="8" r="1.6"/><circle cx="8" cy="8" r="1.6"/><circle cx="12.6" cy="8" r="1.6"/></svg>`,
+  min: `<svg viewBox="0 0 16 16" aria-hidden="true"><line x1="3.5" y1="8" x2="12.5" y2="8" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>`,
+  max: `<svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.3" y="3.3" width="9.4" height="9.4" rx="1.4" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>`,
+  close: `<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M3 3 L11 11 M11 3 L3 11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`,
+  tx: `<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2.2 2.2 L7.8 7.8 M7.8 2.2 L2.2 7.8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>`
+};
+
 const simWins = new Map();    // device id → window element
 let zTop = 70, cascade = 0;
 
@@ -827,32 +891,200 @@ function raiseWin(wrap){
   if (z < zTop) wrap.style.zIndex = ++zTop;
 }
 
+/* ---- title-bar left side: idle (logo + name) or tab strip ---- */
+function renderBarLeft(wrap){
+  const inst = instances.find(i => i.id === +wrap.dataset.id);
+  const name = inst ? inst.name : 'Device';
+  const st = wrap._state;
+  const left = wrap.querySelector('.sb-left');
+  if (!st.apps.length){
+    left.innerHTML = `<div class="sb-idle">${barLogo('sbl-logo')}<span class="sbl-name"></span></div>`;
+    left.querySelector('.sbl-name').textContent = name;
+    return;
+  }
+  let html = `<div class="sbtabs">
+    <div class="tab2${st.sel === 'home' ? ' sel' : ''}" data-tab="home" role="button" aria-label="Home screen">
+      <span class="hv"></span>${barLogo('tlogo')}<span class="tname"></span>
+    </div>`;
+  let prevUn = false;
+  st.apps.forEach(a => {
+    const un = st.sel !== a.id;
+    if (un && prevUn) html += `<span class="tdiv"></span>`;
+    prevUn = un;
+    html += `<div class="tab2${un ? '' : ' sel'}" data-tab="${a.id}" role="button">
+      <span class="hv"></span><span class="tic">${a.icon}</span><span class="tname"></span>
+      <button class="tx" aria-label="Close ${a.name}">${WIC.tx}</button>
+    </div>`;
+  });
+  html += `</div>`;
+  left.innerHTML = html;
+  left.querySelectorAll('.tab2').forEach(t => {
+    const id = t.dataset.tab;
+    t.querySelector('.tname').textContent = id === 'home'
+      ? name
+      : (st.apps.find(a => a.id === id) || {}).name || '';
+  });
+}
+
+function postView(wrap){
+  const st = wrap._state;
+  const msg = st.sel === 'home'
+    ? { type: 'mumu-view', view: 'home' }
+    : { type: 'mumu-view', view: 'app', id: st.sel };
+  try { wrap._frame.contentWindow.postMessage(msg, '*'); } catch (e) {}
+}
+function selectTab(wrap, id){
+  if (wrap._state.sel === id) return;
+  wrap._state.sel = id;
+  renderBarLeft(wrap);
+  postView(wrap);
+}
+function closeAppTab(wrap, id){
+  const st = wrap._state;
+  st.apps = st.apps.filter(a => a.id !== id);
+  if (st.sel === id) st.sel = 'home';
+  renderBarLeft(wrap);
+  try { wrap._frame.contentWindow.postMessage({ type: 'mumu-app-closed', id }, '*'); } catch (e) {}
+  postView(wrap);
+}
+
+/* ---- window controls ---- */
+function toggleMax(wrap){
+  const st = wrap._state;
+  if (st.rect){
+    Object.assign(wrap.style, st.rect);
+    st.rect = null;
+    wrap.classList.remove('max');
+  } else {
+    st.rect = { left: wrap.style.left, top: wrap.style.top, width: wrap.style.width, height: wrap.style.height };
+    Object.assign(wrap.style, { left: '0px', top: '0px', width: innerWidth + 'px', height: innerHeight + 'px' });
+    wrap.classList.add('max');
+  }
+  raiseWin(wrap);
+}
+function minimizeWin(wrap){
+  wrap._state.min = true;
+  wrap.style.display = 'none';
+  updateTaskbar();
+}
+function restoreWin(wrap){
+  wrap._state.min = false;
+  wrap.style.display = '';
+  raiseWin(wrap);
+  updateTaskbar();
+}
+function updateTaskbar(){
+  const tb = $('#taskbar');
+  const mins = [...simWins.values()].filter(w => w._state.min);
+  tb.innerHTML = '';
+  mins.forEach(w => {
+    const inst = instances.find(i => i.id === +w.dataset.id);
+    const b = document.createElement('button');
+    b.className = 'taskbtn';
+    b.innerHTML = `${barLogo('')}<span></span>`;
+    b.lastElementChild.textContent = inst ? inst.name : 'Device';
+    b.addEventListener('click', () => restoreWin(w));
+    tb.appendChild(b);
+  });
+  tb.hidden = mins.length === 0;
+}
+
+/* ---- dragging ---- */
+function startDrag(wrap, e){
+  if (wrap._state.rect) return;               // no dragging while maximized
+  const bar = wrap.querySelector('.simbar');
+  const sx = e.clientX, sy = e.clientY;
+  const ox = parseFloat(wrap.style.left) || 0, oy = parseFloat(wrap.style.top) || 0;
+  try { bar.setPointerCapture(e.pointerId); } catch (err) {}
+  const move = ev => {
+    let nx = ox + ev.clientX - sx, ny = oy + ev.clientY - sy;
+    nx = Math.max(0, Math.min(innerWidth - wrap.offsetWidth, nx));
+    ny = Math.max(0, Math.min(innerHeight - 44, ny));
+    wrap.style.left = nx + 'px';
+    wrap.style.top  = ny + 'px';
+  };
+  const up = () => {
+    removeEventListener('pointermove', move);
+    removeEventListener('pointerup', up);
+  };
+  addEventListener('pointermove', move);
+  addEventListener('pointerup', up);
+}
+
+/* ---- create a window ---- */
 function openSimulator(inst) {
-  const existing = simWins.get(inst.id);
-  if (existing) { raiseWin(existing); return; }
-  const wrap = document.createElement('div');
+  let wrap = simWins.get(inst.id);
+  if (wrap){
+    if (wrap._state.min) restoreWin(wrap);
+    raiseWin(wrap);
+    return;
+  }
+  wrap = document.createElement('div');
   wrap.className = 'simwin';
   wrap.dataset.id = inst.id;
-  const data = encodeURIComponent(JSON.stringify({
-    id: inst.id, name: inst.name, version: inst.version,
-    orientation: inst.orientation, mode: inst.mode, smallDisk: inst.smallDisk
-  }));
-  const w = Math.max(320, Math.min(1152, innerWidth - 56));
-  const h = Math.max(240, Math.min(672, innerHeight - 76));
+  wrap._state = { apps: [], sel: 'home', min: false, rect: null };
+
+  const w = Math.max(360, Math.min(1152, innerWidth - 72));
+  const h = Math.max(280, Math.min(672, innerHeight - 90));
   const off = (cascade++ % 5) * 26;
   wrap.style.width = w + 'px';
   wrap.style.height = h + 'px';
   wrap.style.left = Math.max(8, Math.round((innerWidth - w) / 2) + off - 52) + 'px';
-  wrap.style.top  = Math.max(8, Math.round((innerHeight - h) / 2) + off - 40) + 'px';
+  wrap.style.top  = Math.max(8, Math.round((innerHeight - h) / 2) + off - 36) + 'px';
   wrap.style.zIndex = ++zTop;
+
+  wrap.innerHTML = `
+    <div class="simbar">
+      <div class="sb-left"></div>
+      <div class="sb-ctrl">
+        <button class="wmini" data-w="keys" title="Keyboard" aria-label="Keyboard">${WIC.keys}</button>
+        <button class="wmini" data-w="sound" title="Sound" aria-label="Sound">${WIC.sound}</button>
+        <button class="wmini" data-w="cast" title="Play" aria-label="Play">${WIC.cast}</button>
+        <button class="wmini" data-w="more" title="More" aria-label="More">${WIC.more}</button>
+        <span class="wdiv"></span>
+        <button class="wbtn" data-w="min" title="Minimize" aria-label="Minimize">${WIC.min}</button>
+        <button class="wbtn" data-w="max" title="Maximize" aria-label="Maximize">${WIC.max}</button>
+        <button class="wbtn wx" data-w="close" title="Close" aria-label="Close">${WIC.close}</button>
+      </div>
+    </div>
+    <div class="simbody"></div>`;
+
+  const body = wrap.querySelector('.simbody');
   const frame = document.createElement('iframe');
+  const data = encodeURIComponent(JSON.stringify({
+    id: inst.id, name: inst.name, version: inst.version,
+    orientation: inst.orientation, mode: inst.mode, smallDisk: inst.smallDisk
+  }));
   frame.src = 'simulator.html#' + data;
   frame.title = inst.name;
-  wrap.appendChild(frame);
+  body.appendChild(frame);
+  wrap._frame = frame;
+
+  renderBarLeft(wrap);
+
+  const bar = wrap.querySelector('.simbar');
+  bar.addEventListener('pointerdown', e => {
+    if (e.button !== 0) return;
+    if (e.target.closest('button, .tab2')) return;   // buttons and tabs aren't drag handles
+    startDrag(wrap, e);
+  });
+  bar.addEventListener('click', e => {
+    const t = e.target.closest('.tab2');
+    if (!t || !bar.contains(t)) return;
+    if (e.target.closest('.tx')) { closeAppTab(wrap, t.dataset.tab); return; }
+    selectTab(wrap, t.dataset.tab);
+  });
+  wrap.querySelector('[data-w="close"]').addEventListener('click', () => {
+    const i = instances.find(x => x.id === +wrap.dataset.id);
+    if (i) powerOff(i);
+  });
+  wrap.querySelector('[data-w="max"]').addEventListener('click', () => toggleMax(wrap));
+  wrap.querySelector('[data-w="min"]').addEventListener('click', () => minimizeWin(wrap));
+  /* the ..., play, sound and keyboard buttons are wired later */
+
+  wrap.addEventListener('mousedown', () => raiseWin(wrap));
   document.body.appendChild(wrap);
   simWins.set(inst.id, wrap);
-  wrap.addEventListener('mousedown', () => raiseWin(wrap));
-  frame.addEventListener('load', () => { try { frame.focus(); } catch (e) {} });
 }
 
 function closeSimulator(inst) {
@@ -861,29 +1093,47 @@ function closeSimulator(inst) {
   simWins.delete(inst.id);
   wrap.classList.add('closing');
   setTimeout(() => wrap.remove(), 230);
+  updateTaskbar();
 }
 
 /* bring a window to front when its simulator is clicked (iframe focus) */
 setInterval(() => {
   const ae = document.activeElement;
-  if (ae && ae.tagName === 'IFRAME' && ae.parentElement && ae.parentElement.classList.contains('simwin')){
-    raiseWin(ae.parentElement);
+  if (ae && ae.tagName === 'IFRAME' && ae.parentElement && ae.parentElement.classList.contains('simbody')){
+    raiseWin(ae.parentElement.closest('.simwin'));
   }
 }, 500);
 
-/* simulator says Esc was pressed inside it → power that device off */
+/* messages from the simulator windows */
 addEventListener('message', e => {
   const d = e.data;
-  if (!d || d.type !== 'mumu-close' || d.id == null) return;
-  const inst = instances.find(i => i.id === d.id);
-  if (inst) powerOff(inst);
+  if (!d || typeof d !== 'object') return;
+  if (d.type === 'mumu-close' && d.id != null){           // Esc pressed inside the simulator
+    const inst = instances.find(i => i.id === d.id);
+    if (inst) powerOff(inst);
+    return;
+  }
+  if (d.type === 'mumu-open' && d.id != null && d.app && d.app.id){   // an app was opened
+    const wrap = simWins.get(d.id);
+    if (!wrap) return;
+    const st = wrap._state;
+    if (!st.apps.some(a => a.id === d.app.id)){
+      st.apps.push({ id: String(d.app.id), name: String(d.app.name || ''), icon: String(d.app.icon || '') });
+    }
+    st.sel = String(d.app.id);
+    renderBarLeft(wrap);
+  }
 });
 
-/* Esc while the launcher itself has focus → power off the top window */
+/* Esc while the launcher has focus → power off the top window */
 document.addEventListener('keydown', e => {
   if (e.key !== 'Escape' || !simWins.size) return;
   let top = null, z = -1;
-  simWins.forEach(w => { const zi = +w.style.zIndex || 70; if (zi > z) { z = zi; top = w; } });
+  simWins.forEach(w => {
+    if (w._state.min) return;
+    const zi = +w.style.zIndex || 70;
+    if (zi > z) { z = zi; top = w; }
+  });
   if (!top) return;
   const inst = instances.find(i => i.id === +top.dataset.id);
   if (inst) powerOff(inst);
@@ -1008,6 +1258,8 @@ function openDeviceMenu(inst, anchor) {
         inst.name = name;
         const card = grid.querySelector(`.card[data-id="${inst.id}"]`);
         if (card) card.querySelector('h3').textContent = name;
+        const wrap = simWins.get(inst.id);
+        if (wrap) renderBarLeft(wrap);       // window title/tab follows the rename
         saveDevices();
         closeCtx();
         toast(`Renamed to ${name}.`);
@@ -1088,7 +1340,7 @@ function setMode(next) {
   $('#gridHint').textContent =
     mode === 'batch'   ? 'Select instances to batch-start or batch-stop them.' :
     mode === 'arrange' ? 'Drag instances to reorder them.' :
-                         'Press the play button to power on a device — its window opens here. Press Esc to power it off.';
+                         'Press the play button to power on a device — its window opens here. Press Esc or the window\u2019s X to power it off.';
   syncBulk();
 }
 
