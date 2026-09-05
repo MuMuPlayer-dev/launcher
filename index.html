@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MuMuPlayer — Launcher</title>
+<link rel="icon" href="https://images.dwncdn.net/images/t_app-icon-l/p/d520014e-daf4-451a-8a8c-9aacc33f4d25/2693453914/mumuplayer-1-logo">
+<style>
+:root{
+  --bg:#1a1a1c; --panel:#29292c; --card-hi:rgba(255,255,255,.05);
+  --ink:#f1f1f3; --dim:#9a9aa1; --faint:#70717a; --icon-gray:#b7bbc2;
+  --cyan:#3cc3d6; --cyan-hi:#54d0e1; --cyan-ink:#0b0c0e;
+  --blue:#3cc3d6;
+  --red:#d5432f; --red-hi:#e2503b; --red-txt:#e0654f;
+  --menu:#35353b; --menu-top:#2b2b30; --menu-btn:#2c2c31; --menu-btn-hi:#34343a;
+  --opt-w:170px; --opt-h:40px;
+  --header-h:68px; --side-w:104px; --ease:cubic-bezier(.16,1,.3,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:'Segoe UI','Segoe UI Variable Text',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;overflow:hidden;-webkit-font-smoothing:antialiased;
+     user-select:none;-webkit-user-select:none}         /* no text caret / selection anywhere */
+input{user-select:text;-webkit-user-select:text}        /* …except real input fields */
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+::selection{background:rgba(60,195,214,.35)}
+button:focus{outline:none}
+button:focus-visible{outline:2px solid rgba(255,255,255,.45);outline-offset:2px}
+
+/* ---------- brand row ---------- */
+.brand{position:fixed;top:0;left:0;right:0;height:var(--header-h);display:flex;align-items:center;gap:12px;padding-left:24px;animation:fadeDown .55s var(--ease) both}
+.logo{width:34px;height:34px;border-radius:9px;display:block}
+.brand-name{font-size:16.5px;font-weight:600;color:#fff;letter-spacing:.01em}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-8px)}}
+
+/* ---------- sidebar tabs ---------- */
+.tabs{position:fixed;top:var(--header-h);left:0;bottom:0;width:var(--side-w);display:flex;flex-direction:column;align-items:center;gap:10px;padding-top:22px}
+.tab{width:86px;border-radius:15px;padding:14px 0 12px;display:flex;flex-direction:column;align-items:center;gap:9px;transition:background .18s ease;animation:fadeUp .5s var(--ease) both}
+.tab:nth-child(2){animation-delay:.08s}
+.tab:hover{background:rgba(255,255,255,.07)}
+.tab.active{background:rgba(255,255,255,.10)}
+.tabicon{width:36px;height:36px;display:block}
+.tab-label{font-size:11.5px;font-weight:600;line-height:1.3;letter-spacing:.01em;text-align:center;color:var(--dim);transition:color .2s}
+.tab.active .tab-label{color:#fff}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}}
+.tabicon *{transition:fill .22s ease,stroke .22s ease}
+.p-big,.r-big{fill:none;stroke:var(--icon-gray);stroke-width:2.4}
+.p-small,.r-small{fill:none;stroke:var(--icon-gray);stroke-width:2.1}
+.p-line{stroke:var(--icon-gray);stroke-width:2.2;stroke-linecap:round}
+.r-line{stroke:var(--icon-gray);stroke-width:2.6;stroke-linecap:round}
+.r-arc{fill:none;stroke:var(--icon-gray);stroke-width:2.4;stroke-linecap:round}
+.tab.active .p-big,.tab.active .r-big{fill:var(--icon-gray);stroke:#fff}
+.tab.active .p-small,.tab.active .r-small{fill:#fff;stroke:#101013}
+.tab.active .p-line{stroke:#101013}
+.tab.active .r-line{stroke:#fff}
+.tab.active .r-arc{stroke:#fff}
+
+/* ---------- main panel ---------- */
+.panel{position:fixed;top:var(--header-h);left:var(--side-w);right:0;bottom:0;background:var(--panel);border-top-left-radius:26px;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:#3a3a41 transparent;animation:panelIn .5s var(--ease) both}
+.panel::-webkit-scrollbar{width:10px}
+.panel::-webkit-scrollbar-thumb{background:#3a3a41;border-radius:6px;border:2px solid var(--panel)}
+@keyframes panelIn{from{opacity:0}}
+.tab-panel{display:none;padding:34px 40px 44px}
+.tab-panel.active{display:block;animation:rise .55s var(--ease) both}
+@keyframes rise{from{opacity:0;transform:translateY(38px)}}
+/* devices tab content is full-bleed so row highlights run edge to edge */
+.tab-panel[data-panel="devices"]{padding-left:0;padding-right:0}
+/* remote tab fills the panel height: heading on top, Start button at the bottom */
+.tab-panel[data-panel="remote"].active{display:flex;flex-direction:column;min-height:100%}
+
+/* ---------- devices toolbar ---------- */
+.zone{width:50%;min-width:430px;max-width:680px;margin:0 40px}
+.toolbar{display:flex;gap:14px}
+.tbtn{flex:1;height:50px;border-radius:13px;display:flex;align-items:center;justify-content:center;gap:10px;font-weight:600;font-size:15px;background:#3a3b40;position:relative;transition:background .15s ease,transform .1s ease,box-shadow .15s ease}
+.tbtn:hover{background:#45464d}
+.tbtn:active{transform:translateY(1px)}
+.tbtn.on{box-shadow:inset 0 0 0 1.6px var(--cyan)}
+.tbtn-primary{background:var(--cyan);color:var(--cyan-ink)}
+.tbtn-primary:hover{background:var(--cyan-hi)}
+.tbtn-primary:active{background:#31b1c3}
+.tbtn svg{width:20px;height:20px;flex:none}
+.badge{position:absolute;top:-7px;right:12px;min-width:22px;height:22px;padding:0 6px;border-radius:11px;background:var(--cyan);color:var(--cyan-ink);font-size:12px;font-weight:700;display:none;align-items:center;justify-content:center}
+.tbtn.has-sel .badge{display:flex}
+
+/* ---------- batch action bar ---------- */
+.bulkbar{display:none;align-items:center;justify-content:space-between;gap:12px;margin-top:16px;padding:10px 12px 10px 16px;border-radius:12px;background:rgba(255,255,255,.04)}
+.bulkbar.show{display:flex;animation:rise .35s var(--ease) both}
+.bulkbar>span{font-size:13.5px;color:var(--dim);font-weight:500}
+.bulk-actions{display:flex;gap:8px}
+.mini{padding:8px 15px;border-radius:9px;background:#3f4045;font-size:13px;font-weight:600;transition:background .15s}
+.mini:hover{background:#494a51}
+.mini.primary{background:var(--cyan);color:var(--cyan-ink)}
+.mini.primary:hover{background:var(--cyan-hi)}
+
+/* ---------- device rows ---------- */
+.inst-head{display:flex;align-items:baseline;justify-content:space-between;margin:34px 40px 12px}
+.inst-head h2{font-size:12.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#8f9096}
+.inst-count{font-size:12.5px;color:var(--faint);font-variant-numeric:tabular-nums}
+.grid{display:flex;flex-direction:column;gap:2px;width:100%}
+.card{position:relative;display:flex;align-items:center;gap:26px;padding:14px 40px;background:transparent;border-radius:0;transition:background .16s ease,box-shadow .16s ease,opacity .22s ease,transform .22s ease}
+.card:hover{background:var(--card-hi)}
+.card.enter{animation:cardIn .5s var(--ease) both}
+@keyframes cardIn{from{opacity:0;transform:translateY(16px) scale(.985)}}
+.card.selected{box-shadow:inset 0 0 0 2px var(--cyan)}
+.grid.selecting .card{cursor:pointer}
+.grid.arranging .card{cursor:grab}
+.grid.arranging .card:active{cursor:grabbing}
+.card.dragging{opacity:.35}
+.card h3{font-size:16.5px;font-weight:600}
+.meta{font-size:13px;color:var(--dim);margin-top:4px}
+.status{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:13px;color:var(--dim)}
+.card[data-state="running"] .status{color:#c6cbd1}
+.card .dot{width:7px;height:7px;border-radius:50%;background:#5a5b62;flex:none}
+.card[data-state="running"] .dot{background:var(--cyan);animation:softPulse 2.4s ease-in-out infinite}
+.card[data-state="booting"] .dot{background:var(--cyan);animation:softPulse .8s ease-in-out infinite}
+@keyframes softPulse{50%{opacity:.3}}
+.info{flex:1;min-width:0}
+
+/* ---------- device preview ---------- */
+.pv{position:relative;width:216px;height:122px;flex:none;border-radius:12px;overflow:hidden;background:#0b0c0e;box-shadow:inset 0 0 0 1px rgba(255,255,255,.07)}
+.screen{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;transition:filter .35s ease}
+.screen>*{animation:scrIn .45s ease}
+@keyframes scrIn{from{opacity:0}}
+.hs{position:absolute;inset:0;width:100%;height:100%}
+.card[data-state="stopped"] .screen,.card[data-state="stopping"] .screen{filter:brightness(.42) saturate(.72)}
+.bootd{width:42px;height:auto;color:#9aa0a6;animation:bootPulse 1s ease-in-out infinite}
+@keyframes bootPulse{50%{opacity:.3}}
+.pbar{position:absolute;left:0;right:0;bottom:0;height:26px;display:flex;align-items:center;justify-content:center;gap:7px;background:rgba(158,162,170,.30);transition:height .35s var(--ease)}
+.pv:hover .pbar{height:100%}
+.pb-ic{width:13px;height:13px;display:block;color:var(--icon-gray);transition:opacity .18s}
+.pb-tx{font-size:12px;font-weight:600;color:var(--icon-gray);white-space:nowrap;transition:opacity .18s}
+.pv:hover .pb-ic,.pv:hover .pb-tx{opacity:0}
+.card[data-state="running"] .pb-ic,.card[data-state="booting"] .pb-ic{color:var(--cyan)}
+.play{position:absolute;left:50%;bottom:0;width:40px;height:40px;border-radius:50%;background:var(--icon-gray);display:flex;align-items:center;justify-content:center;transform:translateX(-50%);opacity:0;pointer-events:none;transition:bottom .35s var(--ease),opacity .25s ease .06s,background .15s}
+.play:hover{background:#ccd1d7}
+.play svg{width:17px;height:17px;display:block}
+.pv:hover .play{opacity:1;bottom:calc(50% - 20px);pointer-events:auto}
+.card[data-state="booting"] .play,.card[data-state="stopping"] .play{opacity:0!important;pointer-events:none!important}
+
+/* ---------- circular action buttons ---------- */
+.cbtns{margin-left:auto;display:flex;align-items:center;gap:16px;flex:none}
+.cbtn{position:relative;width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.cb-bg{position:absolute;inset:0;border-radius:50%;background:#3a3b40;transition:transform .18s var(--ease),background .18s}
+.cbtn:hover .cb-bg{transform:scale(1.13);background:#45464d}
+.cbtn:active .cb-bg{transform:scale(1.05)}
+.cb-ic{position:relative;width:17px;height:17px;display:flex}
+.cb-ic svg{width:100%;height:100%;display:block}
+.card[data-state="booting"] .cbtn[data-act="power"],
+.card[data-state="stopping"] .cbtn[data-act="power"]{opacity:.4;pointer-events:none}
+.check{position:absolute;top:14px;right:14px;width:20px;height:20px;border-radius:6px;border:1.5px solid #5c5e66;display:none}
+.grid.selecting .check{display:block}
+.card.selected .check{background:var(--cyan);border-color:var(--cyan)}
+.card.selected .check::after{content:"";position:absolute;left:6px;top:3px;width:5px;height:9px;border:solid var(--cyan-ink);border-width:0 2px 2px 0;transform:rotate(45deg)}
+.grip{position:absolute;top:14px;right:14px;width:15px;height:15px;fill:#8e8f96;display:none}
+.grid.arranging .grip{display:block}
+
+/* empty state — fully removed (box, icon, text) once any device exists */
+.empty{display:flex;flex-direction:column;align-items:center;gap:5px;margin:18px 40px 0;padding:46px 20px;border:1.5px dashed #45464c;border-radius:16px;text-align:center}
+.empty[hidden]{display:none}
+.empty svg{width:34px;height:34px;margin-bottom:9px}
+.empty p{font-size:14.5px;font-weight:600;color:#c9c9cc}
+.empty span{font-size:12.5px;color:var(--faint)}
+.hint{margin:18px 40px 0;font-size:12.5px;color:var(--faint)}
+
+/* ---------- remote play (StarDesk) — horizontally centered ---------- */
+.rp-hero{max-width:640px;margin:0 auto;text-align:center}
+.rp-title{font-size:24px;font-weight:600;color:#fff;line-height:1.25}
+.rp-sub{margin-top:10px;font-size:14px;color:var(--dim);line-height:1.55}
+.rp-foot{margin-top:auto;padding-top:24px;padding-bottom:10px;display:flex;justify-content:center}
+.rp-start{height:48px;min-width:170px;padding:0 46px;border-radius:12px;background:var(--blue);color:var(--cyan-ink);font-size:15px;font-weight:600;transition:background .15s,transform .1s}
+.rp-start:hover{background:var(--cyan-hi)}
+.rp-start:active{background:#31b1c3;transform:translateY(1px)}
+
+/* ---------- toasts ---------- */
+.toasts{position:fixed;right:26px;bottom:26px;display:flex;flex-direction:column;gap:10px;z-index:60}
+.toast{display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:12px;background:#333439;border:1px solid rgba(255,255,255,.09);font-size:13.5px;box-shadow:0 10px 26px rgba(0,0,0,.35);animation:toastIn .4s var(--ease)}
+.toast.out{animation:toastOut .3s ease forwards}
+@keyframes toastIn{from{opacity:0;transform:translateY(12px)}}
+@keyframes toastOut{to{opacity:0;transform:translateY(8px)}}
+.toast .tdot{width:7px;height:7px;border-radius:50%;background:var(--cyan);flex:none}
+
+/* ================= CREATE DEVICE MENU ================= */
+.veil{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;background:rgba(9,9,11,.6);opacity:0;transition:opacity .3s ease}
+.veil.show{opacity:1}
+.veil[hidden]{display:none}
+.dlg{position:relative;width:768px;max-width:calc(100vw - 36px);max-height:calc(100vh - 32px);overflow:auto;background:var(--menu);border-radius:16px;box-shadow:0 30px 80px rgba(0,0,0,.55);animation:dlgIn .38s cubic-bezier(.2,.85,.3,1) .12s both}
+@keyframes dlgIn{from{opacity:0;transform:translateY(18px) scale(.965)}}
+.dlg:focus{outline:none}
+.dlg-top{display:flex;align-items:center;justify-content:space-between;height:46px;padding-left:20px;background:var(--menu-top)}
+.dlg-title{font-size:14px;font-weight:600;color:#fff;letter-spacing:.01em}
+.dlg-x{width:46px;height:46px;flex:none;display:flex;align-items:center;justify-content:center;color:#fff;transition:background .16s ease}
+.dlg-x:hover{background:#d5432f}
+.dlg-x:active{background:#bd3a2a}
+.dlg-x svg{width:13px;height:13px}
+.dlg-body{padding:22px 24px 10px}
+.frow{display:grid;grid-template-columns:170px minmax(0,1fr);column-gap:16px;align-items:center;margin-bottom:18px}
+.frow-top{align-items:start}
+.frow-top .flabel{padding-top:12px}
+.flabel{font-size:13.5px;font-weight:500;color:#e9e9ec}
+.seg{display:flex;gap:12px}
+.opt{width:var(--opt-w);height:var(--opt-h);flex:none;border-radius:10px;background:var(--menu-btn);border:1.5px solid transparent;color:#a9aab0;font-size:13.5px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:9px;transition:background .16s,border-color .16s,color .16s}
+.opt:hover{background:var(--menu-btn-hi)}
+.opt.sel{border-color:var(--blue);color:#fff;background:rgba(60,195,214,.10)}
+.oicon{width:19px;height:19px;flex:none}
+.mode-col{min-width:0}
+.mode-desc{margin-top:10px;font-size:12.5px;line-height:1.5;color:var(--dim);min-height:38px}
+.stepper{display:flex;gap:10px;height:var(--opt-h)}
+.numbox{position:relative;width:var(--opt-w);background:var(--menu-btn);border:1.5px solid transparent;border-radius:10px;display:flex;align-items:center;transition:border-color .16s,background .16s}
+.numbox:focus-within{border-color:var(--blue)}
+#numIn{flex:1;min-width:0;background:none;border:0;outline:0;color:#fff;font:inherit;font-size:14px;font-weight:600;text-align:center;font-variant-numeric:tabular-nums;padding:0 24px 0 12px;caret-color:var(--blue)}
+.num-x{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#8d8e95;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .18s,visibility .18s,color .15s,background .15s}
+.num-x:hover{color:#fff;background:#3f3f47}
+.num-x svg{width:9px;height:9px}
+.stepper:focus-within .num-x{opacity:1;visibility:visible;pointer-events:auto}
+.spin{display:flex;flex-direction:column;gap:2px;width:30px;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .18s,visibility .18s}
+.stepper:focus-within .spin,.stepper:hover .spin{opacity:1;visibility:visible;pointer-events:auto}
+.spin-btn{flex:1;min-height:0;border-radius:8px;background:var(--menu-btn);color:#a9aab0;display:flex;align-items:center;justify-content:center;transition:background .15s,color .15s}
+.spin-btn:hover{background:var(--menu-btn-hi);color:#fff}
+.spin-btn:active{background:#3c3c44}
+.spin-btn svg{width:10px;height:10px}
+.collapse{display:grid;grid-template-rows:0fr}
+.tgl-row{grid-template-rows:1fr}
+.tgl-row.closed{grid-template-rows:0fr}
+.adv.open{grid-template-rows:1fr}
+.tgl-inner{overflow:hidden;min-height:0;visibility:visible;transition:visibility 0s .5s;display:flex;justify-content:center}
+.tgl-row.closed .tgl-inner{visibility:hidden}
+.adv-toggle{display:inline-flex;align-items:center;gap:7px;color:var(--blue);font-size:13.5px;font-weight:600;padding:5px 2px;margin-bottom:14px;border-radius:6px;transition:opacity .22s,filter .15s}
+.adv-toggle:hover{filter:brightness(1.22)}
+.adv-toggle svg{width:11px;height:11px;transition:transform .2s}
+.adv-toggle:hover svg{transform:translateY(1.5px)}
+.tgl-row.closed .adv-toggle{opacity:0}
+.adv-inner{overflow:hidden;min-height:0;visibility:hidden;transform:translateY(34px);opacity:0;transition:transform .48s cubic-bezier(.25,.9,.3,1),opacity .34s ease,visibility 0s .5s}
+.adv.open .adv-inner{visibility:visible;transform:none;opacity:1;transition:transform .48s cubic-bezier(.25,.9,.3,1),opacity .34s ease,visibility 0s 0s}
+.adv-inner .frow:last-child{margin-bottom:0}
+.switch{position:relative;width:46px;height:24px;flex:none;border-radius:99px;border:2px solid #9a9aa1;cursor:pointer;transition:border-color .22s}
+.sw-fill{position:absolute;inset:0;border-radius:99px;background:var(--blue);opacity:0;transition:opacity .22s}
+.sw-knob{position:absolute;top:50%;left:4px;width:13px;height:13px;border-radius:50%;background:#9a9aa1;transform:translateY(-50%);transition:left .22s ease,background-color .22s}
+.switch.on{border-color:var(--blue)}
+.switch.on .sw-fill{opacity:1}
+.switch.on .sw-knob{left:25px;background:var(--menu)}
+.dlg-foot{display:flex;justify-content:center;padding:12px 24px 22px}
+.dlg-create{height:44px;padding:0 48px;border-radius:12px;background:var(--cyan);color:var(--cyan-ink);font-size:15px;font-weight:700;letter-spacing:.01em;transition:background .15s,transform .1s}
+.dlg-create:hover{background:var(--cyan-hi)}
+.dlg-create:active{background:#31b1c3;transform:translateY(1px)}
+
+/* ================= DEVICE CONTEXT MENU ================= */
+.ctxmenu{position:fixed;z-index:90;min-width:216px;background:var(--menu);border-radius:12px;padding:6px;box-shadow:0 16px 44px rgba(0,0,0,.5);animation:ctxIn .16s ease both}
+@keyframes ctxIn{from{opacity:0;transform:translateY(-4px) scale(.97)}}
+.ctx-item{width:100%;display:flex;align-items:center;gap:11px;padding:9px 10px;border-radius:8px;font-size:13px;font-weight:600;color:#e9e9ec;transition:background .13s}
+.ctx-item:hover{background:rgba(255,255,255,.08)}
+.ctx-item svg{width:18px;height:18px;flex:none;color:#fff}
+.ctx-item.danger{color:var(--red-txt)}
+.ctx-item.danger svg{color:var(--red-txt)}
+.ctx-item.danger:hover{background:rgba(224,101,79,.14)}
+.ctx-sub{padding:12px;width:256px}
+.ctx-title{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#8f9096;margin-bottom:9px}
+.ctx-note{font-size:12.5px;line-height:1.55;color:var(--dim)}
+.ctx-note b{color:#e9e9ec;font-weight:600}
+.ctx-input{width:100%;height:38px;border-radius:9px;background:var(--menu-btn);border:1.5px solid transparent;color:#fff;font:inherit;font-size:13.5px;font-weight:500;padding:0 12px;outline:none;transition:border-color .15s}
+.ctx-input:focus{border-color:var(--cyan)}
+.ctx-row{display:flex;gap:8px;margin-top:12px}
+.ctx-btn{flex:1;height:36px;border-radius:9px;font-size:13px;font-weight:600;background:#3f4045;transition:background .15s}
+.ctx-btn:hover{background:#494a51}
+.ctx-btn.primary{background:var(--cyan);color:var(--cyan-ink)}
+.ctx-btn.primary:hover{background:var(--cyan-hi)}
+.ctx-btn.danger{background:var(--red);color:#fff}
+.ctx-btn.danger:hover{background:var(--red-hi)}
+
+@media (max-width:820px){
+  .dlg{width:calc(100vw - 36px)}
+  .frow{grid-template-columns:1fr;row-gap:8px}
+  .frow-top .flabel{padding-top:0}
+  .seg{width:100%}
+  .opt{width:100%;flex:1}
+  .mode-desc{width:100%;min-height:0}
+  .numbox{width:auto;flex:1}
+}
+@media (max-width:760px){
+  .zone{width:100%;min-width:0;margin:0 22px}
+  .inst-head,.empty,.hint{margin-left:22px;margin-right:22px}
+  .toolbar{flex-wrap:wrap}
+  .tbtn{min-width:150px}
+  .tab-panel{padding:26px 22px 36px}
+  .tab-panel[data-panel="devices"]{padding-left:0;padding-right:0}
+  .card{padding:10px 18px;gap:14px}
+  .pv{width:150px;height:86px}
+  .pbar{height:20px}
+  .pb-tx{font-size:10px}
+  .play{width:32px;height:32px}
+  .pv:hover .play{bottom:calc(50% - 16px)}
+}
+@media (max-width:560px){
+  :root{--side-w:88px}
+  .tab{width:70px}
+}
+</style>
+</head>
+<body>
+
+<header class="brand">
+  <img class="logo" draggable="false" alt="MuMuPlayer logo"
+       src="https://images.dwncdn.net/images/t_app-icon-l/p/d520014e-daf4-451a-8a8c-9aacc33f4d25/2693453914/mumuplayer-1-logo">
+  <span class="brand-name">MuMuPlayer</span>
+</header>
+
+<nav class="tabs" role="tablist" aria-label="Launcher sections">
+  <button class="tab active" id="tab-devices" role="tab" aria-selected="true" data-tab="devices">
+    <svg class="tabicon" viewBox="0 0 48 48" aria-hidden="true">
+      <defs>
+        <mask id="cut-dev" maskUnits="userSpaceOnUse" x="0" y="0" width="48" height="48">
+          <rect width="48" height="48" fill="#fff"/>
+          <rect x="24.5" y="18.5" width="22" height="30" rx="5" fill="#000"/>
+        </mask>
+      </defs>
+      <rect class="p-big" x="3" y="2" width="31" height="40" rx="5.5" mask="url(#cut-dev)"/>
+      <rect class="p-small" x="27" y="21" width="17" height="25" rx="3.5"/>
+      <line class="p-line" x1="31" y1="26" x2="40" y2="26"/>
+    </svg>
+    <span class="tab-label">Devices</span>
+  </button>
+
+  <button class="tab" id="tab-remote" role="tab" aria-selected="false" data-tab="remote">
+    <svg class="tabicon" viewBox="0 0 48 48" aria-hidden="true">
+      <defs>
+        <mask id="cut-remote" maskUnits="userSpaceOnUse" x="0" y="0" width="48" height="48">
+          <rect width="48" height="48" fill="#fff"/>
+          <rect x="22.5" y="15" width="18" height="23" rx="4.5" fill="#000"/>
+        </mask>
+      </defs>
+      <rect class="r-big" x="4" y="4" width="34" height="27" rx="5" mask="url(#cut-remote)"/>
+      <line class="r-line" x1="9.5" y1="36" x2="22.5" y2="36"/>
+      <rect class="r-small" x="25" y="17.5" width="13" height="18" rx="3.5"/>
+      <path class="r-arc r-arc1" d="M18.31 15.45 A7 7 0 0 1 22.95 10.81"/>
+      <path class="r-arc r-arc2" d="M13.95 12.81 A12 12 0 0 1 20.31 6.45"/>
+    </svg>
+    <span class="tab-label">Remote<br>Play</span>
+  </button>
+</nav>
+
+<main class="panel">
+  <!-- ================= DEVICES ================= -->
+  <section class="tab-panel active" data-panel="devices" role="tabpanel" aria-labelledby="tab-devices">
+    <div class="zone">
+      <div class="toolbar">
+        <button class="tbtn tbtn-primary" id="btnNew">
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.4 V16.6 M3.4 10 H16.6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>
+          <span>New</span>
+        </button>
+        <button class="tbtn" id="btnBatch">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 3.6 L21 9 L12 14.4 L3 9 Z" fill="currentColor"/>
+            <path d="M4.4 12.7 L12 17.2 L19.6 12.7" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M4.4 16.7 L12 21.2 L19.6 16.7" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Batch</span>
+          <span class="badge" id="batchBadge">0</span>
+        </button>
+        <button class="tbtn" id="btnArrange">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="2.6" y="2.6" width="14" height="14" rx="3.4" fill="none" stroke="currentColor" stroke-width="2"/>
+            <line x1="2.6" y1="7.6" x2="16.6" y2="7.6" stroke="currentColor" stroke-width="2"/>
+            <path d="M20.4 13.6 V17.4 A2.2 2.2 0 0 1 18.2 19.6 H11.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <span>Arrange</span>
+        </button>
+      </div>
+      <div class="bulkbar" id="bulkbar">
+        <span id="bulkCount">0 selected</span>
+        <div class="bulk-actions">
+          <button class="mini primary" id="bulkStart">Start all</button>
+          <button class="mini" id="bulkStop">Stop all</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="inst-head">
+      <h2>Instances</h2>
+      <span class="inst-count" id="instCount">0</span>
+    </div>
+    <div class="grid" id="grid"></div>
+
+    <div class="empty" id="emptyState" hidden>
+      <svg viewBox="0 0 48 48" fill="none" stroke="#5c5e66" stroke-width="2.4" aria-hidden="true">
+        <rect x="14" y="5" width="20" height="38" rx="4.5"/>
+        <line x1="21" y1="38" x2="27" y2="38" stroke-linecap="round"/>
+      </svg>
+      <p>No devices yet</p>
+      <span>Click New to create an Android device.</span>
+    </div>
+    <p class="hint" id="gridHint">Press the play button to power on a device — its simulator opens in a new window.</p>
+  </section>
+
+  <!-- ================= REMOTE PLAY ================= -->
+  <section class="tab-panel" data-panel="remote" role="tabpanel" aria-labelledby="tab-remote">
+    <div class="rp-hero">
+      <h2 class="rp-title">Track Game Progress Remotely from Phone</h2>
+      <p class="rp-sub">StarDesk: Crafted for real-time game monitoring at your fingertips!</p>
+    </div>
+    <div class="rp-foot">
+      <button class="rp-start" id="btnStart">Start</button>
+    </div>
+  </section>
+</main>
+
+<!-- ================= CREATE DEVICE MENU ================= -->
+<div class="veil" id="veil" hidden>
+  <div class="dlg" id="dlg" role="dialog" aria-modal="true" aria-labelledby="dlgTitle" tabindex="-1">
+    <div class="dlg-top">
+      <span class="dlg-title" id="dlgTitle">Create Device</span>
+      <button class="dlg-x" id="dlgX" aria-label="Close">
+        <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2.2 2.2 L11.8 11.8 M11.8 2.2 L2.2 11.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="dlg-body">
+
+      <div class="frow">
+        <span class="flabel">Android version:</span>
+        <div class="seg" data-group="version">
+          <button class="opt" data-value="15">Android 15</button>
+          <button class="opt" data-value="12">Android 12</button>
+        </div>
+      </div>
+
+      <div class="frow">
+        <span class="flabel">Screen orientation:</span>
+        <div class="seg" data-group="orientation">
+          <button class="opt" data-value="landscape">
+            <svg class="oicon" viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="6" y="3.5" width="12" height="17" rx="2.6" fill="none" stroke="currentColor" stroke-width="2"/>
+              <line x1="9.2" y1="10" x2="9.2" y2="14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <span>Landscape</span>
+          </button>
+          <button class="opt" data-value="portrait">
+            <svg class="oicon" viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="3.5" y="6" width="17" height="12" rx="2.6" fill="none" stroke="currentColor" stroke-width="2"/>
+              <line x1="10" y1="9.2" x2="14" y2="9.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <line x1="10" y1="14.8" x2="14" y2="14.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <span>Portrait</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="frow">
+        <span class="flabel">Number of devices:</span>
+        <div class="stepper" id="stepper">
+          <div class="numbox">
+            <input id="numIn" type="text" inputmode="numeric" autocomplete="off" spellcheck="false" value="1" aria-label="Number of devices">
+            <button class="num-x" id="numX" aria-label="Reset number" title="Reset to 1">
+              <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1.8 1.8 L8.2 8.2 M8.2 1.8 L1.8 8.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+            </button>
+          </div>
+          <div class="spin">
+            <button class="spin-btn" id="numUp" aria-label="Increase">
+              <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1.9 6.6 L5 3.5 L8.1 6.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <button class="spin-btn" id="numDown" aria-label="Decrease">
+              <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1.9 3.4 L5 6.5 L8.1 3.4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="collapse tgl-row" id="tglRow">
+        <div class="tgl-inner">
+          <button class="adv-toggle" id="advToggle">
+            <span>Advanced options</span>
+            <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.4 L6 7.9 L9.5 4.4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="collapse adv" id="adv">
+        <div class="adv-inner">
+          <div class="frow frow-top">
+            <span class="flabel">Operation mode</span>
+            <div class="mode-col">
+              <div class="seg" data-group="mode">
+                <button class="opt" data-value="performance">Performance</button>
+                <button class="opt" data-value="balanced">Balanced</button>
+                <button class="opt" data-value="power-saving">Power Saving</button>
+              </div>
+              <p class="mode-desc" id="modeDesc"></p>
+            </div>
+          </div>
+          <div class="frow">
+            <span class="flabel">Small disk mode:</span>
+            <button class="switch" id="diskSwitch" role="switch" aria-checked="false">
+              <span class="sw-fill"></span>
+              <span class="sw-knob"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="dlg-foot">
+      <button class="dlg-create" id="btnCreate">Create</button>
+    </div>
+  </div>
+</div>
+
+<div class="toasts" id="toasts"></div>
+
+<script>
+(() => {
+'use strict';
+const $  = (s, el = document) => el.querySelector(s);
+const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+
+/* ---------------- tab switching ---------------- */
+const tabs = $$('.tab');
+tabs.forEach(tab => tab.addEventListener('click', () => {
+  if (tab.classList.contains('active')) return;
+  tabs.forEach(t => {
+    const on = t === tab;
+    t.classList.toggle('active', on);
+    t.setAttribute('aria-selected', String(on));
+  });
+  $$('.tab-panel').forEach(p => p.classList.toggle('active', p.dataset.panel === tab.dataset.tab));
+}));
+
+/* ---------------- instance data (no cap, persisted) ---------------- */
+const STATE_LABEL = { running: 'Running', stopped: 'Powered Off', booting: 'Booting…', stopping: 'Stopping…' };
+const BAR_LABEL   = { running: 'Powered On', stopped: 'Powered Off', booting: 'Booting…', stopping: 'Stopping…' };
+const MODE_NAME   = { 'performance': 'Performance', 'balanced': 'Balanced', 'power-saving': 'Power Saving' };
+const MODE_DESC   = {
+  'performance':  'More resource usage for top image quality and smoothness. Recommended for \u2264 3 Multi-instances',
+  'balanced':     'Moderate resource usage for good image quality and smoothness. Recommended for > 3 Multi-instances',
+  'power-saving': 'Less resource usage with reduced image quality, smoothness, and disabled Android system sound. Recommended for extreme Multi-instance scenarios'
+};
+
+let mode = 'normal';          // normal | batch | arrange
+let seq = 0, totalCreated = 0;
+const selected = new Set();
+const instances = [];         // devices persist across reloads
+
+const grid = $('#grid');
+
+/* -------- persistence -------- */
+const DEV_KEY = 'mumu.devices';
+function saveDevices() {
+  try {
+    localStorage.setItem(DEV_KEY, JSON.stringify({ seq, totalCreated, instances }));
+  } catch (e) {}
+}
+function loadDevices() {
+  try {
+    const s = JSON.parse(localStorage.getItem(DEV_KEY));
+    if (!s || !Array.isArray(s.instances)) return;
+    const okMode = v => ['performance', 'balanced', 'power-saving'].includes(v) ? v : 'balanced';
+    s.instances.forEach(d => {
+      if (!d || typeof d !== 'object' || !d.name) return;
+      instances.push({
+        id: Number.isFinite(d.id) ? d.id : ++seq,
+        name: String(d.name),
+        version: d.version === '12' ? '12' : '15',
+        orientation: d.orientation === 'portrait' ? 'portrait' : 'landscape',
+        mode: okMode(d.mode),
+        smallDisk: !!d.smallDisk,
+        state: 'stopped'        // always come back powered off
+      });
+    });
+    const maxId = instances.reduce((m, i) => Math.max(m, i.id), 0);
+    seq = Number.isFinite(s.seq) ? Math.max(s.seq, maxId) : maxId;
+    totalCreated = Number.isFinite(s.totalCreated) ? s.totalCreated : instances.length;
+  } catch (e) { /* nothing saved yet */ }
+}
+
+/* ---------------- preview artwork & icons ---------------- */
+const HOME_SVG = `
+<svg class="hs" viewBox="0 0 116 68" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <rect width="116" height="68" fill="#16222e"/>
+  <circle cx="16" cy="62" r="36" fill="#1d3343"/>
+  <circle cx="104" cy="6" r="30" fill="#20394b"/>
+  <circle cx="72" cy="44" r="20" fill="#182f3c" opacity=".75"/>
+  <text x="7" y="9" font-family="Segoe UI, sans-serif" font-size="5.2" font-weight="700" fill="#dfe7ea" opacity=".9">12:30</text>
+  <rect x="93" y="4.2" width="3.6" height="3.6" rx="1" fill="#dfe7ea" opacity=".75"/>
+  <rect x="99.5" y="3.6" width="6.4" height="4.8" rx="1" fill="#dfe7ea" opacity=".75"/>
+  <rect x="100.8" y="4.8" width="3" height="2.4" rx=".6" fill="#16222e"/>
+  <rect x="107.2" y="4.6" width="1.6" height="3" rx=".8" fill="#dfe7ea" opacity=".75"/>
+  <rect x="12" y="15" width="9" height="9" rx="2.4" fill="#48a9bd"/>
+  <rect x="33" y="15" width="9" height="9" rx="2.4" fill="#d08a5f"/>
+  <rect x="54" y="15" width="9" height="9" rx="2.4" fill="#6d8fdd"/>
+  <rect x="75" y="15" width="9" height="9" rx="2.4" fill="#67b46e"/>
+  <rect x="96" y="15" width="9" height="9" rx="2.4" fill="#a271c2"/>
+  <rect x="12" y="28" width="9" height="9" rx="2.4" fill="#5b8fd6"/>
+  <rect x="33" y="28" width="9" height="9" rx="2.4" fill="#4fae9c"/>
+  <rect x="54" y="28" width="9" height="9" rx="2.4" fill="#c7885c"/>
+  <rect x="75" y="28" width="9" height="9" rx="2.4" fill="#8b6fc9"/>
+  <rect x="96" y="28" width="9" height="9" rx="2.4" fill="#d3b45c"/>
+  <rect x="10" y="51" width="96" height="12" rx="6" fill="#0e1a24" opacity=".85"/>
+  <circle cx="26" cy="57" r="4" fill="#49a5b8"/>
+  <circle cx="45" cy="57" r="4" fill="#6d8fdd"/>
+  <circle cx="64" cy="57" r="4" fill="#67b46e"/>
+  <circle cx="83" cy="57" r="4" fill="#d08a5f"/>
+</svg>`;
+
+const BOOT_SVG = `
+<svg class="bootd" viewBox="0 0 24 17" aria-hidden="true">
+  <path d="M6.9 4.9 L5 1.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" fill="none"/>
+  <path d="M17.1 4.9 L19 1.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" fill="none"/>
+  <rect x="3.4" y="4.8" width="17.2" height="10.4" rx="5.2" fill="currentColor"/>
+  <circle cx="8.3" cy="10" r="1.35" fill="#0b0c0e"/>
+  <circle cx="15.7" cy="10" r="1.35" fill="#0b0c0e"/>
+</svg>`;
+
+const PLAY_ICON  = `<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M4.4 2.6 L11.8 7 L4.4 11.4 Z" fill="#fff"/></svg>`;
+const POWER_ICON = `<svg viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><path d="M10.8 3.7a4.6 4.6 0 1 1-7.6 0"/><line x1="7" y1="1.4" x2="7" y2="6.2"/></svg>`;
+const DOTS_ICON  = `<svg viewBox="0 0 14 14" fill="#fff" aria-hidden="true"><circle cx="7" cy="2.9" r="1.6"/><circle cx="7" cy="7" r="1.6"/><circle cx="7" cy="11.1" r="1.6"/></svg>`;
+
+/* context menu icons */
+const IC_DEVSET = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true">
+  <rect x="8" y="3" width="8" height="18" rx="2.4"/>
+  <line x1="10.4" y1="6.7" x2="13.6" y2="6.7" stroke-linecap="round"/>
+  <circle cx="12" cy="16.8" r="1.3" fill="currentColor" stroke="none"/>
+</svg>`;
+const IC_PENCIL = `<svg viewBox="0 0 24 24" aria-hidden="true">
+  <g transform="rotate(45 12 12)" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
+    <rect x="9.6" y="4" width="4.8" height="3.2" rx="1.1"/>
+    <path d="M9.6 7.2 H14.4 V15.6 H9.6 Z"/>
+    <path d="M9.6 15.6 H14.4 L12 20 Z" fill="currentColor" stroke="none"/>
+  </g>
+</svg>`;
+const IC_TRASH = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <path d="M4.5 7 H19.5"/>
+  <path d="M9.5 7 V5.2 A1.6 1.6 0 0 1 11.1 3.6 H12.9 A1.6 1.6 0 0 1 14.5 5.2 V7"/>
+  <path d="M6.3 7 L7.1 19.2 A1.8 1.8 0 0 0 8.9 21 H15.1 A1.8 1.8 0 0 0 16.9 19.2 L17.7 7"/>
+  <line x1="10.2" y1="11" x2="10.7" y2="17"/>
+  <line x1="13.8" y1="11" x2="13.3" y2="17"/>
+</svg>`;
+
+const GRIP = `
+<svg class="grip" viewBox="0 0 12 12" aria-hidden="true">
+  <circle cx="3" cy="2.6" r="1.25"/><circle cx="9" cy="2.6" r="1.25"/>
+  <circle cx="3" cy="6"   r="1.25"/><circle cx="9" cy="6"   r="1.25"/>
+  <circle cx="3" cy="9.4" r="1.25"/><circle cx="9" cy="9.4" r="1.25"/>
+</svg>`;
+
+function screenHTML(state) {
+  if (state === 'booting') return BOOT_SVG;
+  return HOME_SVG;
+}
+
+/* ---------------- card rendering ---------------- */
+function render(anim) {          // 'all' | single id | array of ids
+  grid.innerHTML = '';
+  instances.forEach((inst, i) => {
+    const card = document.createElement('article');
+    card.className = 'card' + (selected.has(inst.id) ? ' selected' : '');
+    card.dataset.id = inst.id;
+    card.dataset.state = inst.state;
+    if (mode === 'arrange') card.draggable = true;
+    card.innerHTML = `
+      <div class="pv">
+        <div class="screen">${screenHTML(inst.state)}</div>
+        <div class="pbar">
+          <svg class="pb-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="11"/></svg>
+          <span class="pb-tx"></span>
+        </div>
+        <button class="play" aria-label="Power device"></button>
+      </div>
+      <div class="info">
+        <h3></h3>
+        <p class="meta"></p>
+        <p class="status"><span class="dot"></span><span class="state-txt"></span></p>
+      </div>
+      <div class="cbtns">
+        <button class="cbtn" data-act="power" aria-label="Power">
+          <span class="cb-bg"></span>
+          <span class="cb-ic">${inst.state === 'running' ? POWER_ICON : PLAY_ICON}</span>
+        </button>
+        <button class="cbtn" data-act="menu" aria-label="More options">
+          <span class="cb-bg"></span>
+          <span class="cb-ic">${DOTS_ICON}</span>
+        </button>
+      </div>
+      <span class="check" aria-hidden="true"></span>
+      ${GRIP}`;
+    card.querySelector('h3').textContent = inst.name;
+    card.querySelector('.meta').textContent = `Android ${inst.version} · ${MODE_NAME[inst.mode]}${inst.smallDisk ? ' · Small disk' : ''}`;
+    card.querySelector('.state-txt').textContent = STATE_LABEL[inst.state];
+    card.querySelector('.pb-tx').textContent = BAR_LABEL[inst.state];
+    card.querySelector('.play').innerHTML = inst.state === 'running' ? POWER_ICON : PLAY_ICON;
+
+    let show = false, delay = 0;
+    if (anim === 'all') { show = true; delay = i * 70; }
+    else if (Array.isArray(anim)) { const p = anim.indexOf(inst.id); if (p > -1) { show = true; delay = p * 80; } }
+    else if (anim === inst.id) show = true;
+    if (show) { card.classList.add('enter'); card.style.animationDelay = delay + 'ms'; }
+    grid.appendChild(card);
+  });
+  $('#instCount').textContent = String(instances.length);
+  $('#emptyState').hidden = instances.length > 0;   // box, icon, text all disappear
+}
+
+function setState(inst, state) {
+  inst.state = state;
+  const card = grid.querySelector(`.card[data-id="${inst.id}"]`);
+  if (card) {
+    card.dataset.state = state;
+    card.querySelector('.state-txt').textContent = STATE_LABEL[state];
+    card.querySelector('.pb-tx').textContent = BAR_LABEL[state];
+    card.querySelector('.screen').innerHTML = screenHTML(state);
+    const ic = state === 'running' ? POWER_ICON : PLAY_ICON;
+    card.querySelector('.play').innerHTML = ic;
+    card.querySelector('.cbtn[data-act="power"] .cb-ic').innerHTML = ic;
+  }
+  saveDevices();
+}
+
+/* ---------------- simulator window ----------------
+   simulator.html must live in the same folder as this launcher file. */
+function openSimulator(inst) {
+  const data = encodeURIComponent(JSON.stringify({
+    name: inst.name, version: inst.version, orientation: inst.orientation,
+    mode: inst.mode, smallDisk: inst.smallDisk
+  }));
+  const w = 1152, h = 672;
+  const left = Math.max(0, ((screen.availWidth || screen.width) - w) / 2 | 0);
+  const top  = Math.max(0, ((screen.availHeight || screen.height) - h) / 2 | 0);
+  const win = window.open('simulator.html#' + data, '_blank', `width=${w},height=${h},left=${left},top=${top}`);
+  if (!win) toast('Allow pop-ups for this page to open the simulator.');
+}
+
+/* ---------------- power on / off ---------------- */
+function togglePower(inst) {
+  if (inst.state === 'booting' || inst.state === 'stopping') return;
+  if (inst.state === 'running') {
+    setState(inst, 'stopping');
+    setTimeout(() => setState(inst, 'stopped'), 550);
+  } else {
+    openSimulator(inst);   // powering on opens the simulator window
+    setState(inst, 'booting');
+    setTimeout(() => setState(inst, 'running'), 1600);
+  }
+}
+
+grid.addEventListener('click', e => {
+  const card = e.target.closest('.card');
+  if (!card) return;
+  const inst = instances.find(i => i.id === +card.dataset.id);
+  if (!inst) return;
+  const cbtn = e.target.closest('.cbtn');
+  if (cbtn) {
+    if (cbtn.dataset.act === 'power') togglePower(inst);
+    else openDeviceMenu(inst, cbtn);
+    return;
+  }
+  if (e.target.closest('.play')) { togglePower(inst); return; }
+  if (mode === 'batch') toggleSelect(inst.id);
+});
+
+/* ---------------- device context menu ---------------- */
+let ctxMenus = [];
+let ctxAnchor = null;
+
+function closeCtx() {
+  ctxMenus.forEach(el => el.remove());
+  ctxMenus = [];
+  ctxAnchor = null;
+}
+document.addEventListener('mousedown', e => {
+  if (!ctxMenus.length) return;
+  if (e.target.closest('.ctxmenu')) return;
+  if (ctxAnchor && e.target.closest('.cbtn') === ctxAnchor) return;
+  closeCtx();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && ctxMenus.length) closeCtx(); });
+
+function placeMenu(el, rightX, topY) {
+  document.body.appendChild(el);
+  const r = el.getBoundingClientRect();
+  let left = Math.max(8, Math.min(rightX - r.width, innerWidth - r.width - 8));
+  let top  = Math.max(8, Math.min(topY, innerHeight - r.height - 8));
+  el.style.left = left + 'px';
+  el.style.top  = top + 'px';
+}
+
+function spawnSub(build, parentMenu, item) {
+  while (ctxMenus.length > 1) ctxMenus.pop().remove();
+  const sub = document.createElement('div');
+  sub.className = 'ctxmenu';
+  build(sub);
+  document.body.appendChild(sub);
+  const pr = parentMenu.getBoundingClientRect();
+  const ir = item.getBoundingClientRect();
+  const sr = sub.getBoundingClientRect();
+  let left = pr.left - sr.width - 10;
+  if (left < 8) left = Math.min(pr.right + 10, innerWidth - sr.width - 8);
+  let top = Math.max(8, Math.min(ir.top - 6, innerHeight - sr.height - 8));
+  sub.style.left = left + 'px';
+  sub.style.top  = top + 'px';
+  ctxMenus.push(sub);
+}
+
+function openDeviceMenu(inst, anchor) {
+  if (ctxAnchor === anchor && ctxMenus.length) { closeCtx(); return; }
+  closeCtx();
+  ctxAnchor = anchor;
+  const m = document.createElement('div');
+  m.className = 'ctxmenu';
+  m.innerHTML = `
+    <button class="ctx-item" data-act="settings">${IC_DEVSET}<span>Device Settings</span></button>
+    <button class="ctx-item" data-act="rename">${IC_PENCIL}<span>Rename</span></button>
+    <button class="ctx-item danger" data-act="delete">${IC_TRASH}<span>Delete</span></button>`;
+  const r = anchor.getBoundingClientRect();
+  placeMenu(m, r.right, r.bottom + 8);
+  ctxMenus.push(m);
+
+  m.addEventListener('click', e => {
+    const b = e.target.closest('.ctx-item');
+    if (!b) return;
+    const act = b.dataset.act;
+    if (act === 'settings') spawnSub(sub => {
+      sub.innerHTML = `<div class="ctx-sub">
+        <div class="ctx-title">Device Settings</div>
+        <p class="ctx-note">Settings for <b></b> arrive with the simulator update.</p>
+      </div>`;
+      sub.querySelector('b').textContent = inst.name;
+    }, m, b);
+    if (act === 'rename') spawnSub(sub => {
+      sub.innerHTML = `<div class="ctx-sub">
+        <div class="ctx-title">Rename</div>
+        <input class="ctx-input" maxlength="32" spellcheck="false" aria-label="Device name">
+        <div class="ctx-row">
+          <button class="ctx-btn primary" data-do="ok">Rename</button>
+          <button class="ctx-btn" data-do="cancel">Cancel</button>
+        </div>
+      </div>`;
+      const inp = sub.querySelector('.ctx-input');
+      inp.value = inst.name;
+      setTimeout(() => { inp.focus(); inp.select(); }, 30);
+      const apply = () => {
+        const name = inp.value.trim();
+        if (!name || name === inst.name) { closeCtx(); return; }
+        inst.name = name;
+        const card = grid.querySelector(`.card[data-id="${inst.id}"]`);
+        if (card) card.querySelector('h3').textContent = name;
+        saveDevices();
+        closeCtx();
+        toast(`Renamed to ${name}.`);
+      };
+      inp.addEventListener('keydown', ev => {
+        if (ev.key === 'Enter') { ev.preventDefault(); apply(); }
+      });
+      sub.querySelector('[data-do="ok"]').addEventListener('click', apply);
+      sub.querySelector('[data-do="cancel"]').addEventListener('click', closeCtx);
+    }, m, b);
+    if (act === 'delete') spawnSub(sub => {
+      sub.innerHTML = `<div class="ctx-sub">
+        <div class="ctx-title">Delete</div>
+        <p class="ctx-note">Delete <b></b>? This can't be undone.</p>
+        <div class="ctx-row">
+          <button class="ctx-btn danger" data-do="del">Delete</button>
+          <button class="ctx-btn" data-do="cancel">Cancel</button>
+        </div>
+      </div>`;
+      sub.querySelector('b').textContent = inst.name;
+      sub.querySelector('[data-do="del"]').addEventListener('click', () => { closeCtx(); deleteInstance(inst); });
+      sub.querySelector('[data-do="cancel"]').addEventListener('click', closeCtx);
+    }, m, b);
+  });
+}
+
+function deleteInstance(inst) {
+  const idx = instances.findIndex(i => i.id === inst.id);
+  if (idx > -1) instances.splice(idx, 1);
+  selected.delete(inst.id);
+  saveDevices();
+  const card = grid.querySelector(`.card[data-id="${inst.id}"]`);
+  if (card) {
+    card.style.opacity = '0';
+    card.style.transform = 'translateX(28px)';
+    setTimeout(() => {
+      card.remove();
+      $('#emptyState').hidden = instances.length > 0;   // empty state returns only at zero devices
+    }, 240);
+  }
+  $('#instCount').textContent = String(instances.length);
+  syncBulk();
+  toast(`Deleted ${inst.name}.`);
+}
+
+/* ---------------- batch mode ---------------- */
+function toggleSelect(id) {
+  selected.has(id) ? selected.delete(id) : selected.add(id);
+  const card = grid.querySelector(`.card[data-id="${id}"]`);
+  if (card) card.classList.toggle('selected', selected.has(id));
+  syncBulk();
+}
+
+function syncBulk() {
+  const n = selected.size;
+  $('#batchBadge').textContent = n;
+  $('#btnBatch').classList.toggle('has-sel', n > 0);
+  $('#bulkbar').classList.toggle('show', mode === 'batch' && n > 0);
+  $('#bulkCount').textContent = `${n} instance${n === 1 ? '' : 's'} selected`;
+}
+
+ $('#btnBatch').addEventListener('click', () => setMode(mode === 'batch' ? 'normal' : 'batch'));
+ $('#btnArrange').addEventListener('click', () => setMode(mode === 'arrange' ? 'normal' : 'arrange'));
+
+function setMode(next) {
+  mode = next;
+  selected.clear();
+  closeCtx();
+  grid.classList.toggle('selecting', mode === 'batch');
+  grid.classList.toggle('arranging', mode === 'arrange');
+  $$('.card', grid).forEach(c => {
+    c.classList.remove('selected');
+    c.draggable = mode === 'arrange';
+  });
+  $('#btnBatch').classList.toggle('on', mode === 'batch');
+  $('#btnArrange').classList.toggle('on', mode === 'arrange');
+  $('#gridHint').textContent =
+    mode === 'batch'   ? 'Select instances to batch-start or batch-stop them.' :
+    mode === 'arrange' ? 'Drag instances to reorder them.' :
+                         'Press the play button to power on a device — its simulator opens in a new window.';
+  syncBulk();
+}
+
+ $('#bulkStart').addEventListener('click', () => bulkAction('start'));
+ $('#bulkStop').addEventListener('click', () => bulkAction('stop'));
+
+function bulkAction(action) {
+  let n = 0;
+  [...selected].forEach((id, i) => {
+    const inst = instances.find(x => x.id === id);
+    if (!inst) return;
+    if (action === 'start') {
+      if (inst.state !== 'stopped') return;
+      openSimulator(inst);   // opened synchronously so the browser treats it as one user gesture
+      setTimeout(() => setState(inst, 'booting'), i * 160);
+      setTimeout(() => setState(inst, 'running'), 1600 + i * 160);
+    } else {
+      if (inst.state !== 'running') return;
+      setTimeout(() => setState(inst, 'stopping'), i * 160);
+      setTimeout(() => setState(inst, 'stopped'), 550 + i * 160);
+    }
+    n++;
+  });
+  if (n) toast(`${action === 'start' ? 'Started' : 'Stopped'} ${n} instance${n === 1 ? '' : 's'}.`);
+}
+
+/* ---------------- arrange mode: drag to reorder ---------------- */
+let dragEl = null;
+
+grid.addEventListener('dragstart', e => {
+  const card = e.target.closest('.card');
+  if (!card || mode !== 'arrange') { e.preventDefault(); return; }
+  dragEl = card;
+  card.classList.add('dragging');
+  e.dataTransfer.effectAllowed = 'move';
+  e.dataTransfer.setData('text/plain', card.dataset.id);
+});
+
+grid.addEventListener('dragover', e => {
+  if (!dragEl) return;
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  const before = $$('.card:not(.dragging)', grid).find(c => {
+    const r = c.getBoundingClientRect();
+    return e.clientY < r.bottom;
+  });
+  if (before && before !== dragEl.nextSibling) grid.insertBefore(dragEl, before);
+  else if (!before) grid.appendChild(dragEl);
+});
+
+grid.addEventListener('drop', e => e.preventDefault());
+
+grid.addEventListener('dragend', () => {
+  if (!dragEl) return;
+  dragEl.classList.remove('dragging');
+  dragEl = null;
+  const order = $$('.card', grid).map(c => +c.dataset.id);
+  instances.sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id));
+  saveDevices();
+});
+
+/* ---------------- remote play ---------------- */
+/* Start button is a placeholder for now — its behavior comes later. */
+ $('#btnStart').addEventListener('click', () => {});
+
+/* ---------------- toasts ---------------- */
+function toast(msg) {
+  const t = document.createElement('div');
+  t.className = 'toast';
+  const dot = document.createElement('span'); dot.className = 'tdot';
+  const txt = document.createElement('span'); txt.textContent = msg;
+  t.append(dot, txt);
+  $('#toasts').appendChild(t);
+  setTimeout(() => {
+    t.classList.add('out');
+    t.addEventListener('animationend', () => t.remove(), { once: true });
+  }, 3400);
+}
+
+/* ================= CREATE DEVICE MENU ================= */
+const veil = $('#veil'), dlg = $('#dlg');
+const tglRow = $('#tglRow'), advSec = $('#adv');
+const numIn = $('#numIn'), numX = $('#numX'), diskSwitch = $('#diskSwitch');
+
+const CFG_KEY = 'mumu.newDevice';
+const newCfg = { version: '15', orientation: 'landscape', count: 1, mode: 'balanced', smallDisk: false };
+const clampN = v => Math.min(99, Math.max(1, v));
+try {
+  const saved = JSON.parse(localStorage.getItem(CFG_KEY));
+  if (saved && typeof saved === 'object') {
+    if (saved.version === '15' || saved.version === '12') newCfg.version = saved.version;
+    if (saved.orientation === 'landscape' || saved.orientation === 'portrait') newCfg.orientation = saved.orientation;
+    if (['performance', 'balanced', 'power-saving'].includes(saved.mode)) newCfg.mode = saved.mode;
+    if (Number.isFinite(saved.count)) newCfg.count = clampN(saved.count);
+    newCfg.smallDisk = !!saved.smallDisk;
+  }
+} catch (e) { /* no saved config yet */ }
+const persist = () => { try { localStorage.setItem(CFG_KEY, JSON.stringify(newCfg)); } catch (e) {} };
+
+const setModeDesc = () => { $('#modeDesc').textContent = MODE_DESC[newCfg.mode]; };
+
+let lastFocus = null;
+
+function openDlg() {
+  dlg.style.cssText = '';
+  tglRow.classList.remove('closed');
+  tglRow.style.display = '';
+  advSec.classList.remove('open');
+
+  $$('.seg').forEach(seg => {
+    const val = String(newCfg[seg.dataset.group]);
+    $$('button', seg).forEach(b => b.classList.toggle('sel', b.dataset.value === val));
+  });
+  diskSwitch.classList.toggle('on', newCfg.smallDisk);
+  diskSwitch.setAttribute('aria-checked', String(newCfg.smallDisk));
+  numIn.value = String(newCfg.count);
+  setModeDesc();
+
+  lastFocus = document.activeElement;
+  veil.hidden = false;
+  requestAnimationFrame(() => requestAnimationFrame(() => veil.classList.add('show')));
+  setTimeout(() => dlg.focus(), 60);
+}
+
+function closeDlg() {
+  persist();
+  veil.classList.remove('show');
+  setTimeout(() => { veil.hidden = true; }, 320);
+  if (lastFocus && lastFocus.focus) lastFocus.focus();
+}
+
+ $('#btnNew').addEventListener('click', openDlg);
+ $('#dlgX').addEventListener('click', closeDlg);
+veil.addEventListener('mousedown', e => { if (e.target === veil) closeDlg(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !veil.hidden) closeDlg(); });
+
+veil.addEventListener('keydown', e => {
+  if (e.key !== 'Tab' || veil.hidden) return;
+  const list = $$('button, input', dlg).filter(el => el.clientWidth > 0 && getComputedStyle(el).visibility !== 'hidden');
+  if (!list.length) return;
+  const first = list[0], last = list[list.length - 1];
+  if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+  else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+});
+
+ $('#advToggle').addEventListener('click', () => {
+  if (advSec.classList.contains('open')) return;
+  const r = dlg.getBoundingClientRect();
+  dlg.style.animation = 'none';
+  Object.assign(dlg.style, {
+    position: 'absolute', left: r.left + 'px', width: r.width + 'px',
+    top: 'auto', bottom: (window.innerHeight - r.bottom) + 'px', margin: '0'
+  });
+  tglRow.classList.add('closed');
+  advSec.classList.add('open');
+  setTimeout(() => { if (tglRow.classList.contains('closed')) tglRow.style.display = 'none'; }, 520);
+});
+
+ $$('.seg').forEach(seg => {
+  seg.addEventListener('click', e => {
+    const b = e.target.closest('button');
+    if (!b || !seg.contains(b)) return;
+    $$('button', seg).forEach(x => x.classList.toggle('sel', x === b));
+    newCfg[seg.dataset.group] = b.dataset.value;
+    if (seg.dataset.group === 'mode') setModeDesc();
+    persist();
+  });
+});
+
+numIn.addEventListener('input', () => {
+  numIn.value = numIn.value.replace(/\D/g, '').replace(/^0+(?=\d)/, '');
+  if (numIn.value !== '') { newCfg.count = clampN(parseInt(numIn.value, 10)); persist(); }
+});
+numIn.addEventListener('blur', () => {
+  const v = clampN(parseInt(numIn.value, 10) || 1);
+  numIn.value = String(v);
+  newCfg.count = v;
+  persist();
+});
+numIn.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); numIn.blur(); } });
+numX.addEventListener('click', () => { numIn.value = '1'; newCfg.count = 1; persist(); });
+
+const stepN = d => {
+  const v = clampN((parseInt(numIn.value, 10) || 0) + d);
+  numIn.value = String(v);
+  newCfg.count = v;
+  persist();
+};
+ $('#numUp').addEventListener('click', () => stepN(1));
+ $('#numDown').addEventListener('click', () => stepN(-1));
+[$('#numUp'), $('#numDown'), numX].forEach(b => b.addEventListener('mousedown', e => e.preventDefault()));
+
+diskSwitch.addEventListener('click', () => {
+  const on = !newCfg.smallDisk;
+  newCfg.smallDisk = on;
+  diskSwitch.classList.toggle('on', on);
+  diskSwitch.setAttribute('aria-checked', String(on));
+  persist();
+});
+
+/* ---------------- create devices (no limit) ---------------- */
+ $('#btnCreate').addEventListener('click', () => {
+  const n = Math.max(1, newCfg.count);
+  const newIds = [];
+  for (let i = 0; i < n; i++) {
+    totalCreated++;
+    const name = totalCreated === 1 ? 'Android Device' : `Android Device-${totalCreated - 1}`;
+    instances.push({
+      id: ++seq, name,
+      version: newCfg.version, orientation: newCfg.orientation,
+      mode: newCfg.mode, smallDisk: newCfg.smallDisk,
+      state: 'stopped'
+    });
+    newIds.push(seq);
+  }
+  saveDevices();
+  render(newIds);
+  closeDlg();
+  toast(n === 1 ? 'Created Android Device.' : `Created ${n} devices.`);
+});
+
+/* ---------------- init ---------------- */
+setModeDesc();
+loadDevices();
+render(instances.length ? 'all' : undefined);
+})();
+</script>
+</body>
+</html>
