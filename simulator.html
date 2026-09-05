@@ -19,7 +19,7 @@ button:focus-visible{outline:2px solid rgba(255,255,255,.5);outline-offset:3px;b
 #ui{position:fixed;inset:0;z-index:1;opacity:0;transform:translateY(16px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
 #ui.ready{opacity:1;transform:none}
 
-#statusbar{position:absolute;top:0;left:0;right:0;height:38px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-size:13px;font-weight:600;text-shadow:0 1px 3px rgba(0,0,0,.45)}
+#statusbar{position:absolute;top:0;left:0;right:0;height:38px;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-size:13px;font-weight:600;text-shadow:0 1px 3px rgba(0,0,0,.45)}
 .sb-right{display:flex;align-items:center;gap:10px}
 .sb-right svg{display:block;filter:drop-shadow(0 1px 2px rgba(0,0,0,.45))}
 
@@ -37,6 +37,16 @@ button:focus-visible{outline:2px solid rgba(255,255,255,.5);outline-offset:3px;b
 #dock .app .lb{display:none}
 
 #gest{position:absolute;left:50%;bottom:9px;transform:translateX(-50%);width:118px;height:4px;border-radius:99px;background:rgba(255,255,255,.55)}
+
+/* open-app view (home is hidden while an app is showing) */
+#appview{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center}
+#appview[hidden]{display:none}
+.avbox{display:flex;flex-direction:column;align-items:center;gap:14px;animation:avIn .45s var(--ease) both}
+@keyframes avIn{from{opacity:0;transform:translateY(12px)}}
+.avic{width:92px;height:92px;filter:drop-shadow(0 10px 26px rgba(0,0,0,.5))}
+.avic svg{width:100%;height:100%;display:block}
+.avname{font-size:24px;font-weight:600;text-shadow:0 2px 14px rgba(0,0,0,.45)}
+.avsub{font-size:13px;color:#a9b0ba;margin-top:-4px}
 
 /* boot splash */
 #splash{position:fixed;inset:0;z-index:5;display:flex;align-items:center;justify-content:center;transition:opacity .65s ease}
@@ -67,6 +77,15 @@ button:focus-visible{outline:2px solid rgba(255,255,255,.5);outline-offset:3px;b
       </svg>
     </span>
   </div>
+
+  <div id="appview" hidden>
+    <div class="avbox">
+      <div class="avic"></div>
+      <div class="avname"></div>
+      <div class="avsub">Not available yet</div>
+    </div>
+  </div>
+
   <div id="appgrid"></div>
   <div id="dock"></div>
   <div id="gest"></div>
@@ -136,12 +155,10 @@ function paintWall(g, W, H){
     g.closePath();
   };
 
-  /* dark blue space background */
   const bg = g.createLinearGradient(0, 0, W * 0.25, H);
   bg.addColorStop(0, '#0b1326'); bg.addColorStop(.55, '#091021'); bg.addColorStop(1, '#060a17');
   g.fillStyle = bg; g.fillRect(0, 0, W, H);
 
-  /* star field — small, varying sizes, blue glow */
   const n = Math.max(60, Math.round(W * H / 9000));
   for (let i = 0; i < n; i++){
     star(rnd() * W, rnd() * H, 0.4 + rnd() * rnd() * 1.9, 0.55 + rnd() * 0.45);
@@ -166,17 +183,16 @@ function paintWall(g, W, H){
   g.strokeStyle = 'rgba(255,255,255,.35)'; g.lineWidth = 2.5;
   g.beginPath(); g.arc(mcx, mcy, mr - 1.2, -0.785 - 0.65, -0.785 + 0.65); g.stroke();
 
-  /* ---- the mumu logo trio: pills + circle —
-        bottoms exactly aligned, equal gaps between all three shapes ---- */
+  /* ---- the mumu logo trio: pills + circle — bottoms aligned, equal gaps ---- */
   const ROT = 15 * Math.PI / 180;
   const PW = m * 0.085, PL = m * 0.36, gap = m * 0.05;
-  const halfW = (PW / 2) * Math.cos(ROT) + (PL / 2) * Math.sin(ROT);   /* horizontal half-extent of a rotated pill */
+  const halfW = (PW / 2) * Math.cos(ROT) + (PL / 2) * Math.sin(ROT);
   const groupW = 4 * halfW + 2 * gap + PW;
   const rightX = W * 0.84;
   const leftX = rightX - groupW;
-  const bottomY = H * 0.62;                                             /* shared bottom line */
+  const bottomY = H * 0.62;
   const circX = rightX - PW / 2, circY = bottomY - PW / 2;
-  const pillY = bottomY - PW / 2 - (PL / 2 - PW / 2) * Math.cos(ROT);   /* pill centers so pill bottoms hit bottomY */
+  const pillY = bottomY - PW / 2 - (PL / 2 - PW / 2) * Math.cos(ROT);
   const pillAx = leftX + halfW;
   const pillBx = leftX + 3 * halfW + gap;
 
@@ -228,7 +244,6 @@ function paintWall(g, W, H){
   g.strokeStyle = 'rgba(225,248,252,.5)'; g.lineWidth = 1.6;
   g.beginPath(); g.arc(pcx, pcy, pr - 0.8, Math.PI * 0.6, Math.PI * 1.1); g.stroke();
 
-  /* stars above the planet */
   const topBand = Math.max(8, (pcy - pr) - 18);
   for (let i = 0; i < 5; i++){
     star(pcx - pr * 1.05 + rnd() * pr * 2.1, 10 + rnd() * topBand, 0.7 + rnd() * 1.1, 0.9);
@@ -248,7 +263,6 @@ let rzT; addEventListener('resize', () => { clearTimeout(rzT); rzT = setTimeout(
 
 /* ============ app icons ============ */
 const ICONS = {
-  /* MuMu Store — white bag: rope handle, corner blobs, mumu-logo trio in blue→cyan */
   store: () => `
 <svg viewBox="0 0 64 64" aria-hidden="true">
   <defs>
@@ -274,7 +288,6 @@ const ICONS = {
   </g>
 </svg>`,
 
-  /* App Cloner — blue gradient, 2×2 tiles: filled, +, hollow, filled */
   cloner: () => `
 <svg viewBox="0 0 64 64" aria-hidden="true">
   <defs>
@@ -292,7 +305,6 @@ const ICONS = {
   <rect x="33" y="33" width="16" height="16" rx="4.5" fill="#fff"/>
 </svg>`,
 
-  /* Settings — #346894 with white 6-tooth gear, hole + inner white circle */
   settings: () => `
 <svg viewBox="0 0 64 64" aria-hidden="true">
   <rect x="2" y="2" width="60" height="60" rx="15" fill="#346894"/>
@@ -309,7 +321,6 @@ const ICONS = {
   <circle cx="32" cy="32" r="6.6" fill="#fff"/>
 </svg>`,
 
-  /* Gallery — #7F67F9, light circle, 3D pyramid pair, back pyramid peeking out */
   gallery: () => `
 <svg viewBox="0 0 64 64" aria-hidden="true">
   <defs>
@@ -324,7 +335,6 @@ const ICONS = {
   <path d="M24 17 L25 53 L40 53 Z" fill="url(#ga-r)"/>
 </svg>`,
 
-  /* Files — #4D85F3, plain white folder with a bottom-right shadow */
   files: () => `
 <svg viewBox="0 0 64 64" aria-hidden="true">
   <defs>
@@ -337,7 +347,6 @@ const ICONS = {
   </g>
 </svg>`,
 
-  /* Chromium — white tile with the Chromium logo inset */
   chromium: () => `
 <svg viewBox="0 0 64 64" aria-hidden="true">
   <rect x="2" y="2" width="60" height="60" rx="15" fill="#fff"/>
@@ -346,10 +355,10 @@ const ICONS = {
 </svg>`
 };
 
-/* ============ apps (6 defaults — 2 on home, 4 in the dock) ============ */
+/* ============ apps ============ */
 const HOME_APPS = [
-  { id: 'store',   name: 'MuMu Store' },
-  { id: 'cloner',  name: 'App Cloner' }
+  { id: 'store',  name: 'MuMu Store' },
+  { id: 'cloner', name: 'App Cloner' }
 ];
 const DOCK_APPS = [
   { id: 'settings', name: 'Settings' },
@@ -357,16 +366,55 @@ const DOCK_APPS = [
   { id: 'files',    name: 'Files' },
   { id: 'chromium', name: 'Chromium' }
 ];
+const ALL_APPS = [...HOME_APPS, ...DOCK_APPS];
+
+/* opening an app: swap to its view and tell the launcher's window chrome,
+   which turns the title bar into a tab system */
+function openApp(a){
+  showView(a.id);
+  if (window.parent !== window){
+    try {
+      parent.postMessage({
+        type: 'mumu-open',
+        id: DEV && DEV.id,
+        app: { id: a.id, name: a.name, icon: ICONS[a.id]() }
+      }, '*');
+    } catch (e) {}
+  }
+}
+
+function showView(v){
+  const home = v === 'home';
+  $('#appgrid').style.display = home ? '' : 'none';
+  $('#dock').style.display    = home ? '' : 'none';
+  $('#gest').style.display    = home ? '' : 'none';
+  const av = $('#appview');
+  if (home){ av.hidden = true; return; }
+  const app = ALL_APPS.find(a => a.id === v);
+  if (!app){ av.hidden = true; return; }
+  av.querySelector('.avic').innerHTML = ICONS[app.id]();
+  av.querySelector('.avname').textContent = app.name;
+  av.hidden = false;
+}
+
 function appEl(a){
   const b = document.createElement('button');
   b.className = 'app';
   b.setAttribute('aria-label', a.name);
   b.innerHTML = `<span class="ic">${ICONS[a.id]()}</span><span class="lb"></span>`;
   b.querySelector('.lb').textContent = a.name;
+  b.addEventListener('click', () => openApp(a));
   return b;
 }
-HOME_APPS.forEach(a => $('#appgrid').appendChild(appEl(a)));   /* slots 1 & 2 of the 6×3 grid */
+HOME_APPS.forEach(a => $('#appgrid').appendChild(appEl(a)));
 DOCK_APPS.forEach(a => $('#dock').appendChild(appEl(a)));
+
+/* tab clicks in the launcher's title bar switch views here */
+addEventListener('message', e => {
+  const d = e.data;
+  if (!d || typeof d !== 'object') return;
+  if (d.type === 'mumu-view') showView(d.view === 'app' ? d.id : 'home');
+});
 
 /* ============ clock ============ */
 function tick(){
