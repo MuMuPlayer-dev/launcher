@@ -19,8 +19,8 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
 body{background:var(--bg);color:var(--ink);font-family:'Segoe UI','Segoe UI Variable Text',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;overflow:hidden;-webkit-font-smoothing:antialiased;
-     user-select:none;-webkit-user-select:none}         /* no text caret / selection anywhere */
-input{user-select:text;-webkit-user-select:text}        /* …except real input fields */
+     user-select:none;-webkit-user-select:none}
+input{user-select:text;-webkit-user-select:text}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 ::selection{background:rgba(60,195,214,.35)}
 button:focus{outline:none}
@@ -62,9 +62,7 @@ button:focus-visible{outline:2px solid rgba(255,255,255,.45);outline-offset:2px}
 .tab-panel{display:none;padding:34px 40px 44px}
 .tab-panel.active{display:block;animation:rise .55s var(--ease) both}
 @keyframes rise{from{opacity:0;transform:translateY(38px)}}
-/* devices tab content is full-bleed so row highlights run edge to edge */
 .tab-panel[data-panel="devices"]{padding-left:0;padding-right:0}
-/* remote tab fills the panel height: heading on top, Start button at the bottom */
 .tab-panel[data-panel="remote"].active{display:flex;flex-direction:column;min-height:100%}
 
 /* ---------- devices toolbar ---------- */
@@ -115,15 +113,13 @@ button:focus-visible{outline:2px solid rgba(255,255,255,.45);outline-offset:2px}
 @keyframes softPulse{50%{opacity:.3}}
 .info{flex:1;min-width:0}
 
-/* ---------- device preview ---------- */
-.pv{position:relative;width:216px;height:122px;flex:none;border-radius:12px;overflow:hidden;background:#0b0c0e;box-shadow:inset 0 0 0 1px rgba(255,255,255,.07)}
-.screen{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;transition:filter .35s ease}
-.screen>*{animation:scrIn .45s ease}
-@keyframes scrIn{from{opacity:0}}
-.hs{position:absolute;inset:0;width:100%;height:100%}
-.card[data-state="stopped"] .screen,.card[data-state="stopping"] .screen{filter:brightness(.42) saturate(.72)}
-.bootd{width:42px;height:auto;color:#9aa0a6;animation:bootPulse 1s ease-in-out infinite}
+/* ---------- device preview (renders the simulator wallpaper) ---------- */
+.pv{position:relative;width:216px;height:122px;flex:none;border-radius:12px;overflow:hidden;background:#060a17;box-shadow:inset 0 0 0 1px rgba(255,255,255,.07)}
+.screen{position:absolute;inset:0;transition:filter .35s ease}
+.pvwall{position:absolute;inset:0;width:100%;height:100%;display:block}
+.bootd{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:42px;height:auto;color:#9aa0a6;animation:bootPulse 1s ease-in-out infinite}
 @keyframes bootPulse{50%{opacity:.3}}
+.card[data-state="stopped"] .screen,.card[data-state="stopping"] .screen{filter:brightness(.42) saturate(.72)}
 .pbar{position:absolute;left:0;right:0;bottom:0;height:26px;display:flex;align-items:center;justify-content:center;gap:7px;background:rgba(158,162,170,.30);transition:height .35s var(--ease)}
 .pv:hover .pbar{height:100%}
 .pb-ic{width:13px;height:13px;display:block;color:var(--icon-gray);transition:opacity .18s}
@@ -153,7 +149,7 @@ button:focus-visible{outline:2px solid rgba(255,255,255,.45);outline-offset:2px}
 .grip{position:absolute;top:14px;right:14px;width:15px;height:15px;fill:#8e8f96;display:none}
 .grid.arranging .grip{display:block}
 
-/* empty state — fully removed (box, icon, text) once any device exists */
+/* empty state */
 .empty{display:flex;flex-direction:column;align-items:center;gap:5px;margin:18px 40px 0;padding:46px 20px;border:1.5px dashed #45464c;border-radius:16px;text-align:center}
 .empty[hidden]{display:none}
 .empty svg{width:34px;height:34px;margin-bottom:9px}
@@ -161,7 +157,7 @@ button:focus-visible{outline:2px solid rgba(255,255,255,.45);outline-offset:2px}
 .empty span{font-size:12.5px;color:var(--faint)}
 .hint{margin:18px 40px 0;font-size:12.5px;color:var(--faint)}
 
-/* ---------- remote play (StarDesk) — horizontally centered ---------- */
+/* ---------- remote play (StarDesk) ---------- */
 .rp-hero{max-width:640px;margin:0 auto;text-align:center}
 .rp-title{font-size:24px;font-weight:600;color:#fff;line-height:1.25}
 .rp-sub{margin-top:10px;font-size:14px;color:var(--dim);line-height:1.55}
@@ -170,8 +166,15 @@ button:focus-visible{outline:2px solid rgba(255,255,255,.45);outline-offset:2px}
 .rp-start:hover{background:var(--cyan-hi)}
 .rp-start:active{background:#31b1c3;transform:translateY(1px)}
 
+/* ---------- simulator windows (frameless: no URL, no toolbar) ---------- */
+.simwin{position:fixed;z-index:70;border-radius:14px;overflow:hidden;background:#060a17;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.08);animation:winIn .38s var(--ease) both}
+.simwin iframe{width:100%;height:100%;border:0;display:block;background:#060a17}
+.simwin.closing{animation:winOut .22s ease forwards}
+@keyframes winIn{from{opacity:0;transform:scale(.94)}}
+@keyframes winOut{to{opacity:0;transform:scale(.95)}}
+
 /* ---------- toasts ---------- */
-.toasts{position:fixed;right:26px;bottom:26px;display:flex;flex-direction:column;gap:10px;z-index:60}
+.toasts{position:fixed;right:26px;bottom:26px;display:flex;flex-direction:column;gap:10px;z-index:320}
 .toast{display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:12px;background:#333439;border:1px solid rgba(255,255,255,.09);font-size:13.5px;box-shadow:0 10px 26px rgba(0,0,0,.35);animation:toastIn .4s var(--ease)}
 .toast.out{animation:toastOut .3s ease forwards}
 @keyframes toastIn{from{opacity:0;transform:translateY(12px)}}
@@ -179,7 +182,7 @@ button:focus-visible{outline:2px solid rgba(255,255,255,.45);outline-offset:2px}
 .toast .tdot{width:7px;height:7px;border-radius:50%;background:var(--cyan);flex:none}
 
 /* ================= CREATE DEVICE MENU ================= */
-.veil{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;background:rgba(9,9,11,.6);opacity:0;transition:opacity .3s ease}
+.veil{position:fixed;inset:0;z-index:300;display:flex;align-items:center;justify-content:center;background:rgba(9,9,11,.6);opacity:0;transition:opacity .3s ease}
 .veil.show{opacity:1}
 .veil[hidden]{display:none}
 .dlg{position:relative;width:768px;max-width:calc(100vw - 36px);max-height:calc(100vh - 32px);overflow:auto;background:var(--menu);border-radius:16px;box-shadow:0 30px 80px rgba(0,0,0,.55);animation:dlgIn .38s cubic-bezier(.2,.85,.3,1) .12s both}
@@ -243,7 +246,7 @@ button:focus-visible{outline:2px solid rgba(255,255,255,.45);outline-offset:2px}
 .dlg-create:active{background:#31b1c3;transform:translateY(1px)}
 
 /* ================= DEVICE CONTEXT MENU ================= */
-.ctxmenu{position:fixed;z-index:90;min-width:216px;background:var(--menu);border-radius:12px;padding:6px;box-shadow:0 16px 44px rgba(0,0,0,.5);animation:ctxIn .16s ease both}
+.ctxmenu{position:fixed;z-index:310;min-width:216px;background:var(--menu);border-radius:12px;padding:6px;box-shadow:0 16px 44px rgba(0,0,0,.5);animation:ctxIn .16s ease both}
 @keyframes ctxIn{from{opacity:0;transform:translateY(-4px) scale(.97)}}
 .ctx-item{width:100%;display:flex;align-items:center;gap:11px;padding:9px 10px;border-radius:8px;font-size:13px;font-weight:600;color:#e9e9ec;transition:background .13s}
 .ctx-item:hover{background:rgba(255,255,255,.08)}
@@ -386,7 +389,7 @@ button:focus-visible{outline:2px solid rgba(255,255,255,.45);outline-offset:2px}
       <p>No devices yet</p>
       <span>Click New to create an Android device.</span>
     </div>
-    <p class="hint" id="gridHint">Press the play button to power on a device — its simulator opens in a new window.</p>
+    <p class="hint" id="gridHint">Press the play button to power on a device — its window opens here. Press Esc to power it off.</p>
   </section>
 
   <!-- ================= REMOTE PLAY ================= -->
@@ -533,7 +536,7 @@ const MODE_DESC   = {
 let mode = 'normal';          // normal | batch | arrange
 let seq = 0, totalCreated = 0;
 const selected = new Set();
-const instances = [];         // devices persist across reloads
+const instances = [];
 
 const grid = $('#grid');
 
@@ -558,7 +561,7 @@ function loadDevices() {
         orientation: d.orientation === 'portrait' ? 'portrait' : 'landscape',
         mode: okMode(d.mode),
         smallDisk: !!d.smallDisk,
-        state: 'stopped'        // always come back powered off
+        state: 'stopped'
       });
     });
     const maxId = instances.reduce((m, i) => Math.max(m, i.id), 0);
@@ -567,35 +570,142 @@ function loadDevices() {
   } catch (e) { /* nothing saved yet */ }
 }
 
-/* ---------------- preview artwork & icons ---------------- */
-const HOME_SVG = `
-<svg class="hs" viewBox="0 0 116 68" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-  <rect width="116" height="68" fill="#16222e"/>
-  <circle cx="16" cy="62" r="36" fill="#1d3343"/>
-  <circle cx="104" cy="6" r="30" fill="#20394b"/>
-  <circle cx="72" cy="44" r="20" fill="#182f3c" opacity=".75"/>
-  <text x="7" y="9" font-family="Segoe UI, sans-serif" font-size="5.2" font-weight="700" fill="#dfe7ea" opacity=".9">12:30</text>
-  <rect x="93" y="4.2" width="3.6" height="3.6" rx="1" fill="#dfe7ea" opacity=".75"/>
-  <rect x="99.5" y="3.6" width="6.4" height="4.8" rx="1" fill="#dfe7ea" opacity=".75"/>
-  <rect x="100.8" y="4.8" width="3" height="2.4" rx=".6" fill="#16222e"/>
-  <rect x="107.2" y="4.6" width="1.6" height="3" rx=".8" fill="#dfe7ea" opacity=".75"/>
-  <rect x="12" y="15" width="9" height="9" rx="2.4" fill="#48a9bd"/>
-  <rect x="33" y="15" width="9" height="9" rx="2.4" fill="#d08a5f"/>
-  <rect x="54" y="15" width="9" height="9" rx="2.4" fill="#6d8fdd"/>
-  <rect x="75" y="15" width="9" height="9" rx="2.4" fill="#67b46e"/>
-  <rect x="96" y="15" width="9" height="9" rx="2.4" fill="#a271c2"/>
-  <rect x="12" y="28" width="9" height="9" rx="2.4" fill="#5b8fd6"/>
-  <rect x="33" y="28" width="9" height="9" rx="2.4" fill="#4fae9c"/>
-  <rect x="54" y="28" width="9" height="9" rx="2.4" fill="#c7885c"/>
-  <rect x="75" y="28" width="9" height="9" rx="2.4" fill="#8b6fc9"/>
-  <rect x="96" y="28" width="9" height="9" rx="2.4" fill="#d3b45c"/>
-  <rect x="10" y="51" width="96" height="12" rx="6" fill="#0e1a24" opacity=".85"/>
-  <circle cx="26" cy="57" r="4" fill="#49a5b8"/>
-  <circle cx="45" cy="57" r="4" fill="#6d8fdd"/>
-  <circle cx="64" cy="57" r="4" fill="#67b46e"/>
-  <circle cx="83" cy="57" r="4" fill="#d08a5f"/>
-</svg>`;
+/* ============ wallpaper painter — identical to the simulator's ============ */
+function mulberry32(seed){
+  return function(){
+    seed |= 0; seed = (seed + 0x6D2B79F5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+function paintWall(g, W, H){
+  const m = Math.min(W, H);
+  const rnd = mulberry32(0x4D554D21);
+  const star = (x, y, s, a) => {
+    const gr = g.createRadialGradient(x, y, 0, x, y, s * 4.5);
+    gr.addColorStop(0, 'rgba(165,195,255,' + (0.55 * a).toFixed(3) + ')');
+    gr.addColorStop(1, 'rgba(120,160,255,0)');
+    g.fillStyle = gr; g.beginPath(); g.arc(x, y, s * 4.5, 0, 7); g.fill();
+    g.fillStyle = 'rgba(255,255,255,' + a.toFixed(3) + ')';
+    g.beginPath(); g.arc(x, y, s, 0, 7); g.fill();
+  };
+  const crater = (x, y, r, lx, ly, dark, mid, rim) => {
+    const la = Math.atan2(ly, lx);
+    const gr = g.createRadialGradient(x + lx * r * 0.45, y + ly * r * 0.45, r * 0.1, x, y, r);
+    gr.addColorStop(0, rim); gr.addColorStop(.6, mid); gr.addColorStop(1, dark);
+    g.fillStyle = gr;
+    g.beginPath(); g.ellipse(x, y, r, r * 0.94, 0, 0, 7); g.fill();
+    g.lineWidth = Math.max(1, r * 0.16);
+    g.strokeStyle = 'rgba(255,255,255,.30)';
+    g.beginPath(); g.arc(x, y, r * 0.9, la - 0.85, la + 0.85); g.stroke();
+    g.strokeStyle = 'rgba(0,0,25,.22)';
+    g.beginPath(); g.arc(x, y, r * 0.9, la + Math.PI - 0.85, la + Math.PI + 0.85); g.stroke();
+  };
+  const rr = (x, y, w, h, r) => {
+    g.beginPath();
+    g.moveTo(x + r, y);
+    g.arcTo(x + w, y, x + w, y + h, r);
+    g.arcTo(x + w, y + h, x, y + h, r);
+    g.arcTo(x, y + h, x, y, r);
+    g.arcTo(x, y, x + w, y, r);
+    g.closePath();
+  };
 
+  const bg = g.createLinearGradient(0, 0, W * 0.25, H);
+  bg.addColorStop(0, '#0b1326'); bg.addColorStop(.55, '#091021'); bg.addColorStop(1, '#060a17');
+  g.fillStyle = bg; g.fillRect(0, 0, W, H);
+
+  const n = Math.max(60, Math.round(W * H / 9000));
+  for (let i = 0; i < n; i++){
+    star(rnd() * W, rnd() * H, 0.4 + rnd() * rnd() * 1.9, 0.55 + rnd() * 0.45);
+  }
+
+  const mr = m * 0.52, mcx = -mr * 0.34, mcy = H + mr * 0.34;
+  g.save();
+  g.beginPath(); g.arc(mcx, mcy, mr, 0, 7); g.clip();
+  const mg = g.createRadialGradient(mcx + mr * 0.55, mcy - mr * 0.55, mr * 0.1, mcx, mcy, mr);
+  mg.addColorStop(0, '#eff1f3'); mg.addColorStop(.55, '#d5d9dd'); mg.addColorStop(1, '#b7bdc3');
+  g.fillStyle = mg; g.fillRect(mcx - mr, mcy - mr, mr * 2, mr * 2);
+  for (let i = 0; i < 9; i++){
+    const ang = -(0.3 + rnd() * 1.05), d = mr * (0.28 + rnd() * 0.55);
+    crater(mcx + Math.cos(ang) * d, mcy + Math.sin(ang) * d,
+           mr * (0.04 + rnd() * 0.085), 0.7, -0.7, '#787e86', '#a6abb1', '#dfe2e5');
+  }
+  const term = g.createLinearGradient(mcx - mr * 0.8, mcy + mr * 0.8, mcx + mr * 0.6, mcy - mr * 0.6);
+  term.addColorStop(0, 'rgba(4,7,20,0.97)'); term.addColorStop(.5, 'rgba(5,9,26,0.55)'); term.addColorStop(1, 'rgba(5,9,26,0)');
+  g.fillStyle = term; g.fillRect(mcx - mr, mcy - mr, mr * 2, mr * 2);
+  g.restore();
+  g.strokeStyle = 'rgba(255,255,255,.35)'; g.lineWidth = 2.5;
+  g.beginPath(); g.arc(mcx, mcy, mr - 1.2, -0.785 - 0.65, -0.785 + 0.65); g.stroke();
+
+  /* the mumu logo trio — bottoms aligned, equal gaps */
+  const ROT = 15 * Math.PI / 180;
+  const PW = m * 0.085, PL = m * 0.36, gap = m * 0.05;
+  const halfW = (PW / 2) * Math.cos(ROT) + (PL / 2) * Math.sin(ROT);
+  const groupW = 4 * halfW + 2 * gap + PW;
+  const rightX = W * 0.84;
+  const leftX = rightX - groupW;
+  const bottomY = H * 0.62;
+  const circX = rightX - PW / 2, circY = bottomY - PW / 2;
+  const pillY = bottomY - PW / 2 - (PL / 2 - PW / 2) * Math.cos(ROT);
+  const pillAx = leftX + halfW;
+  const pillBx = leftX + 3 * halfW + gap;
+
+  const shape = (kind, px, py) => {
+    g.save();
+    g.translate(px, py);
+    if (kind === 'pill') g.rotate(ROT);
+    const R = kind === 'pill' ? PL / 2 : PW / 2;
+    const grad = g.createRadialGradient(0, 0, R * 0.08, 0, 0, R);
+    grad.addColorStop(0, '#8ed2f3');
+    grad.addColorStop(.35, '#c4e4f7');
+    grad.addColorStop(1, '#eff8ff');
+    const path = () => {
+      if (kind === 'pill') rr(-PW / 2, -PL / 2, PW, PL, PW / 2);
+      else { g.beginPath(); g.arc(0, 0, PW / 2, 0, 7); }
+    };
+    g.shadowColor = 'rgba(125,190,255,.38)';
+    g.shadowBlur = 64; g.shadowOffsetX = -54;
+    g.fillStyle = grad; path(); g.fill();
+    g.shadowColor = 'rgba(150,212,255,.62)';
+    g.shadowBlur = 26; g.shadowOffsetX = -20;
+    path(); g.fill();
+    g.shadowColor = 'transparent'; g.shadowBlur = 0; g.shadowOffsetX = 0;
+    g.fillStyle = grad; path(); g.fill();
+    g.strokeStyle = 'rgba(255,255,255,.5)'; g.lineWidth = 1;
+    path(); g.stroke();
+    g.restore();
+  };
+  shape('pill', pillAx, pillY);
+  shape('pill', pillBx, pillY);
+  shape('circle', circX, circY);
+
+  const pr = m * 0.17, pcx = W - pr * 1.3, pcy = pr * 1.5;
+  g.save();
+  g.beginPath(); g.arc(pcx, pcy, pr, 0, 7); g.clip();
+  const pg = g.createRadialGradient(pcx - pr * 0.5, pcy + pr * 0.5, pr * 0.15, pcx, pcy, pr * 1.05);
+  pg.addColorStop(0, '#c8dbdf'); pg.addColorStop(.6, '#a9c4cb'); pg.addColorStop(1, '#8fb0b9');
+  g.fillStyle = pg; g.fillRect(pcx - pr, pcy - pr, pr * 2, pr * 2);
+  const sh = g.createLinearGradient(pcx + pr * 0.85, pcy - pr * 0.85, pcx - pr * 0.7, pcy + pr * 0.7);
+  sh.addColorStop(0, 'rgba(23,62,74,0.85)'); sh.addColorStop(.55, 'rgba(23,62,74,0.35)'); sh.addColorStop(1, 'rgba(23,62,74,0)');
+  g.fillStyle = sh; g.fillRect(pcx - pr, pcy - pr, pr * 2, pr * 2);
+  for (let i = 0; i < 8; i++){
+    const a = rnd() * Math.PI * 2, d = rnd() * pr * 0.72;
+    crater(pcx + Math.cos(a) * d, pcy + Math.sin(a) * d,
+           pr * (0.05 + rnd() * 0.08), -0.7, 0.7, '#5d7b85', '#89a4ac', '#d3e6ea');
+  }
+  g.restore();
+  g.strokeStyle = 'rgba(225,248,252,.5)'; g.lineWidth = 1.6;
+  g.beginPath(); g.arc(pcx, pcy, pr - 0.8, Math.PI * 0.6, Math.PI * 1.1); g.stroke();
+
+  const topBand = Math.max(8, (pcy - pr) - 18);
+  for (let i = 0; i < 5; i++){
+    star(pcx - pr * 1.05 + rnd() * pr * 2.1, 10 + rnd() * topBand, 0.7 + rnd() * 1.1, 0.9);
+  }
+}
+
+/* ---------------- preview artwork & icons ---------------- */
 const BOOT_SVG = `
 <svg class="bootd" viewBox="0 0 24 17" aria-hidden="true">
   <path d="M6.9 4.9 L5 1.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" fill="none"/>
@@ -609,7 +719,6 @@ const PLAY_ICON  = `<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M4.4 2.
 const POWER_ICON = `<svg viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><path d="M10.8 3.7a4.6 4.6 0 1 1-7.6 0"/><line x1="7" y1="1.4" x2="7" y2="6.2"/></svg>`;
 const DOTS_ICON  = `<svg viewBox="0 0 14 14" fill="#fff" aria-hidden="true"><circle cx="7" cy="2.9" r="1.6"/><circle cx="7" cy="7" r="1.6"/><circle cx="7" cy="11.1" r="1.6"/></svg>`;
 
-/* context menu icons */
 const IC_DEVSET = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true">
   <rect x="8" y="3" width="8" height="18" rx="2.4"/>
   <line x1="10.4" y1="6.7" x2="13.6" y2="6.7" stroke-linecap="round"/>
@@ -637,13 +746,8 @@ const GRIP = `
   <circle cx="3" cy="9.4" r="1.25"/><circle cx="9" cy="9.4" r="1.25"/>
 </svg>`;
 
-function screenHTML(state) {
-  if (state === 'booting') return BOOT_SVG;
-  return HOME_SVG;
-}
-
 /* ---------------- card rendering ---------------- */
-function render(anim) {          // 'all' | single id | array of ids
+function render(anim) {
   grid.innerHTML = '';
   instances.forEach((inst, i) => {
     const card = document.createElement('article');
@@ -653,7 +757,7 @@ function render(anim) {          // 'all' | single id | array of ids
     if (mode === 'arrange') card.draggable = true;
     card.innerHTML = `
       <div class="pv">
-        <div class="screen">${screenHTML(inst.state)}</div>
+        <div class="screen"><canvas class="pvwall" width="432" height="244"></canvas>${inst.state === 'booting' ? BOOT_SVG : ''}</div>
         <div class="pbar">
           <svg class="pb-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="11"/></svg>
           <span class="pb-tx"></span>
@@ -682,6 +786,7 @@ function render(anim) {          // 'all' | single id | array of ids
     card.querySelector('.state-txt').textContent = STATE_LABEL[inst.state];
     card.querySelector('.pb-tx').textContent = BAR_LABEL[inst.state];
     card.querySelector('.play').innerHTML = inst.state === 'running' ? POWER_ICON : PLAY_ICON;
+    paintWall(card.querySelector('.pvwall').getContext('2d'), 432, 244);
 
     let show = false, delay = 0;
     if (anim === 'all') { show = true; delay = i * 70; }
@@ -691,7 +796,7 @@ function render(anim) {          // 'all' | single id | array of ids
     grid.appendChild(card);
   });
   $('#instCount').textContent = String(instances.length);
-  $('#emptyState').hidden = instances.length > 0;   // box, icon, text all disappear
+  $('#emptyState').hidden = instances.length > 0;
 }
 
 function setState(inst, state) {
@@ -701,7 +806,10 @@ function setState(inst, state) {
     card.dataset.state = state;
     card.querySelector('.state-txt').textContent = STATE_LABEL[state];
     card.querySelector('.pb-tx').textContent = BAR_LABEL[state];
-    card.querySelector('.screen').innerHTML = screenHTML(state);
+    const scr = card.querySelector('.screen');
+    const d = scr.querySelector('.bootd');
+    if (state === 'booting') { if (!d) scr.insertAdjacentHTML('beforeend', BOOT_SVG); }
+    else if (d) d.remove();
     const ic = state === 'running' ? POWER_ICON : PLAY_ICON;
     card.querySelector('.play').innerHTML = ic;
     card.querySelector('.cbtn[data-act="power"] .cb-ic').innerHTML = ic;
@@ -709,28 +817,91 @@ function setState(inst, state) {
   saveDevices();
 }
 
-/* ---------------- simulator window ----------------
+/* ---------------- simulator windows (frameless, no URL) ----------------
    simulator.html must live in the same folder as this launcher file. */
-function openSimulator(inst) {
-  const data = encodeURIComponent(JSON.stringify({
-    name: inst.name, version: inst.version, orientation: inst.orientation,
-    mode: inst.mode, smallDisk: inst.smallDisk
-  }));
-  const w = 1152, h = 672;
-  const left = Math.max(0, ((screen.availWidth || screen.width) - w) / 2 | 0);
-  const top  = Math.max(0, ((screen.availHeight || screen.height) - h) / 2 | 0);
-  const win = window.open('simulator.html#' + data, '_blank', `width=${w},height=${h},left=${left},top=${top}`);
-  if (!win) toast('Allow pop-ups for this page to open the simulator.');
+const simWins = new Map();    // device id → window element
+let zTop = 70, cascade = 0;
+
+function raiseWin(wrap){
+  const z = +wrap.style.zIndex || 70;
+  if (z < zTop) wrap.style.zIndex = ++zTop;
 }
 
+function openSimulator(inst) {
+  const existing = simWins.get(inst.id);
+  if (existing) { raiseWin(existing); return; }
+  const wrap = document.createElement('div');
+  wrap.className = 'simwin';
+  wrap.dataset.id = inst.id;
+  const data = encodeURIComponent(JSON.stringify({
+    id: inst.id, name: inst.name, version: inst.version,
+    orientation: inst.orientation, mode: inst.mode, smallDisk: inst.smallDisk
+  }));
+  const w = Math.max(320, Math.min(1152, innerWidth - 56));
+  const h = Math.max(240, Math.min(672, innerHeight - 76));
+  const off = (cascade++ % 5) * 26;
+  wrap.style.width = w + 'px';
+  wrap.style.height = h + 'px';
+  wrap.style.left = Math.max(8, Math.round((innerWidth - w) / 2) + off - 52) + 'px';
+  wrap.style.top  = Math.max(8, Math.round((innerHeight - h) / 2) + off - 40) + 'px';
+  wrap.style.zIndex = ++zTop;
+  const frame = document.createElement('iframe');
+  frame.src = 'simulator.html#' + data;
+  frame.title = inst.name;
+  wrap.appendChild(frame);
+  document.body.appendChild(wrap);
+  simWins.set(inst.id, wrap);
+  wrap.addEventListener('mousedown', () => raiseWin(wrap));
+  frame.addEventListener('load', () => { try { frame.focus(); } catch (e) {} });
+}
+
+function closeSimulator(inst) {
+  const wrap = simWins.get(inst.id);
+  if (!wrap) return;
+  simWins.delete(inst.id);
+  wrap.classList.add('closing');
+  setTimeout(() => wrap.remove(), 230);
+}
+
+/* bring a window to front when its simulator is clicked (iframe focus) */
+setInterval(() => {
+  const ae = document.activeElement;
+  if (ae && ae.tagName === 'IFRAME' && ae.parentElement && ae.parentElement.classList.contains('simwin')){
+    raiseWin(ae.parentElement);
+  }
+}, 500);
+
+/* simulator says Esc was pressed inside it → power that device off */
+addEventListener('message', e => {
+  const d = e.data;
+  if (!d || d.type !== 'mumu-close' || d.id == null) return;
+  const inst = instances.find(i => i.id === d.id);
+  if (inst) powerOff(inst);
+});
+
+/* Esc while the launcher itself has focus → power off the top window */
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Escape' || !simWins.size) return;
+  let top = null, z = -1;
+  simWins.forEach(w => { const zi = +w.style.zIndex || 70; if (zi > z) { z = zi; top = w; } });
+  if (!top) return;
+  const inst = instances.find(i => i.id === +top.dataset.id);
+  if (inst) powerOff(inst);
+});
+
 /* ---------------- power on / off ---------------- */
+function powerOff(inst) {
+  if (inst.state !== 'running' && inst.state !== 'booting') return;
+  closeSimulator(inst);
+  setState(inst, 'stopping');
+  setTimeout(() => setState(inst, 'stopped'), 550);
+}
+
 function togglePower(inst) {
   if (inst.state === 'booting' || inst.state === 'stopping') return;
-  if (inst.state === 'running') {
-    setState(inst, 'stopping');
-    setTimeout(() => setState(inst, 'stopped'), 550);
-  } else {
-    openSimulator(inst);   // powering on opens the simulator window
+  if (inst.state === 'running') powerOff(inst);
+  else {
+    openSimulator(inst);
     setState(inst, 'booting');
     setTimeout(() => setState(inst, 'running'), 1600);
   }
@@ -864,6 +1035,7 @@ function openDeviceMenu(inst, anchor) {
 }
 
 function deleteInstance(inst) {
+  closeSimulator(inst);
   const idx = instances.findIndex(i => i.id === inst.id);
   if (idx > -1) instances.splice(idx, 1);
   selected.delete(inst.id);
@@ -874,7 +1046,7 @@ function deleteInstance(inst) {
     card.style.transform = 'translateX(28px)';
     setTimeout(() => {
       card.remove();
-      $('#emptyState').hidden = instances.length > 0;   // empty state returns only at zero devices
+      $('#emptyState').hidden = instances.length > 0;
     }, 240);
   }
   $('#instCount').textContent = String(instances.length);
@@ -916,7 +1088,7 @@ function setMode(next) {
   $('#gridHint').textContent =
     mode === 'batch'   ? 'Select instances to batch-start or batch-stop them.' :
     mode === 'arrange' ? 'Drag instances to reorder them.' :
-                         'Press the play button to power on a device — its simulator opens in a new window.';
+                         'Press the play button to power on a device — its window opens here. Press Esc to power it off.';
   syncBulk();
 }
 
@@ -930,13 +1102,12 @@ function bulkAction(action) {
     if (!inst) return;
     if (action === 'start') {
       if (inst.state !== 'stopped') return;
-      openSimulator(inst);   // opened synchronously so the browser treats it as one user gesture
+      openSimulator(inst);
       setTimeout(() => setState(inst, 'booting'), i * 160);
       setTimeout(() => setState(inst, 'running'), 1600 + i * 160);
     } else {
-      if (inst.state !== 'running') return;
-      setTimeout(() => setState(inst, 'stopping'), i * 160);
-      setTimeout(() => setState(inst, 'stopped'), 550 + i * 160);
+      if (inst.state !== 'running' && inst.state !== 'booting') return;
+      setTimeout(() => powerOff(inst), i * 160);
     }
     n++;
   });
@@ -979,7 +1150,6 @@ grid.addEventListener('dragend', () => {
 });
 
 /* ---------------- remote play ---------------- */
-/* Start button is a placeholder for now — its behavior comes later. */
  $('#btnStart').addEventListener('click', () => {});
 
 /* ---------------- toasts ---------------- */
@@ -1117,7 +1287,7 @@ diskSwitch.addEventListener('click', () => {
   persist();
 });
 
-/* ---------------- create devices (no limit) ---------------- */
+/* ---------------- create devices ---------------- */
  $('#btnCreate').addEventListener('click', () => {
   const n = Math.max(1, newCfg.count);
   const newIds = [];
