@@ -14,10 +14,8 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 button:focus{outline:none}
 button:focus-visible{outline:2px solid rgba(255,255,255,.5);outline-offset:3px;border-radius:14px}
 
-/* wallpaper canvas sits behind everything */
 #wall{position:fixed;inset:0;z-index:0;display:block}
 
-/* home UI — hidden until the boot splash finishes */
 #ui{position:fixed;inset:0;z-index:1;opacity:0;transform:translateY(16px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
 #ui.ready{opacity:1;transform:none}
 
@@ -25,24 +23,22 @@ button:focus-visible{outline:2px solid rgba(255,255,255,.5);outline-offset:3px;b
 .sb-right{display:flex;align-items:center;gap:10px}
 .sb-right svg{display:block;filter:drop-shadow(0 1px 2px rgba(0,0,0,.45))}
 
-/* 6 × 3 home grid */
-#appgrid{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);display:grid;grid-template-columns:repeat(6,92px);grid-template-rows:repeat(3,104px)}
-.app{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
-.app .ic{width:56px;height:56px;transition:transform .16s var(--ease)}
+/* 6 × 3 grid: edge to edge, from under the status bar down to just above the dock */
+#appgrid{position:absolute;left:0;right:0;top:42px;bottom:134px;display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(3,1fr)}
+.app{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:11px}
+.app .ic{width:66px;height:66px;transition:transform .16s var(--ease)}
 .app .ic svg{width:100%;height:100%;display:block}
-.app:active .ic{transform:scale(.86)}
-.app .lb{font-size:12px;font-weight:500;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.6);max-width:88px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.app:active .ic{transform:scale(.88)}
+.app .lb{font-size:13px;font-weight:500;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.6);max-width:150px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
-/* dock — 4 apps, no labels */
-#dock{position:absolute;left:50%;bottom:30px;transform:translateX(-50%);display:flex;gap:14px;padding:11px 15px;border-radius:28px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.09);backdrop-filter:blur(18px) saturate(1.25)}
+/* dock: no background — same icon size as the grid, tighter spacing, no labels */
+#dock{position:absolute;left:50%;bottom:32px;transform:translateX(-50%);display:flex;gap:24px}
 #dock .app{gap:0}
-#dock .app .ic{width:52px;height:52px}
 #dock .app .lb{display:none}
 
-/* gesture pill */
 #gest{position:absolute;left:50%;bottom:9px;transform:translateX(-50%);width:118px;height:4px;border-radius:99px;background:rgba(255,255,255,.55)}
 
-/* boot splash — logo + text over a blurred panel that sits above the wallpaper */
+/* boot splash */
 #splash{position:fixed;inset:0;z-index:5;display:flex;align-items:center;justify-content:center;transition:opacity .65s ease}
 #splash.hide{opacity:0;pointer-events:none}
 .spl-card{display:flex;flex-direction:column;align-items:center;gap:22px;padding:54px 88px;border-radius:30px;background:rgba(6,11,25,.38);border:1px solid rgba(255,255,255,.07);backdrop-filter:blur(16px) saturate(1.15);animation:splIn .8s var(--ease) both}
@@ -94,10 +90,9 @@ let DEV = null;
 try { DEV = JSON.parse(decodeURIComponent(location.hash.slice(1)) || 'null'); } catch (e) {}
 if (DEV && DEV.name) document.title = DEV.name + ' — MUMUPlayer';
 
-/* ============ wallpaper (drawn on a canvas, fully deterministic) ============ */
+/* ============ wallpaper (canvas, fully deterministic) ============ */
 const cv = $('#wall'), cx = cv.getContext('2d');
 
-/* mulberry32 — seeded PRNG so the sky is identical on every boot */
 function mulberry32(seed){
   return function(){
     seed |= 0; seed = (seed + 0x6D2B79F5) | 0;
@@ -106,52 +101,45 @@ function mulberry32(seed){
     return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
   };
 }
-/* star: white core with a blue glow around it */
-function star(x, y, s, a){
-  const g = cx.createRadialGradient(x, y, 0, x, y, s * 4.5);
-  g.addColorStop(0, 'rgba(165,195,255,' + (0.55 * a).toFixed(3) + ')');
-  g.addColorStop(1, 'rgba(120,160,255,0)');
-  cx.fillStyle = g; cx.beginPath(); cx.arc(x, y, s * 4.5, 0, 7); cx.fill();
-  cx.fillStyle = 'rgba(255,255,255,' + a.toFixed(3) + ')';
-  cx.beginPath(); cx.arc(x, y, s, 0, 7); cx.fill();
-}
-/* crater: shaded bowl — lit inner wall toward (lx,ly), dark rim on the far side */
-function crater(x, y, r, lx, ly, dark, mid, rim){
-  const la = Math.atan2(ly, lx);
-  const g = cx.createRadialGradient(x + lx * r * 0.45, y + ly * r * 0.45, r * 0.1, x, y, r);
-  g.addColorStop(0, rim); g.addColorStop(.6, mid); g.addColorStop(1, dark);
-  cx.fillStyle = g;
-  cx.beginPath(); cx.ellipse(x, y, r, r * 0.94, 0, 0, 7); cx.fill();
-  cx.lineWidth = Math.max(1, r * 0.16);
-  cx.strokeStyle = 'rgba(255,255,255,.30)';
-  cx.beginPath(); cx.arc(x, y, r * 0.9, la - 0.85, la + 0.85); cx.stroke();
-  cx.strokeStyle = 'rgba(0,0,25,.22)';
-  cx.beginPath(); cx.arc(x, y, r * 0.9, la + Math.PI - 0.85, la + Math.PI + 0.85); cx.stroke();
-}
-function rr(x, y, w, h, r){
-  cx.beginPath();
-  cx.moveTo(x + r, y);
-  cx.arcTo(x + w, y, x + w, y + h, r);
-  cx.arcTo(x + w, y + h, x, y + h, r);
-  cx.arcTo(x, y + h, x, y, r);
-  cx.arcTo(x, y, x + w, y, r);
-  cx.closePath();
-}
 
-const ROT = 15 * Math.PI / 180;   /* pills rotated 15° clockwise */
-
-function draw(){
-  const dpr = window.devicePixelRatio || 1;
-  const W = innerWidth, H = innerHeight, m = Math.min(W, H);
-  cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
-  cv.style.width = W + 'px'; cv.style.height = H + 'px';
-  cx.setTransform(dpr, 0, 0, dpr, 0, 0);
+function paintWall(g, W, H){
+  const m = Math.min(W, H);
   const rnd = mulberry32(0x4D554D21);   /* fixed seed — same sky every load */
 
+  const star = (x, y, s, a) => {
+    const gr = g.createRadialGradient(x, y, 0, x, y, s * 4.5);
+    gr.addColorStop(0, 'rgba(165,195,255,' + (0.55 * a).toFixed(3) + ')');
+    gr.addColorStop(1, 'rgba(120,160,255,0)');
+    g.fillStyle = gr; g.beginPath(); g.arc(x, y, s * 4.5, 0, 7); g.fill();
+    g.fillStyle = 'rgba(255,255,255,' + a.toFixed(3) + ')';
+    g.beginPath(); g.arc(x, y, s, 0, 7); g.fill();
+  };
+  const crater = (x, y, r, lx, ly, dark, mid, rim) => {
+    const la = Math.atan2(ly, lx);
+    const gr = g.createRadialGradient(x + lx * r * 0.45, y + ly * r * 0.45, r * 0.1, x, y, r);
+    gr.addColorStop(0, rim); gr.addColorStop(.6, mid); gr.addColorStop(1, dark);
+    g.fillStyle = gr;
+    g.beginPath(); g.ellipse(x, y, r, r * 0.94, 0, 0, 7); g.fill();
+    g.lineWidth = Math.max(1, r * 0.16);
+    g.strokeStyle = 'rgba(255,255,255,.30)';
+    g.beginPath(); g.arc(x, y, r * 0.9, la - 0.85, la + 0.85); g.stroke();
+    g.strokeStyle = 'rgba(0,0,25,.22)';
+    g.beginPath(); g.arc(x, y, r * 0.9, la + Math.PI - 0.85, la + Math.PI + 0.85); g.stroke();
+  };
+  const rr = (x, y, w, h, r) => {
+    g.beginPath();
+    g.moveTo(x + r, y);
+    g.arcTo(x + w, y, x + w, y + h, r);
+    g.arcTo(x + w, y + h, x, y + h, r);
+    g.arcTo(x, y + h, x, y, r);
+    g.arcTo(x, y, x + w, y, r);
+    g.closePath();
+  };
+
   /* dark blue space background */
-  const bg = cx.createLinearGradient(0, 0, W * 0.25, H);
+  const bg = g.createLinearGradient(0, 0, W * 0.25, H);
   bg.addColorStop(0, '#0b1326'); bg.addColorStop(.55, '#091021'); bg.addColorStop(1, '#060a17');
-  cx.fillStyle = bg; cx.fillRect(0, 0, W, H);
+  g.fillStyle = bg; g.fillRect(0, 0, W, H);
 
   /* star field — small, varying sizes, blue glow */
   const n = Math.max(60, Math.round(W * H / 9000));
@@ -159,129 +147,225 @@ function draw(){
     star(rnd() * W, rnd() * H, 0.4 + rnd() * rnd() * 1.9, 0.55 + rnd() * 0.45);
   }
 
-  /* ---- bottom-left moon: only its top-right is visible ---- */
+  /* ---- bottom-left moon: only its top-right shows ---- */
   const mr = m * 0.52, mcx = -mr * 0.34, mcy = H + mr * 0.34;
-  cx.save();
-  cx.beginPath(); cx.arc(mcx, mcy, mr, 0, 7); cx.clip();
-  const mg = cx.createRadialGradient(mcx + mr * 0.55, mcy - mr * 0.55, mr * 0.1, mcx, mcy, mr);
+  g.save();
+  g.beginPath(); g.arc(mcx, mcy, mr, 0, 7); g.clip();
+  const mg = g.createRadialGradient(mcx + mr * 0.55, mcy - mr * 0.55, mr * 0.1, mcx, mcy, mr);
   mg.addColorStop(0, '#eff1f3'); mg.addColorStop(.55, '#d5d9dd'); mg.addColorStop(1, '#b7bdc3');
-  cx.fillStyle = mg; cx.fillRect(mcx - mr, mcy - mr, mr * 2, mr * 2);
-  for (let i = 0; i < 9; i++){                      /* shaded craters on the lit side */
+  g.fillStyle = mg; g.fillRect(mcx - mr, mcy - mr, mr * 2, mr * 2);
+  for (let i = 0; i < 9; i++){
     const ang = -(0.3 + rnd() * 1.05), d = mr * (0.28 + rnd() * 0.55);
     crater(mcx + Math.cos(ang) * d, mcy + Math.sin(ang) * d,
            mr * (0.04 + rnd() * 0.085), 0.7, -0.7, '#787e86', '#a6abb1', '#dfe2e5');
   }
-  /* very dark blue gradient around the circle's bottom-left (night side) */
-  const term = cx.createLinearGradient(mcx - mr * 0.8, mcy + mr * 0.8, mcx + mr * 0.6, mcy - mr * 0.6);
+  const term = g.createLinearGradient(mcx - mr * 0.8, mcy + mr * 0.8, mcx + mr * 0.6, mcy - mr * 0.6);
   term.addColorStop(0, 'rgba(4,7,20,0.97)'); term.addColorStop(.5, 'rgba(5,9,26,0.55)'); term.addColorStop(1, 'rgba(5,9,26,0)');
-  cx.fillStyle = term; cx.fillRect(mcx - mr, mcy - mr, mr * 2, mr * 2);
-  cx.restore();
-  cx.strokeStyle = 'rgba(255,255,255,.35)'; cx.lineWidth = 2.5;   /* rim light on the lit edge */
-  cx.beginPath(); cx.arc(mcx, mcy, mr - 1.2, -0.785 - 0.65, -0.785 + 0.65); cx.stroke();
+  g.fillStyle = term; g.fillRect(mcx - mr, mcy - mr, mr * 2, mr * 2);
+  g.restore();
+  g.strokeStyle = 'rgba(255,255,255,.35)'; g.lineWidth = 2.5;
+  g.beginPath(); g.arc(mcx, mcy, mr - 1.2, -0.785 - 0.65, -0.785 + 0.65); g.stroke();
 
-  /* ---- two glowing pills + aligned circle on the right ---- */
-  const PW = m * 0.085, PL = m * 0.36;
-  const pA = { x: W * 0.66,                 y: H * 0.36 };
-  const pB = { x: W * 0.66 + PW * 1.95,     y: H * 0.36 };
-  /* circle: same size as a pill's end, centered at the pills' bottom-end y level */
-  const circ = { x: pB.x + PW * 1.5, y: H * 0.36 + Math.cos(ROT) * PL / 2 };
+  /* ---- the mumu logo trio: pills + circle —
+        bottoms exactly aligned, equal gaps between all three shapes ---- */
+  const ROT = 15 * Math.PI / 180;
+  const PW = m * 0.085, PL = m * 0.36, gap = m * 0.05;
+  const halfW = (PW / 2) * Math.cos(ROT) + (PL / 2) * Math.sin(ROT);   /* horizontal half-extent of a rotated pill */
+  const groupW = 4 * halfW + 2 * gap + PW;
+  const rightX = W * 0.84;
+  const leftX = rightX - groupW;
+  const bottomY = H * 0.62;                                             /* shared bottom line */
+  const circX = rightX - PW / 2, circY = bottomY - PW / 2;
+  const pillY = bottomY - PW / 2 - (PL / 2 - PW / 2) * Math.cos(ROT);   /* pill centers so pill bottoms hit bottomY */
+  const pillAx = leftX + halfW;
+  const pillBx = leftX + 3 * halfW + gap;
 
-  function glowingShape(kind, px, py){
-    cx.save();
-    cx.translate(px, py);
-    if (kind === 'pill') cx.rotate(ROT);
+  const shape = (kind, px, py) => {
+    g.save();
+    g.translate(px, py);
+    if (kind === 'pill') g.rotate(ROT);
     const R = kind === 'pill' ? PL / 2 : PW / 2;
-    const grad = cx.createRadialGradient(0, 0, R * 0.08, 0, 0, R);
-    grad.addColorStop(0, '#8ed2f3');    /* light sky blue center */
+    const grad = g.createRadialGradient(0, 0, R * 0.08, 0, 0, R);
+    grad.addColorStop(0, '#8ed2f3');
     grad.addColorStop(.35, '#c4e4f7');
-    grad.addColorStop(1, '#eff8ff');    /* very light blue edges */
+    grad.addColorStop(1, '#eff8ff');
     const path = () => {
-      if (kind === 'pill') rr(-PW / 2, -PL / 2, PW, PL, PW / 2);   /* circular ends */
-      else { cx.beginPath(); cx.arc(0, 0, PW / 2, 0, 7); }
+      if (kind === 'pill') rr(-PW / 2, -PL / 2, PW, PL, PW / 2);
+      else { g.beginPath(); g.arc(0, 0, PW / 2, 0, 7); }
     };
-    cx.shadowColor = 'rgba(125,190,255,.38)';    /* wide glow trailing to the left */
-    cx.shadowBlur = 64; cx.shadowOffsetX = -54;
-    cx.fillStyle = grad; path(); cx.fill();
-    cx.shadowColor = 'rgba(150,212,255,.62)';    /* tighter glow hugging the left */
-    cx.shadowBlur = 26; cx.shadowOffsetX = -20;
-    path(); cx.fill();
-    cx.shadowColor = 'transparent'; cx.shadowBlur = 0; cx.shadowOffsetX = 0;
-    cx.fillStyle = grad; path(); cx.fill();
-    cx.strokeStyle = 'rgba(255,255,255,.5)'; cx.lineWidth = 1;
-    path(); cx.stroke();
-    cx.restore();
-  }
-  glowingShape('pill',   pA.x,   pA.y);
-  glowingShape('pill',   pB.x,   pB.y);
-  glowingShape('circle', circ.x, circ.y);
+    g.shadowColor = 'rgba(125,190,255,.38)';
+    g.shadowBlur = 64; g.shadowOffsetX = -54;
+    g.fillStyle = grad; path(); g.fill();
+    g.shadowColor = 'rgba(150,212,255,.62)';
+    g.shadowBlur = 26; g.shadowOffsetX = -20;
+    path(); g.fill();
+    g.shadowColor = 'transparent'; g.shadowBlur = 0; g.shadowOffsetX = 0;
+    g.fillStyle = grad; path(); g.fill();
+    g.strokeStyle = 'rgba(255,255,255,.5)'; g.lineWidth = 1;
+    path(); g.stroke();
+    g.restore();
+  };
+  shape('pill', pillAx, pillY);
+  shape('pill', pillBx, pillY);
+  shape('circle', circX, circY);
 
-  /* ---- top-right planet: greyish cyan, shadowed from the top right ---- */
+  /* ---- top-right planet ---- */
   const pr = m * 0.17, pcx = W - pr * 1.3, pcy = pr * 1.5;
-  cx.save();
-  cx.beginPath(); cx.arc(pcx, pcy, pr, 0, 7); cx.clip();
-  const pg = cx.createRadialGradient(pcx - pr * 0.5, pcy + pr * 0.5, pr * 0.15, pcx, pcy, pr * 1.05);
+  g.save();
+  g.beginPath(); g.arc(pcx, pcy, pr, 0, 7); g.clip();
+  const pg = g.createRadialGradient(pcx - pr * 0.5, pcy + pr * 0.5, pr * 0.15, pcx, pcy, pr * 1.05);
   pg.addColorStop(0, '#c8dbdf'); pg.addColorStop(.6, '#a9c4cb'); pg.addColorStop(1, '#8fb0b9');
-  cx.fillStyle = pg; cx.fillRect(pcx - pr, pcy - pr, pr * 2, pr * 2);
-  const sh = cx.createLinearGradient(pcx + pr * 0.85, pcy - pr * 0.85, pcx - pr * 0.7, pcy + pr * 0.7);
+  g.fillStyle = pg; g.fillRect(pcx - pr, pcy - pr, pr * 2, pr * 2);
+  const sh = g.createLinearGradient(pcx + pr * 0.85, pcy - pr * 0.85, pcx - pr * 0.7, pcy + pr * 0.7);
   sh.addColorStop(0, 'rgba(23,62,74,0.85)'); sh.addColorStop(.55, 'rgba(23,62,74,0.35)'); sh.addColorStop(1, 'rgba(23,62,74,0)');
-  cx.fillStyle = sh; cx.fillRect(pcx - pr, pcy - pr, pr * 2, pr * 2);
-  for (let i = 0; i < 8; i++){                      /* darker spots, lit from bottom-left */
+  g.fillStyle = sh; g.fillRect(pcx - pr, pcy - pr, pr * 2, pr * 2);
+  for (let i = 0; i < 8; i++){
     const a = rnd() * Math.PI * 2, d = rnd() * pr * 0.72;
     crater(pcx + Math.cos(a) * d, pcy + Math.sin(a) * d,
            pr * (0.05 + rnd() * 0.08), -0.7, 0.7, '#5d7b85', '#89a4ac', '#d3e6ea');
   }
-  cx.restore();
-  cx.strokeStyle = 'rgba(225,248,252,.5)'; cx.lineWidth = 1.6;
-  cx.beginPath(); cx.arc(pcx, pcy, pr - 0.8, Math.PI * 0.6, Math.PI * 1.1); cx.stroke();
+  g.restore();
+  g.strokeStyle = 'rgba(225,248,252,.5)'; g.lineWidth = 1.6;
+  g.beginPath(); g.arc(pcx, pcy, pr - 0.8, Math.PI * 0.6, Math.PI * 1.1); g.stroke();
 
-  /* a handful of stars above that planet */
+  /* stars above the planet */
   const topBand = Math.max(8, (pcy - pr) - 18);
   for (let i = 0; i < 5; i++){
     star(pcx - pr * 1.05 + rnd() * pr * 2.1, 10 + rnd() * topBand, 0.7 + rnd() * 1.1, 0.9);
   }
 }
+
+function draw(){
+  const dpr = window.devicePixelRatio || 1;
+  const W = innerWidth, H = innerHeight;
+  cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+  cv.style.width = W + 'px'; cv.style.height = H + 'px';
+  cx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  paintWall(cx, W, H);
+}
 draw();
 let rzT; addEventListener('resize', () => { clearTimeout(rzT); rzT = setTimeout(draw, 120); });
 
+/* ============ app icons ============ */
+const ICONS = {
+  /* MuMu Store — white bag: rope handle, corner blobs, mumu-logo trio in blue→cyan */
+  store: () => `
+<svg viewBox="0 0 64 64" aria-hidden="true">
+  <defs>
+    <clipPath id="st-c"><rect x="2" y="2" width="60" height="60" rx="15"/></clipPath>
+    <linearGradient id="st-m" x1="24" y1="0" x2="58.2" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4a7ee8"/><stop offset="1" stop-color="#3fcade"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="15" fill="#ffffff"/>
+  <g clip-path="url(#st-c)">
+    <circle cx="6" cy="62" r="12" fill="#d9edff"/>
+    <circle cx="59" cy="67" r="16" fill="#eeeaff"/>
+    <path d="M21 15 C22.5 26.5 41.5 26.5 43 15" fill="none" stroke="#b7a887" stroke-width="4" stroke-linecap="round" opacity=".5" transform="translate(0 2.8)"/>
+    <path d="M21 15 C22.5 26.5 41.5 26.5 43 15" fill="none" stroke="#cdb68c" stroke-width="4" stroke-linecap="round"/>
+    <path d="M21 15 C22.5 26.5 41.5 26.5 43 15" fill="none" stroke="#a98f5f" stroke-width="4" stroke-dasharray="3.2 3.2"/>
+    <circle cx="21" cy="15" r="2.4" fill="#1d2f5e"/>
+    <circle cx="43" cy="15" r="2.4" fill="#1d2f5e"/>
+    <g fill="url(#st-m)">
+      <rect x="26.48" y="37.23" width="6.5" height="20" rx="3.25" transform="rotate(15 29.73 47.23)"/>
+      <rect x="40.33" y="37.23" width="6.5" height="20" rx="3.25" transform="rotate(15 43.58 47.23)"/>
+      <circle cx="54.95" cy="53.75" r="3.25"/>
+    </g>
+  </g>
+</svg>`,
+
+  /* App Cloner — blue gradient, 2×2 tiles: filled, +, hollow, filled */
+  cloner: () => `
+<svg viewBox="0 0 64 64" aria-hidden="true">
+  <defs>
+    <linearGradient id="ac-g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4d90f2"/><stop offset="1" stop-color="#3065d4"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="15" fill="url(#ac-g)"/>
+  <rect x="15" y="15" width="16" height="16" rx="4.5" fill="#fff"/>
+  <g fill="#fff">
+    <rect x="38.4" y="16" width="5.2" height="16" rx="2.6"/>
+    <rect x="33" y="21.4" width="16" height="5.2" rx="2.6"/>
+  </g>
+  <rect x="15" y="33" width="16" height="16" rx="4.5" fill="none" stroke="#fff" stroke-width="2.6"/>
+  <rect x="33" y="33" width="16" height="16" rx="4.5" fill="#fff"/>
+</svg>`,
+
+  /* Settings — #346894 with white 6-tooth gear, hole + inner white circle */
+  settings: () => `
+<svg viewBox="0 0 64 64" aria-hidden="true">
+  <rect x="2" y="2" width="60" height="60" rx="15" fill="#346894"/>
+  <g fill="#fff">
+    <rect x="27.6" y="7.5" width="8.8" height="13" rx="2.8"/>
+    <rect x="27.6" y="7.5" width="8.8" height="13" rx="2.8" transform="rotate(60 32 32)"/>
+    <rect x="27.6" y="7.5" width="8.8" height="13" rx="2.8" transform="rotate(120 32 32)"/>
+    <rect x="27.6" y="7.5" width="8.8" height="13" rx="2.8" transform="rotate(180 32 32)"/>
+    <rect x="27.6" y="7.5" width="8.8" height="13" rx="2.8" transform="rotate(240 32 32)"/>
+    <rect x="27.6" y="7.5" width="8.8" height="13" rx="2.8" transform="rotate(300 32 32)"/>
+    <circle cx="32" cy="32" r="17"/>
+  </g>
+  <circle cx="32" cy="32" r="8.6" fill="#346894"/>
+  <circle cx="32" cy="32" r="6.6" fill="#fff"/>
+</svg>`,
+
+  /* Gallery — #7F67F9, light circle, 3D pyramid pair, back pyramid peeking out */
+  gallery: () => `
+<svg viewBox="0 0 64 64" aria-hidden="true">
+  <defs>
+    <linearGradient id="ga-r" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#a893fd"/><stop offset="1" stop-color="#7F67F9"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="15" fill="#7F67F9"/>
+  <circle cx="47" cy="16.5" r="7.5" fill="#9d8bfb"/>
+  <path d="M45.5 34 L35 54 H56 Z" fill="#6d55ec"/>
+  <path d="M24 17 L9 53 H25 Z" fill="#5a41d6"/>
+  <path d="M24 17 L25 53 L40 53 Z" fill="url(#ga-r)"/>
+</svg>`,
+
+  /* Files — #4D85F3, plain white folder with a bottom-right shadow */
+  files: () => `
+<svg viewBox="0 0 64 64" aria-hidden="true">
+  <defs>
+    <clipPath id="fi-c"><rect x="2" y="2" width="60" height="60" rx="15"/></clipPath>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="15" fill="#4D85F3"/>
+  <g clip-path="url(#fi-c)">
+    <path d="M11.5 17.5 h13 l5 5 h18 a5 5 0 0 1 5 5 v17 a5 5 0 0 1 -5 5 H16.5 a5 5 0 0 1 -5 -5 z" fill="rgba(9,17,48,.35)" transform="translate(4 4)"/>
+    <path d="M11.5 17.5 h13 l5 5 h18 a5 5 0 0 1 5 5 v17 a5 5 0 0 1 -5 5 H16.5 a5 5 0 0 1 -5 -5 z" fill="#fff"/>
+  </g>
+</svg>`,
+
+  /* Chromium — white tile with the Chromium logo inset */
+  chromium: () => `
+<svg viewBox="0 0 64 64" aria-hidden="true">
+  <rect x="2" y="2" width="60" height="60" rx="15" fill="#fff"/>
+  <image href="https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Chromium_Logo.svg/3840px-Chromium_Logo.svg.png?utm_source=commons.wikimedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail"
+         x="11" y="11" width="42" height="42" preserveAspectRatio="xMidYMid meet"/>
+</svg>`
+};
+
 /* ============ apps (6 defaults — 2 on home, 4 in the dock) ============ */
-function tint(hex, f){
-  const n = parseInt(hex.slice(1), 16), r = n >> 16 & 255, g = n >> 8 & 255, b = n & 255;
-  const c = v => Math.round(f > 0 ? v + (255 - v) * f : v * (1 + f));
-  return 'rgb(' + c(r) + ',' + c(g) + ',' + c(b) + ')';
-}
 const HOME_APPS = [
-  { id: 'store',   name: 'MuMu Store', hue: '#2e86c8', letter: 'M' },
-  { id: 'cloner',  name: 'App Cloner', hue: '#cf7a3c', letter: 'A' }
+  { id: 'store',   name: 'MuMu Store' },
+  { id: 'cloner',  name: 'App Cloner' }
 ];
 const DOCK_APPS = [
-  { id: 'settings', name: 'Settings', hue: '#76818d', letter: 'S' },
-  { id: 'gallery',  name: 'Gallery',  hue: '#8a5fc0', letter: 'G' },
-  { id: 'files',    name: 'Files',    hue: '#4c9d6e', letter: 'F' },
-  { id: 'chromium', name: 'Chromium', hue: '#47a1dd', letter: 'C' }
+  { id: 'settings', name: 'Settings' },
+  { id: 'gallery',  name: 'Gallery' },
+  { id: 'files',    name: 'Files' },
+  { id: 'chromium', name: 'Chromium' }
 ];
-function iconSVG(a){   /* placeholder icons — replaced later */
-  return `<svg viewBox="0 0 64 64" aria-hidden="true">
-    <defs>
-      <linearGradient id="ig-${a.id}" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="${tint(a.hue, .22)}"/>
-        <stop offset="1" stop-color="${a.hue}"/>
-      </linearGradient>
-    </defs>
-    <rect x="3" y="3" width="58" height="58" rx="15" fill="url(#ig-${a.id})"/>
-    <rect x="3" y="3" width="58" height="58" rx="15" fill="none" stroke="rgba(255,255,255,.18)"/>
-    <text x="32" y="41.5" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="27" font-weight="700" fill="#fff">${a.letter}</text>
-  </svg>`;
-}
 function appEl(a){
   const b = document.createElement('button');
   b.className = 'app';
   b.setAttribute('aria-label', a.name);
-  b.innerHTML = `<span class="ic">${iconSVG(a)}</span><span class="lb"></span>`;
+  b.innerHTML = `<span class="ic">${ICONS[a.id]()}</span><span class="lb"></span>`;
   b.querySelector('.lb').textContent = a.name;
   return b;
 }
-const grid = $('#appgrid');
-HOME_APPS.forEach(a => grid.appendChild(appEl(a)));   /* slots 1 & 2 of the 6×3 grid */
+HOME_APPS.forEach(a => $('#appgrid').appendChild(appEl(a)));   /* slots 1 & 2 of the 6×3 grid */
 DOCK_APPS.forEach(a => $('#dock').appendChild(appEl(a)));
 
 /* ============ clock ============ */
@@ -299,6 +383,13 @@ setTimeout(() => {
   $('#ui').classList.add('ready');
   setTimeout(() => sp.remove(), 700);
 }, 2600);
+
+/* Esc inside the simulator asks the launcher to power this device off */
+addEventListener('keydown', e => {
+  if (e.key === 'Escape' && window.parent !== window && DEV && DEV.id != null){
+    parent.postMessage({ type: 'mumu-close', id: DEV.id }, '*');
+  }
+});
 })();
 </script>
 </body>
