@@ -26,13 +26,11 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 button:focus{outline:none}
 button:focus-visible{outline:2px solid rgba(255,255,255,.45);outline-offset:2px}
 
-/* ---------- brand row ---------- */
 .brand{position:fixed;top:0;left:0;right:0;height:var(--header-h);display:flex;align-items:center;gap:12px;padding-left:24px;animation:fadeDown .55s var(--ease) both}
 .logo{width:34px;height:34px;border-radius:9px;display:block}
 .brand-name{font-size:16.5px;font-weight:600;color:#fff;letter-spacing:.01em}
 @keyframes fadeDown{from{opacity:0;transform:translateY(-8px)}}
 
-/* ---------- sidebar tabs ---------- */
 .tabs{position:fixed;top:var(--header-h);left:0;bottom:0;width:var(--side-w);display:flex;flex-direction:column;align-items:center;gap:10px;padding-top:22px}
 .tab{width:86px;border-radius:15px;padding:14px 0 12px;display:flex;flex-direction:column;align-items:center;gap:9px;transition:background .18s ease;animation:fadeUp .5s var(--ease) both}
 .tab:nth-child(2){animation-delay:.08s}
@@ -54,7 +52,6 @@ button:focus-visible{outline:2px solid rgba(255,255,255,.45);outline-offset:2px}
 .tab.active .r-line{stroke:#fff}
 .tab.active .r-arc{stroke:#fff}
 
-/* ---------- main panel ---------- */
 .panel{position:fixed;top:var(--header-h);left:var(--side-w);right:0;bottom:0;background:var(--panel);border-top-left-radius:26px;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:#3a3a41 transparent;animation:panelIn .5s var(--ease) both}
 .panel::-webkit-scrollbar{width:10px}
 .panel::-webkit-scrollbar-thumb{background:#3a3a41;border-radius:6px;border:2px solid var(--panel)}
@@ -65,7 +62,6 @@ button:focus-visible{outline:2px solid rgba(255,255,255,.45);outline-offset:2px}
 .tab-panel[data-panel="devices"]{padding-left:0;padding-right:0}
 .tab-panel[data-panel="remote"].active{display:flex;flex-direction:column;min-height:100%}
 
-/* ---------- devices toolbar ---------- */
 .zone{width:50%;min-width:430px;max-width:680px;margin:0 40px}
 .toolbar{display:flex;gap:14px}
 .tbtn{flex:1;height:50px;border-radius:13px;display:flex;align-items:center;justify-content:center;gap:10px;font-weight:600;font-size:15px;background:#3a3b40;position:relative;transition:background .15s ease,transform .1s ease,box-shadow .15s ease}
@@ -79,7 +75,6 @@ button:focus-visible{outline:2px solid rgba(255,255,255,.45);outline-offset:2px}
 .badge{position:absolute;top:-7px;right:12px;min-width:22px;height:22px;padding:0 6px;border-radius:11px;background:var(--cyan);color:var(--cyan-ink);font-size:12px;font-weight:700;display:none;align-items:center;justify-content:center}
 .tbtn.has-sel .badge{display:flex}
 
-/* ---------- batch action bar ---------- */
 .bulkbar{display:none;align-items:center;justify-content:space-between;gap:12px;margin-top:16px;padding:10px 12px 10px 16px;border-radius:12px;background:rgba(255,255,255,.04)}
 .bulkbar.show{display:flex;animation:rise .35s var(--ease) both}
 .bulkbar>span{font-size:13.5px;color:var(--dim);font-weight:500}
@@ -89,7 +84,6 @@ button:focus-visible{outline:2px solid rgba(255,255,255,.45);outline-offset:2px}
 .mini.primary{background:var(--cyan);color:var(--cyan-ink)}
 .mini.primary:hover{background:var(--cyan-hi)}
 
-/* ---------- device rows ---------- */
 .inst-head{display:flex;align-items:baseline;justify-content:space-between;margin:34px 40px 12px}
 .inst-head h2{font-size:12.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#8f9096}
 .inst-count{font-size:12.5px;color:var(--faint);font-variant-numeric:tabular-nums}
@@ -113,7 +107,6 @@ button:focus-visible{outline:2px solid rgba(255,255,255,.45);outline-offset:2px}
 @keyframes softPulse{50%{opacity:.3}}
 .info{flex:1;min-width:0}
 
-/* ---------- device preview (renders the simulator wallpaper) ---------- */
 .pv{position:relative;width:216px;height:122px;flex:none;border-radius:12px;overflow:hidden;background:#060a17;box-shadow:inset 0 0 0 1px rgba(255,255,255,.07)}
 .screen{position:absolute;inset:0;transition:filter .35s ease}
 .pvwall{position:absolute;inset:0;width:100%;height:100%;display:block}
@@ -132,7 +125,6 @@ button:focus-visible{outline:2px solid rgba(255,255,255,.45);outline-offset:2px}
 .pv:hover .play{opacity:1;bottom:calc(50% - 20px);pointer-events:auto}
 .card[data-state="booting"] .play,.card[data-state="stopping"] .play{opacity:0!important;pointer-events:none!important}
 
-/* ---------- circular action buttons ---------- */
 .cbtns{margin-left:auto;display:flex;align-items:center;gap:16px;flex:none}
 .cbtn{position:relative;width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center}
 .cb-bg{position:absolute;inset:0;border-radius:50%;background:#3a3b40;transition:transform .18s var(--ease),background .18s}
@@ -149,7 +141,6 @@ button:focus-visible{outline:2px solid rgba(255,255,255,.45);outline-offset:2px}
 .grip{position:absolute;top:14px;right:14px;width:15px;height:15px;fill:#8e8f96;display:none}
 .grid.arranging .grip{display:block}
 
-/* empty state */
 .empty{display:flex;flex-direction:column;align-items:center;gap:5px;margin:18px 40px 0;padding:46px 20px;border:1.5px dashed #45464c;border-radius:16px;text-align:center}
 .empty[hidden]{display:none}
 .empty svg{width:34px;height:34px;margin-bottom:9px}
@@ -157,7 +148,6 @@ button:focus-visible{outline:2px solid rgba(255,255,255,.45);outline-offset:2px}
 .empty span{font-size:12.5px;color:var(--faint)}
 .hint{margin:18px 40px 0;font-size:12.5px;color:var(--faint)}
 
-/* ---------- remote play (StarDesk) ---------- */
 .rp-hero{max-width:640px;margin:0 auto;text-align:center}
 .rp-title{font-size:24px;font-weight:600;color:#fff;line-height:1.25}
 .rp-sub{margin-top:10px;font-size:14px;color:var(--dim);line-height:1.55}
@@ -174,24 +164,26 @@ button:focus-visible{outline:2px solid rgba(255,255,255,.45);outline-offset:2px}
 @keyframes winOut{to{opacity:0;transform:scale(.96)}}
 .simbody{flex:1;min-height:0;position:relative;background:#060a17}
 .simbody iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.rz{position:absolute;z-index:6}
+.rz-l{left:0;top:12px;bottom:12px;width:6px;cursor:ew-resize}
+.rz-r{right:0;top:12px;bottom:12px;width:6px;cursor:ew-resize}
+.rz-b{left:12px;right:12px;bottom:0;height:6px;cursor:ns-resize}
+.rz-bl{left:0;bottom:0;width:14px;height:14px;cursor:nesw-resize}
+.rz-br{right:0;bottom:0;width:14px;height:14px;cursor:nwse-resize}
 
-/* custom title bar (replaces native chrome) */
 .simbar{height:40px;flex:none;background:#2b2b30;display:flex;align-items:stretch;touch-action:none}
 .sb-left{flex:1;min-width:0;display:flex;align-items:stretch}
 .sb-idle{display:flex;align-items:center;gap:9px;padding:0 12px;min-width:0;width:100%}
 .sbl-logo{height:20px;width:auto;display:block;flex:none}
 .sbl-name{font-size:13px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-
-/* tab mode: home tab (logo + device name) + open app tabs */
-.sbtabs{display:flex;align-items:flex-end;height:100%;min-width:0;overflow:hidden}
-.tab2{position:relative;display:flex;align-items:center;gap:8px;height:32px;padding:0 10px;margin-right:9px;color:#c9c9cc;font-size:12.5px;font-weight:600;white-space:nowrap;cursor:default}
-.tab2:first-child{margin-left:8px}
-.tab2 .hv{position:absolute;left:4px;right:4px;top:3px;bottom:3px;border-radius:7px;background:rgba(255,255,255,.09);opacity:0;transition:opacity .15s;pointer-events:none}
+.sbtabs{display:flex;align-items:stretch;height:100%;min-width:0;overflow:hidden;padding:0 10px}
+.tab2{position:relative;display:flex;align-items:center;gap:8px;padding:0 10px;margin-right:12px;border-radius:10px 10px 0 0;color:#c9c9cc;font-size:12.5px;font-weight:600;white-space:nowrap;cursor:default}
+.tab2 .hv{position:absolute;left:4px;right:4px;top:4px;bottom:4px;border-radius:7px;background:rgba(255,255,255,.09);opacity:0;transition:opacity .15s;pointer-events:none}
 .tab2:not(.sel):hover .hv{opacity:1}
 .tab2>*:not(.hv){position:relative}
-.tab2.sel{background:#43434a;color:#fff;border-radius:9px 9px 0 0}
-.tab2.sel::before{content:"";position:absolute;left:-7px;bottom:0;width:7px;height:7px;background:#43434a;border-top-left-radius:7px}
-.tab2.sel::after{content:"";position:absolute;right:-7px;bottom:0;width:7px;height:7px;background:#43434a;border-top-right-radius:7px}
+.tab2.sel{background:#43434a;color:#fff}
+.tab2.sel::before{content:"";position:absolute;left:-10px;bottom:0;width:10px;height:10px;background:radial-gradient(circle 10px at 0% 0%, rgba(0,0,0,0) 9.4px, #43434a 9.5px)}
+.tab2.sel::after{content:"";position:absolute;right:-10px;bottom:0;width:10px;height:10px;background:radial-gradient(circle 10px at 100% 0%, rgba(0,0,0,0) 9.4px, #43434a 9.5px)}
 .tlogo{height:15px;width:auto;display:block;flex:none}
 .tic{width:16px;height:16px;flex:none}
 .tic svg{width:100%;height:100%;display:block}
@@ -199,9 +191,8 @@ button:focus-visible{outline:2px solid rgba(255,255,255,.45);outline-offset:2px}
 .tx{width:18px;height:18px;flex:none;border-radius:4px;display:flex;align-items:center;justify-content:center;color:#c9c9cc;opacity:.65;transition:background .12s,color .12s,opacity .12s}
 .tx:hover{background:#d5432f;color:#fff;opacity:1}
 .tx svg{width:8px;height:8px;display:block}
-.tdiv{width:1px;height:16px;margin:0 9px 8px;background:#4a4a52;flex:none}
+.tdiv{width:1px;height:18px;background:#4a4a52;margin:0 9px;align-self:center;flex:none}
 
-/* window control buttons */
 .sb-ctrl{display:flex;align-items:center;flex:none;padding-left:4px}
 .wbtn{width:44px;height:40px;display:flex;align-items:center;justify-content:center;color:#fff;transition:background .13s}
 .wbtn:hover{background:rgba(255,255,255,.09)}
@@ -215,7 +206,6 @@ button:focus-visible{outline:2px solid rgba(255,255,255,.45);outline-offset:2px}
 .wmini svg{width:18px;height:14px;display:block}
 .wdiv{width:1px;height:20px;background:#45454b;margin:0 7px;flex:none}
 
-/* taskbar for minimized simulator windows */
 #taskbar{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);display:flex;gap:10px;z-index:200}
 #taskbar[hidden]{display:none}
 .taskbtn{display:flex;align-items:center;gap:9px;height:40px;padding:0 16px 0 12px;border-radius:12px;background:#333439;border:1px solid rgba(255,255,255,.1);box-shadow:0 10px 26px rgba(0,0,0,.4);font-size:13px;font-weight:600;color:#e9e9ec;transition:background .15s,transform .1s}
@@ -223,7 +213,6 @@ button:focus-visible{outline:2px solid rgba(255,255,255,.45);outline-offset:2px}
 .taskbtn:active{transform:translateY(1px)}
 .taskbtn img{height:20px;width:auto;display:block}
 
-/* ---------- toasts ---------- */
 .toasts{position:fixed;right:26px;bottom:26px;display:flex;flex-direction:column;gap:10px;z-index:320}
 .toast{display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:12px;background:#333439;border:1px solid rgba(255,255,255,.09);font-size:13.5px;box-shadow:0 10px 26px rgba(0,0,0,.35);animation:toastIn .4s var(--ease)}
 .toast.out{animation:toastOut .3s ease forwards}
@@ -295,7 +284,6 @@ button:focus-visible{outline:2px solid rgba(255,255,255,.45);outline-offset:2px}
 .dlg-create:hover{background:var(--cyan-hi)}
 .dlg-create:active{background:#31b1c3;transform:translateY(1px)}
 
-/* ================= DEVICE CONTEXT MENU ================= */
 .ctxmenu{position:fixed;z-index:310;min-width:216px;background:var(--menu);border-radius:12px;padding:6px;box-shadow:0 16px 44px rgba(0,0,0,.5);animation:ctxIn .16s ease both}
 @keyframes ctxIn{from{opacity:0;transform:translateY(-4px) scale(.97)}}
 .ctx-item{width:100%;display:flex;align-items:center;gap:11px;padding:9px 10px;border-radius:8px;font-size:13px;font-weight:600;color:#e9e9ec;transition:background .13s}
@@ -370,7 +358,6 @@ button:focus-visible{outline:2px solid rgba(255,255,255,.45);outline-offset:2px}
     </svg>
     <span class="tab-label">Devices</span>
   </button>
-
   <button class="tab" id="tab-remote" role="tab" aria-selected="false" data-tab="remote">
     <svg class="tabicon" viewBox="0 0 48 48" aria-hidden="true">
       <defs>
@@ -390,7 +377,6 @@ button:focus-visible{outline:2px solid rgba(255,255,255,.45);outline-offset:2px}
 </nav>
 
 <main class="panel">
-  <!-- ================= DEVICES ================= -->
   <section class="tab-panel active" data-panel="devices" role="tabpanel" aria-labelledby="tab-devices">
     <div class="zone">
       <div class="toolbar">
@@ -442,7 +428,6 @@ button:focus-visible{outline:2px solid rgba(255,255,255,.45);outline-offset:2px}
     <p class="hint" id="gridHint">Press the play button to power on a device — its window opens here. Press Esc or the window's X to power it off.</p>
   </section>
 
-  <!-- ================= REMOTE PLAY ================= -->
   <section class="tab-panel" data-panel="remote" role="tabpanel" aria-labelledby="tab-remote">
     <div class="rp-hero">
       <h2 class="rp-title">Track Game Progress Remotely from Phone</h2>
@@ -464,7 +449,6 @@ button:focus-visible{outline:2px solid rgba(255,255,255,.45);outline-offset:2px}
       </button>
     </div>
     <div class="dlg-body">
-
       <div class="frow">
         <span class="flabel">Android version:</span>
         <div class="seg" data-group="version">
@@ -472,7 +456,6 @@ button:focus-visible{outline:2px solid rgba(255,255,255,.45);outline-offset:2px}
           <button class="opt" data-value="12">Android 12</button>
         </div>
       </div>
-
       <div class="frow">
         <span class="flabel">Screen orientation:</span>
         <div class="seg" data-group="orientation">
@@ -493,7 +476,6 @@ button:focus-visible{outline:2px solid rgba(255,255,255,.45);outline-offset:2px}
           </button>
         </div>
       </div>
-
       <div class="frow">
         <span class="flabel">Number of devices:</span>
         <div class="stepper" id="stepper">
@@ -513,7 +495,6 @@ button:focus-visible{outline:2px solid rgba(255,255,255,.45);outline-offset:2px}
           </div>
         </div>
       </div>
-
       <div class="collapse tgl-row" id="tglRow">
         <div class="tgl-inner">
           <button class="adv-toggle" id="advToggle">
@@ -522,7 +503,6 @@ button:focus-visible{outline:2px solid rgba(255,255,255,.45);outline-offset:2px}
           </button>
         </div>
       </div>
-
       <div class="collapse adv" id="adv">
         <div class="adv-inner">
           <div class="frow frow-top">
@@ -545,7 +525,6 @@ button:focus-visible{outline:2px solid rgba(255,255,255,.45);outline-offset:2px}
           </div>
         </div>
       </div>
-
     </div>
     <div class="dlg-foot">
       <button class="dlg-create" id="btnCreate">Create</button>
@@ -562,7 +541,6 @@ button:focus-visible{outline:2px solid rgba(255,255,255,.45);outline-offset:2px}
 const $  = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 
-/* ---------------- tab switching ---------------- */
 const tabs = $$('.tab');
 tabs.forEach(tab => tab.addEventListener('click', () => {
   if (tab.classList.contains('active')) return;
@@ -574,7 +552,6 @@ tabs.forEach(tab => tab.addEventListener('click', () => {
   $$('.tab-panel').forEach(p => p.classList.toggle('active', p.dataset.panel === tab.dataset.tab));
 }));
 
-/* ---------------- instance data (no cap, persisted) ---------------- */
 const STATE_LABEL = { running: 'Running', stopped: 'Powered Off', booting: 'Booting…', stopping: 'Stopping…' };
 const BAR_LABEL   = { running: 'Powered On', stopped: 'Powered Off', booting: 'Booting…', stopping: 'Stopping…' };
 const MODE_NAME   = { 'performance': 'Performance', 'balanced': 'Balanced', 'power-saving': 'Power Saving' };
@@ -584,19 +561,15 @@ const MODE_DESC   = {
   'power-saving': 'Less resource usage with reduced image quality, smoothness, and disabled Android system sound. Recommended for extreme Multi-instance scenarios'
 };
 
-let mode = 'normal';          // normal | batch | arrange
+let mode = 'normal';
 let seq = 0, totalCreated = 0;
 const selected = new Set();
 const instances = [];
-
 const grid = $('#grid');
 
-/* -------- persistence -------- */
 const DEV_KEY = 'mumu.devices';
 function saveDevices() {
-  try {
-    localStorage.setItem(DEV_KEY, JSON.stringify({ seq, totalCreated, instances }));
-  } catch (e) {}
+  try { localStorage.setItem(DEV_KEY, JSON.stringify({ seq, totalCreated, instances })); } catch (e) {}
 }
 function loadDevices() {
   try {
@@ -618,10 +591,9 @@ function loadDevices() {
     const maxId = instances.reduce((m, i) => Math.max(m, i.id), 0);
     seq = Number.isFinite(s.seq) ? Math.max(s.seq, maxId) : maxId;
     totalCreated = Number.isFinite(s.totalCreated) ? s.totalCreated : instances.length;
-  } catch (e) { /* nothing saved yet */ }
+  } catch (e) {}
 }
 
-/* ============ wallpaper painter — identical to the simulator's ============ */
 function mulberry32(seed){
   return function(){
     seed |= 0; seed = (seed + 0x6D2B79F5) | 0;
@@ -662,16 +634,11 @@ function paintWall(g, W, H){
     g.arcTo(x, y, x + w, y, r);
     g.closePath();
   };
-
   const bg = g.createLinearGradient(0, 0, W * 0.25, H);
   bg.addColorStop(0, '#0b1326'); bg.addColorStop(.55, '#091021'); bg.addColorStop(1, '#060a17');
   g.fillStyle = bg; g.fillRect(0, 0, W, H);
-
   const n = Math.max(60, Math.round(W * H / 9000));
-  for (let i = 0; i < n; i++){
-    star(rnd() * W, rnd() * H, 0.4 + rnd() * rnd() * 1.9, 0.55 + rnd() * 0.45);
-  }
-
+  for (let i = 0; i < n; i++) star(rnd() * W, rnd() * H, 0.4 + rnd() * rnd() * 1.9, 0.55 + rnd() * 0.45);
   const mr = m * 0.52, mcx = -mr * 0.34, mcy = H + mr * 0.34;
   g.save();
   g.beginPath(); g.arc(mcx, mcy, mr, 0, 7); g.clip();
@@ -689,37 +656,25 @@ function paintWall(g, W, H){
   g.restore();
   g.strokeStyle = 'rgba(255,255,255,.35)'; g.lineWidth = 2.5;
   g.beginPath(); g.arc(mcx, mcy, mr - 1.2, -0.785 - 0.65, -0.785 + 0.65); g.stroke();
-
   const ROT = 15 * Math.PI / 180;
   const PW = m * 0.085, PL = m * 0.36, gap = m * 0.05;
   const halfW = (PW / 2) * Math.cos(ROT) + (PL / 2) * Math.sin(ROT);
   const groupW = 4 * halfW + 2 * gap + PW;
-  const rightX = W * 0.84;
-  const leftX = rightX - groupW;
-  const bottomY = H * 0.62;
+  const rightX = W * 0.84, leftX = rightX - groupW, bottomY = H * 0.62;
   const circX = rightX - PW / 2, circY = bottomY - PW / 2;
   const pillY = bottomY - PW / 2 - (PL / 2 - PW / 2) * Math.cos(ROT);
-  const pillAx = leftX + halfW;
-  const pillBx = leftX + 3 * halfW + gap;
-
+  const pillAx = leftX + halfW, pillBx = leftX + 3 * halfW + gap;
   const shape = (kind, px, py) => {
     g.save();
     g.translate(px, py);
     if (kind === 'pill') g.rotate(ROT);
     const R = kind === 'pill' ? PL / 2 : PW / 2;
     const grad = g.createRadialGradient(0, 0, R * 0.08, 0, 0, R);
-    grad.addColorStop(0, '#8ed2f3');
-    grad.addColorStop(.35, '#c4e4f7');
-    grad.addColorStop(1, '#eff8ff');
-    const path = () => {
-      if (kind === 'pill') rr(-PW / 2, -PL / 2, PW, PL, PW / 2);
-      else { g.beginPath(); g.arc(0, 0, PW / 2, 0, 7); }
-    };
-    g.shadowColor = 'rgba(125,190,255,.38)';
-    g.shadowBlur = 64; g.shadowOffsetX = -54;
+    grad.addColorStop(0, '#8ed2f3'); grad.addColorStop(.35, '#c4e4f7'); grad.addColorStop(1, '#eff8ff');
+    const path = () => { if (kind === 'pill') rr(-PW / 2, -PL / 2, PW, PL, PW / 2); else { g.beginPath(); g.arc(0, 0, PW / 2, 0, 7); } };
+    g.shadowColor = 'rgba(125,190,255,.38)'; g.shadowBlur = 64; g.shadowOffsetX = -54;
     g.fillStyle = grad; path(); g.fill();
-    g.shadowColor = 'rgba(150,212,255,.62)';
-    g.shadowBlur = 26; g.shadowOffsetX = -20;
+    g.shadowColor = 'rgba(150,212,255,.62)'; g.shadowBlur = 26; g.shadowOffsetX = -20;
     path(); g.fill();
     g.shadowColor = 'transparent'; g.shadowBlur = 0; g.shadowOffsetX = 0;
     g.fillStyle = grad; path(); g.fill();
@@ -727,10 +682,7 @@ function paintWall(g, W, H){
     path(); g.stroke();
     g.restore();
   };
-  shape('pill', pillAx, pillY);
-  shape('pill', pillBx, pillY);
-  shape('circle', circX, circY);
-
+  shape('pill', pillAx, pillY); shape('pill', pillBx, pillY); shape('circle', circX, circY);
   const pr = m * 0.17, pcx = W - pr * 1.3, pcy = pr * 1.5;
   g.save();
   g.beginPath(); g.arc(pcx, pcy, pr, 0, 7); g.clip();
@@ -742,20 +694,15 @@ function paintWall(g, W, H){
   g.fillStyle = sh; g.fillRect(pcx - pr, pcy - pr, pr * 2, pr * 2);
   for (let i = 0; i < 8; i++){
     const a = rnd() * Math.PI * 2, d = rnd() * pr * 0.72;
-    crater(pcx + Math.cos(a) * d, pcy + Math.sin(a) * d,
-           pr * (0.05 + rnd() * 0.08), -0.7, 0.7, '#5d7b85', '#89a4ac', '#d3e6ea');
+    crater(pcx + Math.cos(a) * d, pcy + Math.sin(a) * d, pr * (0.05 + rnd() * 0.08), -0.7, 0.7, '#5d7b85', '#89a4ac', '#d3e6ea');
   }
   g.restore();
   g.strokeStyle = 'rgba(225,248,252,.5)'; g.lineWidth = 1.6;
   g.beginPath(); g.arc(pcx, pcy, pr - 0.8, Math.PI * 0.6, Math.PI * 1.1); g.stroke();
-
   const topBand = Math.max(8, (pcy - pr) - 18);
-  for (let i = 0; i < 5; i++){
-    star(pcx - pr * 1.05 + rnd() * pr * 2.1, 10 + rnd() * topBand, 0.7 + rnd() * 1.1, 0.9);
-  }
+  for (let i = 0; i < 5; i++) star(pcx - pr * 1.05 + rnd() * pr * 2.1, 10 + rnd() * topBand, 0.7 + rnd() * 1.1, 0.9);
 }
 
-/* ---------------- preview artwork & icons ---------------- */
 const BOOT_SVG = `
 <svg class="bootd" viewBox="0 0 24 17" aria-hidden="true">
   <path d="M6.9 4.9 L5 1.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" fill="none"/>
@@ -764,31 +711,12 @@ const BOOT_SVG = `
   <circle cx="8.3" cy="10" r="1.35" fill="#0b0c0e"/>
   <circle cx="15.7" cy="10" r="1.35" fill="#0b0c0e"/>
 </svg>`;
-
 const PLAY_ICON  = `<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M4.4 2.6 L11.8 7 L4.4 11.4 Z" fill="#fff"/></svg>`;
 const POWER_ICON = `<svg viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><path d="M10.8 3.7a4.6 4.6 0 1 1-7.6 0"/><line x1="7" y1="1.4" x2="7" y2="6.2"/></svg>`;
 const DOTS_ICON  = `<svg viewBox="0 0 14 14" fill="#fff" aria-hidden="true"><circle cx="7" cy="2.9" r="1.6"/><circle cx="7" cy="7" r="1.6"/><circle cx="7" cy="11.1" r="1.6"/></svg>`;
-
-const IC_DEVSET = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true">
-  <rect x="8" y="3" width="8" height="18" rx="2.4"/>
-  <line x1="10.4" y1="6.7" x2="13.6" y2="6.7" stroke-linecap="round"/>
-  <circle cx="12" cy="16.8" r="1.3" fill="currentColor" stroke="none"/>
-</svg>`;
-const IC_PENCIL = `<svg viewBox="0 0 24 24" aria-hidden="true">
-  <g transform="rotate(45 12 12)" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
-    <rect x="9.6" y="4" width="4.8" height="3.2" rx="1.1"/>
-    <path d="M9.6 7.2 H14.4 V15.6 H9.6 Z"/>
-    <path d="M9.6 15.6 H14.4 L12 20 Z" fill="currentColor" stroke="none"/>
-  </g>
-</svg>`;
-const IC_TRASH = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-  <path d="M4.5 7 H19.5"/>
-  <path d="M9.5 7 V5.2 A1.6 1.6 0 0 1 11.1 3.6 H12.9 A1.6 1.6 0 0 1 14.5 5.2 V7"/>
-  <path d="M6.3 7 L7.1 19.2 A1.8 1.8 0 0 0 8.9 21 H15.1 A1.8 1.8 0 0 0 16.9 19.2 L17.7 7"/>
-  <line x1="10.2" y1="11" x2="10.7" y2="17"/>
-  <line x1="13.8" y1="11" x2="13.3" y2="17"/>
-</svg>`;
-
+const IC_DEVSET = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><rect x="8" y="3" width="8" height="18" rx="2.4"/><line x1="10.4" y1="6.7" x2="13.6" y2="6.7" stroke-linecap="round"/><circle cx="12" cy="16.8" r="1.3" fill="currentColor" stroke="none"/></svg>`;
+const IC_PENCIL = `<svg viewBox="0 0 24 24" aria-hidden="true"><g transform="rotate(45 12 12)" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="9.6" y="4" width="4.8" height="3.2" rx="1.1"/><path d="M9.6 7.2 H14.4 V15.6 H9.6 Z"/><path d="M9.6 15.6 H14.4 L12 20 Z" fill="currentColor" stroke="none"/></g></svg>`;
+const IC_TRASH = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 7 H19.5"/><path d="M9.5 7 V5.2 A1.6 1.6 0 0 1 11.1 3.6 H12.9 A1.6 1.6 0 0 1 14.5 5.2 V7"/><path d="M6.3 7 L7.1 19.2 A1.8 1.8 0 0 0 8.9 21 H15.1 A1.8 1.8 0 0 0 16.9 19.2 L17.7 7"/><line x1="10.2" y1="11" x2="10.7" y2="17"/><line x1="13.8" y1="11" x2="13.3" y2="17"/></svg>`;
 const GRIP = `
 <svg class="grip" viewBox="0 0 12 12" aria-hidden="true">
   <circle cx="3" cy="2.6" r="1.25"/><circle cx="9" cy="2.6" r="1.25"/>
@@ -796,7 +724,6 @@ const GRIP = `
   <circle cx="3" cy="9.4" r="1.25"/><circle cx="9" cy="9.4" r="1.25"/>
 </svg>`;
 
-/* ---------------- card rendering ---------------- */
 function render(anim) {
   grid.innerHTML = '';
   instances.forEach((inst, i) => {
@@ -837,7 +764,6 @@ function render(anim) {
     card.querySelector('.pb-tx').textContent = BAR_LABEL[inst.state];
     card.querySelector('.play').innerHTML = inst.state === 'running' ? POWER_ICON : PLAY_ICON;
     paintWall(card.querySelector('.pvwall').getContext('2d'), 432, 244);
-
     let show = false, delay = 0;
     if (anim === 'all') { show = true; delay = i * 70; }
     else if (Array.isArray(anim)) { const p = anim.indexOf(inst.id); if (p > -1) { show = true; delay = p * 80; } }
@@ -848,7 +774,6 @@ function render(anim) {
   $('#instCount').textContent = String(instances.length);
   $('#emptyState').hidden = instances.length > 0;
 }
-
 function setState(inst, state) {
   inst.state = state;
   const card = grid.querySelector(`.card[data-id="${inst.id}"]`);
@@ -867,10 +792,20 @@ function setState(inst, state) {
   saveDevices();
 }
 
-/* ============ SIMULATOR WINDOWS (independent, custom title bar, no URL) ============ */
-const LOGO_TOP  = 'https://mumu-player.fileion.com/storage/software/logos/2026/05/mumuplayer-logo.png';
-const LOGO_ALT  = 'https://images.dwncdn.net/images/t_app-icon-l/p/d520014e-daf4-451a-8a8c-9aacc33f4d25/2693453914/mumuplayer-1-logo';
+/* ============ SIMULATOR WINDOWS ============ */
+const LOGO_TOP = 'https://mumu-player.fileion.com/storage/software/logos/2026/05/mumuplayer-logo.png';
+const LOGO_ALT = 'https://images.dwncdn.net/images/t_app-icon-l/p/d520014e-daf4-451a-8a8c-9aacc33f4d25/2693453914/mumuplayer-1-logo';
 const barLogo = cls => `<img class="${cls}" src="${LOGO_TOP}" onerror="this.onerror=null;this.src='${LOGO_ALT}'" alt="" draggable="false">`;
+
+let _uid = 0;
+function uniqSVG(svg){
+  if (typeof svg !== 'string') return svg;
+  const map = {};
+  return svg
+    .replace(/id="([^"]+)"/g, (m, id) => { const n = id + '_w' + (++_uid); map[id] = n; return 'id="' + n + '"'; })
+    .replace(/url\(#([^)"']+)\)/g, (m, id) => map[id] ? 'url(#' + map[id] + ')' : m)
+    .replace(/href="#([^"]+)"/g, (m, id) => map[id] ? 'href="#' + map[id] + '"' : m);
+}
 
 const WIC = {
   keys: `<svg viewBox="0 0 22 16" aria-hidden="true"><rect x="1" y="1" width="20" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/><g fill="currentColor"><circle cx="4.6" cy="5.2" r=".95"/><circle cx="7.8" cy="5.2" r=".95"/><circle cx="11" cy="5.2" r=".95"/><circle cx="14.2" cy="5.2" r=".95"/><circle cx="17.4" cy="5.2" r=".95"/><circle cx="4.6" cy="7.9" r=".95"/><circle cx="7.8" cy="7.9" r=".95"/><circle cx="11" cy="7.9" r=".95"/><circle cx="14.2" cy="7.9" r=".95"/><circle cx="17.4" cy="7.9" r=".95"/></g><rect x="6.2" y="10.6" width="9.6" height="2" rx="1" fill="currentColor"/></svg>`,
@@ -883,15 +818,13 @@ const WIC = {
   tx: `<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2.2 2.2 L7.8 7.8 M7.8 2.2 L2.2 7.8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>`
 };
 
-const simWins = new Map();    // device id → window element
+const simWins = new Map();
 let zTop = 70, cascade = 0;
 
 function raiseWin(wrap){
   const z = +wrap.style.zIndex || 70;
   if (z < zTop) wrap.style.zIndex = ++zTop;
 }
-
-/* ---- title-bar left side: idle (logo + name) or tab strip ---- */
 function renderBarLeft(wrap){
   const inst = instances.find(i => i.id === +wrap.dataset.id);
   const name = inst ? inst.name : 'Device';
@@ -912,7 +845,7 @@ function renderBarLeft(wrap){
     if (un && prevUn) html += `<span class="tdiv"></span>`;
     prevUn = un;
     html += `<div class="tab2${un ? '' : ' sel'}" data-tab="${a.id}" role="button">
-      <span class="hv"></span><span class="tic">${a.icon}</span><span class="tname"></span>
+      <span class="hv"></span><span class="tic">${uniqSVG(a.icon)}</span><span class="tname"></span>
       <button class="tx" aria-label="Close ${a.name}">${WIC.tx}</button>
     </div>`;
   });
@@ -925,7 +858,6 @@ function renderBarLeft(wrap){
       : (st.apps.find(a => a.id === id) || {}).name || '';
   });
 }
-
 function postView(wrap){
   const st = wrap._state;
   const msg = st.sel === 'home'
@@ -947,10 +879,10 @@ function closeAppTab(wrap, id){
   try { wrap._frame.contentWindow.postMessage({ type: 'mumu-app-closed', id }, '*'); } catch (e) {}
   postView(wrap);
 }
-
-/* ---- window controls ---- */
 function toggleMax(wrap){
   const st = wrap._state;
+  const TR = 'left .28s cubic-bezier(.2,.8,.3,1), top .28s cubic-bezier(.2,.8,.3,1), width .28s cubic-bezier(.2,.8,.3,1), height .28s cubic-bezier(.2,.8,.3,1), border-radius .28s';
+  wrap.style.transition = TR;
   if (st.rect){
     Object.assign(wrap.style, st.rect);
     st.rect = null;
@@ -961,6 +893,7 @@ function toggleMax(wrap){
     wrap.classList.add('max');
   }
   raiseWin(wrap);
+  setTimeout(() => { wrap.style.transition = ''; }, 300);
 }
 function minimizeWin(wrap){
   wrap._state.min = true;
@@ -988,10 +921,8 @@ function updateTaskbar(){
   });
   tb.hidden = mins.length === 0;
 }
-
-/* ---- dragging ---- */
 function startDrag(wrap, e){
-  if (wrap._state.rect) return;               // no dragging while maximized
+  if (wrap._state.rect) return;
   const bar = wrap.querySelector('.simbar');
   const sx = e.clientX, sy = e.clientY;
   const ox = parseFloat(wrap.style.left) || 0, oy = parseFloat(wrap.style.top) || 0;
@@ -1010,8 +941,41 @@ function startDrag(wrap, e){
   addEventListener('pointermove', move);
   addEventListener('pointerup', up);
 }
-
-/* ---- create a window ---- */
+function startResize(wrap, side, e){
+  if (wrap._state.rect) return;
+  try { e.target.setPointerCapture(e.pointerId); } catch (err) {}
+  const sx = e.clientX, sy = e.clientY;
+  const r = { x: parseFloat(wrap.style.left) || 0, y: parseFloat(wrap.style.top) || 0,
+              w: wrap.offsetWidth, h: wrap.offsetHeight };
+  const MINW = 380, MINH = 300;
+  const move = ev => {
+    const dx = ev.clientX - sx, dy = ev.clientY - sy;
+    let x = r.x, y = r.y, w = r.w, h = r.h;
+    if (side.indexOf('l') > -1){
+      w = r.w - dx; x = r.x + dx;
+      if (w < MINW){ x = r.x + r.w - MINW; w = MINW; }
+      if (x < 0){ w += x; x = 0; }
+    }
+    if (side.indexOf('r') > -1){
+      w = r.w + dx;
+      if (w < MINW) w = MINW;
+      if (x + w > innerWidth) w = innerWidth - x;
+    }
+    if (side.indexOf('b') > -1){
+      h = r.h + dy;
+      if (h < MINH) h = MINH;
+      if (y + h > innerHeight) h = innerHeight - y;
+    }
+    wrap.style.left = x + 'px'; wrap.style.top = y + 'px';
+    wrap.style.width = w + 'px'; wrap.style.height = h + 'px';
+  };
+  const up = () => {
+    removeEventListener('pointermove', move);
+    removeEventListener('pointerup', up);
+  };
+  addEventListener('pointermove', move);
+  addEventListener('pointerup', up);
+}
 function openSimulator(inst) {
   let wrap = simWins.get(inst.id);
   if (wrap){
@@ -1023,16 +987,14 @@ function openSimulator(inst) {
   wrap.className = 'simwin';
   wrap.dataset.id = inst.id;
   wrap._state = { apps: [], sel: 'home', min: false, rect: null };
-
-  const w = Math.max(360, Math.min(1152, innerWidth - 72));
-  const h = Math.max(280, Math.min(672, innerHeight - 90));
+  const w = Math.max(380, Math.min(1152, innerWidth - 72));
+  const h = Math.max(300, Math.min(672, innerHeight - 90));
   const off = (cascade++ % 5) * 26;
   wrap.style.width = w + 'px';
   wrap.style.height = h + 'px';
   wrap.style.left = Math.max(8, Math.round((innerWidth - w) / 2) + off - 52) + 'px';
   wrap.style.top  = Math.max(8, Math.round((innerHeight - h) / 2) + off - 36) + 'px';
   wrap.style.zIndex = ++zTop;
-
   wrap.innerHTML = `
     <div class="simbar">
       <div class="sb-left"></div>
@@ -1048,7 +1010,11 @@ function openSimulator(inst) {
       </div>
     </div>
     <div class="simbody"></div>`;
-
+  ['l','r','b','bl','br'].forEach(s => {
+    const h2 = document.createElement('div');
+    h2.className = 'rz rz-' + s;
+    wrap.appendChild(h2);
+  });
   const body = wrap.querySelector('.simbody');
   const frame = document.createElement('iframe');
   const data = encodeURIComponent(JSON.stringify({
@@ -1059,13 +1025,11 @@ function openSimulator(inst) {
   frame.title = inst.name;
   body.appendChild(frame);
   wrap._frame = frame;
-
   renderBarLeft(wrap);
-
   const bar = wrap.querySelector('.simbar');
   bar.addEventListener('pointerdown', e => {
     if (e.button !== 0) return;
-    if (e.target.closest('button, .tab2')) return;   // buttons and tabs aren't drag handles
+    if (e.target.closest('button, .tab2')) return;
     startDrag(wrap, e);
   });
   bar.addEventListener('click', e => {
@@ -1074,19 +1038,20 @@ function openSimulator(inst) {
     if (e.target.closest('.tx')) { closeAppTab(wrap, t.dataset.tab); return; }
     selectTab(wrap, t.dataset.tab);
   });
+  wrap.addEventListener('pointerdown', e => {
+    const h2 = e.target.closest('.rz');
+    if (h2){ startResize(wrap, h2.className.match(/rz-(\w+)/)[1], e); }
+  });
   wrap.querySelector('[data-w="close"]').addEventListener('click', () => {
     const i = instances.find(x => x.id === +wrap.dataset.id);
     if (i) powerOff(i);
   });
   wrap.querySelector('[data-w="max"]').addEventListener('click', () => toggleMax(wrap));
   wrap.querySelector('[data-w="min"]').addEventListener('click', () => minimizeWin(wrap));
-  /* the ..., play, sound and keyboard buttons are wired later */
-
   wrap.addEventListener('mousedown', () => raiseWin(wrap));
   document.body.appendChild(wrap);
   simWins.set(inst.id, wrap);
 }
-
 function closeSimulator(inst) {
   const wrap = simWins.get(inst.id);
   if (!wrap) return;
@@ -1095,8 +1060,6 @@ function closeSimulator(inst) {
   setTimeout(() => wrap.remove(), 230);
   updateTaskbar();
 }
-
-/* bring a window to front when its simulator is clicked (iframe focus) */
 setInterval(() => {
   const ae = document.activeElement;
   if (ae && ae.tagName === 'IFRAME' && ae.parentElement && ae.parentElement.classList.contains('simbody')){
@@ -1108,12 +1071,12 @@ setInterval(() => {
 addEventListener('message', e => {
   const d = e.data;
   if (!d || typeof d !== 'object') return;
-  if (d.type === 'mumu-close' && d.id != null){           // Esc pressed inside the simulator
+  if (d.type === 'mumu-close' && d.id != null){
     const inst = instances.find(i => i.id === d.id);
     if (inst) powerOff(inst);
     return;
   }
-  if (d.type === 'mumu-open' && d.id != null && d.app && d.app.id){   // an app was opened
+  if (d.type === 'mumu-open' && d.id != null && d.app && d.app.id){
     const wrap = simWins.get(d.id);
     if (!wrap) return;
     const st = wrap._state;
@@ -1122,10 +1085,25 @@ addEventListener('message', e => {
     }
     st.sel = String(d.app.id);
     renderBarLeft(wrap);
+    return;
+  }
+  if (d.type === 'mumu-close-app' && d.id != null && d.app){
+    const wrap = simWins.get(d.id);
+    if (wrap) closeAppTab(wrap, String(d.app));
+    return;
+  }
+  /* per-device simulator state (installed apps, home layout) */
+  if (d.type === 'mumu-dev-load' && d.id != null){
+    let st = null;
+    try { st = JSON.parse(localStorage.getItem('mumu.dev.' + d.id)); } catch (err) {}
+    try { (e.source || parent).postMessage({ type: 'mumu-dev-state', id: d.id, state: st }, '*'); } catch (err) {}
+    return;
+  }
+  if (d.type === 'mumu-dev-save' && d.id != null && d.state){
+    try { localStorage.setItem('mumu.dev.' + d.id, JSON.stringify(d.state)); } catch (err) {}
   }
 });
 
-/* Esc while the launcher has focus → power off the top window */
 document.addEventListener('keydown', e => {
   if (e.key !== 'Escape' || !simWins.size) return;
   let top = null, z = -1;
@@ -1139,14 +1117,12 @@ document.addEventListener('keydown', e => {
   if (inst) powerOff(inst);
 });
 
-/* ---------------- power on / off ---------------- */
 function powerOff(inst) {
   if (inst.state !== 'running' && inst.state !== 'booting') return;
   closeSimulator(inst);
   setState(inst, 'stopping');
   setTimeout(() => setState(inst, 'stopped'), 550);
 }
-
 function togglePower(inst) {
   if (inst.state === 'booting' || inst.state === 'stopping') return;
   if (inst.state === 'running') powerOff(inst);
@@ -1156,7 +1132,6 @@ function togglePower(inst) {
     setTimeout(() => setState(inst, 'running'), 1600);
   }
 }
-
 grid.addEventListener('click', e => {
   const card = e.target.closest('.card');
   if (!card) return;
@@ -1175,7 +1150,6 @@ grid.addEventListener('click', e => {
 /* ---------------- device context menu ---------------- */
 let ctxMenus = [];
 let ctxAnchor = null;
-
 function closeCtx() {
   ctxMenus.forEach(el => el.remove());
   ctxMenus = [];
@@ -1188,7 +1162,6 @@ document.addEventListener('mousedown', e => {
   closeCtx();
 });
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && ctxMenus.length) closeCtx(); });
-
 function placeMenu(el, rightX, topY) {
   document.body.appendChild(el);
   const r = el.getBoundingClientRect();
@@ -1197,7 +1170,6 @@ function placeMenu(el, rightX, topY) {
   el.style.left = left + 'px';
   el.style.top  = top + 'px';
 }
-
 function spawnSub(build, parentMenu, item) {
   while (ctxMenus.length > 1) ctxMenus.pop().remove();
   const sub = document.createElement('div');
@@ -1214,7 +1186,6 @@ function spawnSub(build, parentMenu, item) {
   sub.style.top  = top + 'px';
   ctxMenus.push(sub);
 }
-
 function openDeviceMenu(inst, anchor) {
   if (ctxAnchor === anchor && ctxMenus.length) { closeCtx(); return; }
   closeCtx();
@@ -1228,7 +1199,6 @@ function openDeviceMenu(inst, anchor) {
   const r = anchor.getBoundingClientRect();
   placeMenu(m, r.right, r.bottom + 8);
   ctxMenus.push(m);
-
   m.addEventListener('click', e => {
     const b = e.target.closest('.ctx-item');
     if (!b) return;
@@ -1259,7 +1229,7 @@ function openDeviceMenu(inst, anchor) {
         const card = grid.querySelector(`.card[data-id="${inst.id}"]`);
         if (card) card.querySelector('h3').textContent = name;
         const wrap = simWins.get(inst.id);
-        if (wrap) renderBarLeft(wrap);       // window title/tab follows the rename
+        if (wrap) renderBarLeft(wrap);
         saveDevices();
         closeCtx();
         toast(`Renamed to ${name}.`);
@@ -1285,12 +1255,12 @@ function openDeviceMenu(inst, anchor) {
     }, m, b);
   });
 }
-
 function deleteInstance(inst) {
   closeSimulator(inst);
   const idx = instances.findIndex(i => i.id === inst.id);
   if (idx > -1) instances.splice(idx, 1);
   selected.delete(inst.id);
+  try { localStorage.removeItem('mumu.dev.' + inst.id); } catch (e) {}   /* remove this device's simulator save too */
   saveDevices();
   const card = grid.querySelector(`.card[data-id="${inst.id}"]`);
   if (card) {
@@ -1313,7 +1283,6 @@ function toggleSelect(id) {
   if (card) card.classList.toggle('selected', selected.has(id));
   syncBulk();
 }
-
 function syncBulk() {
   const n = selected.size;
   $('#batchBadge').textContent = n;
@@ -1321,10 +1290,8 @@ function syncBulk() {
   $('#bulkbar').classList.toggle('show', mode === 'batch' && n > 0);
   $('#bulkCount').textContent = `${n} instance${n === 1 ? '' : 's'} selected`;
 }
-
  $('#btnBatch').addEventListener('click', () => setMode(mode === 'batch' ? 'normal' : 'batch'));
  $('#btnArrange').addEventListener('click', () => setMode(mode === 'arrange' ? 'normal' : 'arrange'));
-
 function setMode(next) {
   mode = next;
   selected.clear();
@@ -1343,10 +1310,8 @@ function setMode(next) {
                          'Press the play button to power on a device — its window opens here. Press Esc or the window\u2019s X to power it off.';
   syncBulk();
 }
-
  $('#bulkStart').addEventListener('click', () => bulkAction('start'));
  $('#bulkStop').addEventListener('click', () => bulkAction('stop'));
-
 function bulkAction(action) {
   let n = 0;
   [...selected].forEach((id, i) => {
@@ -1366,9 +1331,8 @@ function bulkAction(action) {
   if (n) toast(`${action === 'start' ? 'Started' : 'Stopped'} ${n} instance${n === 1 ? '' : 's'}.`);
 }
 
-/* ---------------- arrange mode: drag to reorder ---------------- */
+/* ---------------- arrange mode ---------------- */
 let dragEl = null;
-
 grid.addEventListener('dragstart', e => {
   const card = e.target.closest('.card');
   if (!card || mode !== 'arrange') { e.preventDefault(); return; }
@@ -1377,7 +1341,6 @@ grid.addEventListener('dragstart', e => {
   e.dataTransfer.effectAllowed = 'move';
   e.dataTransfer.setData('text/plain', card.dataset.id);
 });
-
 grid.addEventListener('dragover', e => {
   if (!dragEl) return;
   e.preventDefault();
@@ -1389,9 +1352,7 @@ grid.addEventListener('dragover', e => {
   if (before && before !== dragEl.nextSibling) grid.insertBefore(dragEl, before);
   else if (!before) grid.appendChild(dragEl);
 });
-
 grid.addEventListener('drop', e => e.preventDefault());
-
 grid.addEventListener('dragend', () => {
   if (!dragEl) return;
   dragEl.classList.remove('dragging');
@@ -1401,10 +1362,8 @@ grid.addEventListener('dragend', () => {
   saveDevices();
 });
 
-/* ---------------- remote play ---------------- */
  $('#btnStart').addEventListener('click', () => {});
 
-/* ---------------- toasts ---------------- */
 function toast(msg) {
   const t = document.createElement('div');
   t.className = 'toast';
@@ -1422,7 +1381,6 @@ function toast(msg) {
 const veil = $('#veil'), dlg = $('#dlg');
 const tglRow = $('#tglRow'), advSec = $('#adv');
 const numIn = $('#numIn'), numX = $('#numX'), diskSwitch = $('#diskSwitch');
-
 const CFG_KEY = 'mumu.newDevice';
 const newCfg = { version: '15', orientation: 'landscape', count: 1, mode: 'balanced', smallDisk: false };
 const clampN = v => Math.min(99, Math.max(1, v));
@@ -1435,19 +1393,16 @@ try {
     if (Number.isFinite(saved.count)) newCfg.count = clampN(saved.count);
     newCfg.smallDisk = !!saved.smallDisk;
   }
-} catch (e) { /* no saved config yet */ }
+} catch (e) {}
 const persist = () => { try { localStorage.setItem(CFG_KEY, JSON.stringify(newCfg)); } catch (e) {} };
-
 const setModeDesc = () => { $('#modeDesc').textContent = MODE_DESC[newCfg.mode]; };
 
 let lastFocus = null;
-
 function openDlg() {
   dlg.style.cssText = '';
   tglRow.classList.remove('closed');
   tglRow.style.display = '';
   advSec.classList.remove('open');
-
   $$('.seg').forEach(seg => {
     const val = String(newCfg[seg.dataset.group]);
     $$('button', seg).forEach(b => b.classList.toggle('sel', b.dataset.value === val));
@@ -1456,25 +1411,21 @@ function openDlg() {
   diskSwitch.setAttribute('aria-checked', String(newCfg.smallDisk));
   numIn.value = String(newCfg.count);
   setModeDesc();
-
   lastFocus = document.activeElement;
   veil.hidden = false;
   requestAnimationFrame(() => requestAnimationFrame(() => veil.classList.add('show')));
   setTimeout(() => dlg.focus(), 60);
 }
-
 function closeDlg() {
   persist();
   veil.classList.remove('show');
   setTimeout(() => { veil.hidden = true; }, 320);
   if (lastFocus && lastFocus.focus) lastFocus.focus();
 }
-
  $('#btnNew').addEventListener('click', openDlg);
  $('#dlgX').addEventListener('click', closeDlg);
 veil.addEventListener('mousedown', e => { if (e.target === veil) closeDlg(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && !veil.hidden) closeDlg(); });
-
 veil.addEventListener('keydown', e => {
   if (e.key !== 'Tab' || veil.hidden) return;
   const list = $$('button, input', dlg).filter(el => el.clientWidth > 0 && getComputedStyle(el).visibility !== 'hidden');
@@ -1483,7 +1434,6 @@ veil.addEventListener('keydown', e => {
   if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
   else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
 });
-
  $('#advToggle').addEventListener('click', () => {
   if (advSec.classList.contains('open')) return;
   const r = dlg.getBoundingClientRect();
@@ -1496,7 +1446,6 @@ veil.addEventListener('keydown', e => {
   advSec.classList.add('open');
   setTimeout(() => { if (tglRow.classList.contains('closed')) tglRow.style.display = 'none'; }, 520);
 });
-
  $$('.seg').forEach(seg => {
   seg.addEventListener('click', e => {
     const b = e.target.closest('button');
@@ -1507,7 +1456,6 @@ veil.addEventListener('keydown', e => {
     persist();
   });
 });
-
 numIn.addEventListener('input', () => {
   numIn.value = numIn.value.replace(/\D/g, '').replace(/^0+(?=\d)/, '');
   if (numIn.value !== '') { newCfg.count = clampN(parseInt(numIn.value, 10)); persist(); }
@@ -1520,7 +1468,6 @@ numIn.addEventListener('blur', () => {
 });
 numIn.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); numIn.blur(); } });
 numX.addEventListener('click', () => { numIn.value = '1'; newCfg.count = 1; persist(); });
-
 const stepN = d => {
   const v = clampN((parseInt(numIn.value, 10) || 0) + d);
   numIn.value = String(v);
@@ -1530,7 +1477,6 @@ const stepN = d => {
  $('#numUp').addEventListener('click', () => stepN(1));
  $('#numDown').addEventListener('click', () => stepN(-1));
 [$('#numUp'), $('#numDown'), numX].forEach(b => b.addEventListener('mousedown', e => e.preventDefault()));
-
 diskSwitch.addEventListener('click', () => {
   const on = !newCfg.smallDisk;
   newCfg.smallDisk = on;
@@ -1538,8 +1484,6 @@ diskSwitch.addEventListener('click', () => {
   diskSwitch.setAttribute('aria-checked', String(on));
   persist();
 });
-
-/* ---------------- create devices ---------------- */
  $('#btnCreate').addEventListener('click', () => {
   const n = Math.max(1, newCfg.count);
   const newIds = [];
@@ -1560,7 +1504,6 @@ diskSwitch.addEventListener('click', () => {
   toast(n === 1 ? 'Created Android Device.' : `Created ${n} devices.`);
 });
 
-/* ---------------- init ---------------- */
 setModeDesc();
 loadDevices();
 render(instances.length ? 'all' : undefined);
