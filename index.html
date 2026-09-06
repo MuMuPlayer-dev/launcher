@@ -176,8 +176,9 @@ button:focus-visible{outline:2px solid rgba(255,255,255,.45);outline-offset:2px}
 .sb-idle{display:flex;align-items:center;gap:9px;padding:0 12px;min-width:0;width:100%}
 .sbl-logo{height:20px;width:auto;display:block;flex:none}
 .sbl-name{font-size:13px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* tabs: equal width, shrink as more appear, fade long names from the right */
 .sbtabs{display:flex;align-items:stretch;height:100%;min-width:0;overflow:hidden;padding:0 10px}
-.tab2{position:relative;display:flex;align-items:center;gap:8px;padding:0 10px;margin-right:12px;border-radius:10px 10px 0 0;color:#c9c9cc;font-size:12.5px;font-weight:600;white-space:nowrap;cursor:default}
+.tab2{position:relative;display:flex;align-items:center;gap:8px;padding:0 10px;margin-right:10px;border-radius:10px 10px 0 0;color:#c9c9cc;font-size:12.5px;font-weight:600;white-space:nowrap;cursor:default;flex:1 1 0;min-width:40px;max-width:185px}
 .tab2 .hv{position:absolute;left:4px;right:4px;top:4px;bottom:4px;border-radius:7px;background:rgba(255,255,255,.09);opacity:0;transition:opacity .15s;pointer-events:none}
 .tab2:not(.sel):hover .hv{opacity:1}
 .tab2>*:not(.hv){position:relative}
@@ -187,7 +188,8 @@ button:focus-visible{outline:2px solid rgba(255,255,255,.45);outline-offset:2px}
 .tlogo{height:15px;width:auto;display:block;flex:none}
 .tic{width:16px;height:16px;flex:none}
 .tic svg{width:100%;height:100%;display:block}
-.tname{overflow:hidden;text-overflow:ellipsis}
+.tname{display:block;flex:1 1 auto;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:clip}
+.tname.ov{mask-image:linear-gradient(90deg,#000 70%,transparent 100%);-webkit-mask-image:linear-gradient(90deg,#000 70%,transparent 100%)}
 .tx{width:18px;height:18px;flex:none;border-radius:4px;display:flex;align-items:center;justify-content:center;color:#c9c9cc;opacity:.65;transition:background .12s,color .12s,opacity .12s}
 .tx:hover{background:#d5432f;color:#fff;opacity:1}
 .tx svg{width:8px;height:8px;display:block}
@@ -853,9 +855,10 @@ function renderBarLeft(wrap){
   left.innerHTML = html;
   left.querySelectorAll('.tab2').forEach(t => {
     const id = t.dataset.tab;
-    t.querySelector('.tname').textContent = id === 'home'
-      ? name
-      : (st.apps.find(a => a.id === id) || {}).name || '';
+    const nm = t.querySelector('.tname');
+    nm.textContent = id === 'home' ? name : (st.apps.find(a => a.id === id) || {}).name || '';
+    /* fade long names from the right (only when actually truncated) */
+    nm.classList.toggle('ov', nm.scrollWidth > nm.clientWidth);
   });
 }
 function postView(wrap){
@@ -894,6 +897,7 @@ function toggleMax(wrap){
   }
   raiseWin(wrap);
   setTimeout(() => { wrap.style.transition = ''; }, 300);
+  syncFs();
 }
 function minimizeWin(wrap){
   wrap._state.min = true;
@@ -1051,6 +1055,7 @@ function openSimulator(inst) {
   wrap.addEventListener('mousedown', () => raiseWin(wrap));
   document.body.appendChild(wrap);
   simWins.set(inst.id, wrap);
+  syncFs();
 }
 function closeSimulator(inst) {
   const wrap = simWins.get(inst.id);
@@ -1066,6 +1071,36 @@ setInterval(() => {
     raiseWin(ae.parentElement.closest('.simwin'));
   }
 }, 500);
+
+/* ---- fullscreen: hide the title bar only when fullscreen AND maximized;
+   entering fullscreen auto-maximizes the top window ---- */
+let lastFs = false;
+function fsState(){
+  return !!document.fullscreenElement || window.innerHeight >= (screen.height - 4);
+}
+function syncFs(){
+  const fs = fsState();
+  if (fs !== lastFs){
+    if (fs){
+      let top = null, z = -1;
+      simWins.forEach(w => {
+        if (w._state.min) return;
+        const zi = +w.style.zIndex || 70;
+        if (zi > z) { z = zi; top = w; }
+      });
+      if (top && !top._state.rect) toggleMax(top);
+    }
+    lastFs = fs;
+  }
+  simWins.forEach(w => {
+    const maxed = !!w._state.rect;
+    const bar = w.querySelector('.simbar');
+    if (bar) bar.style.display = (fs && maxed) ? 'none' : '';
+  });
+}
+addEventListener('resize', syncFs);
+document.addEventListener('fullscreenchange', syncFs);
+setInterval(syncFs, 800);
 
 /* messages from the simulator windows */
 addEventListener('message', e => {
@@ -1092,7 +1127,6 @@ addEventListener('message', e => {
     if (wrap) closeAppTab(wrap, String(d.app));
     return;
   }
-  /* per-device simulator state (installed apps, home layout) */
   if (d.type === 'mumu-dev-load' && d.id != null){
     let st = null;
     try { st = JSON.parse(localStorage.getItem('mumu.dev.' + d.id)); } catch (err) {}
@@ -1260,7 +1294,7 @@ function deleteInstance(inst) {
   const idx = instances.findIndex(i => i.id === inst.id);
   if (idx > -1) instances.splice(idx, 1);
   selected.delete(inst.id);
-  try { localStorage.removeItem('mumu.dev.' + inst.id); } catch (e) {}   /* remove this device's simulator save too */
+  try { localStorage.removeItem('mumu.dev.' + inst.id); } catch (e) {}
   saveDevices();
   const card = grid.querySelector(`.card[data-id="${inst.id}"]`);
   if (card) {
@@ -1507,6 +1541,7 @@ diskSwitch.addEventListener('click', () => {
 setModeDesc();
 loadDevices();
 render(instances.length ? 'all' : undefined);
+syncFs();
 })();
 </script>
 </body>
