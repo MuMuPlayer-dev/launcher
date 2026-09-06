@@ -25,10 +25,11 @@ input{user-select:text;-webkit-user-select:text}
 #ui{position:fixed;top:0;left:0;width:calc(100% / var(--s,1));height:calc(100% / var(--s,1));z-index:1;opacity:0;transform:scale(var(--s,1));transform-origin:0 0;transition:opacity .7s var(--ease),transform .16s ease-out}
 #ui.ready{opacity:1}
 
-/* ---------- status bar (bigger wifi; black background while inside an app) ---------- */
+/* status bar: bigger wifi close to the data triangle, tall skinny battery */
 #statusbar{position:absolute;top:0;left:0;right:0;height:42px;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font-size:15px;font-weight:600;text-shadow:0 1px 3px rgba(0,0,0,.5);transition:background .25s ease}
 #statusbar.appbg{background:#000}
 .sb-right{display:flex;align-items:center;gap:12px}
+.sb-pair{display:flex;align-items:center;gap:6px}
 .sb-right svg{display:block;filter:drop-shadow(0 1px 2px rgba(0,0,0,.5))}
 
 #appgrid{position:absolute;left:0;right:0;top:48px;bottom:134px;display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(3,1fr);transition:transform .3s var(--ease),background .3s ease}
@@ -81,7 +82,8 @@ input{user-select:text;-webkit-user-select:text}
 /* ============ CHROMIUM ============ */
 .chromium{position:absolute;inset:0;display:flex;flex-direction:column;background:#0e0f12;animation:avIn .4s var(--ease) both}
 .ch-strip{height:40px;flex:none;display:flex;align-items:stretch;padding:0 6px;background:#0e0f12}
-.ch-tabs{display:flex;align-items:stretch;flex:1;min-width:0;overflow:hidden;padding:0 10px}
+/* tabs no longer fill the strip: the + button sits right beside the last tab */
+.ch-tabs{display:flex;align-items:stretch;flex:0 1 auto;min-width:0;overflow:hidden;padding:0 10px}
 .ch-new{align-self:center;width:30px;height:28px;margin-left:2px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#b9bdc3;transition:background .13s,color .13s;flex:none}
 .ch-new:hover{background:rgba(255,255,255,.09);color:#fff}
 .ch-new svg{width:13px;height:13px}
@@ -102,7 +104,8 @@ input{user-select:text;-webkit-user-select:text}
 .ch-tab.sel .ch-tic{color:#c7ccd4}
 .ch-tic svg{position:absolute;inset:0;width:100%;height:100%}
 .ch-fav{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
-.ch-tname{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.ch-tname{flex:1 1 auto;min-width:0;overflow:hidden;white-space:nowrap;display:block}
+.ch-tname.ov{mask-image:linear-gradient(90deg,#000 70%,transparent 100%);-webkit-mask-image:linear-gradient(90deg,#000 70%,transparent 100%)}
 .ch-tx{width:18px;height:18px;flex:none;border-radius:4px;display:flex;align-items:center;justify-content:center;color:#b9bdc3;opacity:.65;transition:background .12s,color .12s,opacity .12s}
 .ch-tx:hover{background:#d5432f;color:#fff;opacity:1}
 .ch-tx svg{width:8px;height:8px}
@@ -189,6 +192,12 @@ input{user-select:text;-webkit-user-select:text}
 .dlg-cancel:hover{background:rgba(255,255,255,.08)}
 .dlg-ok{height:40px;padding:0 24px;border-radius:999px;background:#93c2fd;color:#20262e;font-size:13.5px;font-weight:700;transition:filter .15s}
 .dlg-ok:hover{filter:brightness(1.07)}
+/* undo snackbar: slides up from the bottom of the browser */
+.ch-snack{position:absolute;left:50%;bottom:18px;transform:translate(-50%,150%);display:flex;align-items:center;gap:26px;min-width:300px;max-width:72%;height:46px;padding:0 8px 0 18px;background:#2b2d33;border-radius:12px;box-shadow:0 14px 34px rgba(0,0,0,.45);z-index:95;transition:transform .34s var(--ease);touch-action:none}
+.ch-snack.show{transform:translate(-50%,0)}
+.cs-txt{flex:1;min-width:0;color:#c3c7cd;font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cs-undo{color:#8cb4f9;font-size:13px;font-weight:700;padding:7px 12px;border-radius:8px;flex:none;transition:background .13s}
+.cs-undo:hover{background:rgba(140,180,249,.16)}
 
 /* ============ MUMU STORE ============ */
 .store{position:absolute;inset:0;display:flex;flex-direction:column;background:#292b30;animation:avIn .4s var(--ease) both}
@@ -209,7 +218,6 @@ input{user-select:text;-webkit-user-select:text}
 .st-soon{height:100%;display:flex;align-items:center;justify-content:center;color:#8b8f96;font-size:15px;font-weight:600}
 .st-view{position:absolute;inset:0}
 .st-h{position:absolute;top:18px;left:24px;font-size:20px;font-weight:600;color:#fff;z-index:2}
-/* search bar: expands + centers while in use; sidebar is hidden so it has room */
 .st-swrap{position:absolute;top:18px;left:calc(100% - 330px);width:306px;height:42px;display:flex;align-items:center;gap:8px;z-index:6;transition:left .32s cubic-bezier(.2,.8,.3,1),width .32s cubic-bezier(.2,.8,.3,1),transform .32s cubic-bezier(.2,.8,.3,1)}
 .st-view.searching .st-swrap,.st-view.committed .st-swrap{left:50%;transform:translateX(-50%);width:60%}
 .st-back{width:0;height:32px;flex:none;overflow:hidden;opacity:0;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#b9bec6;transition:opacity .25s,width .25s,background .15s}
@@ -221,19 +229,17 @@ input{user-select:text;-webkit-user-select:text}
 .st-view.searching .st-search,.st-view.committed .st-search{border-color:#4a9de0;background:rgba(22,32,46,.65)}
 .st-cover{position:absolute;inset:0;background:rgba(8,10,14,.55);z-index:3;opacity:0;pointer-events:none;transition:opacity .25s}
 .st-view.searching .st-cover{opacity:1;pointer-events:auto}
-/* suggestion dropdown (rows of 1, before Enter) */
 .st-drop{position:absolute;top:72px;left:50%;transform:translateX(-50%);width:60%;z-index:5;display:none;padding:6px}
 .st-view.searching .st-drop{display:block}
-/* committed results grid (rows of 2, after Enter) */
 .st-grid{position:absolute;top:72px;left:24px;right:24px;bottom:8px;z-index:4;overflow-y:auto;padding:4px 2px 14px;display:none;scrollbar-width:thin}
 .st-view.committed .st-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-content:start}
-/* category tab */
 .st-cats{position:absolute;top:66px;left:24px;right:24px;display:flex;gap:10px;flex-wrap:wrap;z-index:2}
 .st-view.searching .st-cats,.st-view.committed .st-cats{display:none}
-.st-catbtn{height:36px;padding:0 18px;border-radius:8px;background:#1d3a63;color:#fff;font-size:13px;font-weight:600;transition:background .15s}
+.st-catbtn{display:flex;align-items:center;gap:8px;height:38px;padding:0 16px 0 12px;border-radius:8px;background:#1d3a63;color:#fff;font-size:13px;font-weight:600;transition:background .15s}
 .st-catbtn:hover{background:#27508c}
 .st-catbtn.sel{background:#2f62a8}
-.st-catgrid{position:absolute;top:118px;left:24px;right:24px;bottom:8px;overflow-y:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-content:start;padding:4px 2px 14px;scrollbar-width:thin}
+.st-catbtn svg{width:18px;height:18px;flex:none;display:block}
+.st-catgrid{position:absolute;top:120px;left:24px;right:24px;bottom:8px;overflow-y:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-content:start;padding:4px 2px 14px;scrollbar-width:thin}
 .st-view.searching .st-catgrid,.st-view.committed .st-catgrid{display:none}
 .st-none{color:#8b8f96;font-size:14px;padding:16px 6px}
 /* rows */
@@ -245,22 +251,22 @@ input{user-select:text;-webkit-user-select:text}
 .sr-ring{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .sr-ring.spin{animation:srSpin .9s linear infinite}
 @keyframes srSpin{to{transform:rotate(360deg)}}
-.sr-info{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.sr-info{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
 .sr-name{font-size:15px;font-weight:600;color:#fff}
 .sr-name .m{color:#5db4f0}
 .sr-rate{display:flex;align-items:center;gap:6px;color:#f5c443;font-size:12.5px;font-weight:600}
-.sr-rate svg{width:13px;height:13px;fill:#f5c443;display:block}
+.sr-rate svg{width:13px;height:13px;fill:#f5c443;display:block;flex:none}
+/* category badge next to the rating */
+.sr-cat{display:inline-flex;align-items:center;height:19px;padding:0 9px;border-radius:7px;background:#123f4d;color:#7fd4f2;font-size:10.5px;font-weight:700;letter-spacing:.02em;flex:none}
 .sr-dl{font-size:12px;color:#5db4f0;font-weight:700}
 .sr-btn{height:34px;padding:0 20px;border-radius:8px;font-size:13px;font-weight:700;flex:none;opacity:0;pointer-events:none;transition:opacity .15s,background .15s,color .15s}
 .sr:hover .sr-btn,.sr.busy .sr-btn,.sr.done .sr-btn{opacity:1;pointer-events:auto}
 .sr-btn.install,.sr-btn.play{background:#3f8fdd;color:#fff}
 .sr-btn.cancel{background:#0b0c10;color:#5db4f0}
-/* grid cards (committed results + category) are a bit bigger */
 .st-grid .sr,.st-catgrid .sr{padding:14px 16px}
 .st-grid .sr-icwrap,.st-catgrid .sr-icwrap{width:64px;height:64px}
 .st-grid .sr-icwrap img,.st-catgrid .sr-icwrap img{width:54px;height:54px;border-radius:13px}
 .st-grid .sr-name,.st-catgrid .sr-name{font-size:16px}
-/* exact-match hero: whole row, bigger, blue-ish gray rounded box behind it */
 .sr.hero{grid-column:1/-1;background:rgba(104,126,158,.40);border-radius:16px;padding:20px 22px}
 .sr.hero .sr-icwrap{width:86px;height:86px}
 .sr.hero .sr-icwrap img{width:70px;height:70px;border-radius:16px}
@@ -277,16 +283,19 @@ input{user-select:text;-webkit-user-select:text}
   <div id="statusbar">
     <span id="clock">9:41</span>
     <span class="sb-right">
-      <!-- wifi: bigger 72° sector (1/5 circle), curved side up, point down -->
-      <svg width="30" height="21" viewBox="0 0 30 21" aria-hidden="true">
-        <path d="M15 20 L8.24 10.7 A11.5 11.5 0 0 1 21.76 10.7 Z" fill="#fff"/>
-      </svg>
-      <svg width="17" height="17" viewBox="0 0 17 17" aria-hidden="true">
-        <path d="M2.6 16.2 H15.2 V3.6 Z" fill="#fff"/>
-      </svg>
-      <svg width="19" height="14" viewBox="0 0 19 14" aria-hidden="true">
-        <rect x="7" y="0.3" width="5" height="2.3" rx="1" fill="#fff"/>
-        <rect x="2.2" y="3.2" width="14.6" height="10.2" rx="2.4" fill="#fff"/>
+      <span class="sb-pair">
+        <!-- wifi: 72° sector, bigger, close to the data triangle -->
+        <svg width="34" height="24" viewBox="0 0 34 24" aria-hidden="true">
+          <path d="M17 22.8 L9.36 12.28 A13 13 0 0 1 24.64 12.28 Z" fill="#fff"/>
+        </svg>
+        <svg width="17" height="17" viewBox="0 0 17 17" aria-hidden="true">
+          <path d="M2.6 16.2 H15.2 V3.6 Z" fill="#fff"/>
+        </svg>
+      </span>
+      <!-- battery: taller than wide -->
+      <svg width="13" height="16" viewBox="0 0 13 16" aria-hidden="true">
+        <rect x="4.8" y="0.6" width="3.4" height="2.2" rx="1" fill="#fff"/>
+        <rect x="2.6" y="3.2" width="7.8" height="12" rx="2.2" fill="#fff"/>
       </svg>
     </span>
   </div>
@@ -735,7 +744,6 @@ function openApp(app, iconEl){
 let chRoot = null, storeRoot = null, phEl = null, embedEl = null, embedUrl = null;
 function showView(v){
   const home = v === 'home';
-  /* status bar gets a black background while inside any app */
   $('#statusbar').classList.toggle('appbg', !home);
   gridEl.style.display = home ? '' : 'none';
   dockEl.style.display = home ? '' : 'none';
@@ -789,6 +797,7 @@ function destroyChromium(){
   CH.tabs = [chTab()];
   CH.cur = 0;
   CH.marks = new Map();
+  closedStack.length = 0;
 }
 
 addEventListener('message', e => {
@@ -822,6 +831,7 @@ const GOOGLE_LOGO = 'https://www.pngkey.com/png/full/685-6856288_new-google-logo
 const FAV = host => `https://www.google.com/s2/favicons?domain=${encodeURIComponent(host)}&amp;sz=64`;
 
 const CH = { tabs: [null], cur: 0, marks: new Map() };
+const closedStack = [];           /* closed tabs for undo / ctrl+shift+t */
 CH.tabs = [chTab()];
 function chTab(){ return { hist: [{ type: 'newtab' }], idx: 0 }; }
 function chCur(){ return CH.tabs[CH.cur]; }
@@ -849,22 +859,32 @@ function goFromText(txt){
   if (isUrl) chGo({ type: 'web', url: hasProto ? t : 'https://' + t });
   else chGo({ type: 'web', url: 'https://www.google.com/search?q=' + encodeURIComponent(t) });
 }
+/* equal-width tabs sized so the strip (tabs + the adjacent + button) always fits */
 function tabWidthFor(){
-  const strip = chRoot.querySelector('.ch-tabs');
-  const avail = Math.max(220, strip.clientWidth - 20);
-  return Math.round(Math.min(240, Math.max(56, avail / Math.max(1, CH.tabs.length))));
+  const strip = chRoot.querySelector('.ch-strip');
+  const n = Math.max(1, CH.tabs.length);
+  const w = (strip.clientWidth - 64 - 12 * n) / n;
+  return Math.round(Math.max(56, Math.min(240, w)));
 }
 function layoutTabs(oldW){
   if (!chRoot || !chRoot.isConnected || chRoot.style.display === 'none') return;
   const els = [...chRoot.querySelectorAll('.ch-tab')];
   if (!els.length) return;
   const w = tabWidthFor();
+  const apply = () => {
+    els.forEach(el => { el.style.width = w + 'px'; });
+    els.forEach(el => {
+      const nm = el.querySelector('.ch-tname');
+      if (nm) nm.classList.toggle('ov', nm.scrollWidth > nm.clientWidth);
+    });
+  };
   if (oldW != null && Math.abs(oldW - w) > 1){
     els.forEach(el => { el.style.transition = 'none'; el.style.width = oldW + 'px'; });
     requestAnimationFrame(() => requestAnimationFrame(() => {
-      els.forEach(el => { el.style.transition = 'width .3s cubic-bezier(.2,.8,.3,1)'; el.style.width = w + 'px'; });
+      els.forEach(el => { el.style.transition = 'width .3s cubic-bezier(.2,.8,.3,1)'; });
+      apply();
     }));
-  } else els.forEach(el => { el.style.width = w + 'px'; });
+  } else apply();
 }
 function flipPlus(old){
   if (!chRoot) return;
@@ -889,8 +909,15 @@ function chNewTab(){
   flipPlus(pr);
 }
 function chCloseAt(i){
-  if (CH.tabs.length === 1){ CH.tabs = [chTab()]; CH.cur = 0; }
-  else {
+  if (CH.tabs.length === 1){
+    closedStack.push({ tab: CH.tabs[0], idx: 0, title: entTitle(CH.tabs[0].hist[CH.tabs[0].idx]) });
+    showSnack(closedStack[closedStack.length - 1].title);
+    CH.tabs = [chTab()];
+    CH.cur = 0;
+  } else {
+    const tb = CH.tabs[i];
+    closedStack.push({ tab: tb, idx: i, title: entTitle(tb.hist[tb.idx]) });
+    showSnack(closedStack[closedStack.length - 1].title);
     CH.tabs.splice(i, 1);
     if (i < CH.cur) CH.cur--;
     if (CH.cur >= CH.tabs.length) CH.cur = CH.tabs.length - 1;
@@ -907,6 +934,54 @@ function closeChTab(i){
     setTimeout(() => { chCloseAt(i); flipPlus(pr); }, 190);
   } else chCloseAt(i);
 }
+function reopenClosedTab(){
+  const c = closedStack.pop();
+  if (!c || !chRoot) return;
+  const plus = chRoot.querySelector('.ch-new');
+  const pr = plus && plus.getBoundingClientRect();
+  const at = Math.min(c.idx, CH.tabs.length);
+  CH.tabs.splice(at, 0, c.tab);
+  CH.cur = at;
+  renderCh(true);
+  flipPlus(pr);
+  hideSnack();
+}
+
+/* ---- undo snackbar (slide-up from the bottom of the browser) ---- */
+let snackTimer = null;
+function showSnack(name){
+  if (!chRoot) return;
+  let s = chRoot.querySelector('.ch-snack');
+  if (!s){
+    s = document.createElement('div');
+    s.className = 'ch-snack';
+    s.innerHTML = `<span class="cs-txt"></span><button class="cs-undo">Undo</button>`;
+    chRoot.appendChild(s);
+    s.querySelector('.cs-undo').addEventListener('click', e => {
+      e.stopPropagation();
+      reopenClosedTab();
+    });
+    s.addEventListener('click', () => hideSnack());
+    let sy = null;                                  /* swipe down to dismiss */
+    s.addEventListener('pointerdown', e => { sy = e.clientY; });
+    s.addEventListener('pointermove', e => {
+      if (sy != null && e.clientY - sy > 30){ sy = null; hideSnack(); }
+    });
+    s.addEventListener('pointerup', () => { sy = null; });
+    s.addEventListener('pointercancel', () => { sy = null; });
+  }
+  s.querySelector('.cs-txt').textContent = 'Closed ' + name;
+  requestAnimationFrame(() => requestAnimationFrame(() => s.classList.add('show')));
+  clearTimeout(snackTimer);
+  snackTimer = setTimeout(hideSnack, 5000);
+}
+function hideSnack(){
+  clearTimeout(snackTimer);
+  if (!chRoot) return;
+  const s = chRoot.querySelector('.ch-snack');
+  if (s) s.classList.remove('show');
+}
+
 function buildChromium(){
   const root = document.createElement('div');
   root.className = 'chromium';
@@ -1168,19 +1243,69 @@ function openCloseAllDlg(){
 
 /* ============ MUMU STORE ============ */
 const GAMES = [
-  { id: 'gd',         name: 'Geometry Dash',         rating: 4.7,
+  { id: 'gd',         name: 'Geometry Dash',         rating: 4.7, cat: 'arcade',
     icon: 'https://m.media-amazon.com/images/I/61mVIP6Oo1L.png',
     url:  'https://web-dashers.github.io' },
-  { id: 'gd-world',   name: 'Geometry Dash World',    rating: 4.5,
+  { id: 'gd-world',   name: 'Geometry Dash World',    rating: 4.5, cat: 'arcade',
     icon: 'https://play-lh.googleusercontent.com/CNg8B28ItxcoMaWMEG5bF7T4BmJz3F2sli0H4PqoWa_IFUgVAV8lSBzOymZksqSPgBvmDsLsanz-MZWI9rSEgq0=w240-h480-rw',
     url:  'https://monkeyworm-tech.github.io/world' },
-  { id: 'gd-subzero', name: 'Geometry Dash SubZero',  rating: 4.5,
-    icon: 'https://static.wikia.nocookie.net/geometry-dashultimate/images/9/99/GeometryDashSubzero.webp/revision/latest?cb=20250527182040',
+  { id: 'gd-subzero', name: 'Geometry Dash SubZero',  rating: 4.5, cat: 'arcade',
+    icon: 'https://play-lh.googleusercontent.com/TU7evnDya31k2v4vcWrMhBmcNUd4e1-egTqfZ3ELv_xZrvsvL2BxZj7RVnbhVvcaYXpE-TOXWDE4iI2vcDKZ8A=w240-h480-rw',
     url:  'https://monkeyworm-tech.github.io/subzero' },
-  { id: 'gd-meltdown',name: 'Geometry Dash Meltdown', rating: 4.6,
+  { id: 'gd-meltdown',name: 'Geometry Dash Meltdown', rating: 4.6, cat: 'arcade',
     icon: 'https://img.utdstc.com/icon/862/a7b/862a7b25a802243e10b809176fe2072dd6fd01a4d888d1b03bd7c57d1ce8558d:600',
-    url:  'https://monkeyworm-tech.github.io/meltdown' }
+    url:  'https://monkeyworm-tech.github.io/meltdown' },
+  { id: 'roblox',     name: 'Roblox',                 rating: 4.2, cat: 'adventure',
+    icon: 'https://m.media-amazon.com/images/I/21aoUPG3svL.png',
+    url:  'https://roblox-devt.github.io/home' },
+  { id: 'subway',     name: 'Subway Surfers',         rating: 4.6, cat: 'action',
+    icon: 'https://cdn.kiz10.com/upload/thumbnails/9814/1519149668_subway-surfers-online.webp',
+    url:  'https://g2.igroutka.ru/games/164/ZXLa594fek6p7nVR/10/subway_surfers_classic/' }
 ];
+const CAT_IC = {
+  adventure: `<svg viewBox="0 0 20 20" fill="none" stroke="#fff" stroke-width="1.6" aria-hidden="true">
+    <rect x="1.6" y="1.6" width="16.8" height="16.8" rx="4.2"/>
+    <g fill="#fff" stroke="none">
+      <rect x="5.4" y="6.6" width="2.3" height="6.8" rx="1.15" transform="rotate(15 6.55 10)"/>
+      <rect x="8.6" y="6.6" width="2.3" height="6.8" rx="1.15" transform="rotate(15 9.75 10)"/>
+      <circle cx="13.9" cy="12.3" r="1.2"/>
+    </g>
+  </svg>`,
+  action: `<svg viewBox="0 0 20 20" fill="none" stroke="#fff" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true">
+    <path d="M6.2 17.5 v-2.6 c-2.6-1.5-3.9-4.4-3-7.1 .8-2.4 3.1-4 5.7-4 h.8 c3 0 5.4 2.3 5.6 5.3 .1 2.2-1.1 4.2-3.1 5.2 v3.2 Z"/>
+    <path d="M6.2 15.2 c1.2-.8 2.5-.8 3.6 0" stroke-linecap="round"/>
+  </svg>`,
+  strategy: `<svg viewBox="0 0 20 20" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M5 17.5 V2.5"/>
+    <path d="M5 3.6 h9.5 l-2.6 3.2 2.6 3.2 H5"/>
+  </svg>`,
+  simulation: `<svg viewBox="0 0 20 20" fill="none" stroke="#fff" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true">
+    <path d="M10 2.8 L16.2 6.4 V13.6 L10 17.2 L3.8 13.6 V6.4 Z"/>
+    <path d="M10 2.8 V10 M3.8 13.6 L10 10 L16.2 13.6"/>
+  </svg>`,
+  casual: `<svg viewBox="0 0 20 20" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M10 2.8 a2.7 2.7 0 0 1 1.9 4.6 c1.6 1.1 2.6 2.9 2.8 5.1 H5.3 c.2-2.2 1.2-4 2.8-5.1 A2.7 2.7 0 0 1 10 2.8 Z"/>
+    <path d="M6.3 15.2 h7.4 M5.2 17.4 h9.6"/>
+  </svg>`,
+  arcade: `<svg viewBox="0 0 20 20" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <circle cx="12.6" cy="3.6" r="1.9"/>
+    <path d="M11.6 6.6 L8.6 11.4 L10.8 16.4"/>
+    <path d="M11.6 6.6 L15 9.2 L17.8 8.2"/>
+    <path d="M11.3 9.8 L7.2 8.6 L4.4 9.6"/>
+    <path d="M8.6 11.4 L4.2 13.2 L5.4 16.4"/>
+  </svg>`
+};
+const CATS = [
+  { id: 'all',       name: 'All' },
+  { id: 'adventure', name: 'Adventure',  ic: CAT_IC.adventure },
+  { id: 'action',    name: 'Action',     ic: CAT_IC.action },
+  { id: 'strategy',  name: 'Strategy',   ic: CAT_IC.strategy },
+  { id: 'simulation',name: 'Simulation', ic: CAT_IC.simulation },
+  { id: 'casual',    name: 'Casual',     ic: CAT_IC.casual },
+  { id: 'arcade',    name: 'Arcade',     ic: CAT_IC.arcade }
+];
+const catName = id => (CATS.find(c => c.id === id) || {}).name || '';
+
 const ST_STAR  = `<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.2 L12.3 6.9 L17.4 7.6 L13.7 11.1 L14.6 16.2 L10 13.8 L5.4 16.2 L6.3 11.1 L2.6 7.6 L7.7 6.9 Z"/></svg>`;
 const ST_BACK  = `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 10 H6"/><path d="M9.8 5.6 L5.4 10 L9.8 14.4"/></svg>`;
 const stFeat = sel => `<svg viewBox="0 0 30 30" aria-hidden="true">
@@ -1197,10 +1322,9 @@ const stMan = sel => `<svg viewBox="0 0 30 30" aria-hidden="true">
   <circle cx="21.2" cy="11.2" r="2" fill="#fff"/>
 </svg>`;
 
-const DLS = {};            /* game id → { phase, pct, timer } */
-let matchIdx = {};         /* game id → matched letter indices (for blue highlight) */
+const DLS = {};
+let matchIdx = {};
 
-/* ---- matching: any part of the name counts; exact first, then most relevant ---- */
 function matchGame(q, g){
   const n = g.name.toLowerCase();
   const s = q.trim().toLowerCase();
@@ -1292,8 +1416,6 @@ function nameHTML(name, idx){
   return [...name].map((ch, i) => `<span${set.has(i) ? ' class="m"' : ''}>${ch}</span>`).join('');
 }
 
-/* re-render every visible row for a game (dropdown / results grid / category grid);
-   each row remembers whether it highlights matched letters */
 function renderRow(g){
   if (!storeRoot) return;
   const st = gameState(g);
@@ -1314,14 +1436,12 @@ function renderRow(g){
       </span>
       <span class="sr-info">
         <span class="sr-name">${hl ? nameHTML(g.name, matchIdx[g.id]) : `<span>${g.name}</span>`}</span>
-        <span class="sr-rate">${ST_STAR}<span>${g.rating.toFixed(1)}</span></span>
+        <span class="sr-rate">${ST_STAR}<span>${g.rating.toFixed(1)}</span>${g.cat ? `<span class="sr-cat">${catName(g.cat)}</span>` : ''}</span>
         ${pct}
       </span>
       ${btn}`;
   });
 }
-
-/* suggestions while typing: rows of 1 under the search bar */
 function renderDrop(drop, q){
   drop.innerHTML = '';
   matchIdx = {};
@@ -1342,7 +1462,6 @@ function renderDrop(drop, q){
     drop.appendChild(p);
   }
 }
-/* committed results after Enter: rows of 2, exact match as a big full-row hero */
 function renderGrid(grid, q){
   grid.innerHTML = '';
   matchIdx = {};
@@ -1363,8 +1482,6 @@ function renderGrid(grid, q){
     grid.appendChild(p);
   }
 }
-
-/* one search rig per view (featured + category): typing → suggestions, Enter → results */
 function wireSearch(view){
   const inp = view.querySelector('.st-search');
   const back = view.querySelector('.st-back');
@@ -1406,6 +1523,7 @@ function wireSearch(view){
   cover.addEventListener('mousedown', closeSearch);
 }
 
+let curCat = 'all';
 function buildStore(){
   const root = document.createElement('div');
   root.className = 'store';
@@ -1442,7 +1560,7 @@ function buildStore(){
             <div class="st-cover"></div>
             <div class="st-drop"></div>
             <div class="st-grid"></div>
-            <div class="st-cats"><button class="st-catbtn sel">Arcade</button></div>
+            <div class="st-cats"></div>
             <div class="st-catgrid"></div>
           </div>
         </div>
@@ -1465,22 +1583,23 @@ function buildStore(){
 
   root.querySelectorAll('.st-view').forEach(wireSearch);
 
-  /* category: genre buttons + all games in rows of 2 */
-  const catgrid = root.querySelector('.st-catgrid');
-  GAMES.forEach(g => {
-    const el = document.createElement('div');
-    el.className = 'sr';
-    el.dataset.g = g.id;
-    catgrid.appendChild(el);
-    renderRow(g);
-  });
-  root.querySelectorAll('.st-catbtn').forEach(b =>
+  /* genre buttons + filtered game grid */
+  const cats = root.querySelector('.st-cats');
+  CATS.forEach(c => {
+    const b = document.createElement('button');
+    b.className = 'st-catbtn' + (c.id === curCat ? ' sel' : '');
+    b.dataset.cat = c.id;
+    b.innerHTML = `${c.ic || ''}<span></span>`;
+    b.querySelector('span').textContent = c.name;
     b.addEventListener('click', () => {
+      curCat = c.id;
       root.querySelectorAll('.st-catbtn').forEach(x => x.classList.toggle('sel', x === b));
-    })
-  );
+      renderCatGrid();
+    });
+    cats.appendChild(b);
+  });
+  renderCatGrid();
 
-  /* install / cancel / play, delegated so every view's rows work */
   root.addEventListener('click', e => {
     const btn = e.target.closest('.sr-btn');
     if (!btn) return;
@@ -1496,6 +1615,25 @@ function buildStore(){
     }
   });
   return root;
+}
+function renderCatGrid(){
+  if (!storeRoot) return;
+  const cg = storeRoot.querySelector('.st-catgrid');
+  cg.innerHTML = '';
+  const list = curCat === 'all' ? GAMES : GAMES.filter(g => g.cat === curCat);
+  list.forEach(g => {
+    const el = document.createElement('div');
+    el.className = 'sr';
+    el.dataset.g = g.id;
+    cg.appendChild(el);
+    renderRow(g);
+  });
+  if (!list.length){
+    const p = document.createElement('p');
+    p.className = 'st-none';
+    p.textContent = 'No games in this category yet';
+    cg.appendChild(p);
+  }
 }
 
 /* ============ clock ============ */
@@ -1557,6 +1695,15 @@ loadDevState(st => {
 });
 
 addEventListener('keydown', e => {
+  /* chromium shortcuts (note: Chrome/Edge reserve Ctrl+T/N/W/Shift+T and may
+     swallow them before the page sees the event — they work whenever the
+     browser does deliver the keydown) */
+  if (chRoot && chRoot.style.display !== 'none' && (e.ctrlKey || e.metaKey)){
+    const k = e.key.toLowerCase();
+    if (e.shiftKey && k === 't'){ e.preventDefault(); reopenClosedTab(); return; }
+    if (!e.shiftKey && (k === 't' || k === 'n')){ e.preventDefault(); chNewTab(); return; }
+    if (k === 'w'){ e.preventDefault(); closeChTab(CH.cur); return; }
+  }
   if (e.key !== 'Escape') return;
   if (chRoot){
     const dlg = chRoot.querySelector('.ch-dlg');
@@ -1565,6 +1712,8 @@ addEventListener('keydown', e => {
     if (pop){ pop.remove(); return; }
     const tm = chRoot.querySelector('.ch-tabsmenu');
     if (tm){ tm.remove(); return; }
+    const snack = chRoot.querySelector('.ch-snack.show');
+    if (snack){ hideSnack(); return; }
   }
   if (window.parent !== window && DEV && DEV.id != null){
     parent.postMessage({ type: 'mumu-close', id: DEV.id }, '*');
