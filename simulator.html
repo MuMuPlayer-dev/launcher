@@ -30,7 +30,7 @@ input{user-select:text;-webkit-user-select:text;caret-color:#A5C2FF}
 .sb-pair{display:flex;align-items:center;gap:6px}
 .sb-right svg{display:block;filter:drop-shadow(0 1px 2px rgba(0,0,0,.5))}
 
-/* ---------- home: pager (side grids peek without intersecting) ---------- */
+/* ---------- home pager ---------- */
 #pagerwrap{position:absolute;left:0;right:0;top:48px;bottom:134px;overflow:hidden;z-index:1;touch-action:none}
 #pager{height:100%;transform-origin:8% 50%;transition:transform .3s var(--ease)}
 #pager.editing{transform:scale(.78)}
@@ -113,6 +113,35 @@ svg.dl-ov.zoom{transition:transform .32s ease,opacity .3s ease;transform:scale(1
 .bb-dot{position:absolute;right:-4px;top:1.5px;transform:translateY(-50%);width:9px;height:9px;border-radius:50%;background:#fff;box-shadow:0 0 10px 2px rgba(90,170,255,.85),0 0 3px 1px rgba(120,190,255,.9)}
 .bb-pct{position:absolute;right:16px;bottom:8px;font-size:12px;font-weight:600;color:#5db4e8;font-variant-numeric:tabular-nums}
 #caretdrop{position:fixed;z-index:999;pointer-events:none;opacity:0}
+
+/* ============ app context menu / dialogs / sheets ============ */
+.appmenu{position:fixed;z-index:150;min-width:200px;background:#33343a;border-radius:12px;padding:6px;box-shadow:0 14px 40px rgba(0,0,0,.5);animation:amIn .15s ease both}
+@keyframes amIn{from{opacity:0;transform:translateY(-4px) scale(.97)}}
+.am-it{display:flex;align-items:center;gap:11px;width:100%;padding:10px;border-radius:8px;font-size:13.5px;font-weight:600;color:#fff;transition:background .12s}
+.am-it:hover{background:rgba(255,255,255,.09)}
+.am-it.dis{color:#77797f;pointer-events:none}
+.am-it svg{width:17px;height:17px;flex:none}
+.am-dlg{position:fixed;inset:0;z-index:160;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;animation:avIn .18s ease both}
+.am-dlgbox{width:400px;max-width:86%;background:#33343a;border-radius:16px;padding:24px 24px 16px;box-shadow:0 22px 60px rgba(0,0,0,.55)}
+.am-dh{display:flex;align-items:center;gap:10px;color:#fff;font-size:17px;font-weight:600}
+.am-dh svg{width:20px;height:20px;flex:none}
+.am-ds{margin-top:8px;color:#c3c7cd;font-size:13.5px;line-height:1.5}
+.am-dbtns{display:flex;justify-content:flex-end;align-items:center;gap:18px;margin-top:20px}
+.am-dbtn{color:#8cb4f9;font-size:13px;font-weight:700;letter-spacing:.05em;padding:8px 12px;border-radius:8px;transition:background .12s}
+.am-dbtn:hover{background:rgba(140,180,249,.14)}
+.am-dbtn.left{margin-right:auto}
+.unsnack{position:fixed;left:50%;bottom:64px;transform:translateX(-50%);background:#fff;color:#111;border-radius:99px;padding:13px 24px;font-size:13.5px;font-weight:600;box-shadow:0 12px 30px rgba(0,0,0,.4);z-index:200;animation:avIn .25s ease both;transition:opacity .45s ease;white-space:nowrap}
+.unsnack.out{opacity:0}
+.custwrap{position:fixed;inset:0;z-index:155;background:rgba(0,0,0,.45)}
+.custsheet{position:fixed;left:50%;transform:translate(-50%,100%);bottom:0;width:min(560px,92%);background:#33343a;border-radius:22px 22px 0 0;padding:24px 26px 34px;z-index:156;transition:transform .35s var(--ease)}
+.custsheet.open{transform:translate(-50%,0)}
+.cs-icowrap{position:relative;width:78px;height:78px;margin:0 auto 20px}
+.cs-icowrap .cs-ico{width:78px;height:78px;display:block}
+.cs-pen{position:absolute;left:-7px;top:-7px;width:27px;height:27px;border-radius:50%;background:#6e7178;display:flex;align-items:center;justify-content:center;color:#fff}
+.cs-pen svg{width:12px;height:12px}
+.cs-lbl{display:block;text-align:right;color:#c3c7cd;font-size:12px;font-weight:600;margin-bottom:6px}
+.cs-in{width:100%;height:44px;border-radius:10px;background:#fff;color:#111;font:inherit;font-size:15px;padding:0 14px;outline:0;border:0}
+.cs-in::selection{background:rgba(90,170,255,.35)}
 
 /* ============ CHROMIUM ============ */
 .chromium{position:absolute;inset:0;display:flex;flex-direction:column;background:var(--cA);animation:avIn .4s var(--ease) both;
@@ -374,7 +403,6 @@ svg.dl-ov.zoom{transition:transform .32s ease,opacity .3s ease;transform:scale(1
 .gd-ico{width:88px;height:88px;flex:none;border-radius:20px;object-fit:cover}
 .gd-hinfo{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
 .gd-name{font-size:21px;font-weight:600;color:#fff;line-height:1.2;overflow-wrap:anywhere}
-/* star rating + other info sit under the game name, right of the icon */
 .gd-sub{display:flex;align-items:center;flex-wrap:wrap;row-gap:5px;color:#fff;font-size:13px}
 .gd-rate{display:flex;align-items:center;gap:6px;color:#f5c443;font-size:13px;font-weight:600}
 .gd-rate svg{width:13px;height:13px;fill:#f5c443;flex:none}
@@ -398,10 +426,9 @@ svg.dl-ov.zoom{transition:transform .32s ease,opacity .3s ease;transform:scale(1
 .gd-sbtn svg{width:15px;height:15px}
 .gd-shottrack{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;touch-action:none}
 .gd-shottrack::-webkit-scrollbar{display:none}
-/* landscape shots: 3 visible at a time, one big equal-size row */
-.gd-shottrack.land .gd-shot{flex:0 0 calc((100% - 16px)/3);aspect-ratio:1052/592;border-radius:10px;object-fit:cover}
-/* portrait shots: 9 visible at a time, equal size */
-.gd-shottrack.port .gd-shot{flex:0 0 calc((100% - 64px)/9);aspect-ratio:592/1052;border-radius:8px;object-fit:cover}
+/* per-shot sizing: portrait = 9 across, landscape = 3 across (equal heights) */
+.gd-shot.p{flex:0 0 calc((100% - 64px)/9);aspect-ratio:592/1052;border-radius:8px;object-fit:cover}
+.gd-shot.l{flex:0 0 calc((100% - 16px)/3);aspect-ratio:1052/592;border-radius:10px;object-fit:cover}
 .gd-shot.ph{background:#1f2228;display:flex;align-items:center;justify-content:center}
 .gd-shot.ph img{width:42%;border-radius:14px;opacity:.55}
 .gd-desc{margin-top:22px}
@@ -415,7 +442,6 @@ svg.dl-ov.zoom{transition:transform .32s ease,opacity .3s ease;transform:scale(1
 .gd-bullets li{color:#d6d9de;font-size:14px;line-height:1.45;margin-bottom:.45em;padding-left:16px;position:relative}
 .gd-bullets li::before{content:"";position:absolute;left:0;top:.55em;width:5px;height:5px;border-radius:50%;background:#8f959d}
 .gd-note{color:#8f959d;font-size:12px;line-height:1.5;margin-top:16px}
-/* more-by-developer / more-in-category sections */
 .gd-more{margin-top:30px}
 .gd-more h3{font-size:16px;font-weight:600;color:#fff;margin-bottom:12px}
 .gd-more-list{display:flex;flex-wrap:wrap;gap:18px 14px}
@@ -740,15 +766,20 @@ function iconInner(app){
   if (app.icon) return imgInner(app.icon, !!app.white, false);
   return uniqSVG(ICONS[app.id] ? ICONS[app.id]() : '');
 }
+/* paused apps get a transparent white overlay on their icon */
+function innerWithPause(app){
+  return iconInner(app) + (app && app.paused
+    ? '<rect x="3" y="3" width="58" height="58" rx="14" fill="rgba(255,255,255,.55)"/>' : '');
+}
 function appIconSVG(app){
-  return `<svg viewBox="0 0 64 64" aria-hidden="true">${iconInner(app)}</svg>`;
+  return `<svg viewBox="0 0 64 64" aria-hidden="true">${innerWithPause(app)}</svg>`;
 }
 function folderIconSVG(f){
   let minis = '';
   const pos = [[7,7],[36,7],[7,36],[36,36]];
   for (let i = 0; i < 4; i++){
     const a = f.apps[i];
-    if (a) minis += `<svg x="${pos[i][0]}" y="${pos[i][1]}" width="21" height="21" viewBox="0 0 64 64" aria-hidden="true">${iconInner(a)}</svg>`;
+    if (a) minis += `<svg x="${pos[i][0]}" y="${pos[i][1]}" width="21" height="21" viewBox="0 0 64 64" aria-hidden="true">${innerWithPause(a)}</svg>`;
     else minis += `<rect x="${pos[i][0]}" y="${pos[i][1]}" width="21" height="21" rx="5.5" fill="rgba(255,255,255,.28)"/>`;
   }
   return `<svg viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="15" fill="rgba(158,162,170,.32)"/>${minis}</svg>`;
@@ -802,13 +833,15 @@ const GADGETS = [
 function gadgetsFolder(){ return { fid: 'gadgets', name: 'Gadgets', apps: GADGETS.slice() }; }
 const REG = {};
 [...BASE, ...DOCK_BASE, ...GADGETS].forEach(a => REG[a.id] = a);
+/* default apps can't be uninstalled */
+const PROTECTED = new Set([...BASE, ...DOCK_BASE, ...GADGETS].map(a => a.id));
 const ICON_FIXES = { 'gd-subzero': SUBZERO_ICON, 'pvz2': PVZ2_ICON, 'clusterduck': CLUSTERDUCK_ICON };
 function fixIcon(id, icon){ return ICON_FIXES[id] || icon; }
 function fixUrl(id, url){ return id === 'pvz2' ? PVZ2_URL : url; }
 let installed = [];
 function appById(id){ return REG[id] || installed.find(a => a.id === id) || null; }
 
-/* ============ per-device persistence ============ */
+/* ============ per-device persistence (labels + paused included) ============ */
 let pages = [new Array(18).fill(null)];
 let dockSlots = new Array(4).fill(null);
 let newBadges = new Set();
@@ -817,13 +850,27 @@ pages[0][0] = BASE[0]; pages[0][1] = BASE[1]; pages[0][2] = gadgetsFolder();
 DOCK_BASE.forEach((a, i) => dockSlots[i] = a);
 
 const DEVKEY = 'mumu.dev.' + devId();
-const serApp = a => a ? (a.url ? { id: a.id, name: a.name, icon: a.icon, url: a.url }
-  : (a.icon ? { id: a.id, name: a.name, tabName: a.tabName || '', icon: a.icon, white: !!a.white } : { id: a.id })) : null;
+const serApp = a => {
+  if (!a) return null;
+  const o = { id: a.id };
+  if (a.url){ o.url = a.url; o.icon = a.icon; o.name = a.name; }
+  else if (a.icon){ o.icon = a.icon; o.white = !!a.white; o.name = a.name; o.tabName = a.tabName || ''; }
+  else if (a.label){ o.name = a.name; }
+  if (a.label) o.label = a.label;
+  if (a.paused) o.paused = true;
+  return o;
+};
 const deApp = d => {
   if (!d || !d.id) return null;
-  if (d.url) return { id: String(d.id), name: String(d.name || 'App'), icon: fixIcon(String(d.id), String(d.icon || '')), url: fixUrl(String(d.id), String(d.url)) };
-  if (REG[d.id]) return REG[d.id];
-  if (d.name) return { id: String(d.id), name: String(d.name), tabName: d.tabName || '', icon: d.icon || '', white: !!d.white };
+  const paused = !!d.paused;
+  if (d.url) return { id: String(d.id), name: String(d.name || 'App'), icon: fixIcon(String(d.id), String(d.icon || '')), url: fixUrl(String(d.id), String(d.url)), paused };
+  if (d.icon) return { id: String(d.id), name: String(d.name || 'App'), tabName: d.tabName || '', icon: String(d.icon), white: !!d.white, label: d.label || '', paused };
+  const base = REG[d.id];
+  if (base){
+    if (d.label && d.label !== base.name) return { ...base, name: d.label, label: d.label, paused };
+    return paused ? { ...base, paused } : base;
+  }
+  if (d.name) return { id: String(d.id), name: String(d.name), label: d.label || '', paused };
   return null;
 };
 const serSlot = s => {
@@ -863,6 +910,7 @@ const wrapEl = $('#pagerwrap'), pagerEl = $('#pager'), trackEl = $('#pagetrack')
       dotsEl = $('#pagedots'), dockEl = $('#dock'), gestEl = $('#gest'), avEl = $('#appview');
 let editing = false, dnd = null, swipe = null, P = null;
 let folderOpen = null, fseq = 0, suppressClick = false, dotsTO = null, fdnd = null;
+let appMenu = null, custSheet = null;
 
 const trackW = () => wrapEl.clientWidth;
 const ORX = 0.08;
@@ -913,7 +961,6 @@ function virtualPage(side){
   }
   return d;
 }
-/* home-screen display names (store names stay unchanged) */
 const HOME_NAMES = { 'temple-run': 'TempleRun', 'temple-run-2': 'TempleRun2' };
 const homeName = s => HOME_NAMES[s.id] || s.name;
 function appBtn(s){
@@ -923,6 +970,11 @@ function appBtn(s){
     b.innerHTML = `<span class="ic">${folderIconSVG(s)}</span><span class="lb"></span>`;
     b.querySelector('.lb').textContent = s.name;
     b.addEventListener('click', () => { if (!suppressClick && !dnd && !fdnd) openFolder(s, b.closest('.cell')); });
+    b.addEventListener('contextmenu', e => {
+      e.preventDefault();
+      const ic = b.querySelector('.ic');
+      openAppMenu(s, ic ? ic.getBoundingClientRect() : b.getBoundingClientRect());
+    });
   } else if (s.dl){
     const g = GAMES.find(x => x.id === s.id);
     const d = DLS[s.id];
@@ -934,7 +986,18 @@ function appBtn(s){
     const lb = b.querySelector('.lb');
     if (newBadges.has(s.id)){ const i = document.createElement('i'); i.className = 'newdot'; lb.appendChild(i); }
     lb.appendChild(document.createTextNode(homeName(s)));
-    b.addEventListener('click', () => { if (!suppressClick && !dnd && !fdnd) openApp(s, b.querySelector('.ic')); });
+    b.addEventListener('click', () => {
+      if (suppressClick || dnd || fdnd) return;
+      const ic = b.querySelector('.ic');
+      const r = ic ? ic.getBoundingClientRect() : b.getBoundingClientRect();
+      if (s.paused){ showPausedDialog(s, r); return; }
+      openApp(s, ic);
+    });
+    b.addEventListener('contextmenu', e => {
+      e.preventDefault();
+      const ic = b.querySelector('.ic');
+      openAppMenu(s, ic ? ic.getBoundingClientRect() : b.getBoundingClientRect());
+    });
   }
   return b;
 }
@@ -942,6 +1005,7 @@ function updateDots(){
   dotsEl.innerHTML = '';
   const box = document.createElement('div');
   box.className = 'dotsin';
+  box.style.width = Math.max(7, pages.length * 14 - 7) + 'px';   /* real width → true centering */
   for (let i = 0; i < pages.length; i++){
     const s = document.createElement('span');
     s.className = 'd' + (i === pageIdx ? ' on' : '');
@@ -1001,15 +1065,30 @@ function exitEdit(){
   setTrackX(false);
   scheduleHideDots();
 }
+/* unified pointer controller:
+   tap = open · hold 500ms stationary = context menu · hold + move = app drag · quick horizontal = page swipe */
 uiEl.addEventListener('pointerdown', e => {
   if (e.button !== 0 || !avEl.hidden || dnd || swipe || fdnd) return;
-  if (e.target.closest('.foldov')) return;
+  if (e.target.closest('.foldov, .appmenu, .am-dlg, .custwrap, .unsnack')) return;
   const appB = e.target.closest('.app');
   const cellB = e.target.closest('.cell');
   P = { x0: e.clientX, y0: e.clientY, lx: e.clientX, ly: e.clientY,
-        t0: performance.now(), mode: 'idle', cell: cellB, holdT: 0 };
+        t0: performance.now(), mode: 'idle', cell: cellB, holdT: 0, onApp: false };
   if (appB && cellB && !appB.classList.contains('dl-cell')){
-    P.holdT = setTimeout(beginAppDrag, 230);
+    P.onApp = true;
+    P.holdT = setTimeout(() => {
+      if (!P || P.mode !== 'idle') return;
+      P.mode = 'menu';
+      const src = slotFromCell(P.cell);
+      const appObj = src && appAt(src);
+      if (appObj){
+        suppressClick = true;
+        setTimeout(() => suppressClick = false, 500);
+        const ic = P.cell.querySelector('.ic');
+        openAppMenu(appObj, ic ? ic.getBoundingClientRect() : P.cell.getBoundingClientRect());
+      }
+      P = null;
+    }, 500);
   }
   addEventListener('pointermove', onPM, true);
   addEventListener('pointerup', onPU, true);
@@ -1020,14 +1099,20 @@ function onPM(e){
   P.lx = e.clientX; P.ly = e.clientY;
   const dx = e.clientX - P.x0, dy = e.clientY - P.y0;
   if (P.mode === 'idle'){
-    if (P.holdT && Math.hypot(dx, dy) > 9){ clearTimeout(P.holdT); P.holdT = 0; }
-    if (Math.abs(dx) > 14 && Math.abs(dx) > Math.abs(dy) && !dnd){
+    const dist = Math.hypot(dx, dy);
+    if (P.holdT && dist > 9){
+      clearTimeout(P.holdT);
+      P.holdT = 0;
+      const slow = performance.now() - P.t0 > 260;
+      if (P.onApp && (slow || Math.abs(dy) > Math.abs(dx))) beginAppDrag();
+    }
+    if (P && P.mode === 'idle' && Math.abs(dx) > 14 && Math.abs(dx) > Math.abs(dy) && !dnd){
       P.mode = 'swipe';
       swipe = { base: baseX() };
       showDots();
     }
   }
-  if (P.mode === 'swipe' && swipe){
+  if (P && P.mode === 'swipe' && swipe){
     const W = trackW();
     let X = swipe.base + dx;
     const min = -(pages.length - 1) * W;
@@ -1037,7 +1122,7 @@ function onPM(e){
     trackEl.style.transform = `translateX(${X}px)`;
     liveDots(Math.round(-X / W));
   }
-  if (P.mode === 'drag' && dnd) dragMove(e);
+  if (P && P.mode === 'drag' && dnd) dragMove(e);
 }
 function onPU(e){
   removeEventListener('pointermove', onPM, true);
@@ -1116,14 +1201,25 @@ function endDrag(){
   exitEdit();
   const appObj = st.app, t = st.target;
   if (t){
-    if (t.dataset.virtual){
+    if (t.dataset.virtual === 'l'){
+      /* left grid = go back to the previous page (no new page) */
       removeApp(st.src, appObj);
-      const idx = +t.dataset.idx;
-      if (t.dataset.virtual === 'l') pages.splice(pageIdx, 0, new Array(18).fill(null));
-      else pages.push(new Array(18).fill(null));
-      const np = t.dataset.virtual === 'l' ? pageIdx : pages.length - 1;
-      pages[np][idx] = appObj;
-      pageIdx = np;
+      const tp = Math.max(0, pageIdx - 1);
+      let idx = +t.dataset.idx;
+      if (pages[tp][idx]) idx = pages[tp].findIndex(s2 => !s2);
+      if (idx === -1){
+        pages.push(new Array(18).fill(null));
+        pageIdx = pages.length - 1;
+        pages[pageIdx][0] = appObj;
+      } else {
+        pages[tp][idx] = appObj;
+        pageIdx = tp;
+      }
+    } else if (t.dataset.virtual === 'r'){
+      removeApp(st.src, appObj);
+      pages.push(new Array(18).fill(null));
+      pages[pages.length - 1][+t.dataset.idx] = appObj;
+      pageIdx = pages.length - 1;
     } else if (t.dataset.area === 'dock'){
       const ti = +t.dataset.idx;
       const cur = dockSlots[ti];
@@ -1158,8 +1254,16 @@ function endDrag(){
     }
   }
   normalizeFolders();
+  removeEmptyPages();
   persistDev();
   renderHome();
+}
+function removeEmptyPages(){
+  const cur = pages[pageIdx];
+  pages = pages.filter(p => p.some(s => s));
+  if (!pages.length) pages = [new Array(18).fill(null)];
+  const ni = pages.indexOf(cur);
+  pageIdx = ni > -1 ? ni : Math.min(pageIdx, pages.length - 1);
 }
 function removeApp(src, appObj){
   if (src.kind === 'page'){
@@ -1242,8 +1346,13 @@ function buildFolderContent(){
         b.addEventListener('click', () => {
           if (suppressClick || dnd || fdnd) return;
           const r = b.querySelector('.ic').getBoundingClientRect();
+          if (a.paused){ showPausedDialog(a, r); return; }
           closeFolder(false);
           openAppFromRect(a, r);
+        });
+        b.addEventListener('contextmenu', e => {
+          e.preventDefault();
+          openAppMenu(a, b.querySelector('.ic').getBoundingClientRect());
         });
         b.addEventListener('pointerdown', e => folderAppPD(e, a));
         w.appendChild(b);
@@ -1342,13 +1451,24 @@ function closeFolder(anim){
     setTimeout(() => fo.ov.remove(), 340);
   } else fo.ov.remove();
 }
+/* hold 500ms = menu · hold + move = drag out · quick move = click */
 function folderAppPD(e, a){
   if (e.button !== 0 || dnd || fdnd) return;
   const fo = folderOpen; if (!fo) return;
-  const sx = e.clientX, sy = e.clientY;
-  let started = false, handedOff = false;
+  const btn = e.target.closest('.foldapp');
+  const icR = btn ? btn.querySelector('.ic').getBoundingClientRect() : null;
+  const sx = e.clientX, sy = e.clientY, t0 = performance.now();
+  let started = false, handedOff = false, menuFired = false;
   const fd = { app: a, folder: fo.folder, ov: fo.ov, box: fo.box, ghost: null, target: null, inside: true };
   const holdT = setTimeout(() => {
+    if (started) return;
+    started = true; menuFired = true;
+    fdnd = fd;
+    suppressClick = true;
+    setTimeout(() => suppressClick = false, 500);
+    openAppMenu(a, icR);
+  }, 500);
+  const startDrag = () => {
     started = true;
     fdnd = fd;
     suppressClick = true;
@@ -1359,13 +1479,18 @@ function folderAppPD(e, a){
     g.style.left = sx + 'px'; g.style.top = sy + 'px';
     document.body.appendChild(g);
     fd.ghost = g;
-  }, 230);
+  };
   const clearFoldHover = () => $$('.fslot.fdrop', fd.ov).forEach(s => s.classList.remove('fdrop'));
   const move = ev => {
-    if (!started) {
-      if (Math.hypot(ev.clientX - sx, ev.clientY - sy) > 9){ clearTimeout(holdT); cleanup(); }
+    if (!started){
+      const dist = Math.hypot(ev.clientX - sx, ev.clientY - sy);
+      if (dist > 9){
+        if (performance.now() - t0 > 260) startDrag();
+        else { clearTimeout(holdT); cleanup(); }
+      }
       return;
     }
+    if (menuFired) return;
     if (!fd.inside) return;
     fd.ghost.style.left = ev.clientX + 'px';
     fd.ghost.style.top = ev.clientY + 'px';
@@ -1398,6 +1523,7 @@ function folderAppPD(e, a){
     removeEventListener('pointerup', up, true);
     clearTimeout(holdT);
     if (!started) return;
+    if (menuFired){ fdnd = null; return; }
     if (fd.inside && folderOpen){
       clearFoldHover();
       if (fd.target){
@@ -1430,8 +1556,181 @@ function folderAppPD(e, a){
   addEventListener('pointerup', up, true);
 }
 
+/* ============ app context menu / uninstall / pause / customize ============ */
+const AM_IC_INFO = `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="10" cy="10" r="7.2"/><line x1="10" y1="8.8" x2="10" y2="14" stroke-linecap="round"/><circle cx="10" cy="6" r="1.1" fill="currentColor" stroke="none"/></svg>`;
+const AM_IC_TRASH = `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5 H16"/><path d="M8 5.5 V4 A1.4 1.4 0 0 1 9.4 2.6 H10.6 A1.4 1.4 0 0 1 12 4 V5.5"/><path d="M5.5 5.5 L6.2 17 A1.6 1.6 0 0 0 7.8 18.5 H12.2 A1.6 1.6 0 0 0 13.8 17 L14.5 5.5"/><line x1="8.7" y1="9" x2="9" y2="15"/><line x1="11.3" y1="9" x2="11" y2="15"/></svg>`;
+const AM_IC_PEN = `<svg viewBox="0 0 20 20" aria-hidden="true"><g transform="rotate(45 10 10)" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><rect x="7.6" y="2.8" width="4.8" height="3.4" rx="1.1"/><path d="M7.6 6.2 H12.4 V13.4 H7.6 Z"/><path d="M7.6 13.4 H12.4 L10 17.4 Z" fill="currentColor" stroke="none"/></g></svg>`;
+const AM_IC_HOUR = `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 2.5 H15 M5 17.5 H15"/><path d="M6 2.5 V5 C6 8 10 8.6 10 10 C10 11.4 6 12 6 15 V17.5"/><path d="M14 2.5 V5 C14 8 10 8.6 10 10 C10 11.4 14 12 14 15 V17.5"/></svg>`;
+
+function openAppMenu(app, rect){
+  closeAppMenu();
+  const prot = PROTECTED.has(app.id);
+  const m = document.createElement('div');
+  m.className = 'appmenu';
+  m.innerHTML = `
+    <button class="am-it" data-a="info">${AM_IC_INFO}<span>App info</span></button>
+    <button class="am-it${prot ? ' dis' : ''}" data-a="uninstall">${AM_IC_TRASH}<span>Uninstall</span></button>
+    <button class="am-it" data-a="customize">${AM_IC_PEN}<span>Customize</span></button>
+    <button class="am-it" data-a="pause">${AM_IC_HOUR}<span>Pause app</span></button>`;
+  document.body.appendChild(m);
+  const r = rect || { left: innerWidth / 2, top: innerHeight / 2, bottom: innerHeight / 2, width: 0, height: 0 };
+  let left = Math.max(8, Math.min(r.left, innerWidth - m.offsetWidth - 8));
+  let top = r.bottom + 6;
+  if (top + m.offsetHeight > innerHeight - 8) top = Math.max(8, r.top - m.offsetHeight - 6);
+  m.style.left = left + 'px';
+  m.style.top = top + 'px';
+  m.addEventListener('click', e => {
+    const b = e.target.closest('.am-it');
+    if (!b) return;
+    closeAppMenu();
+    const a = b.dataset.a;
+    if (a === 'info') { /* arrives with the Settings app later */ }
+    if (a === 'uninstall' && !prot) openUninstallDialog(app);
+    if (a === 'customize') openCustomizeSheet(app);
+    if (a === 'pause') openPauseDialog(app);
+  });
+  appMenu = m;
+}
+function closeAppMenu(){ if (appMenu){ appMenu.remove(); appMenu = null; } }
+document.addEventListener('mousedown', e => {
+  if (appMenu && !e.target.closest('.appmenu')) closeAppMenu();
+});
+
+function openUninstallDialog(app){
+  const d = document.createElement('div');
+  d.className = 'am-dlg';
+  d.innerHTML = `<div class="am-dlgbox">
+    <div class="am-dh"></div>
+    <p class="am-ds">Do you want to uninstall this app?</p>
+    <div class="am-dbtns">
+      <button class="am-dbtn" data-b="cancel">CANCEL</button>
+      <button class="am-dbtn" data-b="ok">OK</button>
+    </div></div>`;
+  d.querySelector('.am-dh').textContent = app.name;
+  d.addEventListener('mousedown', e => { if (e.target === d) d.remove(); });
+  d.querySelector('[data-b="cancel"]').addEventListener('click', () => d.remove());
+  d.querySelector('[data-b="ok"]').addEventListener('click', () => { d.remove(); uninstallApp(app); });
+  document.body.appendChild(d);
+}
+function uninstallApp(app){
+  const name = app.name;
+  const d = DLS[app.id];
+  if (d){ clearInterval(d.timer); clearTimeout(d.timer); delete DLS[app.id]; }
+  installed = installed.filter(a => a.id !== app.id);
+  newBadges.delete(app.id);
+  const purge = arr => arr.forEach((s, i) => { if (s && !s.fid && s.id === app.id) arr[i] = null; });
+  pages.forEach(purge); purge(dockSlots);
+  pages.forEach(p => p.forEach(s => { if (s && s.fid) s.apps = s.apps.filter(a => a.id !== app.id); }));
+  normalizeFolders();
+  removeEmptyPages();
+  pageIdx = Math.max(0, Math.min(pageIdx, pages.length - 1));
+  persistDev();
+  renderHome();
+  showUninstalledSnack(name);
+}
+let unsnackTO = null;
+function showUninstalledSnack(name){
+  const old = document.querySelector('.unsnack'); if (old) old.remove();
+  clearTimeout(unsnackTO);
+  const s = document.createElement('div');
+  s.className = 'unsnack';
+  s.textContent = 'Uninstalled ' + name;
+  document.body.appendChild(s);
+  const kill = () => { s.classList.add('out'); setTimeout(() => s.remove(), 480); };
+  s.addEventListener('click', kill);
+  unsnackTO = setTimeout(kill, 3000);
+}
+function openPauseDialog(app){
+  const d = document.createElement('div');
+  d.className = 'am-dlg';
+  d.innerHTML = `<div class="am-dlgbox">
+    <div class="am-dh">${AM_IC_HOUR}<span></span></div>
+    <p class="am-ds"></p>
+    <div class="am-dbtns">
+      <button class="am-dbtn" data-b="cancel">CANCEL</button>
+      <button class="am-dbtn" data-b="ok">PAUSE</button>
+    </div></div>`;
+  d.querySelector('.am-dh span').textContent = 'Pause ' + app.name + '?';
+  d.querySelector('.am-ds').textContent = 'Notifications for ' + app.name + ' will be paused.';
+  d.addEventListener('mousedown', e => { if (e.target === d) d.remove(); });
+  d.querySelector('[data-b="cancel"]').addEventListener('click', () => d.remove());
+  d.querySelector('[data-b="ok"]').addEventListener('click', () => {
+    d.remove();
+    app.paused = true;
+    persistDev();
+    renderHome();
+    if (folderOpen) buildFolderContent();
+  });
+  document.body.appendChild(d);
+}
+function showPausedDialog(app, rect){
+  const d = document.createElement('div');
+  d.className = 'am-dlg';
+  d.innerHTML = `<div class="am-dlgbox">
+    <div class="am-dh">${AM_IC_HOUR}<span>App paused</span></div>
+    <p class="am-ds"></p>
+    <div class="am-dbtns">
+      <button class="am-dbtn left" data-b="unpause">UNPAUSE APP</button>
+      <button class="am-dbtn" data-b="ok">OK</button>
+    </div></div>`;
+  d.querySelector('.am-ds').textContent = app.name + ' was directly paused from the launcher';
+  d.addEventListener('mousedown', e => { if (e.target === d) d.remove(); });
+  d.querySelector('[data-b="ok"]').addEventListener('click', () => d.remove());
+  d.querySelector('[data-b="unpause"]').addEventListener('click', () => {
+    d.remove();
+    app.paused = false;
+    persistDev();
+    renderHome();
+    if (folderOpen) buildFolderContent();
+    if (rect) openAppFromRect(app, rect);
+  });
+  document.body.appendChild(d);
+}
+function openCustomizeSheet(app){
+  if (custSheet) return;
+  const wrap = document.createElement('div');
+  wrap.className = 'custwrap';
+  wrap.innerHTML = `
+    <div class="custsheet">
+      <div class="cs-icowrap">
+        <span class="cs-ico">${appIconSVG(app)}</span>
+        <button class="cs-pen" aria-label="Change icon">${AM_IC_PEN}</button>
+      </div>
+      <label class="cs-lbl">Label</label>
+      <input class="cs-in" maxlength="32" spellcheck="false" aria-label="App name">
+    </div>`;
+  const inp = wrap.querySelector('.cs-in');
+  inp.value = app.name;
+  document.body.appendChild(wrap);
+  custSheet = wrap;
+  const sh = wrap.querySelector('.custsheet');
+  requestAnimationFrame(() => requestAnimationFrame(() => sh.classList.add('open')));
+  const commit = () => {
+    const v = inp.value.trim();
+    if (v && v !== app.name){
+      app.name = v;
+      app.label = v;
+      persistDev();
+      renderHome();
+      if (folderOpen) buildFolderContent();
+    }
+  };
+  inp.addEventListener('keydown', e => { if (e.key === 'Enter'){ e.preventDefault(); inp.blur(); } });
+  inp.addEventListener('blur', commit);
+  wrap.addEventListener('mousedown', e => { if (e.target === wrap){ commit(); closeCustomizeSheet(); } });
+  setTimeout(() => inp.focus(), 260);
+}
+function closeCustomizeSheet(){
+  if (!custSheet) return;
+  const w = custSheet;
+  custSheet = null;
+  w.querySelector('.custsheet').classList.remove('open');
+  setTimeout(() => w.remove(), 380);
+}
+
 /* ============ app open animation + view switching ============ */
 function openAppFromRect(app, r){
+  if (app.paused){ showPausedDialog(app, r); return; }
   const ov = document.createElement('div');
   ov.className = 'appanim';
   ov.innerHTML = `<div class="aa-ic">${app.fid ? folderIconSVG(app) : appIconSVG(app)}</div>`;
@@ -1987,6 +2286,10 @@ function renderChContent(ent){
   const fr = document.createElement('iframe');
   fr.className = 'ch-frame';
   fr.src = ent.url;
+  /* best-effort: no allow-popups, so target=_blank links can't escape into the
+     real browser (cross-origin iframes can't be redirected into a chromium tab —
+     the browser blocks reading their URLs) */
+  fr.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms');
   fr.addEventListener('load', () => setTimeout(() => {
     let href = null;
     try { href = fr.contentWindow.location.href; } catch (e) { href = null; }
@@ -2134,7 +2437,7 @@ function openTabsMenu(){
       <span class="tm-prev">${ent.type === 'newtab'
         ? `<span class="tm-g"><img src="${ENGINES[CH.engine].logo}" alt="" draggable="false"></span>`
         : ent.type === 'blank' ? ''
-        : `<iframe src="${ent.url.replace(/"/g, '&quot;')}" loading="lazy" tabindex="-1"></iframe>`}</span>`;
+        : `<iframe src="${ent.url.replace(/"/g, '&quot;')}" loading="lazy" tabindex="-1" sandbox="allow-scripts allow-same-origin"></iframe>`}</span>`;
     box.querySelector('.tm-name').textContent = entTitle(ent);
     box.addEventListener('click', ev => {
       if (ev.target.closest('.tm-x')){ chCloseAt(i); rebuildTabsMenu(); return; }
@@ -2506,10 +2809,11 @@ const DETAILS = {
       'https://play-lh.googleusercontent.com/vsUrg0WIqCLmuyet-RU4rDQVavNXSyYbCOsC16QC048p2i51Px8ObVBctSp9ELgrO-06jWuaVtBm6_7wMFZuJQ=w1052-h592-rw',
       'https://play-lh.googleusercontent.com/4j6fhqS7OYdX4sQWs8UuVERR-remUhE0uTjsxE0SmgQXJ-yEfH_1AAI_mcIR9BRRj3vv1RC0DwTwvwBY48UerQ=w1052-h592-rw',
       'https://play-lh.googleusercontent.com/s8W50dJpQKzDzFhx_I0F_g-JD1-RhKg4mnMHIsJfG6I7zgmfW43hkOFgKb7eI_MRNvGdr_qLvVp3MM5PL6fmIG8=w1052-h592-rw'
-    ]
+    ],
+    portrait: true
   },
   'temple-run-2': {
-    size: '122.5MB', dev: 'Imangi Studios', ver: '—', upd: '—',
+    size: '122.5MB', dev: 'Imangi Studios', ver: '1.133.0', upd: '2026-06-11',
     desc: [
       'Temple Run 2: Endless Escape is the sequel to the smash hit endless running game — an endless runner that blends action, strategy and adventure as you run for your life!',
       'Run, jump, turn and slide your way through beautiful but dangerous new worlds, racing to escape the demon monkeys while dodging cliffs, mines, zip lines and forests.'
@@ -2522,10 +2826,18 @@ const DETAILS = {
       'Play offline anywhere',
       'Compete with players around the world'
     ],
-    shots: []
+    shots: [
+      'https://play-lh.googleusercontent.com/L2yw4jhP-SoYJj8pSPcsLwoIAobrE8j3d3x3irOtDKvXYweA6YR_qyAglPvD9Kz-FfbM4k_nIgPVF8Orig5F=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/uAiz2eWQ69NTd9-P7063HiTuT9CTy3gnzJ_LY9IeLF8J649XHZcwfT6VgZqjlf61_qeGH3mjAkOwXbec9-HdHQ=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/Gj4ejwVL2U6Izo_ldmmlanOuNl7s_g6O4Plf2iZ3429g5OR-NpZhVJgXJu8-37YR2p3HNqFPRe0eqvdyghCb=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/-rLOCoLoqGm5tvjrZx-vBhtNmLf6RG2lTK0cIVW10Oc2Rjeli8v9s7cCWVDYu0Luxwm1mVoKUM_5LKMiC2d66Q=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/-p5LmyTf_xCIBHuqr919jSL4z2KpTgfYskPpGFRkAng2w-ZJrzsyD2nVLxssmqpOYfeFoGG0hRKeRPzmq5YF_g=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/d-VcbOJnVJ_LBzbQSr2b4FZaEgFcQWQ1GX7xaqz44dtBEIENHjurLCTpwpMnfnWcUUM1JHjZkOjmZDVz3q6MdFg=w1052-h592-rw'
+    ],
+    portrait: true
   },
   'roblox': {
-    size: '182.3MB', dev: 'Roblox Corporation', ver: '—', upd: '—',
+    size: '182.3MB', dev: 'Roblox Corporation', ver: '2.737.1584', upd: '2026-05-29',
     desc: [
       'Roblox is the ultimate virtual universe that lets you create, share experiences with friends, and be anything you can imagine.',
       'Join millions of people and explore an infinite variety of immersive experiences created by a global community!'
@@ -2536,10 +2848,20 @@ const DETAILS = {
       'Hang out with friends around the world',
       'Create your own experiences',
       'Fully cross-platform support'
-    ], shots: []
+    ],
+    shots: [
+      'https://play-lh.googleusercontent.com/bHynJCCjTZyc9Lqqx45O5GLX3sWAupY9mSqYn7wndPkwuB4A28txE7NKIpteQ_4t1kGvsRWKRuYiToYTYLtVSg=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/Ob7DYuH9C0lvBrjfj0snNOypxuz-hW_g1P9qYSSvdktRXp_rliceDx2fy0IZbc8vka48CN5gVyC3BGUj1kgaAg=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/X8jRVyZ3V1VDy7hOKV4wLV8ZVW2nDJ8V8ag2u2t6tuackvt2M91N9Sku99YStcURNhvCo3zW4of4p9gutOK-21Y=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/MdT-QX8pmIWXfCFohT7XmVTFt8-Q-NDu1ffUGk97CfRUJMoOBX_rs1ALm5SRY50HMLGU46y2a54I9YeK5xeCDw=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/oUTt01IkQ8ffCvOXoKfp2skGRvBIpWr1vqICL94sV_C7MBZvc_kz5EhvyjdBv6wHhy9uHgtCUOVnALV_y_xP=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/SdwaisETMSRSX2xxsgH2WQl4pIpbTpLttpJycHCrpHtIYdbwaxEPqG6tV3OpQa0m1OU7q44FIIoqtkTIfJCn9w=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/ugC1303q4RAPJFZa7g9YD68c5iZCHM1tOuUsR5l32YWbyYLcvVntiarOIWzlNzYRSFA44RELSh85u5mcCJlmJw=w1052-h592-rw'
+    ],
+    portrait: true
   },
   'subway': {
-    size: '169.1MB', dev: 'SYBO Games', ver: '—', upd: '—',
+    size: '169.1MB', dev: 'SYBO Games', ver: '3.66.1', upd: '2026-06-05',
     desc: [
       'DASH as fast as you can! Dodge the oncoming trains and buses and help Jake, Tricky and Fresh escape from the grumpy Inspector and his dog!',
       'Collect coins, grab power ups, and see how far you can run through the endless subway!'
@@ -2549,10 +2871,21 @@ const DETAILS = {
       'Collect coins and grab power ups',
       'Unlock new characters and hoverboards',
       'Challenge and help your friends'
-    ], shots: []
+    ],
+    shots: [
+      'https://play-lh.googleusercontent.com/0WDSfcGVkNLrbllx6z5GaNVA5ubkuBy5xBxfD8se188KrSqO2c-AJMRguiJMyacj5nx58-sIlJU7IXbYz18CyA=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/LR8_LkjuVSenDQi1AIhZQVpNXXvdWb5eRWoza8OrpxM0I4iT6-MH7GeZA9_k1ngB7j8wEZaoT76Lsh4nA4CaYw=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/r1EF2Yo2IQUeXIvAB-ZQe6-7PNGc_sIEeUKMhcpGi7AUpvtiZruKU5EVoSQj0JeAZ5nt4AXAp5J692rX1qS54A=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/J_f57RMIePk00kPk314eu71k2Orz9aCU6QnKyksO0j9PjikecNjGmRPUvm2QBi7aNteCuLcXDpePgInLrtYL=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/78jx66c3X3FrETBI9HegaXUHEHaK1cdEEmrkl15FHcMKIZfwVE9A-uIEc78bgd4nOf80RN4LHriANXEHkcwU=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/t0eJqWkGnQXIkNoQF7lN9gDnu2W1E0Mg4n0HE-gepA3CP-caz4-Mg9P-hQ4mybEVKvU1_CxlhfOHrfbELZIAug=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/GvkjG0pfT-3DNWzeQvh6urhGkx99Cmhe_vHDQAvbGqxNAGXgHrud9_BOxhwUttV26jo8fx0oSP7EGAaRVVyx6g=w1052-h592-rw'
+    ],
+    portrait: true,
+    landFrom: 5
   },
   'pvz2': {
-    size: '983.4MB', dev: 'ELECTRONIC ARTS', ver: '—', upd: '—',
+    size: '983.4MB', dev: 'ELECTRONIC ARTS', ver: '13.3.1', upd: '2026-06-05',
     desc: [
       'Play the hit action-strategy adventure where you meet, greet, and defeat legions of hilarious zombies. Amass an army of amazing plants, charge them with plant food, and devise the ultimate plan to protect your brain!',
       'Collect hundreds of plants and zombies, power up your attacks, journey through 11 wild worlds, and go head-to-head with other players in endless action-strategy adventure.'
@@ -2565,7 +2898,16 @@ const DETAILS = {
       'Earn keys to unlock brain-bending puzzles'
     ],
     note: 'This game offers optional in-app purchases of virtual currency that can be used to acquire virtual in-game items. By downloading this game, you agree to the EA User Agreement.',
-    shots: []
+    shots: [
+      'https://play-lh.googleusercontent.com/OHft5X9qWhMNQWczBLPBndKX538-4AEY0zVCk9OC48WVtRheHbNsrmTkjc4wzRlcdl1fvOvQId5iYp4E8DFOAaI=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/3f4wP-Lz1eH9NEAakJWc5_TyxRGJioI9d2-tsaDfzwN4nYFOXmYxN3ouL062xIRgFKmRnNR3J9ZVLPn7n9wE=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/HP5sdaRPLycx-Thvl-fITcQslG8vndYBSYYA2DChtwIwiWNHY6iPPXWm6cY6l0ZkKdCnwa84NBrT8sd-F21rR0k=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/-mb5IuGFGo_Gqq4C9d991HQZkYCasDVMNDLTRuADCl0X7pfgTeSGoVvqvSAicIuvCuHABo6utgaQV_po3VuVRw=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/wdjauiSQhPF3Cf_1xSlklZnUsypumbqemvpU_uvUGupSSY2nMoGWVWxILJRizWZvRp6fVvgVIc14m0pVboEPqg=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/Zl9SemIPC0S7J5POFQOoxhr-ksQeQLTE4NhCYwVf0HKelzTYkXD7daqE1UC-BLSFbNIAZpywK-SnHFFK7s66=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/UmCFi1yRjEtDVQbGx-pE5679wd_SksVQviVWnckyF04xd410as6KS_JBOSXVjGVGXcaW3T5hYP1WodYguKlG4Q=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/LvcDaNvHEBind3S4GqYBP18n_ENiungU4nAW5eDMOe5_amOiRW6tXUewpH4hTi9Qwu6Y3IMmN2crbGm9HUcu0A=w1052-h592-rw'
+    ]
   },
   'clusterduck': {
     size: '131.8MB', dev: 'PIKPOK', ver: '2.8.1', upd: '2026-06-12',
@@ -2584,8 +2926,7 @@ const DETAILS = {
     shots: []
   }
 };
-/* clusterduck: 6 images repeated twice = 12 portrait shots;
-   temple run + clusterduck use the 9-across portrait strip */
+/* clusterduck: 6 images repeated twice = 12 portrait shots */
 (() => {
   const cd = [
     'https://play-lh.googleusercontent.com/fSs8MVpW_gTR2p2YsgR4OSkpLNOiSvUh3Lsmf4aPxDtF8Ytfb0e7MIrNm05Agq-YiYuZpmjV9DkVHO6Wr1nv-Q=w1052-h592-rw',
@@ -2596,7 +2937,6 @@ const DETAILS = {
     'https://play-lh.googleusercontent.com/AZjSPoh61EuzVTLDd3392hvY-q-Q4BHBwF4a1R4GZJeEdZNhexEzJql5dY6OijAbpSgMj66U8sXQ5jyxH8E8=w1052-h592-rw'
   ];
   DETAILS['clusterduck'].shots = cd.concat(cd);
-  DETAILS['temple-run'].portrait = true;
   DETAILS['clusterduck'].portrait = true;
 })();
 
@@ -2648,14 +2988,14 @@ function miniCard(x){
   b.addEventListener('click', () => {
     if (!gdOpen) return;
     const cur = gdOpen.root;
-    gdOpen = null;                        /* release guard so the new page can open */
-    cur.querySelector('.gd-back').click(); /* full cleanup + slide-out */
+    gdOpen = null;
+    cur.querySelector('.gd-back').click();
     setTimeout(() => openGameDetail(x), 150);
   });
   return b;
 }
 
-/* ---- game detail page (slides up from the bottom) ---- */
+/* ---- game detail page ---- */
 function openGameDetail(g){
   if (gdOpen) return;
   const d = DETAILS[g.id] || {};
@@ -2718,25 +3058,26 @@ function openGameDetail(g){
   const track = root.querySelector('.gd-shottrack');
   const shots = d.shots || [];
   const portrait = !!d.portrait;
-  track.classList.add(portrait ? 'port' : 'land');
+  const landFrom = d.landFrom != null ? d.landFrom : (portrait ? shots.length : -1);
+  const shotKind = i => (i < landFrom) ? 'p' : 'l';
   if (shots.length){
-    shots.forEach(src => {
+    shots.forEach((src, i) => {
       const im = document.createElement('img');
-      im.className = 'gd-shot';
+      im.className = 'gd-shot ' + shotKind(i);
       im.src = src;
       im.draggable = false;
       im.alt = '';
       track.appendChild(im);
     });
   } else {
+    const phk = portrait ? 'p' : 'l';
     for (let i = 0; i < (portrait ? 9 : 3); i++){
       const ph = document.createElement('div');
-      ph.className = 'gd-shot ph';
+      ph.className = 'gd-shot ph ' + phk;
       ph.innerHTML = `<img src="${g.icon}" alt="" draggable="false">`;
       track.appendChild(ph);
     }
   }
-  /* More Games by [Developer] Limited (same developer, excluding this game) */
   const dev = d.dev;
   const mdev = root.querySelector('.gd-mdev');
   if (dev && dev !== '—'){
@@ -2747,7 +3088,6 @@ function openGameDetail(g){
       sameDev.forEach(x => mdev.querySelector('.gd-more-list').appendChild(miniCard(x)));
     }
   }
-  /* More [Category] Games (excluding same-developer games to avoid duplicates) */
   const mcat = root.querySelector('.gd-mcat');
   const sameCat = GAMES.filter(x => x.id !== g.id && x.cat === g.cat && (DETAILS[x.id] || {}).dev !== dev);
   if (sameCat.length){
@@ -2826,7 +3166,7 @@ function openGameDetail(g){
     if (sDrag.horiz === null){
       if (Math.abs(dx) > 6 || Math.abs(dy) > 6){
         sDrag.horiz = Math.abs(dx) > Math.abs(dy);
-        if (!sDrag.horiz) sDrag = null;      /* vertical → page scroll */
+        if (!sDrag.horiz) sDrag = null;
       }
       return;
     }
@@ -2990,6 +3330,7 @@ function cancelInstall(g){
   delete DLS[g.id];
   if (pages[d.slot.page] && pages[d.slot.page][d.slot.idx] && pages[d.slot.page][d.slot.idx].dl)
     pages[d.slot.page][d.slot.idx] = null;
+  removeEmptyPages();
   renderHome();
   renderRow(g);
 }
@@ -3207,7 +3548,6 @@ function buildStore(){
       }
       return;
     }
-    /* clicking anywhere else on an app row opens its detail page */
     const row = e.target.closest('.sr');
     if (row){
       const g = GAMES.find(x => x.id === row.dataset.g);
@@ -3321,6 +3661,9 @@ addEventListener('keydown', e => {
     if (k === 'w'){ e.preventDefault(); closeChTab(curArr().cur); return; }
   }
   if (e.key !== 'Escape') return;
+  if (custSheet){ closeCustomizeSheet(); return; }
+  if (document.querySelector('.am-dlg')){ document.querySelector('.am-dlg').remove(); return; }
+  if (appMenu){ closeAppMenu(); return; }
   if (chRoot && chRoot.querySelector('.ch-panel')){
     chRoot.querySelectorAll('.ch-panel').forEach(p => p.remove());
     return;
