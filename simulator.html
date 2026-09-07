@@ -368,21 +368,17 @@ svg.dl-ov.zoom{transition:transform .32s ease,opacity .3s ease;transform:scale(1
 .gd-back{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;transition:background .13s}
 .gd-back:hover{background:rgba(255,255,255,.10)}
 .gd-back svg{width:20px;height:20px}
-.gd-scroll{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;padding:64px 26px 34px;scrollbar-width:thin}
-.gd-col{max-width:660px;margin:0 auto}
-.gd-head{display:flex;align-items:flex-start;gap:18px}
+.gd-scroll{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;padding:64px 20px 34px;scrollbar-width:thin}
+.gd-col{width:100%;max-width:none}
+.gd-head{display:flex;align-items:flex-start;gap:16px}
 .gd-ico{width:88px;height:88px;flex:none;border-radius:20px;object-fit:cover}
-.gd-hinfo{flex:1;min-width:0;display:flex;flex-direction:column;gap:5px}
+.gd-hinfo{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
 .gd-name{font-size:21px;font-weight:600;color:#fff;line-height:1.2;overflow-wrap:anywhere}
+/* star rating + other info sit under the game name, right of the icon */
+.gd-sub{display:flex;align-items:center;flex-wrap:wrap;row-gap:5px;color:#fff;font-size:13px}
 .gd-rate{display:flex;align-items:center;gap:6px;color:#f5c443;font-size:13px;font-weight:600}
 .gd-rate svg{width:13px;height:13px;fill:#f5c443;flex:none}
-.gd-ibtn{height:40px;padding:0 26px;border-radius:9px;font-size:14px;font-weight:700;flex:none;margin-left:8px;transition:filter .15s}
-.gd-ibtn.install,.gd-ibtn.play{background:#3f8fdd;color:#fff}
-.gd-ibtn.cancel{background:#0b0c10;color:#5db4f0}
-.gd-ibtn:hover{filter:brightness(1.1)}
-.gd-meta{display:flex;align-items:center;flex-wrap:wrap;row-gap:6px;font-size:13px;color:#fff;margin-top:14px}
-.gd-mv{font-size:13px}
-.gd-meta .dv{width:1px;height:13px;background:rgba(255,255,255,.55);margin:0 11px}
+.gd-sub .dv{width:1px;height:13px;background:rgba(255,255,255,.55);margin:0 11px}
 .gd-other{display:flex;align-items:center;gap:5px;color:#fff;font-size:13px;font-weight:600;padding:3px 4px;border-radius:6px;transition:background .13s}
 .gd-other:hover{background:rgba(255,255,255,.10)}
 .gd-other .chev,.gd-va .chev{display:flex;transition:transform .25s var(--ease)}
@@ -390,15 +386,22 @@ svg.dl-ov.zoom{transition:transform .32s ease,opacity .3s ease;transform:scale(1
 .gd-oinfo.open{grid-template-rows:1fr}
 .gd-oinfo>div{overflow:hidden;min-height:0}
 .gd-obox{margin:12px 0 2px;background:#33353b;border-radius:10px;padding:12px 16px;display:flex;flex-direction:column;gap:7px;color:#b9bdc3;font-size:13px}
+.gd-ibtn{height:40px;padding:0 26px;border-radius:9px;font-size:14px;font-weight:700;flex:none;margin-left:8px;transition:filter .15s}
+.gd-ibtn.install,.gd-ibtn.play{background:#3f8fdd;color:#fff}
+.gd-ibtn.cancel{background:#0b0c10;color:#5db4f0}
+.gd-ibtn:hover{filter:brightness(1.1)}
 .gd-h2{font-size:18px;font-weight:600;color:#fff;margin:26px 0 12px}
 .gd-shotbar{display:flex;justify-content:flex-end;gap:8px;margin-bottom:10px}
 .gd-sbtn{width:34px;height:34px;border-radius:50%;background:#1d3a63;color:#fff;display:flex;align-items:center;justify-content:center;transition:opacity .15s,background .15s}
 .gd-sbtn:hover{background:#27508c}
 .gd-sbtn.dis{opacity:.35;pointer-events:none}
 .gd-sbtn svg{width:15px;height:15px}
-.gd-shottrack{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;touch-action:none}
+.gd-shottrack{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;touch-action:none}
 .gd-shottrack::-webkit-scrollbar{display:none}
-.gd-shot{flex:0 0 30.5%;aspect-ratio:1052/592;border-radius:10px;object-fit:cover}
+/* landscape shots: 3 visible at a time, one big equal-size row */
+.gd-shottrack.land .gd-shot{flex:0 0 calc((100% - 16px)/3);aspect-ratio:1052/592;border-radius:10px;object-fit:cover}
+/* portrait shots: 9 visible at a time, equal size */
+.gd-shottrack.port .gd-shot{flex:0 0 calc((100% - 64px)/9);aspect-ratio:592/1052;border-radius:8px;object-fit:cover}
 .gd-shot.ph{background:#1f2228;display:flex;align-items:center;justify-content:center}
 .gd-shot.ph img{width:42%;border-radius:14px;opacity:.55}
 .gd-desc{margin-top:22px}
@@ -408,10 +411,18 @@ svg.dl-ov.zoom{transition:transform .32s ease,opacity .3s ease;transform:scale(1
 .gd-bullets{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s var(--ease)}
 .gd-bullets.open{grid-template-rows:1fr}
 .gd-bullets>div{overflow:hidden;min-height:0}
-.gd-bullets ul{list-style:none;padding-top:14px}
+.gd-bullets ul{list-style:none}
 .gd-bullets li{color:#d6d9de;font-size:14px;line-height:1.45;margin-bottom:.45em;padding-left:16px;position:relative}
 .gd-bullets li::before{content:"";position:absolute;left:0;top:.55em;width:5px;height:5px;border-radius:50%;background:#8f959d}
 .gd-note{color:#8f959d;font-size:12px;line-height:1.5;margin-top:16px}
+/* more-by-developer / more-in-category sections */
+.gd-more{margin-top:30px}
+.gd-more h3{font-size:16px;font-weight:600;color:#fff;margin-bottom:12px}
+.gd-more-list{display:flex;flex-wrap:wrap;gap:18px 14px}
+.gd-mini{width:86px;display:flex;flex-direction:column;align-items:center;gap:7px}
+.gd-mini .mi{width:56px;height:56px;border-radius:13px;overflow:hidden}
+.gd-mini .mi img{width:100%;height:100%;object-fit:cover}
+.gd-mini span{font-size:11.5px;color:#c6cad0;text-align:center;line-height:1.25;max-width:86px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 .gd-view{position:absolute;inset:0;z-index:40;background:rgba(0,0,0,.8);display:flex;align-items:center;justify-content:center;animation:avIn .18s ease}
 .gv-img{max-width:82%;max-height:74%;border-radius:8px;object-fit:contain;background:#000}
 .gv-btn{position:absolute;width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,.45);color:#fff;display:flex;align-items:center;justify-content:center;transition:background .13s}
@@ -854,7 +865,7 @@ let editing = false, dnd = null, swipe = null, P = null;
 let folderOpen = null, fseq = 0, suppressClick = false, dotsTO = null, fdnd = null;
 
 const trackW = () => wrapEl.clientWidth;
-const ORX = 0.08;                                   /* current page left edge while editing */
+const ORX = 0.08;
 const leftVirtuals = () => (editing && pageIdx > 0) ? 1 : 0;
 const curIdx = () => leftVirtuals() + pageIdx;
 const stride = () => trackW() * (editing ? 1.04 : 1);
@@ -878,7 +889,6 @@ function renderHome(){
 function rebuildTrack(){
   trackEl.innerHTML = '';
   pages.forEach((pg, pi) => {
-    /* the left virtual grid sits directly before the current page (new pages only) */
     if (editing && pi === pageIdx && pageIdx > 0) trackEl.appendChild(virtualPage('l'));
     const d = document.createElement('div');
     d.className = 'page';
@@ -890,7 +900,6 @@ function rebuildTrack(){
     }
     trackEl.appendChild(d);
   });
-  /* right grid: always available in the app moving system */
   if (editing) trackEl.appendChild(virtualPage('r'));
 }
 function virtualPage(side){
@@ -904,6 +913,9 @@ function virtualPage(side){
   }
   return d;
 }
+/* home-screen display names (store names stay unchanged) */
+const HOME_NAMES = { 'temple-run': 'TempleRun', 'temple-run-2': 'TempleRun2' };
+const homeName = s => HOME_NAMES[s.id] || s.name;
 function appBtn(s){
   const b = document.createElement('button');
   b.className = 'app';
@@ -921,7 +933,7 @@ function appBtn(s){
     b.innerHTML = `<span class="ic">${appIconSVG(s)}</span><span class="lb"></span>`;
     const lb = b.querySelector('.lb');
     if (newBadges.has(s.id)){ const i = document.createElement('i'); i.className = 'newdot'; lb.appendChild(i); }
-    lb.appendChild(document.createTextNode(s.name));
+    lb.appendChild(document.createTextNode(homeName(s)));
     b.addEventListener('click', () => { if (!suppressClick && !dnd && !fdnd) openApp(s, b.querySelector('.ic')); });
   }
   return b;
@@ -1226,7 +1238,7 @@ function buildFolderContent(){
         const b = document.createElement('button');
         b.className = 'foldapp';
         b.innerHTML = `<span class="ic">${appIconSVG(a)}</span><span class="lb"></span>`;
-        b.querySelector('.lb').textContent = a.name;
+        b.querySelector('.lb').textContent = homeName(a);
         b.addEventListener('click', () => {
           if (suppressClick || dnd || fdnd) return;
           const r = b.querySelector('.ic').getBoundingClientRect();
@@ -1814,7 +1826,6 @@ function hideSnack(){
   const s = chRoot.querySelector('.ch-snack');
   if (s) s.classList.remove('show');
 }
-
 let tabDrag = null;
 function buildChromium(){
   const root = document.createElement('div');
@@ -2388,8 +2399,31 @@ const stMan = sel => `<svg viewBox="0 0 30 30" aria-hidden="true">
   <circle cx="21.2" cy="11.2" r="2" fill="#fff"/>
 </svg>`;
 
-/* ---- game detail data (missing values show "—") ---- */
+/* ---- game detail data ---- */
 const DETAILS = {
+  'gd': {
+    size: '90.8MB', dev: 'RobTop Games', ver: '2.2.08', upd: '2026-06-02',
+    desc: [
+      'Jump and fly your way through danger in this rhythm-based action platformer!',
+      'Prepare for a near impossible challenge in the world of Geometry Dash. Push your skills to the limit as you jump, fly and flip your way through dangerous passages and spiky obstacles.'
+    ],
+    bullets: [
+      'Rhythm-based Action Platforming!',
+      'Lots of levels with unique soundtracks!',
+      'Build and share your own levels using the level editor!',
+      'Unlock new icons and colors to customize your character!',
+      'Use practice mode to sharpen your skills!',
+      'Challenge yourself with the near impossible!'
+    ],
+    shots: [
+      'https://play-lh.googleusercontent.com/6tHdc1Tys3w65dcTWFWl3mVrK3Ry7h0IWQWyDD6y_rA9-L5MQDfYnI5sbElqIwukal2XMzhokOUwN3gr80LPtg=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/q5pnOwW1F77_GF3DnrooFIf_vlhayMZNhJDKDFiLrNcvL-goKkJh9GG8cIL6NqrMwn7YbApcOsx_4fjYr6m1ucA=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/HeVv2pC1rUiw17SumMMfsX4iH7L-KqlmtSiZxC3IiTNQ-Em6cdhpZnfkDn_74YIj_i-bpp3NPt_wPjRr3JoT=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/G-aRHJCb2V6spCLq6_tf5R981XbVvKSuWtX40L-nDMckN7jVhMS3pzup4ExxNykOQ88iVo2aam0be-A2KQpexA=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/oDNFIRY0_-pW5xYXaelfImTYwwRYWbMqOBqLWLjw6yHB3EnB1bwpqpQr1MMz8zixi3Rj2HGdAV5H1S_pybS4=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/_KkoBdk_6-MVV4p9S7R_64QNlMUgH6bGyhxmlnuUV3UECdW2CVZNGmJIAphWxVc18tiKEAoittUWKcy3c1eOt6g=w1052-h592-rw'
+    ]
+  },
   'gd-world': {
     size: '147.6MB', dev: 'RobTop Games', ver: '2.2.147', upd: '2026-06-12',
     desc: [
@@ -2410,23 +2444,8 @@ const DETAILS = {
       'https://play-lh.googleusercontent.com/hnXPIHHINTsX9GI8hH8LB-5YkZWcXI1Y7cBRI-l5kIrTuQiENmnTVJURaV5RugoqvFr58gwNqXRWjD6lpC5R=w1052-h592-rw'
     ]
   },
-  'gd': {
-    size: '90.8MB', dev: 'RobTop Games', ver: '—', upd: '—',
-    desc: [
-      'Jump and fly your way through danger in this rhythm-based action platformer!',
-      'Prepare for a near impossible challenge in the world of Geometry Dash. Push your skills to the limit as you jump, fly and flip your way through dangerous passages and spiky obstacles.'
-    ],
-    bullets: [
-      'Rhythm-based Action Platforming!',
-      'Lots of levels with unique soundtracks!',
-      'Build and share your own levels using the level editor!',
-      'Unlock new icons and colors to customize your character!',
-      'Use practice mode to sharpen your skills!',
-      'Challenge yourself with the near impossible!'
-    ], shots: []
-  },
   'gd-subzero': {
-    size: '117.6MB', dev: 'RobTop Games', ver: '—', upd: '—',
+    size: '117.6MB', dev: 'RobTop Games', ver: '2.2.147', upd: '2026-06-09',
     desc: [
       'Geometry Dash is back with a brand new adventure packed with fresh challenges!',
       'Flex your clicky finger as you jump, fly and flip your way through dangerous passages and thorny obstacles. The wait for the follow-up to the smash hit is over!'
@@ -2436,10 +2455,18 @@ const DETAILS = {
       'Three unique levels with amazing music!',
       'Unique icons to customize your character!',
       'Challenge yourself with the near impossible!'
-    ], shots: []
+    ],
+    shots: [
+      'https://play-lh.googleusercontent.com/l7fzSqRPdWbbr6-CkJFdb_ItD-BvTNgUc6twYpCWJ7Azx0wseJ0ysxzwYKAlYwxUPMOhWZ4RyB_iRrNW1thVUKw=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/bomIET_0NcQw4kiA80f7H5_MNPRDfTGJXsK_zvhy_blTgrBu1YMhVP1ftsOCsG4farOoPrNtsqocgeHCrEhLmg=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/Qk67HxrbKWyyaZPk92pcfRxF2BARXNQDlZuoSM9CO6WOw9Wb0o_vruWZMgBoZeMTY1TPJ1GBivlMo80lb8AGjQ=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/RgGCSay4foy3HpHS1A2rTXVBWSxzr0h1tjKmsjpQ774jtoJYmjsbgb2m8IKNEUK1-0mBHTJGBPxsiPl3fAZqO_k=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/26B2qWuK3wq4zXOqVo94pNESZOEqE8TazTgB8hqrsgHTw9p5bH8ekfxBsiL5tX5mQs96tY0QSanExhbT2-Eh2Yg=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/qUyRfDG5GVzvSE2zn4-Y0nLqfvoqqAWZewQp1hSy4DqkZDjcv_5ez7rAO6bJGUcLIwUOam0sOcdkeyZ0RyPN0w=w1052-h592-rw'
+    ]
   },
   'gd-meltdown': {
-    size: '76.1MB', dev: 'RobTop Games', ver: '—', upd: '—',
+    size: '76.1MB', dev: 'RobTop Games', ver: '2.2.147', upd: '2026-06-09',
     desc: [
       'Geometry Dash Meltdown will prepare you for a new adventure filled with more spikes and monsters than thought humanly possible!',
       'Flex your clicky finger as you jump, fly and flip your way through dangerous passages and thorny obstacles.'
@@ -2449,7 +2476,53 @@ const DETAILS = {
       'Three unique levels with music from F-777!',
       'Unique Meltdown icons and colors to customize your character!',
       'Challenge yourself with the near impossible!'
-    ], shots: []
+    ],
+    shots: [
+      'https://play-lh.googleusercontent.com/NoW_sBKJAawg2ABSWaBzXiJIdsuH1VkmR2bCDZoL8pZnsbMV7QEpDdfqvvj8BPiI--hE5Qdiaoc3-LRv01hGUw=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/1SetB707g_6tROruq0d_PutSTK6lPZzOlRUEbhT_spivo_pFd7hEEf8hPtRgh7JJeOfmxbhSUxLqXMA1VJd8=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/5ZfD7CwMN_cJxSbmSSEHGceedGTSrhVR_2BzRgyzaahL3-OEsC0izxdAoowFjJ8bgfi7YLpVXE64GiU4JOHx_g=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/V1stvabZOFfme5ZxgQ5apMtNDTOJ8VnL-zW9CCnJrumtWjwyQnp4R69jm4REP791vTEibv-5V5WoB2c1hja2iyM=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/c4a9NzwTgZdOoIA7ZIwie0AAMAaa8SmVsi5KhKX_WDFRLT6XNtLkhgd90iOeDOpKtfbRV-2s4SHkUvghpZMz=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/AAUCiJYIWLdVvqZ6FpUcC7ACvNlcob2XNX-Z46R5vvL4H_kY1cPc41yx1pieFCLyZ3nLyXdrVjeMqLtLTI101w=w1052-h592-rw'
+    ]
+  },
+  'temple-run': {
+    size: '110MB', dev: 'Imangi Studios', ver: '1.39.0', upd: '2026-06-11',
+    desc: [
+      'The addictive mega-hit endless running adventure! You have stolen the cursed idol from the temple, and now you must run for your life to escape the Evil Demon Monkeys nipping at your heels.',
+      'Race down ancient temple walls, along sheer cliffs and through jungle ruins as you test your reflexes to the limit. How far can you run?'
+    ],
+    bullets: [
+      'Swipe to turn, jump and slide to avoid obstacles',
+      'Collect coins to unlock new heroes and power ups',
+      'Race through ancient temples and jungle ruins',
+      'Play offline — no connection needed',
+      'Played by over 500 million players worldwide'
+    ],
+    shots: [
+      'https://play-lh.googleusercontent.com/Uxq0m0XGoDWQC8dQbdA9rfWZOqvAORCxCFT3zczAdQiOepKAIlRGYYrqTW-fsFNlYY4upQm0u2V_2yJ9SakvXw=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/lDxXvtbAuEV7wKODVTJJZkrKhoOc9LPDDT9Ab49YkJMBcrbqSdkpjRGn9H06pZK9dqWB6Ruv6aI5p1-QBgqk3w=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/PAnLeyBdEPsIs6uptMc1Bo5EUgIypGU6BIcJMpi8u81Dr6JrT7QG62_A3VMM66_5KdO3OscUh76mcn5neVvMdQ=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/vsUrg0WIqCLmuyet-RU4rDQVavNXSyYbCOsC16QC048p2i51Px8ObVBctSp9ELgrO-06jWuaVtBm6_7wMFZuJQ=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/4j6fhqS7OYdX4sQWs8UuVERR-remUhE0uTjsxE0SmgQXJ-yEfH_1AAI_mcIR9BRRj3vv1RC0DwTwvwBY48UerQ=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/s8W50dJpQKzDzFhx_I0F_g-JD1-RhKg4mnMHIsJfG6I7zgmfW43hkOFgKb7eI_MRNvGdr_qLvVp3MM5PL6fmIG8=w1052-h592-rw'
+    ]
+  },
+  'temple-run-2': {
+    size: '122.5MB', dev: 'Imangi Studios', ver: '—', upd: '—',
+    desc: [
+      'Temple Run 2: Endless Escape is the sequel to the smash hit endless running game — an endless runner that blends action, strategy and adventure as you run for your life!',
+      'Run, jump, turn and slide your way through beautiful but dangerous new worlds, racing to escape the demon monkeys while dodging cliffs, mines, zip lines and forests.'
+    ],
+    bullets: [
+      'Endless running that blends action, strategy and adventure',
+      'Brand new locations, including the deep jungle',
+      'Seasonal events with fresh challenges',
+      'Unlock new heroes and power ups',
+      'Play offline anywhere',
+      'Compete with players around the world'
+    ],
+    shots: []
   },
   'roblox': {
     size: '182.3MB', dev: 'Roblox Corporation', ver: '—', upd: '—',
@@ -2478,35 +2551,6 @@ const DETAILS = {
       'Challenge and help your friends'
     ], shots: []
   },
-  'temple-run': {
-    size: '110MB', dev: 'Imangi Studios', ver: '—', upd: '—',
-    desc: [
-      'The addictive mega-hit endless running adventure! You have stolen the cursed idol from the temple, and now you must run for your life to escape the Evil Demon Monkeys nipping at your heels.',
-      'Race down ancient temple walls, along sheer cliffs and through jungle ruins as you test your reflexes to the limit. How far can you run?'
-    ],
-    bullets: [
-      'Swipe to turn, jump and slide to avoid obstacles',
-      'Collect coins to unlock new heroes and power ups',
-      'Race through ancient temples and jungle ruins',
-      'Play offline — no connection needed',
-      'Played by over 500 million players worldwide'
-    ], shots: []
-  },
-  'temple-run-2': {
-    size: '122.5MB', dev: 'Imangi Studios', ver: '—', upd: '—',
-    desc: [
-      'Temple Run 2: Endless Escape is the sequel to the smash hit endless running game — an endless runner that blends action, strategy and adventure as you run for your life!',
-      'Run, jump, turn and slide your way through beautiful but dangerous new worlds, racing to escape the demon monkeys while dodging cliffs, mines, zip lines and forests.'
-    ],
-    bullets: [
-      'Endless running that blends action, strategy and adventure',
-      'Brand new locations, including the deep jungle',
-      'Seasonal events with fresh challenges',
-      'Unlock new heroes and power ups',
-      'Play offline anywhere',
-      'Compete with players around the world'
-    ], shots: []
-  },
   'pvz2': {
     size: '983.4MB', dev: 'ELECTRONIC ARTS', ver: '—', upd: '—',
     desc: [
@@ -2524,7 +2568,7 @@ const DETAILS = {
     shots: []
   },
   'clusterduck': {
-    size: '—', dev: '—', ver: '—', upd: '—',
+    size: '131.8MB', dev: 'PIKPOK', ver: '2.8.1', upd: '2026-06-12',
     desc: [
       'Clusterduck is a game about hatching ducks and discovering increasingly weird mutations as they breed. The more ducks you hatch, the weirder things get!',
       'Hatch weird ducks, breed even weirder ones, and grow your collection while uncovering the strange secrets hidden deep in the caves below.'
@@ -2536,17 +2580,32 @@ const DETAILS = {
       'Mutations come in tiers of increasing weirdness',
       'Every duck has its own personality description',
       'Explore the caves and uncover their secrets'
-    ], shots: []
+    ],
+    shots: []
   }
 };
+/* clusterduck: 6 images repeated twice = 12 portrait shots;
+   temple run + clusterduck use the 9-across portrait strip */
+(() => {
+  const cd = [
+    'https://play-lh.googleusercontent.com/fSs8MVpW_gTR2p2YsgR4OSkpLNOiSvUh3Lsmf4aPxDtF8Ytfb0e7MIrNm05Agq-YiYuZpmjV9DkVHO6Wr1nv-Q=w1052-h592-rw',
+    'https://play-lh.googleusercontent.com/7ylKNnvjFmlaF_axJmG-TjYMxOFMQrIzomBwfAEJ77WiI6eUIkn_8C9IEwTvz5DPjbqfhVOchZy7MiZj5Q95GU0=w1052-h592-rw',
+    'https://play-lh.googleusercontent.com/3zV81dzzu9_x4QucnAt_Ps0tIszrxKipwkZgBb9ESJ8LpPPrh-M7Weqi6MZ2C_HglkUgwLa1b9at5dd-AXvY3ps=w1052-h592-rw',
+    'https://play-lh.googleusercontent.com/cyYdlwbir4J5Tka0-aSd-naQMWVkNoVoMx93UHGn7arLsHoe481zQlhlncP-tRcZRMx--TImR46GfIQFKGaB=w1052-h592-rw',
+    'https://play-lh.googleusercontent.com/BEngYfc6m7yCOq8SyyiJN-YyCu-nRW0Qfvman7mSBWGRi1lFms4qexU0nlnDcSaFigTMEMoISrCMUYsWPv7s=w1052-h592-rw',
+    'https://play-lh.googleusercontent.com/AZjSPoh61EuzVTLDd3392hvY-q-Q4BHBwF4a1R4GZJeEdZNhexEzJql5dY6OijAbpSgMj66U8sXQ5jyxH8E8=w1052-h592-rw'
+  ];
+  DETAILS['clusterduck'].shots = cd.concat(cd);
+  DETAILS['temple-run'].portrait = true;
+  DETAILS['clusterduck'].portrait = true;
+})();
 
 const DLS = {};
 let matchIdx = {};
 let gdOpen = null;
-
-/* ---- game detail page (slides up from the bottom) ---- */
 const GD_CHEV = `<svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M2 4 L6 8 L10 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"/></svg>`;
 
+/* ---- fullscreen image viewer ---- */
 function openShotViewer(root, shots, idx){
   const v = document.createElement('div');
   v.className = 'gd-view';
@@ -2580,6 +2639,23 @@ function openShotViewer(root, shots, idx){
   root.appendChild(v);
 }
 
+/* ---- mini card for the More sections ---- */
+function miniCard(x){
+  const b = document.createElement('button');
+  b.className = 'gd-mini';
+  b.innerHTML = `<span class="mi"><img src="${x.icon}" alt="" draggable="false"></span><span></span>`;
+  b.querySelector('span:last-child').textContent = x.name;
+  b.addEventListener('click', () => {
+    if (!gdOpen) return;
+    const cur = gdOpen.root;
+    gdOpen = null;                        /* release guard so the new page can open */
+    cur.querySelector('.gd-back').click(); /* full cleanup + slide-out */
+    setTimeout(() => openGameDetail(x), 150);
+  });
+  return b;
+}
+
+/* ---- game detail page (slides up from the bottom) ---- */
 function openGameDetail(g){
   if (gdOpen) return;
   const d = DETAILS[g.id] || {};
@@ -2592,15 +2668,16 @@ function openGameDetail(g){
         <img class="gd-ico" src="${g.icon}" alt="" draggable="false">
         <div class="gd-hinfo">
           <h1 class="gd-name"></h1>
-          <div class="gd-rate">${ST_STAR}<span>${g.rating.toFixed(1)}</span></div>
+          <div class="gd-sub">
+            <span class="gd-rate">${ST_STAR}<span>${g.rating.toFixed(1)}</span></span>
+            <span class="dv"></span>
+            <span class="gd-mv gd-cat"></span><span class="dv"></span>
+            <span class="gd-mv gd-size"></span><span class="dv"></span>
+            <span class="gd-mv gd-dev"></span><span class="dv"></span>
+            <button class="gd-other"><span>Other info</span><span class="chev">${GD_CHEV}</span></button>
+          </div>
         </div>
         <button class="gd-ibtn install">Install</button>
-      </div>
-      <div class="gd-meta">
-        <span class="gd-mv gd-cat"></span><span class="dv"></span>
-        <span class="gd-mv gd-size"></span><span class="dv"></span>
-        <span class="gd-mv gd-dev"></span><span class="dv"></span>
-        <button class="gd-other"><span>Other info</span><span class="chev">${GD_CHEV}</span></button>
       </div>
       <div class="gd-oinfo"><div><div class="gd-obox">
         <div>Version <span class="ov"></span></div>
@@ -2613,9 +2690,11 @@ function openGameDetail(g){
       </div>
       <div class="gd-shottrack"></div>
       <div class="gd-desc"></div>
-      <button class="gd-va"><span class="vt">View All</span><span class="chev">${GD_CHEV}</span></button>
       <div class="gd-bullets"><div><ul></ul></div></div>
+      <button class="gd-va"><span class="vt">View All</span><span class="chev">${GD_CHEV}</span></button>
       ${d.note ? `<p class="gd-note"></p>` : ''}
+      <div class="gd-more gd-mdev"></div>
+      <div class="gd-more gd-mcat"></div>
     </div></div>`;
   root.querySelector('.gd-name').textContent = g.name;
   root.querySelector('.gd-cat').textContent = catName(g.cat);
@@ -2638,6 +2717,8 @@ function openGameDetail(g){
   });
   const track = root.querySelector('.gd-shottrack');
   const shots = d.shots || [];
+  const portrait = !!d.portrait;
+  track.classList.add(portrait ? 'port' : 'land');
   if (shots.length){
     shots.forEach(src => {
       const im = document.createElement('img');
@@ -2648,19 +2729,37 @@ function openGameDetail(g){
       track.appendChild(im);
     });
   } else {
-    for (let i = 0; i < 3; i++){
+    for (let i = 0; i < (portrait ? 9 : 3); i++){
       const ph = document.createElement('div');
       ph.className = 'gd-shot ph';
       ph.innerHTML = `<img src="${g.icon}" alt="" draggable="false">`;
       track.appendChild(ph);
     }
   }
+  /* More Games by [Developer] Limited (same developer, excluding this game) */
+  const dev = d.dev;
+  const mdev = root.querySelector('.gd-mdev');
+  if (dev && dev !== '—'){
+    const sameDev = GAMES.filter(x => x.id !== g.id && (DETAILS[x.id] || {}).dev === dev);
+    if (sameDev.length){
+      mdev.innerHTML = `<h3></h3><div class="gd-more-list"></div>`;
+      mdev.querySelector('h3').textContent = `More Games by ${dev} Limited`;
+      sameDev.forEach(x => mdev.querySelector('.gd-more-list').appendChild(miniCard(x)));
+    }
+  }
+  /* More [Category] Games (excluding same-developer games to avoid duplicates) */
+  const mcat = root.querySelector('.gd-mcat');
+  const sameCat = GAMES.filter(x => x.id !== g.id && x.cat === g.cat && (DETAILS[x.id] || {}).dev !== dev);
+  if (sameCat.length){
+    mcat.innerHTML = `<h3></h3><div class="gd-more-list"></div>`;
+    mcat.querySelector('h3').textContent = `More ${catName(g.cat)} Games`;
+    sameCat.forEach(x => mcat.querySelector('.gd-more-list').appendChild(miniCard(x)));
+  }
+
   storeRoot.appendChild(root);
   requestAnimationFrame(() => requestAnimationFrame(() => root.classList.add('open')));
-
   gdOpen = { g, root };
 
-  /* bar/back */
   const close = () => {
     cleanup();
     gdOpen = null;
@@ -2669,7 +2768,6 @@ function openGameDetail(g){
   };
   root.querySelector('.gd-back').addEventListener('click', close);
 
-  /* other info toggle */
   const oinfo = root.querySelector('.gd-oinfo');
   const ochev = root.querySelector('.gd-other .chev');
   root.querySelector('.gd-other').addEventListener('click', () => {
@@ -2677,7 +2775,6 @@ function openGameDetail(g){
     ochev.style.transform = open ? 'rotate(180deg)' : '';
   });
 
-  /* view all / collapse */
   const bullets = root.querySelector('.gd-bullets');
   const va = root.querySelector('.gd-va');
   va.addEventListener('click', () => {
@@ -2686,7 +2783,6 @@ function openGameDetail(g){
     va.querySelector('.chev').style.transform = open ? 'rotate(180deg)' : '';
   });
 
-  /* install / play button */
   const ib = root.querySelector('.gd-ibtn');
   ib.addEventListener('click', () => {
     const st = gameState(g);
@@ -2703,7 +2799,6 @@ function openGameDetail(g){
   });
   updateDetailBtn(g);
 
-  /* shots: circle buttons + drag scroll + click to view */
   const bl = root.querySelector('.gd-sbtn.l');
   const br = root.querySelector('.gd-sbtn.r');
   const syncBtns = () => {
@@ -2713,7 +2808,7 @@ function openGameDetail(g){
   };
   const shotStep = () => {
     const s = track.querySelector('.gd-shot');
-    return s ? s.offsetWidth + 10 : 200;
+    return s ? s.offsetWidth + 8 : 200;
   };
   bl.addEventListener('click', () => track.scrollBy({ left: -3 * shotStep(), behavior: 'smooth' }));
   br.addEventListener('click', () => track.scrollBy({ left: 3 * shotStep(), behavior: 'smooth' }));
@@ -2731,7 +2826,7 @@ function openGameDetail(g){
     if (sDrag.horiz === null){
       if (Math.abs(dx) > 6 || Math.abs(dy) > 6){
         sDrag.horiz = Math.abs(dx) > Math.abs(dy);
-        if (!sDrag.horiz) sDrag = null;      /* vertical → let the page scroll */
+        if (!sDrag.horiz) sDrag = null;      /* vertical → page scroll */
       }
       return;
     }
@@ -2747,7 +2842,6 @@ function openGameDetail(g){
     sDrag = null;
   };
 
-  /* click-and-drag vertical page scroll */
   const sc = root.querySelector('.gd-scroll');
   let pDrag = null;
   sc.addEventListener('pointerdown', e => {
@@ -3098,6 +3192,7 @@ function buildStore(){
   });
   renderCatGrid();
   root.addEventListener('click', e => {
+    if (e.target.closest('.gdet')) return;
     const btn = e.target.closest('.sr-btn');
     if (btn){
       const row = btn.closest('.sr');
@@ -3113,7 +3208,6 @@ function buildStore(){
       return;
     }
     /* clicking anywhere else on an app row opens its detail page */
-    if (e.target.closest('.gdet')) return;
     const row = e.target.closest('.sr');
     if (row){
       const g = GAMES.find(x => x.id === row.dataset.g);
