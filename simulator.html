@@ -457,6 +457,59 @@ svg.dl-ov.zoom{transition:transform .32s ease,opacity .3s ease;transform:scale(1
 .gv-x{position:absolute;width:34px;height:34px;border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;transition:background .13s}
 .gv-x:hover{background:rgba(255,255,255,.15)}
 .gv-x svg{width:13px;height:13px}
+
+/* ============ SETTINGS APP ============ */
+.setapp{position:absolute;inset:0;display:flex;background:#171B20;animation:avIn .4s var(--ease) both}
+.set-left{width:40%;flex:none;min-height:0;background:#000;display:flex;flex-direction:column;padding:14px 13px 22px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#2c2e33 transparent}
+.set-left::-webkit-scrollbar{width:9px}
+.set-left::-webkit-scrollbar-thumb{background:#2c2e33;border-radius:5px}
+.set-search{flex:none;height:52px;border-radius:999px;background:#36393F;display:flex;align-items:center;gap:13px;padding:0 20px;margin-bottom:18px;color:#9aa0a6}
+.set-search svg{width:19px;height:19px;flex:none;display:block}
+.set-search span{font-size:14.5px}
+.set-tabs{display:flex;flex-direction:column}
+.set-tab{--tbg:#36393F;width:100%;height:64px;flex:none;display:flex;align-items:center;gap:15px;padding:0 18px;background:var(--tbg);color:#e8eaee;text-align:left;transition:filter .15s,background .15s}
+.set-tab:hover{filter:brightness(1.1)}
+.set-tab.sel{--tbg:#1E1F22;background:#1E1F22;filter:none}
+.set-tab .ti{width:23px;height:23px;flex:none;display:block;color:#dfe2e6}
+.set-tab .ti svg{width:100%;height:100%;display:block}
+.set-tx{display:flex;flex-direction:column;justify-content:center;min-width:0;flex:1}
+.set-tx b{font-size:15px;font-weight:500;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.set-tx b.two{white-space:normal;line-height:1.3}
+.set-tx small{font-size:12.5px;color:#9aa0a6;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.set-tab.gtab{border-radius:18px;margin-bottom:18px}
+.set-tab.last{border-radius:18px;margin-top:18px}
+.set-group{display:flex;flex-direction:column;gap:3px;margin-bottom:18px}
+.set-group .set-tab{border-radius:0}
+.set-group .set-tab:first-child{border-radius:18px 18px 0 0}
+.set-group .set-tab:last-child{border-radius:0 0 18px 18px}
+.set-group .set-tab:only-child{border-radius:18px}
+.set-right{flex:1;min-width:0;position:relative;background:#171B20;overflow:hidden}
+.set-content{position:absolute;inset:0;padding:30px 36px;overflow-y:auto;transform:translateX(46px);opacity:0;transition:transform .34s var(--ease),opacity .28s ease}
+.set-content.in{transform:none;opacity:1}
+.sg-out{display:flex;flex-direction:column;align-items:flex-start;gap:20px}
+.sg-out p{color:#c9ccd1;font-size:15px;font-weight:500}
+.sg-btn{height:44px;padding:0 36px;border-radius:6px;background:#1a73e8;color:#fff;font-size:14.5px;font-weight:600;transition:filter .15s}
+.sg-btn:hover{filter:brightness(1.12)}
+.sg-head{color:#fff;font-size:22px;font-weight:600}
+.sg-user{display:flex;align-items:center;gap:16px;margin-top:24px}
+.sg-avatar{width:56px;height:56px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:600;color:#fff}
+.sg-name{color:#fff;font-size:17px;font-weight:600}
+.sg-mail{color:#9aa0a6;font-size:13.5px;margin-top:3px}
+.sg-ovl{position:absolute;inset:0;z-index:70;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;animation:avIn .2s ease both}
+.sg-card{width:400px;max-width:86%;background:#fff;border-radius:22px;padding:34px 32px 26px;display:flex;flex-direction:column;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.sg-logo{width:44px;height:44px;margin:0 auto}
+.sg-logo svg{width:100%;height:100%;display:block}
+.sg-title{margin-top:16px;text-align:center;color:#202124;font-size:22px;font-weight:500}
+.sg-sub{margin-top:5px;text-align:center;color:#5f6368;font-size:13.5px;word-break:break-all}
+.sg-field{margin-top:24px;height:48px;border:1.5px solid #dadce0;border-radius:999px;display:flex;align-items:center;padding:0 22px;transition:border-color .15s}
+.sg-field:focus-within{border-color:#1a73e8}
+.sg-field input{flex:1;min-width:0;border:0;outline:0;background:none;color:#202124;font:inherit;font-size:15px}
+.sg-err{margin-top:10px;min-height:16px;color:#d93025;font-size:12.5px}
+.sg-actions{display:flex;justify-content:flex-end;align-items:center;gap:8px;margin-top:22px}
+.sg-back{color:#1a73e8;font-size:14px;font-weight:600;padding:10px 14px;border-radius:8px;transition:background .13s}
+.sg-back:hover{background:rgba(26,115,232,.08)}
+.sg-next{height:42px;padding:0 30px;border-radius:999px;background:#1a73e8;color:#fff;font-size:14px;font-weight:600;transition:filter .15s}
+.sg-next:hover{filter:brightness(1.1)}
 </style>
 </head>
 <body>
@@ -502,7 +555,7 @@ svg.dl-ov.zoom{transition:transform .32s ease,opacity .3s ease;transform:scale(1
   <span class="bb-pct">0%</span>
 </div>
 
-<div id="caretdrop"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M5.05 7.05 L10 2.1 L14.95 7.05 A7 7 0 1 1 5.05 7.05 Z" fill="#A5C2FF"/></svg></div>
+<div id="caretdrop"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M5.05 7.05 L10 2.1 L14.95 7.05 A7 7 0 1 1 5.05 7.05 Z" fill="#A5C2FF" stroke="#A5C2FF" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
 
 <script>
 (() => {
@@ -645,8 +698,8 @@ let dropTO = null;
 function showCaretDrop(x, y){
   dropEl.style.transition = 'none';
   dropEl.style.opacity = '1';
-  dropEl.style.left = (x - 8) + 'px';
-  dropEl.style.top = (y + 6) + 'px';
+  dropEl.style.left = (x - 9) + 'px';
+  dropEl.style.top = (y - 2) + 'px';
   clearTimeout(dropTO);
   dropTO = setTimeout(() => {
     dropEl.style.transition = 'opacity .8s ease';
@@ -658,8 +711,51 @@ function hideCaretDrop(){
   dropEl.style.transition = 'none';
   dropEl.style.opacity = '0';
 }
+/* measure the real caret position inside an input/textarea
+   (mirror-node technique; aware of the UI scale transform) */
+function caretPoint(el){
+  const m = document.createElement('div');
+  const cs = getComputedStyle(el);
+  m.style.cssText = 'position:absolute;top:0;left:0;visibility:hidden;overflow:hidden;white-space:pre;word-wrap:break-word;';
+  if (el.tagName === 'TEXTAREA') m.style.whiteSpace = 'pre-wrap';
+  ['width','fontFamily','fontSize','fontWeight','fontStyle','letterSpacing','wordSpacing','textIndent','textTransform','paddingTop','paddingRight','paddingBottom','paddingLeft','borderTopWidth','borderRightWidth','borderBottomWidth','borderLeftWidth','boxSizing'].forEach(p => {
+    try { m.style[p] = cs[p]; } catch (err) {}
+  });
+  const val = el.value || '';
+  const pos = el.selectionStart == null ? val.length : Math.min(el.selectionStart, val.length);
+  m.textContent = val.slice(0, pos);
+  const t = document.createElement('span');
+  t.textContent = '\u200b';
+  m.appendChild(t);
+  document.body.appendChild(m);
+  const mr = m.getBoundingClientRect(), tr = t.getBoundingClientRect();
+  const offX = tr.left - mr.left, offY = tr.top - mr.top;
+  m.remove();
+  const r = el.getBoundingClientRect();
+  const k = el.offsetWidth ? r.width / el.offsetWidth : 1;
+  const fs = parseFloat(cs.fontSize) || 14;
+  const lh = parseFloat(cs.lineHeight) || fs * 1.25;
+  const padT = parseFloat(cs.paddingTop) || 0, padB = parseFloat(cs.paddingBottom) || 0;
+  const borT = parseFloat(cs.borderTopWidth) || 0, borB = parseFloat(cs.borderBottomWidth) || 0;
+  let yOff;
+  if (el.tagName === 'TEXTAREA') yOff = borT + padT;
+  else {
+    const contentH = el.offsetHeight - padT - padB - borT - borB;
+    yOff = borT + padT + Math.max(0, (contentH - lh) / 2);
+  }
+  const x = r.left + (offX - (el.scrollLeft || 0)) * k;
+  const y = r.top + (yOff + offY - (el.scrollTop || 0) + lh) * k;
+  return { x, y };
+}
 document.addEventListener('pointerdown', e => {
-  if (e.target.matches('input, textarea')) showCaretDrop(e.clientX, e.clientY);
+  const el = e.target;
+  if (!(el instanceof HTMLElement) || !el.matches('input, textarea')) return;
+  /* wait for the click to place the caret, then show the drop under it */
+  setTimeout(() => {
+    if (document.activeElement !== el || !el.isConnected) return;
+    const p = caretPoint(el);
+    if (p) showCaretDrop(p.x, p.y);
+  }, 0);
 });
 document.addEventListener('input', hideCaretDrop, true);
 document.addEventListener('keydown', hideCaretDrop, true);
@@ -849,6 +945,7 @@ let pageIdx = 0;
 pages[0][0] = BASE[0]; pages[0][1] = BASE[1]; pages[0][2] = gadgetsFolder();
 DOCK_BASE.forEach((a, i) => dockSlots[i] = a);
 
+let setAccount = null;   /* signed-in Google account (settings app) */
 const DEVKEY = 'mumu.dev.' + devId();
 const serApp = a => {
   if (!a) return null;
@@ -884,7 +981,7 @@ const deSlot = d => {
   return deApp(d);
 };
 function persistDev(){
-  const payload = { installed, pages: pages.map(p => p.map(serSlot)), dock: dockSlots.map(serSlot), newApps: [...newBadges] };
+  const payload = { installed, pages: pages.map(p => p.map(serSlot)), dock: dockSlots.map(serSlot), newApps: [...newBadges], settings: { google: setAccount } };
   try { localStorage.setItem(DEVKEY, JSON.stringify(payload)); } catch (e) {}
   try { parent.postMessage({ type: 'mumu-dev-save', id: devId(), state: payload }, '*'); } catch (e) {}
 }
@@ -1069,7 +1166,7 @@ function exitEdit(){
    tap = open · hold 500ms stationary = context menu · hold + move = app drag · quick horizontal = page swipe */
 uiEl.addEventListener('pointerdown', e => {
   if (e.button !== 0 || !avEl.hidden || dnd || swipe || fdnd) return;
-  if (e.target.closest('.foldov, .appmenu, .am-dlg, .custwrap, .unsnack')) return;
+  if (e.target.closest('.foldov, .appmenu, .am-dlg, .custwrap, .unsnack, .setapp')) return;
   const appB = e.target.closest('.app');
   const cellB = e.target.closest('.cell');
   P = { x0: e.clientX, y0: e.clientY, lx: e.clientX, ly: e.clientY,
@@ -1763,7 +1860,7 @@ function openAppFromRect(app, r){
 }
 function openApp(app, iconEl){ openAppFromRect(app, iconEl.getBoundingClientRect()); }
 
-let chRoot = null, storeRoot = null, phEl = null, embedEl = null, embedUrl = null;
+let chRoot = null, storeRoot = null, setRoot = null, phEl = null, embedEl = null, embedUrl = null;
 const AD_BLOCKED = new Set(['clusterduck', 'pvz2']);
 function showView(v){
   const home = v === 'home';
@@ -1772,8 +1869,9 @@ function showView(v){
   dotsEl.style.display = home ? '' : 'none';
   dockEl.style.display = home ? '' : 'none';
   gestEl.style.display = home ? '' : 'none';
-  if (chRoot) chRoot.style.display = (v === 'chromium') ? '' : 'none';
+  if (chRoot) chRoot.style.display = (v === 'chromium' || v === 'g-chrome') ? '' : 'none';
   if (storeRoot) storeRoot.style.display = (v === 'store') ? '' : 'none';
+  if (setRoot) setRoot.style.display = (v === 'settings') ? '' : 'none';
   const app = appById(v);
   if (embedEl) embedEl.style.display = (app && app.url) ? '' : 'none';
   if (phEl) phEl.style.display = 'none';
@@ -1789,15 +1887,27 @@ function showView(v){
     if (storeRoot.parentElement !== avEl) avEl.appendChild(storeRoot);
     return;
   }
-  if (v === 'chromium'){
-    if (!chRoot){ chRoot = buildChromium(); avEl.appendChild(chRoot); renderCh(); }
-    else {
+  if (v === 'chromium' || v === 'g-chrome'){
+    /* the Chrome gadget reuses the Chromium engine, with its own tab state */
+    const want = v === 'g-chrome' ? 'chrome' : 'chromium';
+    const switched = CH.app !== want;
+    if (switched){ CH.app = want; CH.mode = 'n'; }
+    if (!chRoot){
+      chRoot = buildChromium();
+      avEl.appendChild(chRoot);
+      renderCh();
+    } else {
       const tm = chRoot.querySelector('.ch-tabsmenu');
       if (tm) tm.remove();
       if (chRoot.parentElement !== avEl) avEl.appendChild(chRoot);
       chRoot.style.display = '';
-      layoutTabs();
+      if (switched) renderCh(); else layoutTabs();
     }
+    return;
+  }
+  if (v === 'settings'){
+    if (!setRoot){ buildSettings(); avEl.appendChild(setRoot); }
+    else if (setRoot.parentElement !== avEl) avEl.appendChild(setRoot);
     return;
   }
   if (app && app.url){
@@ -1807,7 +1917,8 @@ function showView(v){
       avEl.appendChild(embedEl);
     }
     if (AD_BLOCKED.has(app.id)){
-      embedEl.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms');
+      /* pvz2 gets allow-downloads so data can be exported from the game */
+      embedEl.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms' + (app.id === 'pvz2' ? ' allow-downloads' : ''));
       embedEl.setAttribute('referrerpolicy', 'no-referrer');
     } else {
       embedEl.removeAttribute('sandbox');
@@ -1828,21 +1939,29 @@ function showView(v){
     phEl.querySelector('.avname').textContent = app.name;
   }
 }
-function destroyChromium(){
-  if (chRoot){ chRoot.remove(); chRoot = null; }
-  CH.normal = { tabs: [chTab()], cur: 0 };
-  CH.inc = { tabs: [chTab()], cur: 0 };
-  CH.mode = 'n';
+/* resets one browser app's tabs (chromium or chrome); shared settings stay */
+function resetBrowserApp(key){
+  const p = CH.profiles[key];
+  if (!p) return;
+  p.n = { tabs: [chTab()], cur: 0 };
+  p.i = { tabs: [chTab()], cur: 0 };
   closedStack.length = 0;
+  if (CH.app === key){
+    if (chRoot){ chRoot.remove(); chRoot = null; }
+    CH.app = 'chromium';
+    CH.mode = 'n';
+  }
 }
 addEventListener('message', e => {
   const d = e.data;
   if (!d || typeof d !== 'object') return;
   if (d.type === 'mumu-view') showView(d.view === 'app' ? d.id : 'home');
-  if (d.type === 'mumu-app-closed' && d.id === 'chromium') destroyChromium();
+  if (d.type === 'mumu-app-closed' && (d.id === 'chromium' || d.id === 'g-chrome')){
+    resetBrowserApp(d.id === 'g-chrome' ? 'chrome' : 'chromium');
+  }
 });
 
-/* ============ CHROMIUM ============ */
+/* ============ CHROMIUM (engine shared with the Chrome app) ============ */
 const CH_HOME  = `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M3.2 9.4 L10 3.4 L16.8 9.4"/><path d="M5.2 8.2 V16.2 H14.8 V8.2"/></svg>`;
 const CH_LEFT  = `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 10 H6"/><path d="M9.8 5.6 L5.4 10 L9.8 14.4"/></svg>`;
 const CH_RIGHT = `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 10 H14"/><path d="M10.2 5.6 L14.6 10 L10.2 14.4"/></svg>`;
@@ -1899,10 +2018,15 @@ const ENGINES = {
     fav: 'https://play-lh.googleusercontent.com/Ric37SXVuhw-1uK7TzgUvERNCxOMg9WvjNnCfbzQ4tUZgvzDj-bY6RIfEdaAnltr' }
 };
 
+/* engine state: 'chromium' = the Chromium dock app, 'chrome' = the Chrome gadget app.
+   Both apps share one rendering engine, but keep separate tab sets. */
 const CH = {
+  app: 'chromium',
   mode: 'n',
-  normal: { tabs: [], cur: 0 },
-  inc: { tabs: [], cur: 0 },
+  profiles: {
+    chromium: { n: { tabs: [], cur: 0 }, i: { tabs: [], cur: 0 } },
+    chrome:   { n: { tabs: [], cur: 0 }, i: { tabs: [], cur: 0 } }
+  },
   marks: new Map(),
   engine: 'google',
   theme: 'dark',
@@ -1917,10 +2041,13 @@ function newEntry(){
   return { type: 'newtab' };
 }
 function chTab(){ return { hist: [newEntry()], idx: 0 }; }
-CH.normal.tabs = [chTab()];
-CH.inc.tabs = [chTab()];
-function tabsArr(){ return CH.mode === 'i' ? CH.inc.tabs : CH.normal.tabs; }
-function curArr(){ return CH.mode === 'i' ? CH.inc : CH.normal; }
+['chromium', 'chrome'].forEach(k => {
+  CH.profiles[k].n.tabs = [chTab()];
+  CH.profiles[k].i.tabs = [chTab()];
+});
+function tabsArr(){ return curArr().tabs; }
+function curArr(){ return CH.profiles[CH.app][CH.mode]; }
+function isChromeApp(){ return CH.app === 'chrome'; }
 function chCur(){ const a = curArr(); return a.tabs[a.cur]; }
 function chEnt(){ const t = chCur(); return t.hist[t.idx]; }
 function hostOf(u){ try { return new URL(u).hostname; } catch (e) { return u; } }
@@ -1932,7 +2059,8 @@ function entTitle(e){
   return hostOf(e.url);
 }
 function addrOf(e){
-  if (e.type === 'newtab') return ENGINES[CH.engine].host;
+  /* Chrome app: the new tab page shows no URL in the address bar */
+  if (e.type === 'newtab') return isChromeApp() ? '' : ENGINES[CH.engine].host;
   if (e.type === 'blank') return 'about:blank';
   if (e.type === 'history') return 'chrome://history';
   return e.url.replace(/^https?:\/\//, '');
@@ -1943,7 +2071,9 @@ function entHost(e){
 }
 function tabIcon(ent){
   if (ent.type === 'blank') return `<span class="ch-tic">${CH_GLOBE}</span>`;
-  if (ent.type === 'history') return `<span class="ch-tic"><img class="ch-fav" src="${HIST_FAV}" style="filter:brightness(0) invert(1)" alt=""></span>`;
+  /* Chrome app: the new tab favicon is the same as the history page's */
+  if (ent.type === 'history' || (ent.type === 'newtab' && isChromeApp()))
+    return `<span class="ch-tic"><img class="ch-fav" src="${HIST_FAV}" style="filter:brightness(0) invert(1)" alt=""></span>`;
   return `<span class="ch-tic">${CH_GLOBE}<img class="ch-fav" src="${FAV(entHost(ent))}" alt="" onerror="this.remove()"></span>`;
 }
 function entryIconKind(ent){
@@ -1951,7 +2081,7 @@ function entryIconKind(ent){
   if (ent.type === 'web') return 'lock';
   if (ent.type === 'search') return 'engine';
   if (ent.type === 'blank') return 'globe';
-  if (ent.type === 'history') return 'history';
+  if (ent.type === 'history' || (ent.type === 'newtab' && isChromeApp())) return 'history';
   return 'engine';
 }
 function setAddrIcon(kind){
@@ -2052,8 +2182,9 @@ function chNewTab(){
 }
 function chNewIncognito(){
   CH.mode = 'i';
-  CH.inc.tabs.push(chTab());
-  CH.inc.cur = CH.inc.tabs.length - 1;
+  const a = curArr();
+  a.tabs.push(chTab());
+  a.cur = a.tabs.length - 1;
   renderCh(true);
 }
 function chCloseAt(i){
@@ -2247,6 +2378,8 @@ function syncChromeState(){
   chRoot.querySelector('.ch-count').textContent = String(a.tabs.length);
   const inp = chRoot.querySelector('.ch-addr-in');
   if (document.activeElement !== inp) inp.value = addrOf(ent);
+  /* Chrome app: placeholder text in the empty address bar */
+  inp.placeholder = isChromeApp() ? 'Search Google or type a URL' : '';
   setAddrIcon(entryIconKind(ent));
   renderBmBar();
 }
@@ -2430,7 +2563,7 @@ function openTabsMenu(){
     box.setAttribute('role', 'button');
     box.innerHTML = `
       <span class="tm-row">
-        <span class="tm-fav">${CH_GLOBE}<img src="${FAV(entHost(ent))}" alt="" onerror="this.remove()"></span>
+        <span class="tm-fav">${tabIcon(ent)}</span>
         <span class="tm-name"></span>
         <span class="tm-x" role="button" aria-label="Close tab">${TM_X}</span>
       </span>
@@ -2506,12 +2639,14 @@ function openCloseAllDlg(){
   d.querySelector('.dlg-ok').addEventListener('click', () => {
     d.remove();
     if (inc){
-      CH.inc.tabs = [chTab()];
-      CH.inc.cur = 0;
+      const a = curArr();
+      a.tabs = [chTab()];
+      a.cur = 0;
       renderCh();
     } else {
-      destroyChromium();
-      try { parent.postMessage({ type: 'mumu-close-app', id: DEV && DEV.id, app: 'chromium' }, '*'); } catch (e) {}
+      const appId = CH.app === 'chrome' ? 'g-chrome' : 'chromium';
+      resetBrowserApp(CH.app);
+      try { parent.postMessage({ type: 'mumu-close-app', id: DEV && DEV.id, app: appId }, '*'); } catch (e) {}
     }
   });
   chRoot.appendChild(d);
@@ -3576,6 +3711,227 @@ function renderCatGrid(){
   }
 }
 
+/* ============ SETTINGS APP ============ */
+const SET_G_WHITE = `<svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#fff" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#fff" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#fff" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#fff" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>`;
+const SET_G_COLOR = `<svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>`;
+const SET_SEARCH_IC = `<svg viewBox="0 0 20 20" fill="none" stroke="#9aa0a6" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="9" r="6.2"/><line x1="13.7" y1="13.7" x2="17" y2="17"/></svg>`;
+const SET_IC = {
+  net: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="17.6" r="1.7" fill="currentColor" stroke="none"/><path d="M7.7 13.6 A6.1 6.1 0 0 1 16.3 13.6"/><path d="M4.9 10.4 A10.1 10.1 0 0 1 19.1 10.4"/></svg>`,
+  devices: `<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.2" y="4.6" width="12.6" height="9.8" rx="2.4" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="9.4" y="9.6" width="11.2" height="8.6" rx="2.2" style="fill:var(--tbg)" stroke="currentColor" stroke-width="1.7"/><rect x="3.4" y="14" width="5.8" height="5.6" rx="1.8" style="fill:var(--tbg)" stroke="currentColor" stroke-width="1.6"/></svg>`,
+  apps: `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="6.5" cy="6.5" r="1.75"/><circle cx="12" cy="6.5" r="1.75"/><circle cx="17.5" cy="6.5" r="1.75"/><circle cx="6.5" cy="12" r="1.75"/><circle cx="12" cy="12" r="1.75"/><circle cx="17.5" cy="12" r="1.75"/><circle cx="6.5" cy="17.5" r="1.75"/><circle cx="12" cy="17.5" r="1.75"/><circle cx="17.5" cy="17.5" r="1.75"/></svg>`,
+  bell: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4 C8.8 4 6.6 6.3 6.6 9.4 V13.2 L4.7 16.2 C4.2 17 4.8 17.9 5.7 17.9 H18.3 C19.2 17.9 19.8 17 19.3 16.2 L17.4 13.2 V9.4 C17.4 6.3 15.2 4 12 4 Z" fill="currentColor"/><path d="M9.6 19.4 a2.5 2.5 0 0 0 4.8 0 Z" fill="currentColor"/></svg>`,
+  sound: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.8 9.2 H7.4 L12.4 4.9 V19.1 L7.4 14.8 H3.8 Z" fill="currentColor"/><path d="M14.9 9.1 a4.5 4.5 0 0 1 0 5.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M17.6 6.4 a8.2 8.2 0 0 1 0 11.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`,
+  modes: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="8.1" stroke-width="1.9"/><line x1="8.7" y1="12" x2="15.3" y2="12" stroke-width="2" stroke-linecap="round"/></svg>`,
+  display: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5 L13.5 5 L19 5 L19 10.5 L20.5 12 L19 13.5 L19 19 L13.5 19 L12 20.5 L10.5 19 L5 19 L5 13.5 L3.5 12 L5 10.5 L5 5 L10.5 5 Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 3.5 L13.5 5 L19 5 L19 10.5 L20.5 12 L19 13.5 L19 19 L13.5 19 L12 20.5 Z" fill="currentColor" transform="translate(12 12) scale(.78) translate(-12 -12)"/></svg>`,
+  wallpaper: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.1 3.6 C7.2 3.6 3.5 7.1 3.5 11.5 C3.5 15.8 6.8 19.3 10.8 19.3 C12.2 19.3 12.9 18.4 12.4 17.3 C11.9 16.2 12.5 15.1 14 15.1 H16.2 C18.8 15.1 20.5 13.3 20.5 11.1 C20.5 6.9 16.8 3.6 12.1 3.6 Z" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="8" cy="8.3" r="1.5" fill="currentColor"/><circle cx="12.9" cy="7" r="1.5" fill="currentColor"/><circle cx="16.7" cy="9.6" r="1.5" fill="currentColor"/></svg>`,
+  storage: `<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.6" y="3.8" width="16.8" height="4.9" rx="1.7"/><rect x="3.6" y="9.55" width="16.8" height="4.9" rx="1.7"/><rect x="3.6" y="15.3" width="16.8" height="4.9" rx="1.7"/></g><g stroke="currentColor" stroke-width="1.4"><circle cx="7" cy="6.25" r="1.05" style="fill:var(--tbg)"/><circle cx="7" cy="12" r="1.05" style="fill:var(--tbg)"/><circle cx="7" cy="17.75" r="1.05" style="fill:var(--tbg)"/></g></svg>`,
+  battery: `<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="10.3" y="3.7" width="3.4" height="2.1" rx="1.05" fill="currentColor"/><rect x="8.4" y="5.8" width="7.2" height="14.6" rx="2.3" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="9.9" y="10.2" width="4.2" height="8.1" rx="1.2" fill="currentColor"/></svg>`,
+  system: `<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="currentColor"><rect x="10.9" y="2.8" width="2.2" height="4" rx="1"/><rect x="10.9" y="2.8" width="2.2" height="4" rx="1" transform="rotate(60 12 12)"/><rect x="10.9" y="2.8" width="2.2" height="4" rx="1" transform="rotate(120 12 12)"/><rect x="10.9" y="2.8" width="2.2" height="4" rx="1" transform="rotate(180 12 12)"/><rect x="10.9" y="2.8" width="2.2" height="4" rx="1" transform="rotate(240 12 12)"/><rect x="10.9" y="2.8" width="2.2" height="4" rx="1" transform="rotate(300 12 12)"/><circle cx="12" cy="12" r="7.2"/></g><circle cx="12" cy="12" r="4.2" style="fill:var(--tbg)"/></svg>`,
+  phone: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><rect x="7.4" y="3" width="9.2" height="18" rx="2.4" stroke-width="1.7"/><line x1="10.5" y1="17.9" x2="13.5" y2="17.9" stroke-width="1.7" stroke-linecap="round"/></svg>`,
+  shield: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2 L19.2 5.9 V11.3 C19.2 16 16.1 19.7 12 21.1 C7.9 19.7 4.8 16 4.8 11.3 V5.9 Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>`,
+  location: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.4 C16.4 3.4 19.6 6.6 19.6 11 C19.6 15.6 12 20.8 12 20.8 C12 20.8 4.4 15.6 4.4 11 C4.4 6.6 7.6 3.4 12 3.4 Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="12" cy="10.8" r="2.7" style="fill:var(--tbg)" stroke="currentColor" stroke-width="1.5"/></svg>`,
+  key: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="7.5" cy="12" r="3.9"/><line x1="11.4" y1="12" x2="20" y2="12"/><line x1="16.6" y1="12" x2="16.6" y2="15.2"/><line x1="20" y1="12" x2="20" y2="15.2"/></svg>`,
+  access: `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="4.6" r="2.1" fill="currentColor"/><rect x="10.7" y="7.4" width="2.6" height="4.8" rx="1.3" fill="currentColor"/><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><line x1="12" y1="12.2" x2="9.7" y2="16.3"/><line x1="12" y1="12.2" x2="14.3" y2="16.3"/></g><g fill="currentColor"><circle cx="7.8" cy="19.3" r=".95"/><circle cx="10.6" cy="19.3" r=".95"/><circle cx="13.4" cy="19.3" r=".95"/><circle cx="16.2" cy="19.3" r=".95"/></g></svg>`
+};
+const SET_DEFS = {
+  google:    { g: true, name: 'Google', sub: 'Services & preferences' },
+  net:       { name: 'Network & internet', sub: 'Mobile, Wi-Fi, hotspot', ic: SET_IC.net },
+  devices:   { name: 'Connected devices', sub: 'Bluetooth, pairing', ic: SET_IC.devices },
+  apps:      { name: 'Apps', sub: 'Recent apps, default apps', ic: SET_IC.apps },
+  notif:     { name: 'Notifications', sub: 'Notification history, conversations', ic: SET_IC.bell },
+  sound:     { name: 'Sound & vibration', sub: 'Volume and vibration', ic: SET_IC.sound },
+  modes:     { name: 'Modes', sub: 'Do Not Disturb, Sleeping', ic: SET_IC.modes },
+  display:   { name: 'Display', sub: 'Dark theme, font size, brightness', ic: SET_IC.display },
+  wallpaper: { name: 'Wallpaper', sub: 'Home, lock screen', ic: SET_IC.wallpaper },
+  storage:   { name: 'Storage', ic: SET_IC.storage },
+  battery:   { name: 'Battery', sub: '71% - 1 hr left until full', ic: SET_IC.battery },
+  system:    { name: 'System', sub: 'Languages, gestures, time, backup', ic: SET_IC.system },
+  about:     { name: 'About phone', sub: 'SM-G9980', ic: SET_IC.phone },
+  security:  { name: 'Security & privacy', sub: 'App security, device lock, permissions', ic: SET_IC.shield },
+  location:  { name: 'Location', sub: 'On', ic: SET_IC.location },
+  passwords: { name: 'Passwords, passkeys, &', name2: 'accounts', sub: 'Suggestions for sign-in & autofill', ic: SET_IC.key },
+  access:    { name: 'Accessibility', sub: 'Display, interaction, audio', ic: SET_IC.access }
+};
+const SET_LAYOUT = [
+  { tab: 'google' },
+  { group: ['net', 'devices'] },
+  { group: ['apps', 'notif', 'sound', 'modes', 'display', 'wallpaper'] },
+  { group: ['storage', 'battery', 'system', 'about'] },
+  { group: ['security', 'location', 'passwords'] },
+  { tab: 'access' }
+];
+let setSel = 'google';
+
+function buildSettings(){
+  const root = document.createElement('div');
+  root.className = 'setapp';
+  setRoot = root;
+  root.innerHTML = `
+    <div class="set-left">
+      <div class="set-search">${SET_SEARCH_IC}<span>Search Settings</span></div>
+      <div class="set-tabs"></div>
+    </div>
+    <div class="set-right"></div>`;
+  const tabsEl = root.querySelector('.set-tabs');
+  SET_LAYOUT.forEach(item => {
+    if (item.group){
+      const g = document.createElement('div');
+      g.className = 'set-group';
+      item.group.forEach(id => g.appendChild(setTabBtn(id)));
+      tabsEl.appendChild(g);
+    } else {
+      tabsEl.appendChild(setTabBtn(item.tab, item.tab === 'google' ? 'gtab' : 'last'));
+    }
+  });
+  selectSetTab('google');
+  return root;
+}
+function setTabBtn(id, extra){
+  const d = SET_DEFS[id];
+  const b = document.createElement('button');
+  b.className = 'set-tab' + (extra ? ' ' + extra : '');
+  b.dataset.st = id;
+  const ic = document.createElement('span');
+  ic.className = 'ti';
+  ic.innerHTML = d.g ? SET_G_WHITE : d.ic;
+  const tx = document.createElement('span');
+  tx.className = 'set-tx';
+  const bl = document.createElement('b');
+  if (d.name2){
+    bl.className = 'two';
+    const s1 = document.createElement('span'); s1.textContent = d.name;
+    const s2 = document.createElement('span'); s2.textContent = d.name2;
+    bl.append(s1, document.createElement('br'), s2);
+  } else bl.textContent = d.name;
+  tx.appendChild(bl);
+  if (d.sub){ const sm = document.createElement('small'); sm.textContent = d.sub; tx.appendChild(sm); }
+  b.append(ic, tx);
+  b.addEventListener('click', () => selectSetTab(id));
+  return b;
+}
+function selectSetTab(id){
+  setSel = id;
+  if (!setRoot) return;
+  setRoot.querySelectorAll('.set-tab').forEach(t => t.classList.toggle('sel', t.dataset.st === id));
+  const right = setRoot.querySelector('.set-right');
+  const old = right.querySelector('.set-content');
+  if (old) old.remove();
+  const c = document.createElement('div');
+  c.className = 'set-content';
+  c.dataset.st = id;
+  if (id === 'google') c.appendChild(googleContent());
+  right.appendChild(c);
+  /* slide in: starts almost completely moved in, then settles into place */
+  requestAnimationFrame(() => requestAnimationFrame(() => c.classList.add('in')));
+}
+function googleContent(){
+  const w = document.createElement('div');
+  if (!setAccount){
+    w.className = 'sg-out';
+    const p = document.createElement('p');
+    p.textContent = 'Not signed in';
+    const b = document.createElement('button');
+    b.className = 'sg-btn';
+    b.textContent = 'Sign In';
+    b.addEventListener('click', openGoogleSignIn);
+    w.append(p, b);
+  } else {
+    w.className = 'sg-in';
+    w.innerHTML = `
+      <h2 class="sg-head">Google services</h2>
+      <div class="sg-user">
+        <div class="sg-avatar"></div>
+        <div>
+          <div class="sg-name"></div>
+          <div class="sg-mail"></div>
+        </div>
+      </div>`;
+    w.querySelector('.sg-name').textContent = setAccount.name;
+    w.querySelector('.sg-mail').textContent = setAccount.email;
+    const av = w.querySelector('.sg-avatar');
+    av.textContent = (setAccount.name || '?').charAt(0).toUpperCase();
+    av.style.background = avatarColor(setAccount.email);
+  }
+  return w;
+}
+function avatarColor(s){
+  const cols = ['#d93025','#e37400','#f9ab00','#188038','#0b8043','#1a73e8','#1967d2','#a142f4','#9334e6','#c5221f'];
+  let h = 0;
+  for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0;
+  return cols[h % cols.length];
+}
+function nameFromEmail(email){
+  const local = email.split('@')[0];
+  const parts = local.split(/[._\-+]+/).filter(Boolean);
+  const name = parts.map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(' ');
+  return name || email;
+}
+function openGoogleSignIn(){
+  if (setRoot && setRoot.querySelector('.sg-ovl')) return;
+  const ov = document.createElement('div');
+  ov.className = 'sg-ovl';
+  ov.innerHTML = `
+    <div class="sg-card" role="dialog" aria-modal="true">
+      <div class="sg-logo">${SET_G_COLOR}</div>
+      <div class="sg-title">Sign in</div>
+      <div class="sg-sub">to continue to Settings</div>
+      <div class="sg-field"><input type="email" placeholder="Email" spellcheck="false" autocomplete="off" aria-label="Email"></div>
+      <p class="sg-err"></p>
+      <div class="sg-actions"><button class="sg-next">Next</button></div>
+    </div>`;
+  const sub = ov.querySelector('.sg-sub');
+  const inp = ov.querySelector('input');
+  const err = ov.querySelector('.sg-err');
+  const actions = ov.querySelector('.sg-actions');
+  const next = ov.querySelector('.sg-next');
+  let stage = 0, email = '', backBtn = null;
+  const toEmailStage = () => {
+    stage = 0; email = '';
+    inp.type = 'email'; inp.value = ''; inp.placeholder = 'Email';
+    inp.setAttribute('aria-label', 'Email');
+    sub.textContent = 'to continue to Settings';
+    err.textContent = '';
+    if (backBtn && backBtn.isConnected) backBtn.remove();
+    backBtn = null;
+    next.textContent = 'Next';
+  };
+  const toPassStage = () => {
+    stage = 1;
+    inp.type = 'password'; inp.value = ''; inp.placeholder = 'Password';
+    inp.setAttribute('aria-label', 'Password');
+    sub.textContent = email;
+    err.textContent = '';
+    next.textContent = 'Sign in';
+    if (!backBtn){
+      backBtn = document.createElement('button');
+      backBtn.className = 'sg-back';
+      backBtn.textContent = 'Back';
+      backBtn.addEventListener('click', () => { toEmailStage(); inp.focus(); });
+      actions.insertBefore(backBtn, next);
+    }
+  };
+  const advance = () => {
+    const v = inp.value.trim();
+    if (stage === 0){
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){ err.textContent = 'Enter a valid email address'; return; }
+      email = v;
+      toPassStage();
+      inp.focus();
+    } else {
+      if (!inp.value){ err.textContent = 'Enter a password'; return; }
+      setAccount = { email, name: nameFromEmail(email) };
+      persistDev();
+      ov.remove();
+      selectSetTab('google');
+    }
+  };
+  ov.addEventListener('mousedown', e => { if (e.target === ov) ov.remove(); });
+  next.addEventListener('click', advance);
+  inp.addEventListener('keydown', e => { if (e.key === 'Enter'){ e.preventDefault(); advance(); } });
+  setRoot.appendChild(ov);
+  setTimeout(() => inp.focus(), 40);
+}
+
 /* ============ clock ============ */
 function tick(){
   const d = new Date();
@@ -3625,6 +3981,10 @@ addEventListener('resize', () => {
 });
 loadDevState(st => {
   if (st && Array.isArray(st.installed)){
+    if (st.settings && st.settings.google && st.settings.google.email){
+      const em = String(st.settings.google.email);
+      setAccount = { email: em, name: String(st.settings.google.name || '') || nameFromEmail(em) };
+    }
     installed = st.installed.filter(d => d && d.id && d.url)
       .map(d => ({ id: String(d.id), name: String(d.name || 'App'), icon: fixIcon(String(d.id), String(d.icon || '')), url: fixUrl(String(d.id), String(d.url)) }));
     if (Array.isArray(st.pages)){
@@ -3664,6 +4024,7 @@ addEventListener('keydown', e => {
   if (custSheet){ closeCustomizeSheet(); return; }
   if (document.querySelector('.am-dlg')){ document.querySelector('.am-dlg').remove(); return; }
   if (appMenu){ closeAppMenu(); return; }
+  if (document.querySelector('.sg-ovl')){ document.querySelector('.sg-ovl').remove(); return; }
   if (chRoot && chRoot.querySelector('.ch-panel')){
     chRoot.querySelectorAll('.ch-panel').forEach(p => p.remove());
     return;
