@@ -24,22 +24,20 @@ input{user-select:text;-webkit-user-select:text;caret-color:#A5C2FF}
 #ui{position:fixed;top:0;left:0;width:calc(100% / var(--s,1));height:calc(100% / var(--s,1));z-index:1;opacity:0;transform:scale(var(--s,1));transform-origin:0 0;transition:opacity .7s var(--ease),transform .16s ease-out}
 #ui.ready{opacity:1}
 
-/* ---------- status bar: wifi arc fully inside the viewBox so the top curves ---------- */
 #statusbar{position:absolute;top:0;left:0;right:0;height:42px;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font-size:15px;font-weight:600;text-shadow:0 1px 3px rgba(0,0,0,.5);transition:background .25s ease}
 #statusbar.appbg{background:#000}
 .sb-right{display:flex;align-items:center;gap:12px}
 .sb-pair{display:flex;align-items:center;gap:6px}
 .sb-right svg{display:block;filter:drop-shadow(0 1px 2px rgba(0,0,0,.5))}
 
-/* ---------- home pager ---------- */
+/* ---------- home: pager (side grids peek without intersecting) ---------- */
 #pagerwrap{position:absolute;left:0;right:0;top:48px;bottom:134px;overflow:hidden;z-index:1;touch-action:none}
-#pager{height:100%;transition:transform .3s var(--ease)}
-#pager.editing{transform:scale(.84)}
-#pagetrack{display:flex;height:100%;will-change:transform}
+#pager{height:100%;transform-origin:8% 50%;transition:transform .3s var(--ease)}
+#pager.editing{transform:scale(.78)}
+#pagetrack{display:flex;height:100%;will-change:transform;transition:transform .3s var(--ease)}
 .page{flex:0 0 100%;height:100%;display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(3,1fr);min-width:0}
-/* gaps between pages while editing so side grids never intersect */
-#pager.editing .page{margin:0 4%}
 #pager.editing .page{outline:2.5px solid rgba(135,198,255,.75);outline-offset:7px;border-radius:20px;background:rgba(135,198,255,.10)}
+#pager.editing .page + .page{margin-left:4%}
 .cell{position:relative;display:flex;align-items:center;justify-content:center;min-width:0}
 .cell.drop::after{content:"";position:absolute;inset:9%;border-radius:16px;border:2.5px solid rgba(135,198,255,.9);background:rgba(135,198,255,.16);pointer-events:none}
 .cell.mh .ic::before{content:"";position:absolute;inset:-11px;border-radius:20px;background:rgba(158,162,170,.38);animation:mhIn .2s var(--ease) both}
@@ -50,7 +48,6 @@ input{user-select:text;-webkit-user-select:text;caret-color:#A5C2FF}
 .app:active .ic{transform:scale(.88)}
 .app .lb{font-size:13px;font-weight:500;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.6);max-width:150px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .newdot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#46d67f;margin-right:5px}
-/* downloading cell: dark rounded overlay sits ON the icon */
 .dl-cell .ic>svg:not(.dl-ov){filter:brightness(.42)}
 svg.dl-ov{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:3}
 svg.dl-ov.zoom{transition:transform .32s ease,opacity .3s ease;transform:scale(1.55);opacity:0}
@@ -115,11 +112,9 @@ svg.dl-ov.zoom{transition:transform .32s ease,opacity .3s ease;transform:scale(1
 .bb-line{position:absolute;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,#2b6fe0,#54d0e1)}
 .bb-dot{position:absolute;right:-4px;top:1.5px;transform:translateY(-50%);width:9px;height:9px;border-radius:50%;background:#fff;box-shadow:0 0 10px 2px rgba(90,170,255,.85),0 0 3px 1px rgba(120,190,255,.9)}
 .bb-pct{position:absolute;right:16px;bottom:8px;font-size:12px;font-weight:600;color:#5db4e8;font-variant-numeric:tabular-nums}
-
-/* typing-cursor teardrop */
 #caretdrop{position:fixed;z-index:999;pointer-events:none;opacity:0}
 
-/* ============ CHROMIUM (themeable: dark / light / incognito via CSS vars) ============ */
+/* ============ CHROMIUM ============ */
 .chromium{position:absolute;inset:0;display:flex;flex-direction:column;background:var(--cA);animation:avIn .4s var(--ease) both;
   --cA:#0e0f12;--cB:#121317;--cS:#191b21;--cAdr:#282e38;--cAdrT:#c7ccd4;--cCnt:#1c1d21;--cNts:#474b52;
   --cTm:#030305;--cBox:#272e37;--cPop:#2c323f;--cDlg:#20262e;--cSnk:#2b2d33;--cBm:#1d1f24;
@@ -212,7 +207,6 @@ svg.dl-ov.zoom{transition:transform .32s ease,opacity .3s ease;transform:scale(1
 .hh-n{color:var(--cT1);font-size:14px;font-weight:600}
 .hh-u{font-size:12.5px;color:var(--cT4)}
 .hh-empty{color:var(--cT4);font-size:14px}
-/* tabs menu */
 .ch-tabsmenu{position:absolute;inset:0;z-index:50;background:var(--cTm);display:flex;flex-direction:column;animation:avIn .22s ease both}
 .tm-head{flex:none;display:flex;align-items:center;gap:6px;padding:14px 24px}
 .tm-new{display:flex;align-items:center;gap:9px;height:38px;padding:0 16px 0 13px;border-radius:10px;color:var(--cT5);font-size:13.5px;font-weight:600;transition:background .13s}
@@ -244,7 +238,6 @@ svg.dl-ov.zoom{transition:transform .32s ease,opacity .3s ease;transform:scale(1
 .tm-prev iframe{position:absolute;top:0;left:0;width:1280px;height:900px;border:0;pointer-events:none;background:#fff;transform-origin:0 0}
 .tm-prev .tm-g{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
 .tm-prev .tm-g img{width:44%;height:auto;object-fit:contain}
-/* popups (main menu + tabs menu dots) */
 .ch-popwrap{position:absolute;inset:0;z-index:82}
 .ch-pop{position:absolute;width:250px;background:var(--cPop);border-radius:14px;padding:7px;box-shadow:0 18px 44px rgba(0,0,0,.5);animation:avIn .16s ease both}
 .ch-pop.tm-pop{right:18px;top:62px}
@@ -266,7 +259,6 @@ svg.dl-ov.zoom{transition:transform .32s ease,opacity .3s ease;transform:scale(1
 .cs-txt{flex:1;min-width:0;color:var(--cT2);font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .cs-undo{color:#8cb4f9;font-size:13px;font-weight:700;padding:7px 12px;border-radius:8px;flex:none;transition:background .13s}
 .cs-undo:hover{background:rgba(140,180,249,.16)}
-/* settings panels (slide in from the right) */
 .ch-panel{position:absolute;inset:0;z-index:85;background:var(--cCnt);transform:translateX(100%);transition:transform .3s var(--ease);display:flex;flex-direction:column;overflow:hidden}
 .ch-panel.open{transform:none}
 .chp-top{height:52px;flex:none;display:flex;align-items:center;gap:12px;padding:0 14px}
@@ -368,6 +360,66 @@ svg.dl-ov.zoom{transition:transform .32s ease,opacity .3s ease;transform:scale(1
 .sr.hero .sr-rate{font-size:14px}
 .sr.hero .sr-rate svg{width:15px;height:15px}
 .sr.hero .sr-btn{height:40px;padding:0 26px;font-size:14px}
+
+/* ============ GAME DETAIL PAGE ============ */
+.gdet{position:absolute;inset:0;z-index:30;background:#292b30;transform:translateY(100%);transition:transform .4s var(--ease)}
+.gdet.open{transform:none}
+.gd-bar{position:absolute;top:0;left:0;right:0;height:52px;z-index:8;display:flex;align-items:center;padding:0 10px;background:#292b30}
+.gd-back{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;transition:background .13s}
+.gd-back:hover{background:rgba(255,255,255,.10)}
+.gd-back svg{width:20px;height:20px}
+.gd-scroll{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;padding:64px 26px 34px;scrollbar-width:thin}
+.gd-col{max-width:660px;margin:0 auto}
+.gd-head{display:flex;align-items:flex-start;gap:18px}
+.gd-ico{width:88px;height:88px;flex:none;border-radius:20px;object-fit:cover}
+.gd-hinfo{flex:1;min-width:0;display:flex;flex-direction:column;gap:5px}
+.gd-name{font-size:21px;font-weight:600;color:#fff;line-height:1.2;overflow-wrap:anywhere}
+.gd-rate{display:flex;align-items:center;gap:6px;color:#f5c443;font-size:13px;font-weight:600}
+.gd-rate svg{width:13px;height:13px;fill:#f5c443;flex:none}
+.gd-ibtn{height:40px;padding:0 26px;border-radius:9px;font-size:14px;font-weight:700;flex:none;margin-left:8px;transition:filter .15s}
+.gd-ibtn.install,.gd-ibtn.play{background:#3f8fdd;color:#fff}
+.gd-ibtn.cancel{background:#0b0c10;color:#5db4f0}
+.gd-ibtn:hover{filter:brightness(1.1)}
+.gd-meta{display:flex;align-items:center;flex-wrap:wrap;row-gap:6px;font-size:13px;color:#fff;margin-top:14px}
+.gd-mv{font-size:13px}
+.gd-meta .dv{width:1px;height:13px;background:rgba(255,255,255,.55);margin:0 11px}
+.gd-other{display:flex;align-items:center;gap:5px;color:#fff;font-size:13px;font-weight:600;padding:3px 4px;border-radius:6px;transition:background .13s}
+.gd-other:hover{background:rgba(255,255,255,.10)}
+.gd-other .chev,.gd-va .chev{display:flex;transition:transform .25s var(--ease)}
+.gd-oinfo{display:grid;grid-template-rows:0fr;transition:grid-template-rows .32s var(--ease)}
+.gd-oinfo.open{grid-template-rows:1fr}
+.gd-oinfo>div{overflow:hidden;min-height:0}
+.gd-obox{margin:12px 0 2px;background:#33353b;border-radius:10px;padding:12px 16px;display:flex;flex-direction:column;gap:7px;color:#b9bdc3;font-size:13px}
+.gd-h2{font-size:18px;font-weight:600;color:#fff;margin:26px 0 12px}
+.gd-shotbar{display:flex;justify-content:flex-end;gap:8px;margin-bottom:10px}
+.gd-sbtn{width:34px;height:34px;border-radius:50%;background:#1d3a63;color:#fff;display:flex;align-items:center;justify-content:center;transition:opacity .15s,background .15s}
+.gd-sbtn:hover{background:#27508c}
+.gd-sbtn.dis{opacity:.35;pointer-events:none}
+.gd-sbtn svg{width:15px;height:15px}
+.gd-shottrack{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;touch-action:none}
+.gd-shottrack::-webkit-scrollbar{display:none}
+.gd-shot{flex:0 0 30.5%;aspect-ratio:1052/592;border-radius:10px;object-fit:cover}
+.gd-shot.ph{background:#1f2228;display:flex;align-items:center;justify-content:center}
+.gd-shot.ph img{width:42%;border-radius:14px;opacity:.55}
+.gd-desc{margin-top:22px}
+.gd-desc p{color:#d6d9de;font-size:14.5px;line-height:1.6;margin:0 0 1.5em}
+.gd-va{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;color:#5db4f0;font-size:14px;font-weight:700;padding:9px;border-radius:8px;transition:background .13s}
+.gd-va:hover{background:rgba(93,180,240,.12)}
+.gd-bullets{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s var(--ease)}
+.gd-bullets.open{grid-template-rows:1fr}
+.gd-bullets>div{overflow:hidden;min-height:0}
+.gd-bullets ul{list-style:none;padding-top:14px}
+.gd-bullets li{color:#d6d9de;font-size:14px;line-height:1.45;margin-bottom:.45em;padding-left:16px;position:relative}
+.gd-bullets li::before{content:"";position:absolute;left:0;top:.55em;width:5px;height:5px;border-radius:50%;background:#8f959d}
+.gd-note{color:#8f959d;font-size:12px;line-height:1.5;margin-top:16px}
+.gd-view{position:absolute;inset:0;z-index:40;background:rgba(0,0,0,.8);display:flex;align-items:center;justify-content:center;animation:avIn .18s ease}
+.gv-img{max-width:82%;max-height:74%;border-radius:8px;object-fit:contain;background:#000}
+.gv-btn{position:absolute;width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,.45);color:#fff;display:flex;align-items:center;justify-content:center;transition:background .13s}
+.gv-btn:hover{background:rgba(0,0,0,.7)}
+.gv-btn svg{width:18px;height:18px}
+.gv-x{position:absolute;width:34px;height:34px;border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;transition:background .13s}
+.gv-x:hover{background:rgba(255,255,255,.15)}
+.gv-x svg{width:13px;height:13px}
 </style>
 </head>
 <body>
@@ -378,7 +430,6 @@ svg.dl-ov.zoom{transition:transform .32s ease,opacity .3s ease;transform:scale(1
     <span id="clock">9:41</span>
     <span class="sb-right">
       <span class="sb-pair">
-        <!-- wifi: 72° pie sector, arc fully inside so the top is curved -->
         <svg width="25" height="17" viewBox="0 0 25 17" aria-hidden="true">
           <path d="M12.5 16.5 L2.8 3.15 A16.5 16.5 0 0 1 22.2 3.15 Z" fill="#fff"/>
         </svg>
@@ -551,7 +602,7 @@ function setScale(){
   uiEl.style.setProperty('--s', s.toFixed(4));
 }
 
-/* ============ typing cursor: #A5C2FF caret + teardrop on click ============ */
+/* ============ typing cursor teardrop ============ */
 const dropEl = $('#caretdrop');
 let dropTO = null;
 function showCaretDrop(x, y){
@@ -660,7 +711,6 @@ const ICONS = {
          x="11" y="11" width="42" height="42" preserveAspectRatio="xMidYMid meet"/>
 </svg>`
 };
-/* icon inner content — shared by home icons and folder minis (rounded + white bg included) */
 function imgInner(icon, white, dark){
   const n = 'gi' + (++_uid);
   if (white){
@@ -682,7 +732,6 @@ function iconInner(app){
 function appIconSVG(app){
   return `<svg viewBox="0 0 64 64" aria-hidden="true">${iconInner(app)}</svg>`;
 }
-/* folder icon: minis are real scaled-down app icons (rounded, white bg kept) */
 function folderIconSVG(f){
   let minis = '';
   const pos = [[7,7],[36,7],[7,36],[36,36]];
@@ -693,10 +742,9 @@ function folderIconSVG(f){
   }
   return `<svg viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="15" fill="rgba(158,162,170,.32)"/>${minis}</svg>`;
 }
-/* download overlay: dark rounded rect with circular hole + pacman-style pie */
 function pieShape(p){
   const r = 19, cx0 = 32, cy0 = 32;
-  const a = Math.max(0, Math.min(1, p)) * 360;        /* eaten fraction (clockwise from top) */
+  const a = Math.max(0, Math.min(1, p)) * 360;
   if (a <= 0.2) return `<circle cx="32" cy="32" r="${r}" fill="rgba(0,0,0,.72)"/>`;
   if (a >= 359.8) return '';
   const rad = a * Math.PI / 180;
@@ -715,6 +763,9 @@ function dlOverlaySVG(pct){
 
 /* ============ app registry ============ */
 const SUBZERO_ICON = 'https://play-lh.googleusercontent.com/TU7evnDya31k2v4vcWrMhBmcNUd4e1-egTqfZ3ELv_xZrvsvL2BxZj7RVnbhVvcaYXpE-TOXWDE4iI2vcDKZ8A=w240-h480-rw';
+const PVZ2_ICON = 'https://play-lh.googleusercontent.com/r8kGrEySHDwfk2bv1HYmk4K76ioLYeDgr6W5SEAsNhoYlHdu-4kVJdaK9NIyVv9z__0_WOOQpSa2qMkaR9m5JQ';
+const PVZ2_URL = 'https://en.gameslol.net/data/pvzge/index.html';
+const CLUSTERDUCK_ICON = 'https://play-lh.googleusercontent.com/cTwDY_r_9paKRsbTHXV-ShALxhsBg8wrJDG-EdeeGhvmPNJGjeefmx6lf0ZRHK-mO3j-QrSxA0emNJ4yZTVDvg';
 const BASE = [
   { id: 'store',  name: 'MuMu Store' },
   { id: 'cloner', name: 'App Cloner' }
@@ -740,7 +791,9 @@ const GADGETS = [
 function gadgetsFolder(){ return { fid: 'gadgets', name: 'Gadgets', apps: GADGETS.slice() }; }
 const REG = {};
 [...BASE, ...DOCK_BASE, ...GADGETS].forEach(a => REG[a.id] = a);
-function fixIcon(id, icon){ return id === 'gd-subzero' ? SUBZERO_ICON : icon; }
+const ICON_FIXES = { 'gd-subzero': SUBZERO_ICON, 'pvz2': PVZ2_ICON, 'clusterduck': CLUSTERDUCK_ICON };
+function fixIcon(id, icon){ return ICON_FIXES[id] || icon; }
+function fixUrl(id, url){ return id === 'pvz2' ? PVZ2_URL : url; }
 let installed = [];
 function appById(id){ return REG[id] || installed.find(a => a.id === id) || null; }
 
@@ -757,7 +810,7 @@ const serApp = a => a ? (a.url ? { id: a.id, name: a.name, icon: a.icon, url: a.
   : (a.icon ? { id: a.id, name: a.name, tabName: a.tabName || '', icon: a.icon, white: !!a.white } : { id: a.id })) : null;
 const deApp = d => {
   if (!d || !d.id) return null;
-  if (d.url) return { id: String(d.id), name: String(d.name || 'App'), icon: fixIcon(String(d.id), String(d.icon || '')), url: String(d.url) };
+  if (d.url) return { id: String(d.id), name: String(d.name || 'App'), icon: fixIcon(String(d.id), String(d.icon || '')), url: fixUrl(String(d.id), String(d.url)) };
   if (REG[d.id]) return REG[d.id];
   if (d.name) return { id: String(d.id), name: String(d.name), tabName: d.tabName || '', icon: d.icon || '', white: !!d.white };
   return null;
@@ -801,12 +854,14 @@ let editing = false, dnd = null, swipe = null, P = null;
 let folderOpen = null, fseq = 0, suppressClick = false, dotsTO = null, fdnd = null;
 
 const trackW = () => wrapEl.clientWidth;
-const leftVirtuals = () => (editing && pageIdx > 0) ? 1 : 0;    /* no left grid on the default page */
-const stride = () => trackW() * (editing ? 1.08 : 1);           /* 4% margins each side while editing */
+const ORX = 0.08;                                   /* current page left edge while editing */
+const leftVirtuals = () => (editing && pageIdx > 0) ? 1 : 0;
 const curIdx = () => leftVirtuals() + pageIdx;
+const stride = () => trackW() * (editing ? 1.04 : 1);
+function baseX(){ return editing ? (ORX * trackW() - curIdx() * stride()) : (-pageIdx * trackW()); }
 function setTrackX(anim){
   trackEl.style.transition = anim ? '' : 'none';
-  trackEl.style.transform = `translateX(${-(curIdx() * stride())}px)`;
+  trackEl.style.transform = `translateX(${baseX()}px)`;
 }
 function renderHome(){
   rebuildTrack();
@@ -822,8 +877,9 @@ function renderHome(){
 }
 function rebuildTrack(){
   trackEl.innerHTML = '';
-  if (editing && pageIdx > 0) trackEl.appendChild(virtualPage('l'));
   pages.forEach((pg, pi) => {
+    /* the left virtual grid sits directly before the current page (new pages only) */
+    if (editing && pi === pageIdx && pageIdx > 0) trackEl.appendChild(virtualPage('l'));
     const d = document.createElement('div');
     d.className = 'page';
     for (let i = 0; i < 18; i++){
@@ -834,6 +890,7 @@ function rebuildTrack(){
     }
     trackEl.appendChild(d);
   });
+  /* right grid: always available in the app moving system */
   if (editing) trackEl.appendChild(virtualPage('r'));
 }
 function virtualPage(side){
@@ -932,7 +989,6 @@ function exitEdit(){
   setTrackX(false);
   scheduleHideDots();
 }
-/* unified pointer controller: tap = open, hold = app drag, horizontal = page swipe */
 uiEl.addEventListener('pointerdown', e => {
   if (e.button !== 0 || !avEl.hidden || dnd || swipe || fdnd) return;
   if (e.target.closest('.foldov')) return;
@@ -955,19 +1011,19 @@ function onPM(e){
     if (P.holdT && Math.hypot(dx, dy) > 9){ clearTimeout(P.holdT); P.holdT = 0; }
     if (Math.abs(dx) > 14 && Math.abs(dx) > Math.abs(dy) && !dnd){
       P.mode = 'swipe';
-      swipe = { base: -curIdx() * stride() };
+      swipe = { base: baseX() };
       showDots();
     }
   }
   if (P.mode === 'swipe' && swipe){
-    const S = stride();
+    const W = trackW();
     let X = swipe.base + dx;
-    const min = -((leftVirtuals()) + pages.length - 1) * S;
+    const min = -(pages.length - 1) * W;
     if (X > 0) X *= 0.3;
     if (X < min) X = min + (X - min) * 0.3;
     trackEl.style.transition = 'none';
     trackEl.style.transform = `translateX(${X}px)`;
-    liveDots(Math.round(-X / S) - leftVirtuals());
+    liveDots(Math.round(-X / W));
   }
   if (P.mode === 'drag' && dnd) dragMove(e);
 }
@@ -978,11 +1034,11 @@ function onPU(e){
   if (!P) return;
   if (P.holdT) clearTimeout(P.holdT);
   if (P.mode === 'swipe' && swipe){
-    const S = stride();
+    const W = trackW();
     const dx = e.clientX - P.x0;
     let tgt = pageIdx;
-    if (dx < -trackW() * 0.15) tgt = pageIdx + 1;
-    else if (dx > trackW() * 0.15) tgt = pageIdx - 1;
+    if (dx < -W * 0.15) tgt = pageIdx + 1;
+    else if (dx > W * 0.15) tgt = pageIdx - 1;
     tgt = Math.max(0, Math.min(pages.length - 1, tgt));
     swipe = null;
     if (tgt !== pageIdx){ animateDots(pageIdx, tgt); pageIdx = tgt; }
@@ -1173,7 +1229,6 @@ function buildFolderContent(){
         b.querySelector('.lb').textContent = a.name;
         b.addEventListener('click', () => {
           if (suppressClick || dnd || fdnd) return;
-          /* opening an app closes the folder first */
           const r = b.querySelector('.ic').getBoundingClientRect();
           closeFolder(false);
           openAppFromRect(a, r);
@@ -1275,7 +1330,6 @@ function closeFolder(anim){
     setTimeout(() => fo.ov.remove(), 340);
   } else fo.ov.remove();
 }
-/* hold an app inside a folder: drag within to reorder; drag out to extract it */
 function folderAppPD(e, a){
   if (e.button !== 0 || dnd || fdnd) return;
   const fo = folderOpen; if (!fo) return;
@@ -1300,13 +1354,12 @@ function folderAppPD(e, a){
       if (Math.hypot(ev.clientX - sx, ev.clientY - sy) > 9){ clearTimeout(holdT); cleanup(); }
       return;
     }
-    if (!fd.inside) return;                     /* handed off to the home-grid drag system */
+    if (!fd.inside) return;
     fd.ghost.style.left = ev.clientX + 'px';
     fd.ghost.style.top = ev.clientY + 'px';
     const bx = fd.box.getBoundingClientRect();
     const inBox = ev.clientX > bx.left && ev.clientX < bx.right && ev.clientY > bx.top && ev.clientY < bx.bottom;
     if (!inBox){
-      /* leaving the folder: close it and continue the drag on the home grid */
       fd.inside = false;
       handedOff = true;
       clearFoldHover();
@@ -1351,7 +1404,7 @@ function folderAppPD(e, a){
       buildFolderContent();
       renderHome();
     } else if (handedOff){
-      fdnd = null;                               /* global onPU/endDrag finishes the drop */
+      fdnd = null;
     } else {
       if (fd.ghost) fd.ghost.remove();
       fdnd = null;
@@ -1442,7 +1495,6 @@ function showView(v){
       embedEl.className = 'appembed';
       avEl.appendChild(embedEl);
     }
-    /* best-effort ad popup blocking for flagged games */
     if (AD_BLOCKED.has(app.id)){
       embedEl.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms');
       embedEl.setAttribute('referrerpolicy', 'no-referrer');
@@ -1518,7 +1570,6 @@ const GOOGLE_LOGO = 'https://www.pngkey.com/png/full/685-6856288_new-google-logo
 const HIST_FAV = 'https://assets.streamlinehq.com/image/private/w_300,h_300,ar_1/f_auto/v1/icons/logos/chrome-logo-t06wyngmehupsy6qwpmfn.png/chrome-logo-iep6syzf8tdaovbjmack.png?_a=DATAiZAAZAA0';
 const FAV = host => `https://www.google.com/s2/favicons?domain=${encodeURIComponent(host)}&amp;sz=64`;
 
-/* search engines (chromium is the base for other browsers) */
 const ENGINES = {
   google: { name: 'Google', host: 'google.com', q: 'https://www.google.com/search?q=',
     logo: GOOGLE_LOGO,
@@ -1577,7 +1628,6 @@ function addrOf(e){
 }
 function entHost(e){
   if (e.type === 'newtab') return ENGINES[CH.engine].host;
-  if (e.type === 'search') return hostOf(e.url);
   return hostOf(e.url);
 }
 function tabIcon(ent){
@@ -1765,7 +1815,6 @@ function hideSnack(){
   if (s) s.classList.remove('show');
 }
 
-/* right-click + drag a tab to reorder it (others slide aside) */
 let tabDrag = null;
 function buildChromium(){
   const root = document.createElement('div');
@@ -1813,10 +1862,7 @@ function buildChromium(){
   });
   const inp = root.querySelector('.ch-addr-in');
   inp.addEventListener('focus', () => inp.select());
-  inp.addEventListener('input', () => {
-    /* typing a non-link swaps the lock for the engine's favicon */
-    setAddrIcon(isUrlLike(inp.value.trim()) ? 'lock' : 'engine');
-  });
+  inp.addEventListener('input', () => setAddrIcon(isUrlLike(inp.value.trim()) ? 'lock' : 'engine'));
   inp.addEventListener('blur', () => setAddrIcon(entryIconKind(chEnt())));
   inp.addEventListener('keydown', e => {
     if (e.key === 'Enter'){ e.preventDefault(); inp.blur(); goFromText(inp.value); }
@@ -2010,8 +2056,6 @@ function buildFallback(url){
   d.querySelector('.fb-open').href = url;
   return d;
 }
-
-/* ---- tabs menu (with normal/incognito mode switch) ---- */
 function openTabsMenu(){
   if (!chRoot || chRoot.querySelector('.ch-tabsmenu')) return;
   const m = document.createElement('div');
@@ -2100,8 +2144,6 @@ function rebuildTabsMenu(){
   const tm = chRoot.querySelector('.ch-tabsmenu');
   if (tm){ tm.remove(); openTabsMenu(); }
 }
-
-/* ---- 3-dot menu next to the address bar ---- */
 function openMainMenu(){
   if (!chRoot || chRoot.querySelector('.ch-popwrap')) return;
   const inc = CH.mode === 'i';
@@ -2160,8 +2202,6 @@ function openCloseAllDlg(){
   });
   chRoot.appendChild(d);
 }
-
-/* ---- settings panels (slide in from the right) ---- */
 function slidePanel(title, buildBody){
   const p = document.createElement('div');
   p.className = 'ch-panel';
@@ -2307,11 +2347,11 @@ const GAMES = [
     icon: 'https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=1200,height=1200,fit=cover,f=png/b5c8b617f65be7cc4d56dd3657590ae7/temple-run-2-logo.png',
     url:  'https://azgames.io/game/temple-run-2/' },
   { id: 'clusterduck', name: 'Clusterduck',           rating: 4.6, cat: 'casual',
-    icon: 'https://static.wikia.nocookie.net/clusterduck/images/2/23/Clusterduck.png/revision/latest?cb=20251121082823',
+    icon: CLUSTERDUCK_ICON,
     url:  'https://cdn.yad.com/Clusterduck/index.html?yad#goog_rewarded' },
   { id: 'pvz2',       name: 'Plants vs Zombies 2',    rating: 4.1, cat: 'casual',
-    icon: 'https://static.wikia.nocookie.net/plantsvszombies/images/a/a2/Plants_Vs._Zombies%E2%84%A2_2_It%27s_About_Time_Square_Icon_%28Versions_4.5.1%29.png/revision/latest?cb=20160517131008',
-    url:  'https://play.pvzge.com/' }
+    icon: PVZ2_ICON,
+    url:  PVZ2_URL }
 ];
 const CAT_IC = {
   adventure: `<svg viewBox="0 0 20 20" fill="none" stroke="#fff" stroke-width="1.6" aria-hidden="true"><rect x="1.6" y="1.6" width="16.8" height="16.8" rx="4.2"/><g fill="#fff" stroke="none"><rect x="5.4" y="6.6" width="2.3" height="6.8" rx="1.15" transform="rotate(15 6.55 10)"/><rect x="8.6" y="6.6" width="2.3" height="6.8" rx="1.15" transform="rotate(15 9.75 10)"/><circle cx="13.9" cy="12.3" r="1.2"/></g></svg>`,
@@ -2348,8 +2388,397 @@ const stMan = sel => `<svg viewBox="0 0 30 30" aria-hidden="true">
   <circle cx="21.2" cy="11.2" r="2" fill="#fff"/>
 </svg>`;
 
+/* ---- game detail data (missing values show "—") ---- */
+const DETAILS = {
+  'gd-world': {
+    size: '147.6MB', dev: 'RobTop Games', ver: '2.2.147', upd: '2026-06-12',
+    desc: [
+      'Geometry Dash is back with a brand new adventure! New levels, new music, new monsters, new everything!',
+      'Flex your clicky finger as you jump, fly and flip your way through dark caves and spikey obstacles. Discover the lands, play online levels, and find the secrets hidden within the World of Geometry Dash!'
+    ],
+    bullets: [
+      'Rhythm-based Action Platforming!',
+      'Ten unique levels with music from Dex Arson, Waterflame, and F-777!',
+      'Play daily quests and earn rewards!',
+      'Play online levels created by the Geometry Dash Community!'
+    ],
+    shots: [
+      'https://play-lh.googleusercontent.com/kQKWGv6C60TNtQ07VKAqTgj96qsx1u5ESacqcBT0OyZr24u026V_MuTMuKC2L3nXVtPN9KtvHP1rdBqUoAGH=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/01llGV4kRHEdVeapj0965O8Cbh8D110JSsUjNXFJfIj1YZ7JOl-FZ4RUde20HGRjxwiRv2y2F3Sk3PR_G6IH6g=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/5eHywKWwkZcXR9NA98hbRmS6ivcJUroRAG5aPrxUljtOHtMXwpaF1XWt_rgY575QvCeIuVNcm2eDyasmobbCOmU=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/7_CarjIzChEu2PP6K4NidGg16hNsIX-UDl7NRhtcNhA45BzyJhkk9b2VMRiP4k0Z3gjqDR5m9jlMu-4FEoDNBDY=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/hnXPIHHINTsX9GI8hH8LB-5YkZWcXI1Y7cBRI-l5kIrTuQiENmnTVJURaV5RugoqvFr58gwNqXRWjD6lpC5R=w1052-h592-rw'
+    ]
+  },
+  'gd': {
+    size: '90.8MB', dev: 'RobTop Games', ver: '—', upd: '—',
+    desc: [
+      'Jump and fly your way through danger in this rhythm-based action platformer!',
+      'Prepare for a near impossible challenge in the world of Geometry Dash. Push your skills to the limit as you jump, fly and flip your way through dangerous passages and spiky obstacles.'
+    ],
+    bullets: [
+      'Rhythm-based Action Platforming!',
+      'Lots of levels with unique soundtracks!',
+      'Build and share your own levels using the level editor!',
+      'Unlock new icons and colors to customize your character!',
+      'Use practice mode to sharpen your skills!',
+      'Challenge yourself with the near impossible!'
+    ], shots: []
+  },
+  'gd-subzero': {
+    size: '117.6MB', dev: 'RobTop Games', ver: '—', upd: '—',
+    desc: [
+      'Geometry Dash is back with a brand new adventure packed with fresh challenges!',
+      'Flex your clicky finger as you jump, fly and flip your way through dangerous passages and thorny obstacles. The wait for the follow-up to the smash hit is over!'
+    ],
+    bullets: [
+      'Rhythm-based Action Platforming!',
+      'Three unique levels with amazing music!',
+      'Unique icons to customize your character!',
+      'Challenge yourself with the near impossible!'
+    ], shots: []
+  },
+  'gd-meltdown': {
+    size: '76.1MB', dev: 'RobTop Games', ver: '—', upd: '—',
+    desc: [
+      'Geometry Dash Meltdown will prepare you for a new adventure filled with more spikes and monsters than thought humanly possible!',
+      'Flex your clicky finger as you jump, fly and flip your way through dangerous passages and thorny obstacles.'
+    ],
+    bullets: [
+      'Rhythm-based Action Platforming!',
+      'Three unique levels with music from F-777!',
+      'Unique Meltdown icons and colors to customize your character!',
+      'Challenge yourself with the near impossible!'
+    ], shots: []
+  },
+  'roblox': {
+    size: '182.3MB', dev: 'Roblox Corporation', ver: '—', upd: '—',
+    desc: [
+      'Roblox is the ultimate virtual universe that lets you create, share experiences with friends, and be anything you can imagine.',
+      'Join millions of people and explore an infinite variety of immersive experiences created by a global community!'
+    ],
+    bullets: [
+      'Millions of experiences to explore',
+      'Immerse yourself in a huge variety of games',
+      'Hang out with friends around the world',
+      'Create your own experiences',
+      'Fully cross-platform support'
+    ], shots: []
+  },
+  'subway': {
+    size: '169.1MB', dev: 'SYBO Games', ver: '—', upd: '—',
+    desc: [
+      'DASH as fast as you can! Dodge the oncoming trains and buses and help Jake, Tricky and Fresh escape from the grumpy Inspector and his dog!',
+      'Collect coins, grab power ups, and see how far you can run through the endless subway!'
+    ],
+    bullets: [
+      'Dodge oncoming trains and buses',
+      'Collect coins and grab power ups',
+      'Unlock new characters and hoverboards',
+      'Challenge and help your friends'
+    ], shots: []
+  },
+  'temple-run': {
+    size: '110MB', dev: 'Imangi Studios', ver: '—', upd: '—',
+    desc: [
+      'The addictive mega-hit endless running adventure! You have stolen the cursed idol from the temple, and now you must run for your life to escape the Evil Demon Monkeys nipping at your heels.',
+      'Race down ancient temple walls, along sheer cliffs and through jungle ruins as you test your reflexes to the limit. How far can you run?'
+    ],
+    bullets: [
+      'Swipe to turn, jump and slide to avoid obstacles',
+      'Collect coins to unlock new heroes and power ups',
+      'Race through ancient temples and jungle ruins',
+      'Play offline — no connection needed',
+      'Played by over 500 million players worldwide'
+    ], shots: []
+  },
+  'temple-run-2': {
+    size: '122.5MB', dev: 'Imangi Studios', ver: '—', upd: '—',
+    desc: [
+      'Temple Run 2: Endless Escape is the sequel to the smash hit endless running game — an endless runner that blends action, strategy and adventure as you run for your life!',
+      'Run, jump, turn and slide your way through beautiful but dangerous new worlds, racing to escape the demon monkeys while dodging cliffs, mines, zip lines and forests.'
+    ],
+    bullets: [
+      'Endless running that blends action, strategy and adventure',
+      'Brand new locations, including the deep jungle',
+      'Seasonal events with fresh challenges',
+      'Unlock new heroes and power ups',
+      'Play offline anywhere',
+      'Compete with players around the world'
+    ], shots: []
+  },
+  'pvz2': {
+    size: '983.4MB', dev: 'ELECTRONIC ARTS', ver: '—', upd: '—',
+    desc: [
+      'Play the hit action-strategy adventure where you meet, greet, and defeat legions of hilarious zombies. Amass an army of amazing plants, charge them with plant food, and devise the ultimate plan to protect your brain!',
+      'Collect hundreds of plants and zombies, power up your attacks, journey through 11 wild worlds, and go head-to-head with other players in endless action-strategy adventure.'
+    ],
+    bullets: [
+      'Collect hundreds of plants and zombies',
+      'Power up your plants and sharpen your defenses',
+      'Go head-to-head with players in competitive battles',
+      'Journey through 11 wild worlds',
+      'Earn keys to unlock brain-bending puzzles'
+    ],
+    note: 'This game offers optional in-app purchases of virtual currency that can be used to acquire virtual in-game items. By downloading this game, you agree to the EA User Agreement.',
+    shots: []
+  },
+  'clusterduck': {
+    size: '—', dev: '—', ver: '—', upd: '—',
+    desc: [
+      'Clusterduck is a game about hatching ducks and discovering increasingly weird mutations as they breed. The more ducks you hatch, the weirder things get!',
+      'Hatch weird ducks, breed even weirder ones, and grow your collection while uncovering the strange secrets hidden deep in the caves below.'
+    ],
+    bullets: [
+      'Hatch weird mutant ducks',
+      'Breed even weirder ducks',
+      'Grow your duck collection',
+      'Mutations come in tiers of increasing weirdness',
+      'Every duck has its own personality description',
+      'Explore the caves and uncover their secrets'
+    ], shots: []
+  }
+};
+
 const DLS = {};
 let matchIdx = {};
+let gdOpen = null;
+
+/* ---- game detail page (slides up from the bottom) ---- */
+const GD_CHEV = `<svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M2 4 L6 8 L10 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"/></svg>`;
+
+function openShotViewer(root, shots, idx){
+  const v = document.createElement('div');
+  v.className = 'gd-view';
+  v.innerHTML = `
+    <img class="gv-img" alt="">
+    <button class="gv-btn gv-l" aria-label="Previous">${CH_LEFT}</button>
+    <button class="gv-btn gv-r" aria-label="Next">${CH_RIGHT}</button>
+    <button class="gv-x" aria-label="Close">${CH_X}</button>`;
+  const img = v.querySelector('.gv-img');
+  const L = v.querySelector('.gv-l'), R = v.querySelector('.gv-r'), X = v.querySelector('.gv-x');
+  const place = () => {
+    if (!img.complete || !img.naturalWidth) return;
+    const r = img.getBoundingClientRect(), vr = v.getBoundingClientRect();
+    L.style.top = R.style.top = (r.top - vr.top + r.height / 2 - 22) + 'px';
+    L.style.left = Math.max(6, r.left - vr.left - 52) + 'px';
+    R.style.left = Math.min(vr.width - 50, r.right - vr.left + 8) + 'px';
+    X.style.left = (r.right - vr.left - 34) + 'px';
+    X.style.top = Math.max(6, r.top - vr.top - 42) + 'px';
+  };
+  const set = i => {
+    idx = (i + shots.length) % shots.length;
+    img.src = shots[idx];
+    if (img.complete && img.naturalWidth) requestAnimationFrame(place);
+  };
+  img.addEventListener('load', () => requestAnimationFrame(place));
+  set(idx);
+  X.addEventListener('click', e => { e.stopPropagation(); v.remove(); });
+  L.addEventListener('click', e => { e.stopPropagation(); set(idx - 1); });
+  R.addEventListener('click', e => { e.stopPropagation(); set(idx + 1); });
+  v.addEventListener('click', e => { if (e.target === v) v.remove(); });
+  root.appendChild(v);
+}
+
+function openGameDetail(g){
+  if (gdOpen) return;
+  const d = DETAILS[g.id] || {};
+  const root = document.createElement('div');
+  root.className = 'gdet';
+  root.innerHTML = `
+    <div class="gd-bar"><button class="gd-back" aria-label="Back">${ST_BACK}</button></div>
+    <div class="gd-scroll"><div class="gd-col">
+      <div class="gd-head">
+        <img class="gd-ico" src="${g.icon}" alt="" draggable="false">
+        <div class="gd-hinfo">
+          <h1 class="gd-name"></h1>
+          <div class="gd-rate">${ST_STAR}<span>${g.rating.toFixed(1)}</span></div>
+        </div>
+        <button class="gd-ibtn install">Install</button>
+      </div>
+      <div class="gd-meta">
+        <span class="gd-mv gd-cat"></span><span class="dv"></span>
+        <span class="gd-mv gd-size"></span><span class="dv"></span>
+        <span class="gd-mv gd-dev"></span><span class="dv"></span>
+        <button class="gd-other"><span>Other info</span><span class="chev">${GD_CHEV}</span></button>
+      </div>
+      <div class="gd-oinfo"><div><div class="gd-obox">
+        <div>Version <span class="ov"></span></div>
+        <div>Last updated <span class="ou"></span></div>
+      </div></div></div>
+      <h2 class="gd-h2">Game Information</h2>
+      <div class="gd-shotbar">
+        <button class="gd-sbtn l" aria-label="Scroll images left">${CH_LEFT}</button>
+        <button class="gd-sbtn r" aria-label="Scroll images right">${CH_RIGHT}</button>
+      </div>
+      <div class="gd-shottrack"></div>
+      <div class="gd-desc"></div>
+      <button class="gd-va"><span class="vt">View All</span><span class="chev">${GD_CHEV}</span></button>
+      <div class="gd-bullets"><div><ul></ul></div></div>
+      ${d.note ? `<p class="gd-note"></p>` : ''}
+    </div></div>`;
+  root.querySelector('.gd-name').textContent = g.name;
+  root.querySelector('.gd-cat').textContent = catName(g.cat);
+  root.querySelector('.gd-size').textContent = d.size || '—';
+  root.querySelector('.gd-dev').textContent = d.dev || '—';
+  root.querySelector('.ov').textContent = d.ver || '—';
+  root.querySelector('.ou').textContent = d.upd || '—';
+  if (d.note) root.querySelector('.gd-note').textContent = d.note;
+  const descEl = root.querySelector('.gd-desc');
+  (d.desc || []).forEach(t => {
+    const p = document.createElement('p');
+    p.textContent = t;
+    descEl.appendChild(p);
+  });
+  const ul = root.querySelector('.gd-bullets ul');
+  (d.bullets || []).forEach(t => {
+    const li = document.createElement('li');
+    li.textContent = t;
+    ul.appendChild(li);
+  });
+  const track = root.querySelector('.gd-shottrack');
+  const shots = d.shots || [];
+  if (shots.length){
+    shots.forEach(src => {
+      const im = document.createElement('img');
+      im.className = 'gd-shot';
+      im.src = src;
+      im.draggable = false;
+      im.alt = '';
+      track.appendChild(im);
+    });
+  } else {
+    for (let i = 0; i < 3; i++){
+      const ph = document.createElement('div');
+      ph.className = 'gd-shot ph';
+      ph.innerHTML = `<img src="${g.icon}" alt="" draggable="false">`;
+      track.appendChild(ph);
+    }
+  }
+  storeRoot.appendChild(root);
+  requestAnimationFrame(() => requestAnimationFrame(() => root.classList.add('open')));
+
+  gdOpen = { g, root };
+
+  /* bar/back */
+  const close = () => {
+    cleanup();
+    gdOpen = null;
+    root.classList.remove('open');
+    setTimeout(() => root.remove(), 420);
+  };
+  root.querySelector('.gd-back').addEventListener('click', close);
+
+  /* other info toggle */
+  const oinfo = root.querySelector('.gd-oinfo');
+  const ochev = root.querySelector('.gd-other .chev');
+  root.querySelector('.gd-other').addEventListener('click', () => {
+    const open = oinfo.classList.toggle('open');
+    ochev.style.transform = open ? 'rotate(180deg)' : '';
+  });
+
+  /* view all / collapse */
+  const bullets = root.querySelector('.gd-bullets');
+  const va = root.querySelector('.gd-va');
+  va.addEventListener('click', () => {
+    const open = bullets.classList.toggle('open');
+    va.querySelector('.vt').textContent = open ? 'Collapse' : 'View All';
+    va.querySelector('.chev').style.transform = open ? 'rotate(180deg)' : '';
+  });
+
+  /* install / play button */
+  const ib = root.querySelector('.gd-ibtn');
+  ib.addEventListener('click', () => {
+    const st = gameState(g);
+    if (st === 'idle') startInstall(g);
+    else if (st === 'dl' || st === 'inst') cancelInstall(g);
+    else {
+      const app = installed.find(a => a.id === g.id);
+      if (app){
+        const r = root.querySelector('.gd-ico').getBoundingClientRect();
+        close();
+        openAppFromRect(app, r);
+      }
+    }
+  });
+  updateDetailBtn(g);
+
+  /* shots: circle buttons + drag scroll + click to view */
+  const bl = root.querySelector('.gd-sbtn.l');
+  const br = root.querySelector('.gd-sbtn.r');
+  const syncBtns = () => {
+    if (!shots.length){ bl.classList.add('dis'); br.classList.add('dis'); return; }
+    bl.classList.toggle('dis', track.scrollLeft < 2);
+    br.classList.toggle('dis', track.scrollLeft > track.scrollWidth - track.clientWidth - 2);
+  };
+  const shotStep = () => {
+    const s = track.querySelector('.gd-shot');
+    return s ? s.offsetWidth + 10 : 200;
+  };
+  bl.addEventListener('click', () => track.scrollBy({ left: -3 * shotStep(), behavior: 'smooth' }));
+  br.addEventListener('click', () => track.scrollBy({ left: 3 * shotStep(), behavior: 'smooth' }));
+  track.addEventListener('scroll', syncBtns, { passive: true });
+  syncBtns();
+
+  let sDrag = null;
+  track.addEventListener('pointerdown', e => {
+    if (e.button !== 0) return;
+    sDrag = { x0: e.clientX, y0: e.clientY, base: track.scrollLeft, horiz: null, moved: false, tgt: e.target.closest('.gd-shot') };
+  });
+  const onSMove = e => {
+    if (!sDrag) return;
+    const dx = e.clientX - sDrag.x0, dy = e.clientY - sDrag.y0;
+    if (sDrag.horiz === null){
+      if (Math.abs(dx) > 6 || Math.abs(dy) > 6){
+        sDrag.horiz = Math.abs(dx) > Math.abs(dy);
+        if (!sDrag.horiz) sDrag = null;      /* vertical → let the page scroll */
+      }
+      return;
+    }
+    if (Math.abs(dx) > 5) sDrag.moved = true;
+    track.scrollLeft = sDrag.base - dx;
+    syncBtns();
+  };
+  const onSUp = () => {
+    if (sDrag && sDrag.horiz !== null && !sDrag.moved && sDrag.tgt && shots.length){
+      const i = [...track.querySelectorAll('.gd-shot')].indexOf(sDrag.tgt);
+      if (i > -1) openShotViewer(root, shots, i);
+    }
+    sDrag = null;
+  };
+
+  /* click-and-drag vertical page scroll */
+  const sc = root.querySelector('.gd-scroll');
+  let pDrag = null;
+  sc.addEventListener('pointerdown', e => {
+    if (e.target.closest('button, a, input')) return;
+    pDrag = { y0: e.clientY, top: sc.scrollTop };
+  });
+  const onPMove = e => {
+    if (!pDrag || (sDrag && sDrag.horiz)) return;
+    sc.scrollTop = pDrag.top - (e.clientY - pDrag.y0);
+  };
+  const onPUp = () => { pDrag = null; };
+  addEventListener('pointermove', onSMove, true);
+  addEventListener('pointerup', onSUp, true);
+  addEventListener('pointermove', onPMove, true);
+  addEventListener('pointerup', onPUp, true);
+  const cleanup = () => {
+    removeEventListener('pointermove', onSMove, true);
+    removeEventListener('pointerup', onSUp, true);
+    removeEventListener('pointermove', onPMove, true);
+    removeEventListener('pointerup', onPUp, true);
+  };
+}
+function updateDetailBtn(g){
+  if (!gdOpen || gdOpen.g.id !== g.id) return;
+  const b = gdOpen.root.querySelector('.gd-ibtn');
+  if (!b) return;
+  const st = gameState(g);
+  b.className = 'gd-ibtn ' + (st === 'installed' ? 'play' : st === 'idle' ? 'install' : 'cancel');
+  b.textContent = st === 'installed' ? 'Play' : (st === 'idle' ? 'Install' : 'Cancel');
+}
+
 function matchGame(q, g){
   const n = g.name.toLowerCase();
   const s = q.trim().toLowerCase();
@@ -2419,8 +2848,8 @@ function startInstall(g){
       clearInterval(d.timer);
       d.phase = 'inst';
       renderRow(g);
-      renderHome();          /* regenerates the circle fully */
-      runEat(g);             /* pacman-style disappearance + overlay zoom out */
+      renderHome();
+      runEat(g);
       d.timer = setTimeout(() => finalizeInstall(g), 1250);
     }
   }, 95);
@@ -2449,7 +2878,7 @@ function runEat(g){
 }
 function finalizeInstall(g){
   const d = DLS[g.id];
-  if (!d || d.phase !== 'inst') return;      /* canceled */
+  if (!d || d.phase !== 'inst') return;
   delete DLS[g.id];
   const app = { id: g.id, name: g.name, icon: g.icon, url: g.url };
   installed.push(app);
@@ -2513,6 +2942,7 @@ function renderRow(g){
       </span>
       ${btn}`;
   });
+  updateDetailBtn(g);
 }
 function renderDrop(drop, q){
   drop.innerHTML = '';
@@ -2669,16 +3099,25 @@ function buildStore(){
   renderCatGrid();
   root.addEventListener('click', e => {
     const btn = e.target.closest('.sr-btn');
-    if (!btn) return;
-    const row = btn.closest('.sr');
-    const g = GAMES.find(x => x.id === row.dataset.g);
-    if (!g) return;
-    const st = gameState(g);
-    if (st === 'idle') startInstall(g);
-    else if (st === 'dl' || st === 'inst') cancelInstall(g);
-    else {
-      const app = installed.find(a => a.id === g.id);
-      if (app) openApp(app, row.querySelector('.sr-icwrap'));
+    if (btn){
+      const row = btn.closest('.sr');
+      const g = GAMES.find(x => x.id === row.dataset.g);
+      if (!g) return;
+      const st = gameState(g);
+      if (st === 'idle') startInstall(g);
+      else if (st === 'dl' || st === 'inst') cancelInstall(g);
+      else {
+        const app = installed.find(a => a.id === g.id);
+        if (app) openApp(app, row.querySelector('.sr-icwrap'));
+      }
+      return;
+    }
+    /* clicking anywhere else on an app row opens its detail page */
+    if (e.target.closest('.gdet')) return;
+    const row = e.target.closest('.sr');
+    if (row){
+      const g = GAMES.find(x => x.id === row.dataset.g);
+      if (g) openGameDetail(g);
     }
   });
   return root;
@@ -2753,7 +3192,7 @@ addEventListener('resize', () => {
 loadDevState(st => {
   if (st && Array.isArray(st.installed)){
     installed = st.installed.filter(d => d && d.id && d.url)
-      .map(d => ({ id: String(d.id), name: String(d.name || 'App'), icon: fixIcon(String(d.id), String(d.icon || '')), url: String(d.url) }));
+      .map(d => ({ id: String(d.id), name: String(d.name || 'App'), icon: fixIcon(String(d.id), String(d.icon || '')), url: fixUrl(String(d.id), String(d.url)) }));
     if (Array.isArray(st.pages)){
       pages = st.pages.map(p => {
         const arr = (p || []).slice(0, 18).map(deSlot);
@@ -2802,6 +3241,11 @@ addEventListener('keydown', e => {
     if (tm){ tm.remove(); return; }
     const snack = chRoot.querySelector('.ch-snack.show');
     if (snack){ hideSnack(); return; }
+  }
+  if (storeRoot){
+    const view = storeRoot.querySelector('.gd-view');
+    if (view){ view.remove(); return; }
+    if (gdOpen){ gdOpen.root.querySelector('.gd-back').click(); return; }
   }
   if (window.parent !== window && DEV && DEV.id != null){
     parent.postMessage({ type: 'mumu-close', id: DEV.id }, '*');
