@@ -510,6 +510,18 @@ svg.dl-ov.zoom{transition:transform .32s ease,opacity .3s ease;transform:scale(1
 .sg-back:hover{background:rgba(26,115,232,.08)}
 .sg-next{height:42px;padding:0 30px;border-radius:999px;background:#1a73e8;color:#fff;font-size:14px;font-weight:600;transition:filter .15s}
 .sg-next:hover{filter:brightness(1.1)}
+
+/* ============ SETTINGS: section list (Network & internet) ============ */
+.net-page{display:flex;flex-direction:column;gap:2px}
+.set-sec-head{color:#fff;font-size:22px;font-weight:600;margin:0 0 12px}
+.set-sec{display:flex;align-items:center;gap:15px;width:100%;min-height:62px;padding:9px 16px;border-radius:12px;text-align:left;transition:background .14s}
+.set-sec:hover{background:rgba(255,255,255,.06)}
+.set-sec .sec-ic{width:23px;height:23px;flex:none;display:block;color:#dfe2e6}
+.set-sec .sec-ic svg{width:100%;height:100%;display:block}
+.set-sec .sec-tx{display:flex;flex-direction:column;justify-content:center;gap:2px;min-width:0;flex:1}
+.set-sec .sec-tx b{font-size:15px;font-weight:500;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.set-sec .sec-tx small{font-size:12.5px;color:#9aa0a6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.set-sec.no-ic{padding-left:54px}
 </style>
 </head>
 <body>
@@ -519,7 +531,7 @@ svg.dl-ov.zoom{transition:transform .32s ease,opacity .3s ease;transform:scale(1
   <div id="statusbar">
     <span id="clock">9:41</span>
     <span class="sb-right">
-      <span class="sb-pair">
+      <span class="sb-pair" id="sbNet">
         <svg width="25" height="17" viewBox="0 0 25 17" aria-hidden="true">
           <path d="M12.5 16.5 L2.8 3.15 A16.5 16.5 0 0 1 22.2 3.15 Z" fill="#fff"/>
         </svg>
@@ -527,6 +539,9 @@ svg.dl-ov.zoom{transition:transform .32s ease,opacity .3s ease;transform:scale(1
           <path d="M2.6 16.2 H15.2 V3.6 Z" fill="#fff"/>
         </svg>
       </span>
+      <svg id="sbPlane" width="17" height="17" viewBox="0 0 20 20" style="display:none" aria-hidden="true">
+        <path d="M10 1.5 L11.1 6.2 L11.1 8.8 L18.6 12.4 L18.6 13.9 L11.1 12.2 L11.1 15.2 L13.4 16.9 L13.4 18.2 L10 17.3 L6.6 18.2 L6.6 16.9 L8.9 15.2 L8.9 12.2 L1.4 13.9 L1.4 12.4 L8.9 8.8 L8.9 6.2 Z" fill="#fff"/>
+      </svg>
       <svg width="13" height="17" viewBox="0 0 13 17" aria-hidden="true">
         <rect x="4.8" y="0.5" width="3.4" height="2.4" rx="1" fill="#fff"/>
         <rect x="2.6" y="3.4" width="7.8" height="13.1" rx="2.4" fill="#fff"/>
@@ -2800,7 +2815,16 @@ const GAMES = [
     url:  'https://cdn.yad.com/Clusterduck/index.html?yad#goog_rewarded' },
   { id: 'pvz2',       name: 'Plants vs Zombies 2',    rating: 4.1, cat: 'casual',
     icon: PVZ2_ICON,
-    url:  PVZ2_URL }
+    url:  PVZ2_URL },
+  { id: 'gacha-life', name: 'Gacha Life',             rating: 4.5, cat: 'casual',
+    icon: 'https://cdn.now.gg/apps-content/air.com.lunime.gachalife/icon/gacha-life.png',
+    url:  'https://zapgames.io/gacha-life.embed' },
+  { id: 'gacha-club', name: 'Gacha Club',             rating: 4.5, cat: 'casual',
+    icon: 'https://play-lh.googleusercontent.com/f6kVXGwfe6vK9hJ-okf0In_wsw_pUU-Wp2h1vs-GrfuF98rsL1RZwkMiOW1_sp-R5P4r7AowRa62fbN043xZELk',
+    url:  'https://www.gachaclub.online/wp-content/uploads/games/html5/G/gacha%20club%20online/index.html' },
+  { id: 'pvz',        name: 'Plants vs. Zombies',     rating: 3.8, cat: 'strategy',
+    icon: 'https://play-lh.googleusercontent.com/FGB00L2-aGHPAiRJPxbC3Th_KEaGvVroVF-tPSf_1Unh9kzzY-al4mp1yJT16I16FuLK6oJ-3H-KrVgTrg3ABFc',
+    url:  'https://www.1r8t9so0qotx1d9c.whm.66042whm.school.and.securly-3351dcb3.nip.io/games/467.html' }
 ];
 const CAT_IC = {
   adventure: `<svg viewBox="0 0 20 20" fill="none" stroke="#fff" stroke-width="1.6" aria-hidden="true"><rect x="1.6" y="1.6" width="16.8" height="16.8" rx="4.2"/><g fill="#fff" stroke="none"><rect x="5.4" y="6.6" width="2.3" height="6.8" rx="1.15" transform="rotate(15 6.55 10)"/><rect x="8.6" y="6.6" width="2.3" height="6.8" rx="1.15" transform="rotate(15 9.75 10)"/><circle cx="13.9" cy="12.3" r="1.2"/></g></svg>`,
@@ -3042,6 +3066,77 @@ const DETAILS = {
       'https://play-lh.googleusercontent.com/Zl9SemIPC0S7J5POFQOoxhr-ksQeQLTE4NhCYwVf0HKelzTYkXD7daqE1UC-BLSFbNIAZpywK-SnHFFK7s66=w1052-h592-rw',
       'https://play-lh.googleusercontent.com/UmCFi1yRjEtDVQbGx-pE5679wd_SksVQviVWnckyF04xd410as6KS_JBOSXVjGVGXcaW3T5hYP1WodYguKlG4Q=w1052-h592-rw',
       'https://play-lh.googleusercontent.com/LvcDaNvHEBind3S4GqYBP18n_ENiungU4nAW5eDMOe5_amOiRW6tXUewpH4hTi9Qwu6Y3IMmN2crbGm9HUcu0A=w1052-h592-rw'
+    ]
+  },
+  'gacha-life': {
+    size: '99.6MB', dev: 'Lunime', ver: '1.1.14', upd: '2026-06-12',
+    desc: [
+      '★ Welcome to Gacha Life ★ Create your own anime styled characters and dress them up in your favorite fashion outfits!',
+      'With hundreds of dresses, shirts, hairstyles, weapons and much more, the customization possibilities are endless! Build scenes in Studio Mode, explore the world in Life Mode, and gacha for gifts!'
+    ],
+    bullets: [
+      'CREATE YOUR OWN CHARACTERS — dress up your anime characters with hundreds of outfits, hairstyles and accessories',
+      'STUDIO MODE — add up to 8 characters, pets and objects to your scenes and create your own stories',
+      'LIFE MODE — explore different areas and meet new NPCs — no Wi-Fi needed, play fully offline',
+      'GACHA GAMES — play 8 fun mini games and gacha to earn gifts and gems',
+      'Notes: the game may lag on old devices — restarting the game solves most issues',
+      'Android 6.0+ devices are unable to make in-app purchases'
+    ],
+    shots: [
+      'https://play-lh.googleusercontent.com/4mFifT6PsMYtV3Ml9su5AnUzNtypNQA_mc5wCCDfpPm2kWpVBDhVmMXltdpwEXfj1ngaSIB6JJxQX8AFRjVdQQ=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/cRVTa3s4NoGLEpQGetmm1BdhR2jt7OmsU8r2pRJL8A4Ck4Oouu3uXHpWvQwQGRhsr0Ggk1CAof0pj2M4b3B3gZI=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/IzAX92rIFBAg5qwDqvj5kv3KbfaTIYSeCvHJw8wRB38dz56FhxdK-SW_teLtoxytPtk7qr5fjAbG1WCzhnQP=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/sl-uXevqKOaxnC5bXiGp81f1sXuZnaSggJQ93amUFKkGITSSWTV7Bnf4XP6Q9cg1aX1m0T0aJt2avHeizxGlxeE=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/mQZ5gOvKZfSP09MmjCC3uS0K8htQ9YnY5BG7wBFiZECQV4PnplEwua2g77zUwvGYo9UbmvX5PDPJfA5E2p3Axw=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/wmOCoaXXJMi7CpvAQf3Wb2GkITCqKXqiQ_gV-0qdalkFHkOF1TjRsaR6qWcHlCODdaB8USpuce5lgLvxkdqpZw=w1052-h592-rw'
+    ]
+  },
+  'gacha-club': {
+    size: '99.7MB', dev: 'Lunime', ver: '1.1.12', upd: '2026-06-12',
+    desc: [
+      '★ Welcome to Gacha Club ★ Create your own anime styled characters and dress them up in your favorite fashion outfits — dresses, shirts, hairstyles, weapons and much more!',
+      'Customization is 100% free! There are no in-app purchases — collect units, customize them your way, and build the ultimate battle team!'
+    ],
+    bullets: [
+      'CUSTOMIZE: 10 main characters and 90 extra characters with nearly 600 poses',
+      'STUDIO MODE: add characters, pets and objects, choose backgrounds, and create your own scenes and stories',
+      'BATTLE: collect over 180 units and 150 pets, enhance them with materials, and battle in Story, Training, Tower and Shadows of Corruption modes',
+      'MINI GAMES: play Usagi vs Neko and more to collect gems and units — no Wi-Fi needed',
+      'Notes: the game may lag on old devices — restarting the game solves most issues',
+      'No in-app purchases — everything is free!'
+    ],
+    shots: [
+      'https://play-lh.googleusercontent.com/4zS7se8I3kLRaOGi96Ge0KmxWLk6HGxaUIldxDkiWND4xCZGsH8E7fG-w5a84EyWowNhnjjj22Ik5tUXa3dN=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/T8RdEoaWznPqssMCveUJzMS--Diecd8eOfMigzqG-UIvzzTurqR0Pf3nz9_FmPHBT8Y7PiuioYVJDmcZJkH-=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/RClOWRZqJVwj23R3_TqgDCR738B0h85B5YFVklIofNOGMmzxmKyNrDM_J2zCZr7T20IG-1IiB8soyYbB24TZqAQ=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/PWWAJ-bBVXcaN--gJWFuwdQf0AhpUi7FWisiud9f-U22RjFspJdfwQxH-zSbvF0fAIW2eb3ODkRRl6EpFeSHGw=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/jdD5KhIRBvx0rEXIbeSZi2Elj4Jup9FpSL-7QySbzLLV58lFxfJ_HGuFYGBjVcWbtDcThifU_fooqkQrVgJkgy4=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/b02wSPCVtePvmkyteNGU3YaEuQkOmvEWcde1bdkVE7qbEutdj_aplV9UMtFCkrkTX83Digc10e8zEAVOZC08cQ=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/pR8JzbwJSEel4VG3c3XEgw1_R4EgUFC6DCPUXrUq4xKzslqhlZIUkPsxi6OVZ9Snm3rq3HKlpEsxUzLiciII6g=w1052-h592-rw'
+    ]
+  },
+  'pvz': {
+    size: '108.3MB', dev: 'ELECTRONIC ARTS', ver: '3.16.0', upd: '2026-06-12',
+    desc: [
+      'Zombies are invading your home — and the only defense is your arsenal of plants! Armed with 49 zombie-zapping plants like Peashooters, Wall-nuts and Cherry Bombs, you will need to think fast and plant faster to stop 26 types of zombies dead in their tracks.',
+      'Conquer all 50 levels of Adventure mode, battle through Survival and other game modes, and collect 46 achievements along the way!'
+    ],
+    bullets: [
+      '50 levels of Adventure mode, plus Survival, Puzzle and Mini-Games modes',
+      '49 plants — from Peashooters to Wall-nuts — to battle 26 types of zombies',
+      'Zombies with special abilities — think fast and plant faster to keep them at bay',
+      'Collect 46 achievements and show off your zombie-zapping prowess',
+      'Coin packs available in the main menu store — up to 600,000 coins',
+      'Grow your own Zen Garden between battles'
+    ],
+    note: 'This game offers optional in-app purchases of virtual currency that can be used to acquire virtual in-game items. By downloading this game, you agree to the EA User Agreement. *Original PC downloadable game.',
+    shots: [
+      'https://play-lh.googleusercontent.com/a3yJfEvDBKHAuCiareO3xPOLkiALpzYHbRjxjiMxS1YJsocbt0T4AO2DIDJrZ_Dl6966yRcc6M2QLHoA1oBXhao=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/G9UXGmyL47XVLwTf96MY1r2Lg5y9iIVmN5hP4bsu7vxEdEqGX6Hto6BN3GXcBQk9EVRZiOFIhyRIN_3HTIAcUg=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/bkX8fyapc2N_J6VRZVOINRP7vdD9X-OGIRm6yJCfzRG2SzULAbMNf9oq2uUuowtDa8Em0YPQUUN6-tlrcalG=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/-wsdnqxHjoae8Tve6a6N2LOhY2gSYMEoLUiwXbHXAsvii3wovCLKqg3w8z7uSKYDJN_OsqaVXFRgsmSlbFZLtjQ=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/GZUGfAy9qEcdcT3EwooXZW0qirrSxYfI0M6BcibC3PiG38-FKVg8tulOmoogHl6z48ds9xt8taiV-rt4QKI0hbE=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/7gvX0kqyyrs7P6y1pBWtS2ye5sh0VLgxCa6ruJ81yTjmJyRxYAMUMt2iCN5Gg80sDw0BYiUkpUeiW5jer8D_7No=w1052-h592-rw'
     ]
   },
   'clusterduck': {
@@ -3761,6 +3856,7 @@ const SET_LAYOUT = [
   { tab: 'access' }
 ];
 let setSel = 'google';
+let airplaneMode = false;
 
 function buildSettings(){
   const root = document.createElement('div');
@@ -3820,6 +3916,7 @@ function selectSetTab(id){
   c.className = 'set-content';
   c.dataset.st = id;
   if (id === 'google') c.appendChild(googleContent());
+  if (id === 'net') c.appendChild(networkContent());
   right.appendChild(c);
   /* slide in: starts almost completely moved in, then settles into place */
   requestAnimationFrame(() => requestAnimationFrame(() => c.classList.add('in')));
@@ -3930,6 +4027,109 @@ function openGoogleSignIn(){
   inp.addEventListener('keydown', e => { if (e.key === 'Enter'){ e.preventDefault(); advance(); } });
   setRoot.appendChild(ov);
   setTimeout(() => inp.focus(), 40);
+}
+
+/* ---- Network & internet tab ---- */
+const NET_IC = {
+  wifi: `<svg viewBox="0 0 25 17" fill="currentColor" aria-hidden="true"><path d="M12.5 16.5 L2.8 3.15 A16.5 16.5 0 0 1 22.2 3.15 Z"/></svg>`,
+  globe: `<svg viewBox="0 0 24 24" aria-hidden="true"><g stroke="#84878d" stroke-width="1.6" fill="none"><circle cx="11" cy="11" r="7.5"/><path d="M3.5 11 H18.5"/><path d="M11 3.5 C8.2 5.8 8.2 16.2 11 18.5 C13.8 16.2 13.8 5.8 11 3.5 Z"/></g><g stroke="#b5b9bf" stroke-width="1.5" stroke-linecap="round"><line x1="16.4" y1="16.4" x2="20.3" y2="20.3"/><line x1="20.3" y1="16.4" x2="16.4" y2="20.3"/></g></svg>`,
+  sim: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M8.6 4.6 H16.4 A2.8 2.8 0 0 1 19.2 7.4 V16.6 A2.8 2.8 0 0 1 16.4 19.4 H7.6 A2.8 2.8 0 0 1 4.8 16.6 V8.4 Z" stroke-width="1.6"/><g stroke-width="1.4"><line x1="9.8" y1="10" x2="9.8" y2="15.2"/><line x1="12" y1="10" x2="12" y2="15.2"/><line x1="14.2" y1="10" x2="14.2" y2="15.2"/></g></svg>`,
+  plane: `<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5 L11.1 6.2 L11.1 8.8 L18.6 12.4 L18.6 13.9 L11.1 12.2 L11.1 15.2 L13.4 16.9 L13.4 18.2 L10 17.3 L6.6 18.2 L6.6 16.9 L8.9 15.2 L8.9 12.2 L1.4 13.9 L1.4 12.4 L8.9 8.8 L8.9 6.2 Z" fill="currentColor"/></svg>`,
+  hotspot: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="8.3" pathLength="100" stroke-dasharray="80 20" transform="rotate(126 12 12)"/><circle cx="12" cy="12" r="5" pathLength="100" stroke-dasharray="80 20" transform="rotate(126 12 12)"/><circle cx="12" cy="12" r="1.9" fill="currentColor" stroke="none"/></svg>`,
+  data: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="8.2" pathLength="100" stroke-dasharray="4.17 8.33 58.33 8.33 20.83"/></svg>`,
+  key: SET_IC.key
+};
+let airTO = null;
+function setStatusAirplane(on){
+  const pair = $('#sbNet'), plane = $('#sbPlane');
+  if (!pair || !plane) return;
+  clearTimeout(airTO);
+  if (on){
+    /* wifi + signal slide right and fade away ... */
+    pair.style.transition = 'transform .38s cubic-bezier(.2,.8,.3,1), opacity .3s ease';
+    pair.style.transform = 'translateX(18px)';
+    pair.style.opacity = '0';
+    airTO = setTimeout(() => {
+      pair.style.display = 'none';
+      /* ... then the airplane fades in and rises into place */
+      plane.style.display = '';
+      plane.style.transition = 'none';
+      plane.style.transform = 'translateY(9px)';
+      plane.style.opacity = '0';
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        plane.style.transition = 'transform .42s cubic-bezier(.16,1,.3,1), opacity .34s ease';
+        plane.style.transform = '';
+        plane.style.opacity = '1';
+      }));
+    }, 400);
+  } else {
+    /* reverse: airplane sinks and fades ... */
+    plane.style.transition = 'transform .38s cubic-bezier(.2,.8,.3,1), opacity .3s ease';
+    plane.style.transform = 'translateY(9px)';
+    plane.style.opacity = '0';
+    airTO = setTimeout(() => {
+      plane.style.display = 'none';
+      /* ... then wifi + signal slide back in from the right */
+      pair.style.display = '';
+      pair.style.transition = 'none';
+      pair.style.transform = 'translateX(18px)';
+      pair.style.opacity = '0';
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        pair.style.transition = 'transform .42s cubic-bezier(.16,1,.3,1), opacity .34s ease';
+        pair.style.transform = '';
+        pair.style.opacity = '1';
+      }));
+    }, 400);
+  }
+}
+function networkContent(){
+  const w = document.createElement('div');
+  w.className = 'net-page';
+  w.innerHTML = `
+    <h2 class="set-sec-head">Network &amp; internet</h2>
+    <button class="set-sec" data-sec="internet">
+      <span class="sec-ic"></span>
+      <span class="sec-tx"><b>Internet</b><small></small></span>
+    </button>
+    <button class="set-sec" data-sec="sims">
+      <span class="sec-ic">${NET_IC.sim}</span>
+      <span class="sec-tx"><b>SIMs</b><small>China Mobile GSM</small></span>
+    </button>
+    <button class="set-sec" data-sec="airplane">
+      <span class="sec-ic">${NET_IC.plane}</span>
+      <span class="sec-tx"><b>Airplane mode</b></span>
+      <span class="chsw" role="switch" aria-checked="false"><i></i></span>
+    </button>
+    <button class="set-sec" data-sec="hotspot">
+      <span class="sec-ic">${NET_IC.hotspot}</span>
+      <span class="sec-tx"><b>Hotspot &amp; tethering</b></span>
+    </button>
+    <button class="set-sec" data-sec="data">
+      <span class="sec-ic">${NET_IC.data}</span>
+      <span class="sec-tx"><b>Data saver</b><small>Off</small></span>
+    </button>
+    <button class="set-sec" data-sec="vpn">
+      <span class="sec-ic">${NET_IC.key}</span>
+      <span class="sec-tx"><b>VPN</b><small>None</small></span>
+    </button>
+    <button class="set-sec no-ic" data-sec="dns">
+      <span class="sec-tx"><b>Private DNS</b><small>Automatic</small></span>
+    </button>`;
+  const inet = w.querySelector('[data-sec="internet"]');
+  const sw = w.querySelector('[data-sec="airplane"] .chsw');
+  const sync = () => {
+    sw.classList.toggle('on', airplaneMode);
+    sw.setAttribute('aria-checked', String(airplaneMode));
+    inet.querySelector('.sec-ic').innerHTML = airplaneMode ? NET_IC.globe : NET_IC.wifi;
+    inet.querySelector('small').textContent = airplaneMode ? 'Airplane mode is on' : 'Cisco_c726cd28af83';
+  };
+  w.querySelector('[data-sec="airplane"]').addEventListener('click', () => {
+    airplaneMode = !airplaneMode;
+    sync();
+    setStatusAirplane(airplaneMode);
+  });
+  sync();
+  return w;
 }
 
 /* ============ clock ============ */
