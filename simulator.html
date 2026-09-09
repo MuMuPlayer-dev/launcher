@@ -522,6 +522,85 @@ svg.dl-ov.zoom{transition:transform .32s ease,opacity .3s ease;transform:scale(1
 .set-sec .sec-tx b{font-size:15px;font-weight:500;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .set-sec .sec-tx small{font-size:12.5px;color:#9aa0a6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .set-sec.no-ic{padding-left:54px}
+
+/* ============ GOOGLE PLAY ============ */
+.play{position:absolute;inset:0;display:flex;background:#000;animation:avIn .4s var(--ease) both}
+.ps-side{width:96px;flex:none;display:flex;flex-direction:column;padding:14px 8px 10px;overflow-y:auto;scrollbar-width:none}
+.ps-side::-webkit-scrollbar{display:none}
+.ps-logo{height:36px;width:auto;display:block;margin:0 auto 12px;user-select:none;-webkit-user-drag:none}
+.ps-tabs{display:flex;flex-direction:column;gap:4px}
+.ps-tab{display:flex;flex-direction:column;align-items:center;gap:6px;padding:11px 4px 8px;border-radius:14px;color:#c9ccd1;font-size:11px;font-weight:600;transition:background .15s,color .15s}
+.ps-tab svg{width:25px;height:25px;display:block}
+.ps-tab:hover{background:rgba(255,255,255,.08)}
+.ps-tab.sel{background:rgba(139,180,249,.20);color:#fff}
+.ps-body{flex:1;min-width:0;position:relative}
+.ps-pane{position:absolute;inset:0;display:none;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin}
+.ps-pane.on{display:block}
+.ps-games{padding:18px 20px 34px}
+.ps-carousel{display:flex;gap:14px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}
+.ps-carousel::-webkit-scrollbar{display:none}
+.ps-ccard{flex:0 0 calc(50% - 7px);min-width:260px;display:flex;flex-direction:column;background:#0f0f11;border-radius:16px;overflow:hidden;transition:background .15s}
+.ps-ccard:hover{background:#17181b}
+.ps-cshot{width:100%;aspect-ratio:1052/592;object-fit:cover;display:block}
+.ps-cbot{display:flex;align-items:center;gap:11px;padding:10px 12px}
+.ps-cicon{width:44px;height:44px;border-radius:12px;object-fit:cover;flex:none}
+.ps-ctx{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}
+.ps-ctx b{font-size:14px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ps-ctx small{font-size:11.5px;color:#9aa0a6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ps-btn{flex:none;height:34px;padding:0 20px;border-radius:999px;background:#8cb4f9;color:#0c1016;font-size:12.5px;font-weight:700;transition:filter .15s}
+.ps-btn:hover{filter:brightness(1.08)}
+.ps-btn.big{height:42px;padding:0 30px;font-size:14px}
+.ps-h{margin:26px 0 12px;color:#fff;font-size:18px;font-weight:600}
+.ps-row{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;padding:3px 0 10px}
+.ps-row::-webkit-scrollbar{display:none}
+.ps-item{flex:0 0 calc((100% - 20px)/3);min-width:200px;display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:14px;text-align:left;transition:background .14s}
+.ps-item:hover{background:rgba(255,255,255,.07)}
+.ps-iicon{width:46px;height:46px;border-radius:12px;object-fit:cover;flex:none}
+.ps-itx{display:flex;flex-direction:column;gap:3px;min-width:0;flex:1}
+.ps-itx b{font-size:13.5px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ps-itx small{font-size:11.5px;color:#9aa0a6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ps-rate{display:inline-flex;align-items:center;gap:5px;height:24px;padding:0 10px;border-radius:999px;background:#2e3034;flex:none}
+.ps-rate span{font-size:11.5px;font-weight:700;color:#e8eaee}
+.ps-rate svg{width:12px;height:12px;display:block}
+.ps-detail{position:absolute;inset:0;z-index:20;background:#000;transform:translateY(100%);transition:transform .4s var(--ease);overflow-y:auto;scrollbar-width:thin}
+.ps-detail.open{transform:none}
+.ps-dcol{max-width:640px;margin:0 auto;padding:26px 24px 40px}
+.ps-back{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;margin-bottom:14px;transition:background .13s}
+.ps-back:hover{background:rgba(255,255,255,.10)}
+.ps-back svg{width:20px;height:20px}
+.ps-ddev{color:#8cb4f9;font-size:13px;font-weight:600;letter-spacing:.02em}
+.ps-dname{color:#fff;font-size:30px;font-weight:600;margin-top:3px;line-height:1.15}
+.ps-dhead{display:flex;align-items:center;gap:18px;margin-top:18px}
+.ps-dicon{width:88px;height:88px;border-radius:20px;object-fit:cover;flex:none}
+.ps-drate{display:flex;align-items:center;gap:7px;color:#fff;font-size:20px;font-weight:700}
+.ps-drate svg{width:20px;height:20px;display:block}
+.ps-dbtnwrap{margin:20px 0 24px}
+.ps-dshots{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;padding-bottom:6px}
+.ps-dshots::-webkit-scrollbar{display:none}
+.ps-dshot{flex:0 0 62%;aspect-ratio:1052/592;border-radius:12px;object-fit:cover}
+.ps-daboutrow{display:flex;align-items:center;justify-content:space-between;gap:14px;border-radius:10px;padding:4px 6px;margin:10px -6px 0;width:calc(100% + 12px)}
+.ps-daboutrow:hover{background:rgba(255,255,255,.05)}
+.ps-dh{color:#fff;font-size:19px;font-weight:600;margin:10px 0}
+.ps-darrow{width:38px;height:38px;border-radius:50%;background:#2e3034;color:#e8eaee;display:flex;align-items:center;justify-content:center;flex:none;transition:background .13s}
+.ps-darrow:hover{background:#3a3c40}
+.ps-darrow svg{width:17px;height:17px}
+.ps-ddesc p{color:#d6d9de;font-size:14px;line-height:1.6;margin:0 0 1em}
+.ps-ddesc ul{list-style:none;margin:0;padding:0}
+.ps-ddesc li{color:#d6d9de;font-size:14px;line-height:1.5;margin-bottom:.4em;padding-left:15px;position:relative}
+.ps-ddesc li::before{content:"";position:absolute;left:0;top:.55em;width:5px;height:5px;border-radius:50%;background:#8f959d}
+.ps-dboxovl{position:absolute;inset:0;z-index:40;background:rgba(0,0,0,.62);display:flex;align-items:center;justify-content:center;animation:avIn .2s ease both}
+.ps-dbox{width:480px;max-width:88%;max-height:82%;overflow-y:auto;background:#141518;border-radius:18px;padding:20px 22px 24px;scrollbar-width:thin}
+.ps-dboxhead{display:flex;align-items:center;gap:13px}
+.ps-dback{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;flex:none;transition:background .13s}
+.ps-dback:hover{background:rgba(255,255,255,.10)}
+.ps-dback svg{width:18px;height:18px}
+.ps-dicon2{width:44px;height:44px;border-radius:12px;object-fit:cover;flex:none}
+.ps-dboxhead .tx{display:flex;flex-direction:column;gap:1px;min-width:0}
+.ps-dname2{color:#fff;font-size:16px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ps-dsub{color:#9aa0a6;font-size:12px;font-weight:500}
+.ps-dline{height:1px;background:rgba(255,255,255,.14);margin:14px 0}
+/* touch support */
+#dock{touch-action:none}
 </style>
 </head>
 <body>
@@ -919,6 +998,9 @@ const SUBZERO_ICON = 'https://play-lh.googleusercontent.com/TU7evnDya31k2v4vcWrM
 const PVZ2_ICON = 'https://play-lh.googleusercontent.com/r8kGrEySHDwfk2bv1HYmk4K76ioLYeDgr6W5SEAsNhoYlHdu-4kVJdaK9NIyVv9z__0_WOOQpSa2qMkaR9m5JQ';
 const PVZ2_URL = 'https://en.gameslol.net/data/pvzge/index.html';
 const CLUSTERDUCK_ICON = 'https://play-lh.googleusercontent.com/cTwDY_r_9paKRsbTHXV-ShALxhsBg8wrJDG-EdeeGhvmPNJGjeefmx6lf0ZRHK-mO3j-QrSxA0emNJ4yZTVDvg';
+const MELTDOWN_ICON = 'https://play-lh.googleusercontent.com/eGwVBfqYTO-BUs757RxOJYW2SvchNu3s1ivN3nmYF9lDW04SRSg5VWY0-D14nugE1A7XJk0omENU5BL3RkbmGQ';
+const SUBWAY_ICON = 'https://play-lh.googleusercontent.com/T7az9M7td7A24vOr7Jp3C9NG16kyWA1NnlUySyl_mbDV9BtlrFbxps5TD5DzT7kCBxpNeTbIIju2_aFN4xtFoYM';
+const GACHA_LIFE_URL = 'https://cfpju876whm.make-by-vann-dont-steal-it-gooners-3351dcb3.nip.io/games/375.html';
 const BASE = [
   { id: 'store',  name: 'MuMu Store' },
   { id: 'cloner', name: 'App Cloner' }
@@ -946,9 +1028,10 @@ const REG = {};
 [...BASE, ...DOCK_BASE, ...GADGETS].forEach(a => REG[a.id] = a);
 /* default apps can't be uninstalled */
 const PROTECTED = new Set([...BASE, ...DOCK_BASE, ...GADGETS].map(a => a.id));
-const ICON_FIXES = { 'gd-subzero': SUBZERO_ICON, 'pvz2': PVZ2_ICON, 'clusterduck': CLUSTERDUCK_ICON };
+const ICON_FIXES = { 'gd-subzero': SUBZERO_ICON, 'gd-meltdown': MELTDOWN_ICON, 'subway': SUBWAY_ICON, 'pvz2': PVZ2_ICON, 'clusterduck': CLUSTERDUCK_ICON };
+const URL_FIXES = { 'pvz2': PVZ2_URL, 'gacha-life': GACHA_LIFE_URL };
 function fixIcon(id, icon){ return ICON_FIXES[id] || icon; }
-function fixUrl(id, url){ return id === 'pvz2' ? PVZ2_URL : url; }
+function fixUrl(id, url){ return URL_FIXES[id] || url; }
 let installed = [];
 function appById(id){ return REG[id] || installed.find(a => a.id === id) || null; }
 
@@ -1177,11 +1260,11 @@ function exitEdit(){
   setTrackX(false);
   scheduleHideDots();
 }
-/* unified pointer controller:
+/* unified pointer controller (works for mouse and touch):
    tap = open · hold 500ms stationary = context menu · hold + move = app drag · quick horizontal = page swipe */
 uiEl.addEventListener('pointerdown', e => {
   if (e.button !== 0 || !avEl.hidden || dnd || swipe || fdnd) return;
-  if (e.target.closest('.foldov, .appmenu, .am-dlg, .custwrap, .unsnack, .setapp')) return;
+  if (e.target.closest('.foldov, .appmenu, .am-dlg, .custwrap, .unsnack, .setapp, .play')) return;
   const appB = e.target.closest('.app');
   const cellB = e.target.closest('.cell');
   P = { x0: e.clientX, y0: e.clientY, lx: e.clientX, ly: e.clientY,
@@ -1532,6 +1615,7 @@ function wireFoldSwipe(){
     setFoldX(true);
     updateFolderDots();
   });
+  grid.addEventListener('pointercancel', () => { fs = null; });
 }
 function editFolderName(){
   const fo = folderOpen; if (!fo) return;
@@ -1633,6 +1717,7 @@ function folderAppPD(e, a){
   const up = () => {
     removeEventListener('pointermove', move, true);
     removeEventListener('pointerup', up, true);
+    removeEventListener('pointercancel', up, true);
     clearTimeout(holdT);
     if (!started) return;
     if (menuFired){ fdnd = null; return; }
@@ -1663,9 +1748,11 @@ function folderAppPD(e, a){
   const cleanup = () => {
     removeEventListener('pointermove', move, true);
     removeEventListener('pointerup', up, true);
+    removeEventListener('pointercancel', up, true);
   };
   addEventListener('pointermove', move, true);
   addEventListener('pointerup', up, true);
+  addEventListener('pointercancel', up, true);
 }
 
 /* ============ app context menu / uninstall / pause / customize ============ */
@@ -1875,7 +1962,7 @@ function openAppFromRect(app, r){
 }
 function openApp(app, iconEl){ openAppFromRect(app, iconEl.getBoundingClientRect()); }
 
-let chRoot = null, storeRoot = null, setRoot = null, phEl = null, embedEl = null, embedUrl = null;
+let chRoot = null, storeRoot = null, setRoot = null, psRoot = null, phEl = null, embedEl = null, embedUrl = null;
 const AD_BLOCKED = new Set(['clusterduck', 'pvz2']);
 function showView(v){
   const home = v === 'home';
@@ -1887,6 +1974,7 @@ function showView(v){
   if (chRoot) chRoot.style.display = (v === 'chromium' || v === 'g-chrome') ? '' : 'none';
   if (storeRoot) storeRoot.style.display = (v === 'store') ? '' : 'none';
   if (setRoot) setRoot.style.display = (v === 'settings') ? '' : 'none';
+  if (psRoot) psRoot.style.display = (v === 'g-playstore') ? '' : 'none';
   const app = appById(v);
   if (embedEl) embedEl.style.display = (app && app.url) ? '' : 'none';
   if (phEl) phEl.style.display = 'none';
@@ -1923,6 +2011,11 @@ function showView(v){
   if (v === 'settings'){
     if (!setRoot){ buildSettings(); avEl.appendChild(setRoot); }
     else if (setRoot.parentElement !== avEl) avEl.appendChild(setRoot);
+    return;
+  }
+  if (v === 'g-playstore'){
+    if (!psRoot){ psRoot = buildPlayStore(); avEl.appendChild(psRoot); }
+    else if (psRoot.parentElement !== avEl) avEl.appendChild(psRoot);
     return;
   }
   if (app && app.url){
@@ -2796,13 +2889,13 @@ const GAMES = [
     icon: SUBZERO_ICON,
     url:  'https://monkeyworm-tech.github.io/subzero' },
   { id: 'gd-meltdown',name: 'Geometry Dash Meltdown', rating: 4.6, cat: 'arcade',
-    icon: 'https://img.utdstc.com/icon/862/a7b/862a7b25a802243e10b809176fe2072dd6fd01a4d888d1b03bd7c57d1ce8558d:600',
+    icon: MELTDOWN_ICON,
     url:  'https://monkeyworm-tech.github.io/meltdown' },
   { id: 'roblox',     name: 'Roblox',                 rating: 4.2, cat: 'adventure',
     icon: 'https://m.media-amazon.com/images/I/21aoUPG3svL.png',
     url:  'https://roblox-devt.github.io/home' },
   { id: 'subway',     name: 'Subway Surfers',         rating: 4.6, cat: 'action',
-    icon: 'https://cdn.kiz10.com/upload/thumbnails/9814/1519149668_subway-surfers-online.webp',
+    icon: SUBWAY_ICON,
     url:  'https://g2.igroutka.ru/games/164/ZXLa594fek6p7nVR/10/subway_surfers_classic/' },
   { id: 'temple-run', name: 'Temple Run',             rating: 4.2, cat: 'arcade',
     icon: 'https://upload.wikimedia.org/wikipedia/en/c/c4/TempleRun.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original',
@@ -2818,13 +2911,22 @@ const GAMES = [
     url:  PVZ2_URL },
   { id: 'gacha-life', name: 'Gacha Life',             rating: 4.5, cat: 'casual',
     icon: 'https://cdn.now.gg/apps-content/air.com.lunime.gachalife/icon/gacha-life.png',
-    url:  'https://zapgames.io/gacha-life.embed' },
+    url:  GACHA_LIFE_URL },
   { id: 'gacha-club', name: 'Gacha Club',             rating: 4.5, cat: 'casual',
     icon: 'https://play-lh.googleusercontent.com/f6kVXGwfe6vK9hJ-okf0In_wsw_pUU-Wp2h1vs-GrfuF98rsL1RZwkMiOW1_sp-R5P4r7AowRa62fbN043xZELk',
     url:  'https://www.gachaclub.online/wp-content/uploads/games/html5/G/gacha%20club%20online/index.html' },
   { id: 'pvz',        name: 'Plants vs. Zombies',     rating: 3.8, cat: 'strategy',
     icon: 'https://play-lh.googleusercontent.com/FGB00L2-aGHPAiRJPxbC3Th_KEaGvVroVF-tPSf_1Unh9kzzY-al4mp1yJT16I16FuLK6oJ-3H-KrVgTrg3ABFc',
-    url:  'https://www.1r8t9so0qotx1d9c.whm.66042whm.school.and.securly-3351dcb3.nip.io/games/467.html' }
+    url:  'https://www.1r8t9so0qotx1d9c.whm.66042whm.school.and.securly-3351dcb3.nip.io/games/467.html' },
+  { id: 'granny',     name: 'Granny',                 rating: 4.3, cat: 'arcade',
+    icon: 'https://play-lh.googleusercontent.com/P8BbkQ6m0eCYYAx2tXTESBiIDQ2RESsSQp6oD8ZAP35rmEjmaXHMboYT6P807sAnfcuskKTdYbTyH5R0GCFk8Q=w240-h480-rw',
+    url:  '' },
+  { id: 'granny-2',   name: 'Granny: Chapter Two',    rating: 4.3, cat: 'arcade',
+    icon: 'https://play-lh.googleusercontent.com/X_9WQbosx62FK2V2BK1Tuh2f3FuwyhrznBBodZ6nxGphIC0PwU0YxTVDRpOhbVKquz4UzgZ4SbjwQhVYOvEGnA=w240-h480-rw',
+    url:  'https://grannyonline.io/granny-2.embed' },
+  { id: 'granny-3',   name: 'Granny 3',               rating: 4.1, cat: 'arcade',
+    icon: 'https://play-lh.googleusercontent.com/FTsaARkE4CofFloYKDvfVuM11RRnOWITPFHVfGl2Ted1Xa-1VjrW2oWknGqXwc0LVlh0zXDDO6-zNSpBqES-=s0-br30',
+    url:  'https://cfpju876whm.make-by-vann-dont-steal-it-gooners-3351dcb3.nip.io/games/474.html' }
 ];
 const CAT_IC = {
   adventure: `<svg viewBox="0 0 20 20" fill="none" stroke="#fff" stroke-width="1.6" aria-hidden="true"><rect x="1.6" y="1.6" width="16.8" height="16.8" rx="4.2"/><g fill="#fff" stroke="none"><rect x="5.4" y="6.6" width="2.3" height="6.8" rx="1.15" transform="rotate(15 6.55 10)"/><rect x="8.6" y="6.6" width="2.3" height="6.8" rx="1.15" transform="rotate(15 9.75 10)"/><circle cx="13.9" cy="12.3" r="1.2"/></g></svg>`,
@@ -3139,6 +3241,75 @@ const DETAILS = {
       'https://play-lh.googleusercontent.com/7gvX0kqyyrs7P6y1pBWtS2ye5sh0VLgxCa6ruJ81yTjmJyRxYAMUMt2iCN5Gg80sDw0BYiUkpUeiW5jer8D_7No=w1052-h592-rw'
     ]
   },
+  'granny': {
+    size: '141.4MB', dev: 'DVloper', ver: '1.8.12', upd: '2026-06-12',
+    desc: [
+      'Granny keeps you locked in her house.',
+      'Now you have to try to get out of her house, but be careful and quiet. She hears everything. If you drop something on the floor, she hears it and comes running.'
+    ],
+    bullets: [
+      'Granny hears everything — be careful and quiet',
+      'If you drop something on the floor, she hears it and comes running',
+      'You can hide in wardrobes or under beds',
+      'You have 5 days to escape',
+      'Be careful!'
+    ],
+    shots: [
+      'https://play-lh.googleusercontent.com/vvbKtrftDskCmQmUCmJYcQhDLJx5UtaRaxTSLYDW_PYgLvCjpwpu7s_XeUlCbDXTj0ON5SaVerlXq2KQo2GiYA=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/J_4_0IG4bg9bD3gSbdqnnxxlz4WtLxhERp-NbKSYaY9i1Tbx1GWV2iZfzifTxApUc3MZC_WNG8aRD0SFhpoUtA=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/8h2yj8b_6gWfcWCEQ7hcQ_RnELmXkN6w0l3FHcTNtml-DyC_9dnTxnaf1soliMs3eVpkeITynS6y65temK4JGQ=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/UKPSEfexG2NeKstehhTprj7ur9BdiORDRNXnSkJ9VUgG980pMSnsGcVDKX-RsVy1IuKkwxv3apMl7l-r3C_H=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/djdebkgxSB8p5cFwAAz3dyT1-kmRUU4uqktPQ6bQmjaNI92YF_KtBnRE5gwkCdiVX9aZPF3wyW5-ueacJDOY=w1052-h592-rw'
+    ]
+  },
+  'granny-2': {
+    size: '135.8MB', dev: 'DVloper', ver: '1.2.7', upd: '2026-06-12',
+    desc: [
+      'Granny and Grandpa keeps you locked in their house at this time.',
+      'Now you have to try to get out of their house, but be careful and quiet. Granny hears everything as usual. Grandpa does not hear very well, but he hits hard. If you drop something on the floor, Granny hears it and comes running.'
+    ],
+    bullets: [
+      'Granny hears everything as usual',
+      'Grandpa does not hear very well — but he hits hard',
+      'If you drop something on the floor, Granny hears it and comes running',
+      'You can hide in wardrobes or under beds',
+      'You have 5 days to escape',
+      'Be careful!'
+    ],
+    shots: [
+      'https://play-lh.googleusercontent.com/u6IUfY6mpRp4F8ejCJFOZvcA4weTlSYcL9zhlmIdAJ5Ryk3HwXwMnk0Rolyb384-7MErjEp8GLV-JLBqRuBDacY=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/8mkI42-DYLl_hrSPqUGtVZ3D8xUPsmTY03A-mSDcNvRqZb0CZKJvAAUnxydc8OcqYDrYc64qaZ_ybEhSVszdPmE=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/-9t5JBlTVyd2nynBh18S702hfmSlXd72NDphtz4XTyjWuaNSAhOD4juyx22I3wWc0QePY5sO4kXKn1eLe4hWB-M=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/T8VDOBCLhg-VZIN0O1V_adNpoLB2wQURj9vEUKq1YfrC2nrj8xxxA-D8H-p_H8Bnim9UOYcDwXTRxeGViTzJ=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/DtwoT9wweIRbCzsl_tn98b_j0y2d_P4Bx1y6JJHX_zSXTfZJwyIUdi0RPOWgKV7kAhfWElC4tLJN_vjmuYIA59s=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/j7ExpalNnTwMAiRcsSt6BvcBdGppRuYXjLrESj2sgBbsAa4G61LQGkGh4BZPmsUybkWbvh-eXFufg2FwQL67=w1052-h592-rw'
+    ]
+  },
+  'granny-3': {
+    size: '152.6MB', dev: 'DVloper', ver: '1.2.3', upd: '2026-06-12',
+    desc: [
+      'Granny and Grandpa have moved into a new house with a moat — and you are locked in as their prisoner!',
+      'You have 5 days to escape. Granny can hear your footsteps, Grandpa loves to shoot at everything that moves with his shotgun, and their granddaughter Slendrina has a deadly gaze.'
+    ],
+    bullets: [
+      'Granny can hear your footsteps — move carefully',
+      'Grandpa shoots at everything that moves with his shotgun',
+      'Slendrina is watching you — her gaze is deadly',
+      'Hide under beds, behind sofas or inside wardrobes',
+      'Do not jump into the moat',
+      'You have 5 days to escape',
+      'Be careful!'
+    ],
+    shots: [
+      'https://play-lh.googleusercontent.com/zKPJtlhOLkWaQj93SN9rcgdP-S7vzWoIIQ_jR6vwyzDjLYGBta3EziLnE24_grVSB3awzQD9xNoDq-Xp6mHupA=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/MWsyBoIwrKd1qQDfUm2VbTTX_UMC0LPxtPb2kMP8KkwyYb4eRSXkk6uCDM8iaZiI7tx5TwsHQgnruTTaNRMq=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/Ri0FMAnW5MuN3AlClF3bCiNuTdqFmlaVNUH23WMqAE_HUTj7ez-OZ7xWfsz3R4ewzAYawZDtgGTGbFNFaL2DkvY=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/D7tVFUFLF912MaebEORS5PvyTRs-mOF5KVU4JqrTWZGhunMq4K0ghUVGVR4M9azExb3FP7esdBVJQV4-NCTTXA=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/po9wvQ137BEN2-fUQ4Kvf4PGU8pXFkxkOITwBudXrwe7IDkf11s_toxvQW3kVarbGPYKuelkOQaioFVqBbqA=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/Df-fxitSPzrji9CgqFgF8vaw1dTvP9ntS0vB-MCnLFWYrKcT9vThll4cedt9Fll5Ub1KhfChCO2h9mDJ_N6djVk=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/AUktJ-SOC4dS-s4WHeB_vYRAzcQjow-NcbMr3EwBShvfdr91F_brtcJA86T7hHFQyjhYUVWESCQOrb3mR4d2rw=w1052-h592-rw'
+    ]
+  },
   'clusterduck': {
     size: '131.8MB', dev: 'PIKPOK', ver: '2.8.1', upd: '2026-06-12',
     desc: [
@@ -3425,13 +3596,17 @@ function openGameDetail(g){
   const onPUp = () => { pDrag = null; };
   addEventListener('pointermove', onSMove, true);
   addEventListener('pointerup', onSUp, true);
+  addEventListener('pointercancel', onSUp, true);
   addEventListener('pointermove', onPMove, true);
   addEventListener('pointerup', onPUp, true);
+  addEventListener('pointercancel', onPUp, true);
   const cleanup = () => {
     removeEventListener('pointermove', onSMove, true);
     removeEventListener('pointerup', onSUp, true);
+    removeEventListener('pointercancel', onSUp, true);
     removeEventListener('pointermove', onPMove, true);
     removeEventListener('pointerup', onPUp, true);
+    removeEventListener('pointercancel', onPUp, true);
   };
 }
 function updateDetailBtn(g){
@@ -3583,6 +3758,12 @@ function nameHTML(name, idx){
   return [...name].map((ch, i) => `<span${set.has(i) ? ' class="m"' : ''}>${ch}</span>`).join('');
 }
 function renderRow(g){
+  if (psRoot){
+    psRoot.querySelectorAll(`.ps-btn[data-g="${g.id}"]`).forEach(b => {
+      const st = gameState(g);
+      b.textContent = st === 'installed' ? 'Play' : (st === 'idle' ? 'Install' : 'Cancel');
+    });
+  }
   if (!storeRoot) return;
   const st = gameState(g);
   const d = DLS[g.id];
@@ -4132,6 +4313,228 @@ function networkContent(){
   return w;
 }
 
+/* ============ GOOGLE PLAY STORE ============ */
+const PLAY_LOGO = 'https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_Play_2022_icon.svg/1920px-Google_Play_2022_icon.svg.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail';
+const PS_IC = {
+  games: `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M8.2 6.6 h7.6 c4.1 0 6.9 3.1 6.3 6.9 l-.7 4.2 a2.8 2.8 0 0 1 -4.9 1.2 l-1.9-2.4 h-5.2 l-1.9 2.4 a2.8 2.8 0 0 1 -4.9-1.2 l-.7-4.2 c-.6-3.8 2.2-6.9 6.3-6.9 Z M9 9.5 a1.05 1.05 0 1 0 0 2.1 a1.05 1.05 0 1 0 0-2.1 Z M11.4 12.2 a1.05 1.05 0 1 0 0 2.1 a1.05 1.05 0 1 0 0-2.1 Z M15.1 9.4 h1.3 v1.5 h1.5 v1.3 h-1.5 v1.5 h-1.3 v-1.5 h-1.5 v-1.3 h1.5 Z"/></svg>`,
+  apps: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><rect x="3.3" y="3.3" width="7.4" height="7.4" rx="2.1"/><rect x="13.3" y="3.3" width="7.4" height="7.4" rx="2.1"/><rect x="3.3" y="13.3" width="7.4" height="7.4" rx="2.1"/><rect x="13.3" y="13.3" width="7.4" height="7.4" rx="2.1"/></svg>`,
+  search: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.3"/><line x1="15.1" y1="15.1" x2="20" y2="20"/></svg>`,
+  books: `<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.6" y="3" width="14.8" height="18" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12.5 3 h4.6 v6.2 l-2.3-2.1 -2.3 2.1 Z" fill="currentColor"/></svg>`,
+  you: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4.2"/><path d="M4.6 20.6 c0-4.1 3.3-6.7 7.4-6.7 c4.1 0 7.4 2.6 7.4 6.7"/></svg>`,
+  kids: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.6 L14.4 8.6 L19.8 9.3 L15.8 12.9 L16.8 18.3 L12 15.7 L7.2 18.3 L8.2 12.9 L4.2 9.3 L9.6 8.6 Z" fill="currentColor" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg>`
+};
+const PS_STAR_R = `<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.9 L12.3 6.7 L17.5 7.4 L13.7 11.1 L14.7 16.2 L10 13.8 L5.3 16.2 L6.3 11.1 L2.5 7.4 L7.7 6.7 Z" fill="#8cb4f9" stroke="#8cb4f9" stroke-width="2.2" stroke-linejoin="round"/></svg>`;
+const PS_STAR_S = `<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6 L12.5 6.9 L18.2 7.7 L14.1 11.7 L15.1 17.4 L10 14.7 L4.9 17.4 L5.9 11.7 L1.8 7.7 L7.5 6.9 Z" fill="#8cb4f9"/></svg>`;
+const PS_ARROW = `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 10 H15"/><path d="M10.6 5.4 L15.2 10 L10.6 14.6"/></svg>`;
+const PS_TABS = [
+  { id: 'games',  name: 'Games',  ic: PS_IC.games },
+  { id: 'apps',   name: 'Apps',   ic: PS_IC.apps },
+  { id: 'search', name: 'Search', ic: PS_IC.search },
+  { id: 'books',  name: 'Books',  ic: PS_IC.books },
+  { id: 'you',    name: 'You',    ic: PS_IC.you },
+  { id: 'kids',   name: 'Kids',   ic: PS_IC.kids }
+];
+let psDetail = null;
+function shuffle(arr){
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+function psBtnLabel(g){
+  const st = gameState(g);
+  return st === 'installed' ? 'Play' : (st === 'idle' ? 'Install' : 'Cancel');
+}
+function psBtnAction(g, el){
+  const st = gameState(g);
+  if (st === 'idle') startInstall(g);
+  else if (st === 'dl' || st === 'inst') cancelInstall(g);
+  else {
+    const app = installed.find(a => a.id === g.id);
+    if (app) openApp(app, el);
+  }
+}
+function buildPlayStore(){
+  const root = document.createElement('div');
+  root.className = 'play';
+  root.innerHTML = `
+    <div class="ps-side">
+      <img class="ps-logo" alt="Google Play" draggable="false" src="${PLAY_LOGO}">
+      <nav class="ps-tabs"></nav>
+    </div>
+    <div class="ps-body">
+      <div class="ps-pane on" data-p="games"><div class="ps-games"></div></div>
+    </div>`;
+  const tabsEl = root.querySelector('.ps-tabs');
+  const setTab = id => {
+    tabsEl.querySelectorAll('.ps-tab').forEach(b => b.classList.toggle('sel', b.dataset.p === id));
+    let pane = root.querySelector(`.ps-pane[data-p="${id}"]`);
+    if (!pane){
+      pane = document.createElement('div');
+      pane.className = 'ps-pane';
+      pane.dataset.p = id;
+      root.querySelector('.ps-body').appendChild(pane);
+    }
+    root.querySelectorAll('.ps-pane').forEach(p => p.classList.toggle('on', p === pane));
+  };
+  PS_TABS.forEach(t => {
+    const b = document.createElement('button');
+    b.className = 'ps-tab' + (t.id === 'games' ? ' sel' : '');
+    b.dataset.p = t.id;
+    b.innerHTML = `${t.ic}<span>${t.name}</span>`;
+    b.addEventListener('click', () => setTab(t.id));
+    tabsEl.appendChild(b);
+  });
+  buildPsGames(root.querySelector('.ps-games'));
+  root.addEventListener('click', e => {
+    const btn = e.target.closest('.ps-btn');
+    if (btn){
+      const g = GAMES.find(x => x.id === btn.dataset.g);
+      if (g) psBtnAction(g, btn);
+      return;
+    }
+    const item = e.target.closest('.ps-item, .ps-ccard');
+    if (item){
+      const g = GAMES.find(x => x.id === item.dataset.g);
+      if (g) openPsDetail(g);
+    }
+  });
+  return root;
+}
+function buildPsGames(box){
+  box.innerHTML = '';
+  /* top: 8 random games, 2 visible before scrolling */
+  const car = document.createElement('div');
+  car.className = 'ps-carousel';
+  shuffle(GAMES).slice(0, 8).forEach(g => {
+    const d = DETAILS[g.id] || {};
+    const shot = (d.shots && d.shots[0]) || g.icon;
+    const c = document.createElement('div');
+    c.className = 'ps-ccard';
+    c.dataset.g = g.id;
+    c.innerHTML = `
+      <img class="ps-cshot" src="${shot}" alt="" draggable="false">
+      <div class="ps-cbot">
+        <img class="ps-cicon" src="${g.icon}" alt="" draggable="false">
+        <div class="ps-ctx"><b></b><small></small></div>
+        <button class="ps-btn" data-g="${g.id}"></button>
+      </div>`;
+    c.querySelector('b').textContent = g.name;
+    c.querySelector('small').textContent = d.dev || '';
+    c.querySelector('.ps-btn').textContent = psBtnLabel(g);
+    car.appendChild(c);
+  });
+  box.appendChild(car);
+  const h = document.createElement('h2');
+  h.className = 'ps-h';
+  h.textContent = 'Suggested for you';
+  box.appendChild(h);
+  /* rows of 4, 3 visible before scrolling — all games included */
+  const list = shuffle(GAMES);
+  for (let i = 0; i < list.length; i += 4){
+    const r = document.createElement('div');
+    r.className = 'ps-row';
+    list.slice(i, i + 4).forEach(g => {
+      const it = document.createElement('button');
+      it.className = 'ps-item';
+      it.dataset.g = g.id;
+      it.innerHTML = `
+        <img class="ps-iicon" src="${g.icon}" alt="" draggable="false">
+        <div class="ps-itx"><b></b><small></small></div>
+        <span class="ps-rate"><span>${g.rating.toFixed(1)}</span>${PS_STAR_R}</span>`;
+      it.querySelector('b').textContent = g.name;
+      it.querySelector('small').textContent = catName(g.cat);
+      r.appendChild(it);
+    });
+    box.appendChild(r);
+  }
+}
+function openPsDetail(g){
+  if (psDetail) return;
+  const d = DETAILS[g.id] || {};
+  const root = document.createElement('div');
+  root.className = 'ps-detail';
+  root.innerHTML = `
+    <div class="ps-dcol">
+      <button class="ps-back" aria-label="Back">${CH_LEFT}</button>
+      <div class="ps-ddev"></div>
+      <h1 class="ps-dname"></h1>
+      <div class="ps-dhead">
+        <img class="ps-dicon" src="${g.icon}" alt="" draggable="false">
+        <div class="ps-drate"><span>${g.rating.toFixed(1)}</span>${PS_STAR_S}</div>
+      </div>
+      <div class="ps-dbtnwrap"><button class="ps-btn big" data-g="${g.id}"></button></div>
+      <div class="ps-dshots"></div>
+      <div class="ps-dabout">
+        <button class="ps-daboutrow">
+          <h2 class="ps-dh">About this game</h2>
+          <span class="ps-darrow">${PS_ARROW}</span>
+        </button>
+        <div class="ps-ddesc"></div>
+      </div>
+    </div>`;
+  root.querySelector('.ps-ddev').textContent = d.dev || '';
+  root.querySelector('.ps-dname').textContent = g.name;
+  root.querySelector('.ps-btn').textContent = psBtnLabel(g);
+  const shots = root.querySelector('.ps-dshots');
+  (d.shots || []).forEach(src => {
+    const im = document.createElement('img');
+    im.className = 'ps-dshot';
+    im.src = src; im.draggable = false; im.alt = '';
+    shots.appendChild(im);
+  });
+  const p = document.createElement('p');
+  p.textContent = (d.desc && d.desc[0]) || '';
+  root.querySelector('.ps-ddesc').appendChild(p);
+  root.querySelector('.ps-back').addEventListener('click', psCloseDetail);
+  root.querySelector('.ps-daboutrow').addEventListener('click', () => openPsDetailsBox(g));
+  psRoot.appendChild(root);
+  requestAnimationFrame(() => requestAnimationFrame(() => root.classList.add('open')));
+  psDetail = root;
+}
+function psCloseDetail(){
+  if (!psDetail) return;
+  const r = psDetail;
+  psDetail = null;
+  r.classList.remove('open');
+  setTimeout(() => r.remove(), 420);
+}
+function openPsDetailsBox(g){
+  if (psDetail && psDetail.querySelector('.ps-dboxovl')) return;
+  const d = DETAILS[g.id] || {};
+  const ov = document.createElement('div');
+  ov.className = 'ps-dboxovl';
+  ov.innerHTML = `
+    <div class="ps-dbox">
+      <div class="ps-dboxhead">
+        <button class="ps-dback" aria-label="Back">${CH_LEFT}</button>
+        <img class="ps-dicon2" src="${g.icon}" alt="" draggable="false">
+        <div class="tx"><div class="ps-dname2"></div><div class="ps-dsub">Details</div></div>
+      </div>
+      <div class="ps-dline"></div>
+      <div class="ps-ddesc"></div>
+    </div>`;
+  ov.querySelector('.ps-dname2').textContent = g.name;
+  const fd = ov.querySelector('.ps-ddesc');
+  (d.desc || []).forEach(t => {
+    const p = document.createElement('p');
+    p.textContent = t;
+    fd.appendChild(p);
+  });
+  const ul = document.createElement('ul');
+  (d.bullets || []).forEach(t => {
+    const li = document.createElement('li');
+    li.textContent = t;
+    ul.appendChild(li);
+  });
+  fd.appendChild(ul);
+  ov.querySelector('.ps-dback').addEventListener('click', e => { e.stopPropagation(); ov.remove(); });
+  ov.addEventListener('mousedown', e => { if (e.target === ov) ov.remove(); });
+  (psDetail || psRoot).appendChild(ov);
+}
+
 /* ============ clock ============ */
 function tick(){
   const d = new Date();
@@ -4225,6 +4628,11 @@ addEventListener('keydown', e => {
   if (document.querySelector('.am-dlg')){ document.querySelector('.am-dlg').remove(); return; }
   if (appMenu){ closeAppMenu(); return; }
   if (document.querySelector('.sg-ovl')){ document.querySelector('.sg-ovl').remove(); return; }
+  if (psRoot){
+    const pbox = psRoot.querySelector('.ps-dboxovl');
+    if (pbox){ pbox.remove(); return; }
+    if (psDetail){ psCloseDetail(); return; }
+  }
   if (chRoot && chRoot.querySelector('.ch-panel')){
     chRoot.querySelectorAll('.ch-panel').forEach(p => p.remove());
     return;
