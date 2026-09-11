@@ -376,7 +376,9 @@ svg.dl-ov.zoom{transition:transform .32s ease,opacity .3s ease;transform:scale(1
 .sr-rate svg{width:13px;height:13px;fill:#f5c443;display:block;flex:none}
 .sr-cat{display:inline-flex;align-items:center;height:19px;padding:0 9px;border-radius:7px;background:#123f4d;color:#7fd4f2;font-size:10.5px;font-weight:700;flex:none}
 .sr-dl{font-size:12px;color:#5db4f0;font-weight:700}
-.sr-btn{height:34px;padding:0 20px;border-radius:8px;font-size:13px;font-weight:700;flex:none;align-self:center;transition:background .15s,color .15s}
+.sr-side{margin-left:auto;flex:0 0 auto;display:flex;align-items:center;padding-left:6px}
+.sr-btn{flex:0 0 auto !important;position:static !important;opacity:1 !important;pointer-events:auto !important;width:auto !important;align-self:center;height:36px;min-width:96px;padding:0 18px;border-radius:9px;font-size:13px;font-weight:700;white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;transition:filter .15s}
+.sr-btn:hover{filter:brightness(1.12)}
 .sr-btn.install,.sr-btn.play{background:#3f8fdd;color:#fff}
 .sr-btn.cancel{background:#0b0c10;color:#5db4f0}
 .st-grid .sr,.st-catgrid .sr{padding:14px 16px}
@@ -415,7 +417,7 @@ svg.dl-ov.zoom{transition:transform .32s ease,opacity .3s ease;transform:scale(1
 .gd-oinfo.open{grid-template-rows:1fr}
 .gd-oinfo>div{overflow:hidden;min-height:0}
 .gd-obox{margin:12px 0 2px;background:#33353b;border-radius:10px;padding:12px 16px;display:flex;flex-direction:column;gap:7px;color:#b9bdc3;font-size:13px}
-.gd-ibtn{height:40px;padding:0 26px;border-radius:9px;font-size:14px;font-weight:700;flex:none;margin-left:8px;transition:filter .15s}
+.gd-ibtn{flex:0 0 auto !important;position:static !important;opacity:1 !important;pointer-events:auto !important;width:auto !important;align-self:center;height:42px;min-width:110px;padding:0 26px;border-radius:9px;font-size:14px;font-weight:700;white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;margin-left:8px;transition:filter .15s}
 .gd-ibtn.install,.gd-ibtn.play{background:#3f8fdd;color:#fff}
 .gd-ibtn.cancel{background:#0b0c10;color:#5db4f0}
 .gd-ibtn:hover{filter:brightness(1.1)}
@@ -606,16 +608,16 @@ svg.dl-ov.zoom{transition:transform .32s ease,opacity .3s ease;transform:scale(1
 #dock{touch-action:none}
 
 /* ============ HOME SEARCH ============ */
-#hsrch{position:absolute;top:58px;left:50%;transform:translateX(-50%);width:min(560px,72%);height:46px;border-radius:14px;background:rgba(38,40,46,.55);border:1px solid rgba(255,255,255,.22);display:flex;align-items:center;gap:12px;padding:0 18px;z-index:4}
+#hsrch{position:absolute;top:58px;left:50%;transform:translateX(-50%);width:min(500px,62%);height:42px;border-radius:13px;background:rgba(38,40,46,.55);border:1px solid rgba(255,255,255,.22);display:flex;align-items:center;gap:12px;padding:0 17px;z-index:4}
 #hsrch span{flex:1;font-size:14.5px;color:rgba(255,255,255,.55)}
 #hsrch svg{width:19px;height:19px;flex:none;opacity:.65}
 .hs-ovl{position:absolute;inset:0;z-index:60;background:rgba(0,0,0,.55);animation:avIn .18s ease both}
-.hs-bar{position:absolute;top:58px;left:50%;width:min(560px,72%);height:46px;border-radius:14px;background:#000;border:1.5px solid #fff;display:flex;align-items:center;gap:12px;padding:0 18px;transform:translate(-50%,0);transition:transform .34s var(--ease)}
+.hs-bar{position:absolute;top:58px;left:50%;width:min(500px,62%);height:42px;border-radius:13px;background:#000;border:1.5px solid #fff;display:flex;align-items:center;gap:12px;padding:0 17px;transform:translate(-50%,0);transition:transform .34s var(--ease)}
 .hs-bar.start{transform:translate(-50%,680px)}
 .hs-bar input{flex:1;min-width:0;background:none;border:0;outline:0;color:#fff;font:inherit;font-size:14.5px}
 .hs-bar input::placeholder{color:rgba(255,255,255,.5)}
 .hs-bar svg{width:19px;height:19px;flex:none;opacity:.85}
-.hs-list{position:absolute;top:112px;left:50%;transform:translateX(-50%);width:min(560px,72%);max-height:calc(100% - 140px);overflow-y:auto;scrollbar-width:thin;scrollbar-color:#3a3d42 transparent;padding-right:2px}
+.hs-list{position:absolute;top:106px;left:50%;transform:translateX(-50%);width:min(500px,62%);max-height:calc(100% - 134px);overflow-y:auto;scrollbar-width:thin;scrollbar-color:#3a3d42 transparent;padding-right:2px}
 .hs-list::-webkit-scrollbar{width:8px}
 .hs-list::-webkit-scrollbar-thumb{background:#3a3d42;border-radius:4px}
 .hs-row{display:flex;align-items:center;gap:13px;width:100%;padding:10px 12px;border-radius:12px;text-align:left;transition:background .13s}
@@ -1038,6 +1040,7 @@ const CLUSTERDUCK_ICON = 'https://play-lh.googleusercontent.com/cTwDY_r_9paKRsbT
 const MELTDOWN_ICON = 'https://play-lh.googleusercontent.com/eGwVBfqYTO-BUs757RxOJYW2SvchNu3s1ivN3nmYF9lDW04SRSg5VWY0-D14nugE1A7XJk0omENU5BL3RkbmGQ';
 const SUBWAY_ICON = 'https://play-lh.googleusercontent.com/T7az9M7td7A24vOr7Jp3C9NG16kyWA1NnlUySyl_mbDV9BtlrFbxps5TD5DzT7kCBxpNeTbIIju2_aFN4xtFoYM';
 const GACHA_LIFE_URL = 'https://cfpju876whm.make-by-vann-dont-steal-it-gooners-3351dcb3.nip.io/games/375.html';
+const GRANNY_URL = 'https://1games.io/embed/granny-horror?pub_id=&preroll=0';
 const BASE = [
   { id: 'store',  name: 'MuMu Store' },
   { id: 'cloner', name: 'App Cloner' }
@@ -1066,7 +1069,7 @@ const REG = {};
 /* default apps can't be uninstalled */
 const PROTECTED = new Set([...BASE, ...DOCK_BASE, ...GADGETS].map(a => a.id));
 const ICON_FIXES = { 'gd-subzero': SUBZERO_ICON, 'gd-meltdown': MELTDOWN_ICON, 'subway': SUBWAY_ICON, 'pvz2': PVZ2_ICON, 'clusterduck': CLUSTERDUCK_ICON };
-const URL_FIXES = { 'pvz2': PVZ2_URL, 'gacha-life': GACHA_LIFE_URL };
+const URL_FIXES = { 'pvz2': PVZ2_URL, 'gacha-life': GACHA_LIFE_URL, 'granny': GRANNY_URL };
 function fixIcon(id, icon){ return ICON_FIXES[id] || icon; }
 function fixUrl(id, url){ return URL_FIXES[id] || url; }
 let installed = [];
@@ -1095,6 +1098,7 @@ const serApp = a => {
 const deApp = d => {
   if (!d || !d.id) return null;
   const paused = !!d.paused;
+  if (URL_FIXES[d.id]) return { id: String(d.id), name: String(d.name || 'App'), icon: fixIcon(String(d.id), String(d.icon || '')), url: URL_FIXES[d.id], paused };
   if (d.url) return { id: String(d.id), name: String(d.name || 'App'), icon: fixIcon(String(d.id), String(d.icon || '')), url: fixUrl(String(d.id), String(d.url)), paused };
   if (d.icon) return { id: String(d.id), name: String(d.name || 'App'), tabName: d.tabName || '', icon: String(d.icon), white: !!d.white, label: d.label || '', paused };
   const base = REG[d.id];
@@ -2958,7 +2962,7 @@ const GAMES = [
     url:  'https://www.1r8t9so0qotx1d9c.whm.66042whm.school.and.securly-3351dcb3.nip.io/games/467.html' },
   { id: 'granny',     name: 'Granny',                 rating: 4.3, cat: 'arcade',
     icon: 'https://play-lh.googleusercontent.com/P8BbkQ6m0eCYYAx2tXTESBiIDQ2RESsSQp6oD8ZAP35rmEjmaXHMboYT6P807sAnfcuskKTdYbTyH5R0GCFk8Q=w240-h480-rw',
-    url:  '' },
+    url:  GRANNY_URL },
   { id: 'granny-2',   name: 'Granny: Chapter Two',    rating: 4.3, cat: 'arcade',
     icon: 'https://play-lh.googleusercontent.com/X_9WQbosx62FK2V2BK1Tuh2f3FuwyhrznBBodZ6nxGphIC0PwU0YxTVDRpOhbVKquz4UzgZ4SbjwQhVYOvEGnA=w240-h480-rw',
     url:  'https://grannyonline.io/granny-2.embed' },
@@ -3880,7 +3884,7 @@ function renderRow(g){
         <span class="sr-rate">${ST_STAR}<span>${g.rating.toFixed(1)}</span>${g.cat ? `<span class="sr-cat">${catName(g.cat)}</span>` : ''}</span>
         ${pct}
       </span>
-      ${btn}`;
+      <span class="sr-side">${btn}</span>`;
   });
   updateDetailBtn(g);
 }
@@ -4783,8 +4787,8 @@ loadDevState(st => {
       const em = String(st.settings.google.email);
       setAccount = { email: em, name: String(st.settings.google.name || '') || nameFromEmail(em) };
     }
-    installed = st.installed.filter(d => d && d.id && d.url)
-      .map(d => ({ id: String(d.id), name: String(d.name || 'App'), icon: fixIcon(String(d.id), String(d.icon || '')), url: fixUrl(String(d.id), String(d.url)) }));
+    installed = st.installed.filter(d => d && d.id)
+      .map(d => ({ id: String(d.id), name: String(d.name || 'App'), icon: fixIcon(String(d.id), String(d.icon || '')), url: URL_FIXES[d.id] || fixUrl(String(d.id), String(d.url || '')) }));
     if (Array.isArray(st.pages)){
       pages = st.pages.map(p => {
         const arr = (p || []).slice(0, 18).map(deSlot);
