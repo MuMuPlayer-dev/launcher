@@ -636,6 +636,68 @@ svg.dl-ov.zoom{transition:transform .32s ease,opacity .3s ease;transform:scale(1
 .hs-abtn.dl svg{width:17px;height:17px}
 .hs-abtn.go svg{width:15px;height:15px}
 .hs-none{color:#9aa0a6;font-size:13.5px;padding:14px 12px}
+
+/* ============ GARDENDLESS: mock github releases ============ */
+.gh{position:absolute;inset:0;overflow-y:auto;background:#0d1117;color:#e6edf3;font-family:-apple-system,'Segoe UI',Arial,sans-serif;scrollbar-width:thin;scrollbar-color:#30363d transparent}
+.gh-top{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:10px;padding:10px 18px;background:#161b22;border-bottom:1px solid #30363d;font-size:13px}
+.gh-top .cat{color:#7d8590}
+.gh-top .cat b{color:#58a6ff;font-weight:600}
+.gh-top .star{margin-left:auto;display:flex;align-items:center;gap:6px;height:30px;padding:0 12px;border-radius:6px;background:#21262d;border:1px solid #30363d;color:#c9d1d9;font-size:12px;font-weight:600}
+.gh-wrap{display:flex;max-width:980px;margin:0 auto;padding:24px 18px 40px}
+.gh-side{width:220px;flex:none;font-size:14px}
+.gh-side .si{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:6px;color:#c9d1d9}
+.gh-side .si.on{background:#161b22;font-weight:600}
+.gh-main{flex:1;min-width:0;padding-left:28px}
+.gh-main h1{font-size:20px;font-weight:400;margin-bottom:18px}
+.gh-rel{border:1px solid #30363d;border-radius:8px;overflow:hidden;margin-bottom:20px}
+.gh-rel-top{display:flex;align-items:center;gap:10px;padding:12px 16px;background:#161b22;border-bottom:1px solid #30363d;flex-wrap:wrap}
+.gh-tag{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:15px;background:#21262d;border:1px solid #30363d;font-size:12px;font-weight:600;color:#58a6ff}
+.gh-latest{display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:10px;background:#238636;color:#fff;font-size:11px;font-weight:700}
+.gh-meta{margin-left:auto;font-size:12px;color:#7d8590}
+.gh-rel-body{padding:16px}
+.gh-rel-body h2{font-size:16px;font-weight:600;margin-bottom:8px}
+.gh-rel-body p{font-size:13px;line-height:1.6;color:#c9d1d9;margin-bottom:14px}
+.gh-assets{border:1px solid #30363d;border-radius:6px;margin-top:6px}
+.gh-assets-h{display:flex;align-items:center;gap:8px;padding:9px 12px;font-size:13px;font-weight:600;background:#161b22;border-bottom:1px solid #30363d}
+.gh-file{display:flex;align-items:center;gap:10px;width:100%;padding:10px 12px;font-size:13px;color:#58a6ff;transition:background .12s;text-align:left}
+.gh-file:hover{background:#161b22}
+.gh-file svg{width:15px;height:15px;flex:none}
+.gh-file span.sz{margin-left:auto;color:#7d8590;font-size:12px}
+/* download popup (under the tabs, over the page) */
+.dlp{position:absolute;top:10px;left:10px;right:10px;z-index:10;height:56px;border-radius:12px;background:var(--cB);box-shadow:0 8px 24px rgba(0,0,0,.45);display:flex;align-items:center;gap:13px;padding:0 16px;overflow:hidden;cursor:pointer;animation:dlpIn .3s var(--ease) both}
+@keyframes dlpIn{from{transform:translateY(-64px);opacity:0}}
+.dlp-ic{width:20px;height:20px;flex:none;color:var(--cT3)}
+.dlp-ic svg{width:100%;height:100%;display:block}
+.dlp-mid{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1;position:relative;z-index:1}
+.dlp-mid b{font-size:13.5px;font-weight:600;color:var(--cT1)}
+.dlp-mid small{font-size:11.5px;color:var(--cT4)}
+.dlp-act{flex:none;color:#8cb4f9;font-size:13px;font-weight:700;padding:8px 10px;border-radius:8px;position:relative;z-index:1}
+.dlp-act:hover{background:rgba(140,180,249,.14)}
+.dlp-sweep{position:absolute;left:0;right:0;height:55%;background:linear-gradient(180deg,rgba(140,180,249,0),rgba(140,180,249,.45),rgba(140,180,249,0));animation:dlpSweep 1.5s linear infinite;pointer-events:none}
+@keyframes dlpSweep{0%{top:-60%}70%{top:105%}100%{top:105%}}
+/* downloads page */
+.ch-dl{position:absolute;inset:0;overflow-y:auto;background:var(--cCnt);color:var(--cT1)}
+.ch-dl-in{max-width:560px;margin:0 auto;padding:30px 18px 40px}
+.ch-dl h2{font-size:22px;font-weight:600;margin-bottom:18px}
+.dlf{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:11px 10px;border-radius:10px;color:var(--cT1);font-size:14px;font-weight:600;transition:background .12s}
+.dlf:hover{background:var(--hov)}
+.dlf svg{width:17px;height:17px;flex:none;color:var(--cT4)}
+/* install staging dialog */
+.inst-ovl{position:absolute;inset:0;z-index:96;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;animation:avIn .2s ease both}
+.inst-box{width:400px;max-width:88%;background:var(--cB);border-radius:16px;padding:22px 22px 14px;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.inst-top{display:flex;align-items:center;gap:11px;min-height:40px}
+.inst-ic{width:30px;height:30px;flex:none}
+.inst-ic svg{width:100%;height:100%;display:block}
+.inst-t{font-size:16.5px;font-weight:600;color:var(--cT1)}
+.inst-dl{margin-left:auto;width:20px;height:20px;flex:none;color:var(--cT1)}
+.inst-dl svg{width:100%;height:100%;display:block}
+.inst-mid{font-size:14px;color:var(--cT2);padding:10px 0 2px;line-height:1.5}
+.inst-bar{position:relative;height:6px;border-radius:3px;background:rgba(255,255,255,.14);margin:16px 0 6px;overflow:hidden}
+.inst-bar i{position:absolute;top:0;bottom:0;width:45%;border-radius:3px;background:linear-gradient(90deg,#6ea8f7,#8cb4f9);animation:instSlide 1.4s cubic-bezier(.4,0,.2,1) infinite}
+@keyframes instSlide{0%{left:-45%}75%{left:100%}100%{left:100%}}
+.inst-btns{display:flex;justify-content:flex-end;align-items:center;gap:14px;margin-top:14px;min-height:34px}
+.inst-btn{color:#8cb4f9;font-size:13px;font-weight:700;letter-spacing:.05em;padding:8px 12px;border-radius:8px;transition:background .12s}
+.inst-btn:hover{background:rgba(140,180,249,.14)}
 </style>
 </head>
 <body>
@@ -1041,6 +1103,10 @@ const MELTDOWN_ICON = 'https://play-lh.googleusercontent.com/eGwVBfqYTO-BUs757Rx
 const SUBWAY_ICON = 'https://play-lh.googleusercontent.com/T7az9M7td7A24vOr7Jp3C9NG16kyWA1NnlUySyl_mbDV9BtlrFbxps5TD5DzT7kCBxpNeTbIIju2_aFN4xtFoYM';
 const GACHA_LIFE_URL = 'https://cfpju876whm.make-by-vann-dont-steal-it-gooners-3351dcb3.nip.io/games/375.html';
 const GRANNY_URL = 'https://1games.io/embed/granny-horror?pub_id=&preroll=0';
+const GARDENDLESS = { id: 'gardendless', name: 'Gardendless',
+  icon: 'https://pvzge.com/pvz_logo@200.webp',
+  url:  'https://cfpju876whm.make-by-vann-dont-steal-it-gooners-3351dcb3.nip.io/games/92.html' };
+const GARDENDLESS_RELEASE_URL = 'https://github.com/Cateners/gardendless-android/releases';
 const BASE = [
   { id: 'store',  name: 'MuMu Store' },
   { id: 'cloner', name: 'App Cloner' }
@@ -2178,6 +2244,7 @@ const CH = {
     chrome:   { n: { tabs: [], cur: 0 }, i: { tabs: [], cur: 0 } }
   },
   marks: new Map(),
+  downloads: [],
   engine: 'google',
   theme: 'dark',
   homepage: { on: true, mode: 'default', custom: '' },
@@ -2206,6 +2273,7 @@ function entTitle(e){
   if (e.type === 'newtab') return 'New Tab';
   if (e.type === 'blank') return '';
   if (e.type === 'history') return 'History';
+  if (e.type === 'downloads') return 'Downloads';
   return hostOf(e.url);
 }
 function addrOf(e){
@@ -2213,6 +2281,7 @@ function addrOf(e){
   if (e.type === 'newtab') return isChromeApp() ? '' : ENGINES[CH.engine].host;
   if (e.type === 'blank') return 'about:blank';
   if (e.type === 'history') return 'chrome://history';
+  if (e.type === 'downloads') return 'chrome://downloads';
   return e.url.replace(/^https?:\/\//, '');
 }
 function entHost(e){
@@ -2221,6 +2290,7 @@ function entHost(e){
 }
 function tabIcon(ent){
   if (ent.type === 'blank') return `<span class="ch-tic">${CH_GLOBE}</span>`;
+  if (ent.type === 'downloads') return `<span class="ch-tic">${CH_DL}</span>`;
   /* Chrome app: the new tab favicon is the same as the history page's */
   if (ent.type === 'history' || (ent.type === 'newtab' && isChromeApp()))
     return `<span class="ch-tic"><img class="ch-fav" src="${HIST_FAV}" style="filter:brightness(0) invert(1)" alt=""></span>`;
@@ -2231,6 +2301,7 @@ function entryIconKind(ent){
   if (ent.type === 'web') return 'lock';
   if (ent.type === 'search') return 'engine';
   if (ent.type === 'blank') return 'globe';
+  if (ent.type === 'downloads') return 'dl';
   if (ent.type === 'history' || (ent.type === 'newtab' && isChromeApp())) return 'history';
   return 'engine';
 }
@@ -2239,6 +2310,7 @@ function setAddrIcon(kind){
   if (!el) return;
   if (kind === 'lock') el.innerHTML = CH_LOCK;
   else if (kind === 'globe') el.innerHTML = CH_GLOBE;
+  else if (kind === 'dl') el.innerHTML = CH_DL;
   else if (kind === 'history') el.innerHTML = `<img src="${HIST_FAV}" style="filter:brightness(0) invert(1)" alt="">`;
   else el.innerHTML = `<img src="${ENGINES[CH.engine].fav}" alt="">`;
 }
@@ -2261,7 +2333,10 @@ function isUrlLike(t){
 function goFromText(txt){
   const t = txt.trim();
   if (!t) return;
+  /* typing anything containing "gardendless" opens the mock release page */
+  if (t.toLowerCase().includes('gardendless')){ chGo({ type: 'web', url: GARDENDLESS_RELEASE_URL }); return; }
   if (t.toLowerCase() === 'chrome://history'){ chGo({ type: 'history' }); return; }
+  if (t.toLowerCase() === 'chrome://downloads'){ chGo({ type: 'downloads' }); return; }
   if (isUrlLike(t)) chGo({ type: 'web', url: /^([a-z][a-z0-9+.-]*:\/\/)/i.test(t) ? t : 'https://' + t });
   else chGo({ type: 'search', url: ENGINES[CH.engine].q + encodeURIComponent(t) });
 }
@@ -2566,6 +2641,9 @@ function renderChContent(ent){
     return;
   }
   if (ent.type === 'history'){ c.appendChild(buildHistoryPage()); return; }
+  if (ent.type === 'downloads'){ c.appendChild(buildDownloadsPage()); return; }
+  /* the github releases url is never really loaded — show the mock page */
+  if (ent.url === GARDENDLESS_RELEASE_URL){ c.appendChild(buildGardendlessPage()); return; }
   const fr = document.createElement('iframe');
   fr.className = 'ch-frame';
   fr.src = ent.url;
@@ -2719,7 +2797,7 @@ function openTabsMenu(){
       </span>
       <span class="tm-prev">${ent.type === 'newtab'
         ? `<span class="tm-g"><img src="${ENGINES[CH.engine].logo}" alt="" draggable="false"></span>`
-        : ent.type === 'blank' ? ''
+        : (ent.type === 'blank' || ent.type === 'history' || ent.type === 'downloads') ? ''
         : `<iframe src="${ent.url.replace(/"/g, '&quot;')}" loading="lazy" tabindex="-1" sandbox="allow-scripts allow-same-origin"></iframe>`}</span>`;
     box.querySelector('.tm-name').textContent = entTitle(ent);
     box.addEventListener('click', ev => {
@@ -2917,6 +2995,172 @@ function openHomepagePage(){
     render();
     body.appendChild(col);
   });
+}
+
+/* ---- Gardendless: mock release page · download popup · staging ---- */
+function buildGardendlessPage(){
+  const d = document.createElement('div');
+  d.className = 'gh';
+  d.innerHTML = `
+    <div class="gh-top">
+      <svg viewBox="0 0 16 16" width="22" height="22" fill="#7d8590" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+      <span class="cat"><b>Cateners</b> / <b>gardendless-android</b></span>
+      <span class="star">★ Star 128</span>
+    </div>
+    <div class="gh-wrap">
+      <aside class="gh-side">
+        <div class="si on">Releases</div>
+        <div class="si">Tags</div>
+      </aside>
+      <div class="gh-main">
+        <h1>Releases</h1>
+        <div class="gh-rel">
+          <div class="gh-rel-top">
+            <span class="gh-tag">v1.0</span>
+            <span class="gh-latest">Latest</span>
+            <span class="gh-meta">Released Jun 12, 2026 · 4f2a9c1 · 2.4k downloads</span>
+          </div>
+          <div class="gh-rel-body">
+            <h2>Gardendless v1.0</h2>
+            <p>The Android release of Gardendless — the endless garden defense fangame.</p>
+            <div class="gh-assets">
+              <div class="gh-assets-h">Assets · 1</div>
+              <button class="gh-file">
+                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M10 3.5 V12.5"/><path d="M6.4 9.2 L10 12.8 L13.6 9.2"/><path d="M3.5 15.5 H16.5"/></svg>
+                <span class="fn">app-release.apk</span>
+                <span class="sz">48 MB</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  d.querySelector('.gh-file').addEventListener('click', startGardendlessDownload);
+  return d;
+}
+function startGardendlessDownload(){
+  if (!chRoot) return;
+  const c = chRoot.querySelector('.ch-content');
+  if (!c || c.querySelector('.dlp')) return;   /* one download at a time */
+  const pop = document.createElement('div');
+  pop.className = 'dlp';
+  pop.innerHTML = `
+    <span class="dlp-ic">${CH_DL}</span>
+    <span class="dlp-mid"><b>Downloading File...</b><small>Tap to see details</small></span>
+    <span class="dlp-act">Details</span>
+    <span class="dlp-sweep"></span>`;
+  c.appendChild(pop);
+  let done = false;
+  pop.addEventListener('click', e => {
+    if (e.target.closest('.dlp-act')){
+      if (done) openGardendlessInstall();
+      else chGo({ type: 'downloads' });
+      return;
+    }
+    chGo({ type: 'downloads' });
+  });
+  setTimeout(() => {
+    done = true;
+    if (!CH.downloads.includes('app-release.apk')) CH.downloads.push('app-release.apk');
+    if (!pop.isConnected) return;
+    pop.querySelector('b').textContent = 'File Downloaded';
+    pop.querySelector('.dlp-act').textContent = 'Open';
+    const sw = pop.querySelector('.dlp-sweep');
+    if (sw) sw.remove();
+  }, 2000);
+}
+function buildDownloadsPage(){
+  const d = document.createElement('div');
+  d.className = 'ch-dl';
+  d.innerHTML = `<div class="ch-dl-in"><h2>Downloads</h2><div class="dl-list"></div></div>`;
+  const list = d.querySelector('.dl-list');
+  if (!CH.downloads.length){
+    const p = document.createElement('p');
+    p.className = 'hh-empty';
+    p.textContent = 'No downloads yet';
+    list.appendChild(p);
+  } else CH.downloads.forEach(fn => {
+    const row = document.createElement('button');
+    row.className = 'dlf';
+    row.innerHTML = `${CH_DL}<span></span>`;
+    row.querySelector('span').textContent = fn;
+    row.addEventListener('click', () => {
+      if (fn === 'app-release.apk') openGardendlessInstall();
+    });
+    list.appendChild(row);
+  });
+  return d;
+}
+function openGardendlessInstall(){
+  if (!chRoot || chRoot.querySelector('.inst-ovl')) return;
+  const ov = document.createElement('div');
+  ov.className = 'inst-ovl';
+  ov.innerHTML = `
+    <div class="inst-box">
+      <div class="inst-top">
+        <span class="inst-t">Staging app</span>
+        <span class="inst-dl">${CH_DL}</span>
+      </div>
+      <div class="inst-bar"><i></i></div>
+      <div class="inst-btns"></div>
+    </div>`;
+  chRoot.appendChild(ov);
+  let closed = false;
+  const box = ov.querySelector('.inst-box');
+  const btns = ov.querySelector('.inst-btns');
+  const kill = () => { closed = true; ov.remove(); };
+  ov.addEventListener('mousedown', e => { if (e.target === ov) kill(); });
+  const showHead = name => {
+    ov.querySelector('.inst-top').innerHTML = `
+      <span class="inst-ic">${appIconSVG(GARDENDLESS)}</span>
+      <span class="inst-t">${name}</span>`;
+  };
+  setTimeout(() => {
+    if (closed || !ov.isConnected) return;
+    /* stage 2: icon + name, no bar, CANCEL / INSTALL */
+    showHead(GARDENDLESS.name);
+    ov.querySelector('.inst-bar').remove();
+    btns.innerHTML = `
+      <button class="inst-btn" data-b="cancel">CANCEL</button>
+      <button class="inst-btn" data-b="install">INSTALL</button>`;
+    btns.querySelector('[data-b="cancel"]').addEventListener('click', kill);
+    btns.querySelector('[data-b="install"]').addEventListener('click', () => {
+      if (closed) return;
+      /* stage 3: Installing... with the bar back, no buttons */
+      showHead('Installing...');
+      const bar = document.createElement('div');
+      bar.className = 'inst-bar';
+      bar.innerHTML = '<i></i>';
+      box.insertBefore(bar, btns);
+      btns.innerHTML = '';
+      setTimeout(() => {
+        if (closed || !ov.isConnected) return;
+        /* stage 4: installed — icon + name, message, OK / OPEN */
+        bar.remove();
+        showHead(GARDENDLESS.name);
+        const mid = document.createElement('p');
+        mid.className = 'inst-mid';
+        mid.textContent = `${GARDENDLESS.name} was installed.`;
+        box.insertBefore(mid, btns);
+        btns.innerHTML = `
+          <button class="inst-btn" data-b="ok">OK</button>
+          <button class="inst-btn" data-b="open">OPEN</button>`;
+        btns.querySelector('[data-b="ok"]').addEventListener('click', kill);
+        btns.querySelector('[data-b="open"]').addEventListener('click', () => {
+          const r = ov.querySelector('.inst-ic').getBoundingClientRect();
+          kill();
+          /* register on the home screen (never in the stores), then launch */
+          if (!installed.some(a => a.id === GARDENDLESS.id)){
+            installed.push({ ...GARDENDLESS });
+            newBadges.add(GARDENDLESS.id);
+            persistDev();
+            renderHome();
+          }
+          openAppFromRect(GARDENDLESS, r);
+        });
+      }, 1000);
+    });
+  }, 1000);
 }
 
 /* ============ MUMU STORE ============ */
@@ -4833,12 +5077,9 @@ addEventListener('keydown', e => {
     if (pbox){ pbox.remove(); return; }
     if (psDetail){ psCloseDetail(); return; }
   }
-  if (chRoot && chRoot.querySelector('.ch-panel')){
-    chRoot.querySelectorAll('.ch-panel').forEach(p => p.remove());
-    return;
-  }
-  if (folderOpen){ closeFolder(true); return; }
   if (chRoot){
+    const inst = chRoot.querySelector('.inst-ovl');
+    if (inst){ inst.remove(); return; }
     const dlg = chRoot.querySelector('.ch-dlg');
     if (dlg){ dlg.remove(); return; }
     const pop = chRoot.querySelector('.ch-popwrap');
@@ -4848,6 +5089,11 @@ addEventListener('keydown', e => {
     const snack = chRoot.querySelector('.ch-snack.show');
     if (snack){ hideSnack(); return; }
   }
+  if (chRoot && chRoot.querySelector('.ch-panel')){
+    chRoot.querySelectorAll('.ch-panel').forEach(p => p.remove());
+    return;
+  }
+  if (folderOpen){ closeFolder(true); return; }
   if (storeRoot){
     const view = storeRoot.querySelector('.gd-view');
     if (view){ view.remove(); return; }
