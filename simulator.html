@@ -24,7 +24,10 @@ input{user-select:text;-webkit-user-select:text;caret-color:#A5C2FF}
 #ui{position:fixed;top:0;left:0;width:calc(100% / var(--s,1));height:calc(100% / var(--s,1));z-index:1;opacity:0;transform:scale(var(--s,1));transform-origin:0 0;transition:opacity .7s var(--ease),transform .16s ease-out}
 #ui.ready{opacity:1}
 
-#statusbar{position:absolute;top:0;left:0;right:0;height:42px;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font-size:15px;font-weight:600;text-shadow:0 1px 3px rgba(0,0,0,.5);transition:background .25s ease}
+#statusbar{position:absolute;top:0;left:0;right:0;height:42px;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font-size:15px;font-weight:600;text-shadow:0 1px 3px rgba(0,0,0,.5);transition:background .25s ease,transform .34s var(--ease)}
+#statusbar.hidebar{transform:translateY(-100%)}
+#statusbar.peek{background:rgba(0,0,0,.58);backdrop-filter:blur(5px)}
+#topedge{position:absolute;top:0;left:0;right:0;height:20px;z-index:400;display:none;touch-action:none}
 #statusbar.appbg{background:#000}
 .sb-right{display:flex;align-items:center;gap:12px}
 .sb-pair{display:flex;align-items:center;gap:6px}
@@ -87,7 +90,7 @@ svg.dl-ov.zoom{transition:transform .32s ease,opacity .3s ease;transform:scale(1
 .folddots span{width:7px;height:7px;border-radius:99px;background:#6d747d}
 .folddots span.on{background:#d9dde2}
 
-#appview{position:absolute;left:0;right:0;top:42px;bottom:0;z-index:2}
+#appview{position:absolute;left:0;right:0;top:0;bottom:0;z-index:2}
 #appview[hidden]{display:none}
 .avbox{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;animation:avIn .45s var(--ease) both}
 @keyframes avIn{from{opacity:0;transform:translateY(12px)}}
@@ -350,7 +353,6 @@ svg.dl-ov.zoom{transition:transform .32s ease,opacity .3s ease;transform:scale(1
 .st-view.searching .st-drop{display:block}
 .st-grid{position:absolute;top:72px;left:24px;right:24px;bottom:8px;z-index:4;overflow-y:auto;padding:4px 2px 14px;display:none;scrollbar-width:thin}
 .st-view.committed .st-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-content:start}
-.st-pane[data-pane="featured"] .st-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-content:start}
 .st-view.searching .st-grid{display:none}
 .st-cats{position:absolute;top:66px;left:24px;right:24px;display:flex;gap:10px;flex-wrap:wrap;z-index:2}
 .st-view.searching .st-cats,.st-view.committed .st-cats{display:none}
@@ -558,8 +560,9 @@ svg.dl-ov.zoom{transition:transform .32s ease,opacity .3s ease;transform:scale(1
 .ps-btn:hover{filter:brightness(1.08)}
 .ps-btn.big{height:42px;padding:0 30px;font-size:14px}
 .ps-h{margin:26px 0 12px;color:#fff;font-size:18px;font-weight:600}
-.ps-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:10px}
-.ps-item{min-width:0;display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:14px;text-align:left;transition:background .14s}
+.ps-row{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;padding:3px 0 10px}
+.ps-row::-webkit-scrollbar{display:none}
+.ps-item{flex:0 0 calc((100% - 20px)/3);min-width:0;display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:14px;text-align:left;transition:background .14s}
 .ps-item:hover{background:rgba(255,255,255,.07)}
 .ps-iicon{width:46px;height:46px;border-radius:12px;object-fit:cover;flex:none}
 .ps-itx{display:flex;flex-direction:column;gap:3px;min-width:0;flex:1}
@@ -570,7 +573,9 @@ svg.dl-ov.zoom{transition:transform .32s ease,opacity .3s ease;transform:scale(1
 .ps-rate svg{width:12px;height:12px;display:block}
 .ps-detail{position:absolute;inset:0;z-index:20;background:#000;transform:translateY(100%);transition:transform .4s var(--ease);overflow-y:auto;scrollbar-width:thin}
 .ps-detail.open{transform:none}
-.ps-dcol{max-width:none;margin:0;padding:26px 32px 40px}
+.ps-dbg{position:absolute;top:0;left:0;right:0;height:360px;background-size:cover;background-position:center top;pointer-events:none}
+.ps-dbg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.5) 0%,rgba(0,0,0,.06) 26%,rgba(0,0,0,.14) 55%,#000 97%)}
+.ps-dcol{max-width:none;margin:0;padding:26px 32px 40px;position:relative;z-index:1}
 .ps-back{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;margin-bottom:14px;transition:background .13s}
 .ps-back:hover{background:rgba(255,255,255,.10)}
 .ps-back svg{width:20px;height:20px}
@@ -698,6 +703,68 @@ svg.dl-ov.zoom{transition:transform .32s ease,opacity .3s ease;transform:scale(1
 .inst-btns{display:flex;justify-content:flex-end;align-items:center;gap:14px;margin-top:14px;min-height:34px}
 .inst-btn{color:#8cb4f9;font-size:13px;font-weight:700;letter-spacing:.05em;padding:8px 12px;border-radius:8px;transition:background .12s}
 .inst-btn:hover{background:rgba(140,180,249,.14)}
+
+/* ============ MUMU STORE: featured page ============ */
+.feat{position:absolute;top:66px;left:24px;right:24px;bottom:8px;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;padding-bottom:14px}
+.st-view.searching .feat,.st-view.committed .feat{display:none}
+.feat-top{display:flex;gap:14px;align-items:stretch}
+.feat-hero{position:relative;width:calc(66.6% - 9px);flex:none;height:300px;border-radius:16px;overflow:hidden;background:#15161a;touch-action:pan-y;cursor:pointer}
+.feat-track{display:flex;height:100%;will-change:transform;transition:transform .5s var(--ease)}
+.feat-slide{flex:0 0 100%;position:relative;height:100%}
+.feat-slide .shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;user-select:none;-webkit-user-drag:none}
+.feat-grad{position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,6,10,.82) 0%,rgba(4,6,10,.34) 46%,rgba(4,6,10,0) 72%)}
+.feat-info{position:absolute;left:20px;top:18px;display:flex;flex-direction:column;align-items:flex-start;gap:7px;z-index:2}
+.fi-ic{width:58px;height:58px;border-radius:14px;object-fit:cover;box-shadow:0 6px 18px rgba(0,0,0,.45)}
+.fi-name{font-size:23px;font-weight:700;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.6);max-width:60%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fi-meta{display:flex;align-items:center;gap:9px}
+.fi-rate{display:flex;align-items:center;gap:5px;color:#f5c443;font-size:13.5px;font-weight:600}
+.fi-rate svg{width:13px;height:13px;fill:#f5c443}
+.fi-div{width:1px;height:13px;background:rgba(255,255,255,.5)}
+.fi-cat{color:#fff;font-size:13.5px;font-weight:600;text-shadow:0 1px 4px rgba(0,0,0,.5)}
+.fi-btn{height:38px;min-width:104px;padding:0 22px;border-radius:10px;background:#3f8fdd;color:#fff;font-size:13.5px;font-weight:700;white-space:nowrap;transition:filter .15s,background .15s,color .15s}
+.fi-btn:hover{filter:brightness(1.12)}
+.fi-btn.cancel{background:#0b0c10;color:#5db4f0}
+.feat-dots{position:absolute;left:50%;bottom:13px;transform:translateX(-50%);display:flex;gap:6px;align-items:center;z-index:3}
+.feat-dots span{width:7px;height:7px;border-radius:99px;background:rgba(255,255,255,.42);transition:width .28s var(--ease),background .28s ease}
+.feat-dots span.on{width:22px;background:#4a9de0}
+.feat-cat{flex:1;min-width:0;background:#33353b;border-radius:16px;padding:14px 14px 10px;display:flex;flex-direction:column}
+.fc-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
+.fc-name{color:#fff;font-size:16.5px;font-weight:600}
+.fc-more{display:flex;align-items:center;gap:4px;color:#5db4f0;font-size:12.5px;font-weight:700;padding:4px 6px;border-radius:7px;transition:background .13s}
+.fc-more:hover{background:rgba(93,180,240,.14)}
+.fc-more svg{width:12px;height:12px}
+.fc-item{display:flex;align-items:center;gap:11px;padding:8px;border-radius:11px;text-align:left;transition:background .13s}
+.fc-item:hover{background:rgba(255,255,255,.07)}
+.fc-item img{width:42px;height:42px;border-radius:11px;object-fit:cover;flex:none}
+.fc-item .tx{display:flex;flex-direction:column;gap:2px;min-width:0}
+.fc-item b{color:#fff;font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fc-item small{color:#9aa0a6;font-size:11px}
+.feat-h{color:#fff;font-size:18px;font-weight:600;margin:24px 2px 10px}
+.feat-pop{display:flex;gap:14px;overflow-x:auto;scrollbar-width:none;padding:4px 2px 10px}
+.feat-pop::-webkit-scrollbar{display:none}
+.fpop{width:96px;flex:none;display:flex;flex-direction:column;align-items:center;gap:7px;padding:4px 2px;border-radius:12px;transition:transform .22s var(--ease)}
+.fpop:hover{transform:translateY(-6px)}
+.fpop img{width:64px;height:64px;border-radius:15px;object-fit:cover}
+.fpop span{font-size:11.5px;color:#c6cad0;text-align:center;line-height:1.25;max-width:92px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.feat-latest{display:flex;gap:14px;overflow-x:auto;scrollbar-width:none;padding-bottom:8px}
+.feat-latest::-webkit-scrollbar{display:none}
+.flat{flex:0 0 calc((100% - 21px)/2.5);min-width:0;position:relative;border-radius:14px;overflow:hidden;background:#15161a;cursor:pointer}
+.flat .banner{width:100%;aspect-ratio:1052/592;object-fit:cover;display:block;user-select:none;-webkit-user-drag:none}
+.flat-band{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:center;gap:10px;padding:46px 12px 10px;background:linear-gradient(180deg,rgba(var(--c,36,39,45),0) 0%,rgba(var(--c,36,39,45),.92) 55%,rgba(var(--c,36,39,45),1) 100%)}
+.fb-ic{width:40px;height:40px;border-radius:10px;object-fit:cover;flex:none;box-shadow:0 2px 10px rgba(0,0,0,.35)}
+.fb-tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.fb-name{font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fb-row{display:flex;align-items:center;gap:7px}
+.fb-rate{display:flex;align-items:center;gap:4px;font-size:11px;font-weight:700}
+.fb-rate svg{width:11px;height:11px;fill:currentColor}
+.fb-cat{background:#fff;color:#1a73e8;font-size:10px;font-weight:800;padding:2px 8px;border-radius:6px;white-space:nowrap}
+.fb-btn{flex:none;height:30px;padding:0 15px;border-radius:8px;background:rgba(255,255,255,.8);color:#000;font-size:11.5px;font-weight:800;white-space:nowrap;transition:background .15s,color .15s}
+.fb-btn:hover{background:#fff}
+.fb-btn.cancel{background:rgba(0,0,0,.45);color:#fff}
+.flat-band.lt .fb-name{color:#fff}
+.flat-band.lt .fb-rate{color:#f5c443}
+.flat-band.dk .fb-name{color:#111}
+.flat-band.dk .fb-rate{color:#7a5a00}
 </style>
 </head>
 <body>
@@ -730,6 +797,7 @@ svg.dl-ov.zoom{transition:transform .32s ease,opacity .3s ease;transform:scale(1
   <div id="appview" hidden></div>
   <div id="dock"></div>
   <div id="gest"></div>
+  <div id="topedge"></div>
   <button id="hsrch" aria-label="Search games">
     <span>Search games</span>
     <svg viewBox="0 0 20 20" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="9" r="6.2"/><line x1="13.7" y1="13.7" x2="17" y2="17"/></svg>
@@ -1371,7 +1439,7 @@ function exitEdit(){
    tap = open · hold 500ms stationary = context menu · hold + move = app drag · quick horizontal = page swipe */
 uiEl.addEventListener('pointerdown', e => {
   if (e.button !== 0 || !avEl.hidden || dnd || swipe || fdnd) return;
-  if (e.target.closest('.foldov, .appmenu, .am-dlg, .custwrap, .unsnack, .setapp, .play, .hs-ovl')) return;
+  if (e.target.closest('.foldov, .appmenu, .am-dlg, .custwrap, .unsnack, .setapp, .play, .hs-ovl, #topedge')) return;
   const appB = e.target.closest('.app');
   const cellB = e.target.closest('.cell');
   P = { x0: e.clientX, y0: e.clientY, lx: e.clientX, ly: e.clientY,
@@ -2073,7 +2141,18 @@ let chRoot = null, storeRoot = null, setRoot = null, psRoot = null, phEl = null,
 const AD_BLOCKED = new Set(['clusterduck', 'pvz2']);
 function showView(v){
   const home = v === 'home';
-  $('#statusbar').classList.toggle('appbg', !home);
+  const sb = $('#statusbar');
+  clearTimeout(peekTO);
+  if (home){
+    sb.classList.remove('hidebar', 'peek');
+    topedge.style.display = 'none';
+    topedge.style.height = '';
+  } else {
+    sb.classList.remove('peek');
+    sb.classList.add('hidebar');
+    topedge.style.display = '';
+    topedge.style.height = '';
+  }
   wrapEl.style.display = home ? '' : 'none';
   dotsEl.style.display = home ? '' : 'none';
   dockEl.style.display = home ? '' : 'none';
@@ -2176,6 +2255,46 @@ addEventListener('message', e => {
     resetBrowserApp(d.id === 'g-chrome' ? 'chrome' : 'chromium');
   }
 });
+
+/* ============ top bar: hidden in apps · swipe down to peek ============ */
+const topedge = $('#topedge');
+let peekTO = null, edgeDrag = null;
+function barPeek(){
+  const sb = $('#statusbar');
+  sb.classList.remove('hidebar');
+  sb.classList.add('peek');
+  topedge.style.height = '42px';
+  clearTimeout(peekTO);
+  peekTO = setTimeout(barUnpeek, 4000);
+}
+function barUnpeek(){
+  clearTimeout(peekTO);
+  const sb = $('#statusbar');
+  sb.classList.remove('peek');
+  topedge.style.height = '';
+  if (!avEl.hidden) sb.classList.add('hidebar');
+}
+topedge.addEventListener('pointerdown', e => {
+  if (avEl.hidden) return;
+  edgeDrag = { y0: e.clientY };
+});
+topedge.addEventListener('pointermove', e => {
+  /* any interaction while revealed resets the 4s timer */
+  if ($('#statusbar').classList.contains('peek')){ barPeek(); return; }
+  if (!edgeDrag) return;
+  if (e.clientY - edgeDrag.y0 > 16){ edgeDrag = null; barPeek(); }
+});
+topedge.addEventListener('pointerup', e => {
+  if (edgeDrag && Math.abs(e.clientY - edgeDrag.y0) < 6 && !$('#statusbar').classList.contains('peek')){
+    /* plain tap: pass it through to the app underneath */
+    topedge.style.display = 'none';
+    const el = document.elementFromPoint(e.clientX, e.clientY);
+    topedge.style.display = '';
+    if (el && el.click) el.click();
+  }
+  edgeDrag = null;
+});
+topedge.addEventListener('pointercancel', () => { edgeDrag = null; });
 
 /* ============ CHROMIUM (engine shared with the Chrome app) ============ */
 const CH_HOME  = `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M3.2 9.4 L10 3.4 L16.8 9.4"/><path d="M5.2 8.2 V16.2 H14.8 V8.2"/></svg>`;
@@ -3117,9 +3236,13 @@ function openGardendlessInstall(){
   };
   setTimeout(() => {
     if (closed || !ov.isConnected) return;
-    /* stage 2: icon + name, no bar, CANCEL / INSTALL */
+    /* stage 2: icon + name + question, no bar, CANCEL / INSTALL */
     showHead(GARDENDLESS.name);
     ov.querySelector('.inst-bar').remove();
+    const q = document.createElement('p');
+    q.className = 'inst-mid';
+    q.textContent = 'Do you want to install this app?';
+    box.insertBefore(q, btns);
     btns.innerHTML = `
       <button class="inst-btn" data-b="cancel">CANCEL</button>
       <button class="inst-btn" data-b="install">INSTALL</button>`;
@@ -3128,6 +3251,8 @@ function openGardendlessInstall(){
       if (closed) return;
       /* stage 3: Installing... with the bar back, no buttons */
       showHead('Installing...');
+      const qq = ov.querySelector('.inst-mid');
+      if (qq) qq.remove();
       const bar = document.createElement('div');
       bar.className = 'inst-bar';
       bar.innerHTML = '<i></i>';
@@ -3149,14 +3274,18 @@ function openGardendlessInstall(){
         btns.querySelector('[data-b="open"]').addEventListener('click', () => {
           const r = ov.querySelector('.inst-ic').getBoundingClientRect();
           kill();
-          /* register on the home screen (never in the stores), then launch */
-          if (!installed.some(a => a.id === GARDENDLESS.id)){
-            installed.push({ ...GARDENDLESS });
+          /* register on the home screen like any installed app (never in the stores), then launch */
+          let app = installed.find(a => a.id === GARDENDLESS.id);
+          if (!app){
+            app = { ...GARDENDLESS };
+            installed.push(app);
             newBadges.add(GARDENDLESS.id);
+            const slot = firstEmptySlot();
+            pages[slot.page][slot.idx] = app;
             persistDev();
             renderHome();
           }
-          openAppFromRect(GARDENDLESS, r);
+          openAppFromRect(app, r);
         });
       }, 1000);
     });
@@ -3218,7 +3347,13 @@ const GAMES = [
     url:  'https://tocabocaworld.io/wp-content/uploads/games/html5/T/Toca%20Boca%20World/index.html' },
   { id: 'blockblast', name: 'Block Blast!',           rating: 4.8, cat: 'casual',
     icon: 'https://play-lh.googleusercontent.com/Abzm9CjXi_DZjGzalQqVFMNZL8Wcx4uxtT5wcGOBaclbjvb3UYA2Bi6s6ff2SFRktdXehBsocFKkGUeIffUkLg',
-    url:  'https://block-blast.io/block-blast.embed' }
+    url:  'https://block-blast.io/block-blast.embed' },
+  { id: 'fnaf',       name: "Five Nights at Freddy's",   rating: 4.7, cat: 'action',
+    icon: 'https://play-lh.googleusercontent.com/AI5JwVmiXgkAvySoyHcIIsQAZjAsX3C0GfOIeTx6MM2AyGP02DwPlx29IZUi4JzGnpUJJhQYwRnu8rd0IwmMbg',
+    url:  'https://cfpju876whm.make-by-vann-dont-steal-it-gooners-3351dcb3.nip.io/games/166.html' },
+  { id: 'fnaf-2',     name: "Five Nights at Freddy's 2", rating: 4.6, cat: 'strategy',
+    icon: 'https://play-lh.googleusercontent.com/ax7Yy0SvZ9GUS5o0MHtXFD0vEPqK5BEadf2a5O0I_36GYaUkZ29PYGQNxktEflYOFsG34n5PWVCyAlKD7n-9Ww=w240-h480-rw',
+    url:  'https://cfpju876whm.make-by-vann-dont-steal-it-gooners-3351dcb3.nip.io/games/167.html' }
 ];
 const CAT_IC = {
   adventure: `<svg viewBox="0 0 20 20" fill="none" stroke="#fff" stroke-width="1.6" aria-hidden="true"><rect x="1.6" y="1.6" width="16.8" height="16.8" rx="4.2"/><g fill="#fff" stroke="none"><rect x="5.4" y="6.6" width="2.3" height="6.8" rx="1.15" transform="rotate(15 6.55 10)"/><rect x="8.6" y="6.6" width="2.3" height="6.8" rx="1.15" transform="rotate(15 9.75 10)"/><circle cx="13.9" cy="12.3" r="1.2"/></g></svg>`,
@@ -3650,6 +3785,53 @@ const DETAILS = {
       'https://play-lh.googleusercontent.com/zYfj4Mqb-OOxPoDHGum-hlImWHAbZ_C3zDqVSsLKXCrUqjnsg0bTf5L2F3s3ToAcmvDhXKzsOpo7si8UQknbGg=w1052-h592-rw',
       'https://play-lh.googleusercontent.com/0buKzw2a2VskT3e64j5r7YvN0P8Ac1O8NoZPZausfa8KcajcZOt4Y4L4iLvQT7GlL5TfB7HxLUExXC3RWpUE14A=w1052-h592-rw',
       'https://play-lh.googleusercontent.com/_jZOZGnnhVE9yI_tfWAwxnAWgqUEjiZLUpVUcf9yBdTkf84Nqvxq8z4tBim5rOvEgx4tyPkiO9KeddziwKYG=w1052-h592-rw'
+    ]
+  },
+  'fnaf': {
+    size: '98.5MB', dev: 'Clickteam USA LLC', ver: '1,000,000+', upd: '2026-06-10',
+    desc: [
+      "Welcome to your new summer job at Freddy Fazbear's Pizza, where kids and parents alike come for entertainment and food as far as the eye can see! The main attraction is Freddy Fazbear, of course; and his two friends. They are animatronic robots, programmed to please the crowds!",
+      "But their behavior has become somewhat unpredictable at night. As the new night security guard, you must monitor the cameras and keep a close eye on them — and with limited power, everything shuts down if you run out. Can you survive Five Nights at Freddy Fazbear's Pizza?"
+    ],
+    bullets: [
+      "Can you survive Five Nights at Freddy Fazbear's Pizza?",
+      'Monitor the security cameras to track the animatronics',
+      'Power is limited — everything shuts down if you run out',
+      'Survive each night from midnight to 6 AM',
+      'This version requires at least 2GB of RAM'
+    ],
+    shots: [
+      'https://play-lh.googleusercontent.com/CjD3Do7438VCP7v0szDWPojJNopxFolVZX3WmwftAOD2HGLmJiDd2HuUOV1nnJm00XpHqLMVQPXUELiiDzbhhg=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/f8HOFjRAyUknscmshcftytc_7Xjtewas6abOkAN1v0GmvCOmr9tGyNkNkRB6FVaDh15WTOB8vbiLK5l4ItrcAYk=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/OI36iDhQoFEaCD2X5mkQjc-DkHx_goQImr55kXeZobVE1i165U2SU25qY5unBeoKmRd6guitkrqDGEEgNGhL7g=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/I8i7HbXxw_zy7HoZhoG724pysAus1YDjoE_p47wdfdqG61X9zG3pvvahCKqtAcqcYwlXwHkrNUb5uNeHWJhzRg=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/9UK1s-BlJd95v1sy-aCvqx-9UU24K4t4FA-8JD3sHEkmMdUCIOmk1vYycl88G3SxurZblJJgdLXlTfAqv__d=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/FE4lkUBVCp1lR6Yd9CHSK5hgA_ys0CnTnpG4eEq8llrFzhdHgOgUD37CBXKYEhB9fdWHfRw4fLWgkQAub0y3cw=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/k4GCoPMCutJesSdbPECPkm891LqACQwo97xMRBBuoBOXUmmj82R6-Y1zA4JOGW_2b3OflQAyBm0kyQw5dONS8g=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/cxrffsNTbveuFBCixDfs7Lmh0ighsw3Dz_zmJ_7xxGd3XVEUcqWsSDSC2_JS4_RaacAneCLEeCtOV-jyo_LopQ=w1052-h592-rw'
+    ]
+  },
+  'fnaf-2': {
+    size: '124.6MB', dev: 'Clickteam USA LLC', ver: '1,000,000+', upd: '2026-06-10',
+    desc: [
+      "Five Nights at Freddy's 2 — welcome back to the new and improved Freddy Fazbear's Pizza!",
+      "As the new night watchman you'll face a whole new cast of friendly animatronics... and the old fears return. With no doors to protect you this time, put on the empty Freddy head to fool them, watch the cameras, and survive from midnight to 6 AM."
+    ],
+    bullets: [
+      'A brand new cast of animatronics — and the old fears return',
+      'No doors this time — wear the empty Freddy head to fool them',
+      'Monitor the cameras and survive each night until 6 AM',
+      'This version is the PC remaster and requires at least 2GB of RAM'
+    ],
+    shots: [
+      'https://play-lh.googleusercontent.com/mSqj79AobKtW8SQ3OfGRetS6yAw90aEwRa8LdBAfgpDKPYI4RruVSP2enhZiN2XHCse8DgxfIK2iWoRktxgMiw=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/CqKtwQJDNLKCpPXRKZYVqg77re9Vx3-F1dCQkRgWyoQkGQLLHG9tPrD5kyE0kYKrJSTqzUYCYO6BafT39bJc=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/WuQLCEHmyvrnGQvQ5MGQsTdAslS-5fYCe7tgG2XaJ_GwY4XOqjqLZfGibSKxN910ufjiMGWFKU6m5GBpIzWsJQ=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/nnXqaAevKimJItIbanLwlfobMV3rdgr46q0iSXbd-y1noNexi2ps9uPOAgngOKhq2oe3BZHUYuoIYeR5B6SR2OE=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/C4QzxLKlwh5oSm3n_iliES1dKUFKN68EV0n-2m939lfq7909EnRJXAqgbHwsGdNAf3qlvdtS19C9kKax5SAc=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/m-8vebvLZMg_H4aSTmh82gkCxDx5o6A6ODiSRceuqKaO_4-uqedYe3ipYeaIkekRZCxls5sbIMzpo-t-gTBtTQ=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/CV-tArUljGYOggWKWDdQ1CCtqw_MeQ-o5O8jvGPZBqiODVXqyB-sKM79u7uicKyheKUFNKkIzc0VkeXWlhCmxA=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/FiwRNo4ABllxr8JREaJVvcKjadTfeA8vdv3DN4DOZF6iN3Upkd-7lkggpwB1j5O_8FHvVChh5A7-uxJ2WoCdvxg=w1052-h592-rw'
     ]
   },
   'clusterduck': {
@@ -4107,6 +4289,11 @@ function renderRow(g){
     });
   }
   if (!storeRoot) return;
+  storeRoot.querySelectorAll(`[data-instbtn="${g.id}"]`).forEach(b => {
+    const stx = gameState(g);
+    b.textContent = stx === 'installed' ? 'Play' : (stx === 'idle' ? 'Install' : 'Cancel');
+    b.classList.toggle('cancel', stx === 'dl' || stx === 'inst');
+  });
   const st = gameState(g);
   const d = DLS[g.id];
   const down = st === 'dl' || st === 'inst';
@@ -4212,6 +4399,212 @@ function wireSearch(view){
   back.addEventListener('click', closeSearch);
   cover.addEventListener('mousedown', closeSearch);
 }
+
+/* ---- featured page: hero carousel · category box · popular · latest ---- */
+function avgColor(url, cb){
+  const im = new Image();
+  im.crossOrigin = 'anonymous';
+  im.onload = () => {
+    try {
+      const c = document.createElement('canvas');
+      c.width = 24; c.height = 14;
+      const g2 = c.getContext('2d');
+      g2.drawImage(im, 0, 0, 24, 14);
+      const d = g2.getImageData(0, 0, 24, 14).data;
+      let r = 0, gg = 0, b = 0, n = 0;
+      for (let i = 0; i < d.length; i += 4){ r += d[i]; gg += d[i+1]; b += d[i+2]; n++; }
+      cb(Math.round(r/n), Math.round(gg/n), Math.round(b/n));
+    } catch (e) { cb(36, 39, 45); }
+  };
+  im.onerror = () => cb(36, 39, 45);
+  im.src = url;
+}
+function instAction(g, el){
+  const st = gameState(g);
+  if (st === 'idle') startInstall(g);
+  else if (st === 'dl' || st === 'inst') cancelInstall(g);
+  else {
+    const app = installed.find(a => a.id === g.id);
+    if (app && el) openApp(app, el);
+  }
+}
+function buildFeatured(view){
+  const feat = document.createElement('div');
+  feat.className = 'feat';
+  /* ---- hero: 5 random games, auto-advance every 10s ---- */
+  const picks = shuffle(GAMES).slice(0, 5);
+  const top = document.createElement('div');
+  top.className = 'feat-top';
+  const hero = document.createElement('div');
+  hero.className = 'feat-hero';
+  const track = document.createElement('div');
+  track.className = 'feat-track';
+  picks.forEach(g => {
+    const d = DETAILS[g.id] || {};
+    const shot = (d.shots && d.shots[0]) || g.icon;
+    const s = document.createElement('div');
+    s.className = 'feat-slide';
+    s.innerHTML = `
+      <img class="shot" src="${shot}" alt="" draggable="false">
+      <span class="feat-grad"></span>
+      <div class="feat-info">
+        <img class="fi-ic" src="${g.icon}" alt="" draggable="false">
+        <span class="fi-name"></span>
+        <span class="fi-meta">
+          <span class="fi-rate">${ST_STAR}<span>${g.rating.toFixed(1)}</span></span>
+          <span class="fi-div"></span>
+          <span class="fi-cat"></span>
+        </span>
+        <button class="fi-btn" data-instbtn="${g.id}"></button>
+      </div>`;
+    s.querySelector('.fi-name').textContent = g.name;
+    s.querySelector('.fi-cat').textContent = catName(g.cat);
+    s.querySelector('.fi-btn').textContent = psBtnLabel(g);
+    s.querySelector('.fi-btn').addEventListener('click', e => { e.stopPropagation(); instAction(g, e.target); });
+    track.appendChild(s);
+  });
+  hero.appendChild(track);
+  const dots = document.createElement('div');
+  dots.className = 'feat-dots';
+  picks.forEach(() => dots.appendChild(document.createElement('span')));
+  hero.appendChild(dots);
+  let fi = 0, hMoved = false;
+  const setSlide = i => {
+    fi = (i + picks.length) % picks.length;
+    track.style.transition = '';
+    track.style.transform = `translateX(${-fi * 100}%)`;
+    dots.querySelectorAll('span').forEach((d2, k) => d2.classList.toggle('on', k === fi));
+  };
+  setSlide(0);
+  setInterval(() => {
+    if (storeRoot && storeRoot.isConnected && storeRoot.style.display !== 'none' &&
+        !view.classList.contains('searching') && !view.classList.contains('committed')) setSlide(fi + 1);
+  }, 10000);
+  /* swipe the hero */
+  let hDrag = null;
+  hero.addEventListener('pointerdown', e => {
+    if (e.button !== 0) return;
+    hDrag = { x0: e.clientX, base: -fi * hero.clientWidth };
+    hMoved = false;
+    track.style.transition = 'none';
+  });
+  hero.addEventListener('pointermove', e => {
+    if (!hDrag) return;
+    const dx = e.clientX - hDrag.x0;
+    if (Math.abs(dx) > 8) hMoved = true;
+    let X = hDrag.base + dx;
+    const min = -(picks.length - 1) * hero.clientWidth;
+    if (X > 0) X *= 0.3;
+    if (X < min) X = min + (X - min) * 0.3;
+    track.style.transform = `translateX(${X}px)`;
+  });
+  hero.addEventListener('pointerup', e => {
+    if (!hDrag) return;
+    const dx = e.clientX - hDrag.x0;
+    hDrag = null;
+    if (dx < -50) setSlide(fi + 1);
+    else if (dx > 50) setSlide(fi - 1);
+    else setSlide(fi);
+  });
+  hero.addEventListener('pointercancel', () => { if (hDrag){ hDrag = null; setSlide(fi); } });
+  hero.addEventListener('click', e => {
+    if (hMoved){ hMoved = false; return; }
+    if (e.target.closest('.fi-btn')) return;
+    const g = picks[fi];
+    if (g) openGameDetail(g);
+  });
+  top.appendChild(hero);
+  /* ---- category box: one random category ---- */
+  const cpool = CATS.filter(c => c.id !== 'all');
+  const cat = cpool[Math.floor(Math.random() * cpool.length)];
+  const boxEl = document.createElement('div');
+  boxEl.className = 'feat-cat';
+  const ARROW = `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4 L13 10 L7 16"/></svg>`;
+  boxEl.innerHTML = `
+    <div class="fc-head">
+      <span class="fc-name"></span>
+      <button class="fc-more">More ${ARROW}</button>
+    </div>
+    <div class="fc-list"></div>`;
+  boxEl.querySelector('.fc-name').textContent = cat.name;
+  boxEl.querySelector('.fc-more').addEventListener('click', () => {
+    const tab = storeRoot && storeRoot.querySelector('.st-tab[data-t="category"]');
+    if (tab) tab.click();
+    curCat = cat.id;
+    storeRoot.querySelectorAll('.st-catbtn').forEach(x => x.classList.toggle('sel', x.dataset.cat === cat.id));
+    renderCatGrid();
+  });
+  const flist = boxEl.querySelector('.fc-list');
+  GAMES.filter(g2 => g2.cat === cat.id).slice(0, 3).forEach(g2 => {
+    const it = document.createElement('button');
+    it.className = 'fc-item';
+    it.innerHTML = `<img src="${g2.icon}" alt="" draggable="false"><span class="tx"><b></b><small></small></span>`;
+    it.querySelector('b').textContent = g2.name;
+    it.querySelector('small').textContent = catName(g2.cat);
+    it.addEventListener('click', () => openGameDetail(g2));
+    flist.appendChild(it);
+  });
+  top.appendChild(boxEl);
+  feat.appendChild(top);
+  /* ---- popular games: 10 random mini cards ---- */
+  const h1 = document.createElement('h2');
+  h1.className = 'feat-h';
+  h1.textContent = 'Popular Games';
+  feat.appendChild(h1);
+  const pop = document.createElement('div');
+  pop.className = 'feat-pop';
+  shuffle(GAMES).slice(0, 10).forEach(g2 => {
+    const c = document.createElement('button');
+    c.className = 'fpop';
+    c.innerHTML = `<img src="${g2.icon}" alt="" draggable="false"><span></span>`;
+    c.querySelector('span').textContent = g2.name;
+    c.addEventListener('click', () => openGameDetail(g2));
+    pop.appendChild(c);
+  });
+  feat.appendChild(pop);
+  /* ---- latest games: 5 banners with average-color bars ---- */
+  const h2 = document.createElement('h2');
+  h2.className = 'feat-h';
+  h2.textContent = 'Latest Games';
+  feat.appendChild(h2);
+  const latest = document.createElement('div');
+  latest.className = 'feat-latest';
+  GAMES.slice(-5).forEach(g2 => {
+    const d = DETAILS[g2.id] || {};
+    const shot = (d.shots && d.shots[0]) || g2.icon;
+    const card = document.createElement('div');
+    card.className = 'flat';
+    card.innerHTML = `
+      <img class="banner" src="${shot}" alt="" draggable="false">
+      <div class="flat-band lt">
+        <img class="fb-ic" src="${g2.icon}" alt="" draggable="false">
+        <div class="fb-tx">
+          <span class="fb-name"></span>
+          <div class="fb-row">
+            <span class="fb-rate">${ST_STAR}<span>${g2.rating.toFixed(1)}</span></span>
+            <span class="fb-cat"></span>
+          </div>
+        </div>
+        <button class="fb-btn" data-instbtn="${g2.id}"></button>
+      </div>`;
+    card.querySelector('.fb-name').textContent = g2.name;
+    card.querySelector('.fb-cat').textContent = catName(g2.cat);
+    const btn = card.querySelector('.fb-btn');
+    btn.textContent = psBtnLabel(g2);
+    btn.addEventListener('click', e => { e.stopPropagation(); instAction(g2, btn); });
+    card.addEventListener('click', () => openGameDetail(g2));
+    const band = card.querySelector('.flat-band');
+    avgColor(shot, (r, g3, b) => {
+      band.style.setProperty('--c', `${r},${g3},${b}`);
+      const lum = 0.2126 * r + 0.7152 * g3 + 0.0722 * b;
+      band.classList.toggle('lt', lum < 128);
+      band.classList.toggle('dk', lum >= 128);
+    });
+    latest.appendChild(card);
+  });
+  feat.appendChild(latest);
+  view.appendChild(feat);
+}
 let curCat = 'all';
 function buildStore(){
   const root = document.createElement('div');
@@ -4229,7 +4622,6 @@ function buildStore(){
       <div class="st-content">
         <div class="st-pane on" data-pane="featured">
           <div class="st-view">
-            <h2 class="st-h">Suggested For You</h2>
             <div class="st-swrap">
               <button class="st-back" aria-label="Back">${ST_BACK}</button>
               <input class="st-search" placeholder="Search apps &amp; games" spellcheck="false" aria-label="Search apps">
@@ -4285,8 +4677,7 @@ function buildStore(){
     cats.appendChild(b);
   });
   renderCatGrid();
-  const fgrid = root.querySelector('.st-pane[data-pane="featured"] .st-grid');
-  if (fgrid) renderGrid(fgrid, '');
+  buildFeatured(root.querySelector('.st-pane[data-pane="featured"] .st-view'));
   root.addEventListener('click', e => {
     if (e.target.closest('.gdet')) return;
     const btn = e.target.closest('.sr-btn');
@@ -4786,12 +5177,12 @@ function buildPsList(box){
   h.className = 'ps-h';
   h.textContent = 'Suggested for you';
   box.appendChild(h);
-  /* 3 rows of 4 games, stacked vertically */
-  const list = shuffle(GAMES).slice(0, 12);
+  /* 3 horizontal rows of 6 games, 3 visible before scrolling */
+  const list = shuffle(GAMES).slice(0, 18);
   for (let r = 0; r < 3; r++){
     const row = document.createElement('div');
     row.className = 'ps-row';
-    list.slice(r * 4, r * 4 + 4).forEach(g => {
+    list.slice(r * 6, r * 6 + 6).forEach(g => {
       const it = document.createElement('button');
       it.className = 'ps-item';
       it.dataset.g = g.id;
@@ -4803,15 +5194,18 @@ function buildPsList(box){
       it.querySelector('small').textContent = catName(g.cat);
       row.appendChild(it);
     });
+    wireDragScroll(row);
     box.appendChild(row);
   }
 }
 function openPsDetail(g){
   if (psDetail) return;
   const d = DETAILS[g.id] || {};
+  const shot0 = (d.shots && d.shots[0]) || '';
   const root = document.createElement('div');
   root.className = 'ps-detail';
   root.innerHTML = `
+    ${shot0 ? `<div class="ps-dbg" style="background-image:url('${shot0}')"></div>` : ''}
     <div class="ps-dcol">
       <button class="ps-back" aria-label="Back">${CH_LEFT}</button>
       <div class="ps-ddev"></div>
