@@ -765,6 +765,88 @@ svg.dl-ov.zoom{transition:transform .32s ease,opacity .3s ease;transform:scale(1
 .flat-band.lt .fb-rate{color:#f5c443}
 .flat-band.dk .fb-name{color:#111}
 .flat-band.dk .fb-rate{color:#7a5a00}
+
+/* ============ DELTA MOCK SITES ============ */
+.dx{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;background:#0a0a12;color:#e8eaf0;font-family:'Roboto','Segoe UI',sans-serif;scrollbar-width:thin;scrollbar-color:#2a2a3a transparent}
+.dx-nav{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:26px;padding:0 28px;height:62px;background:rgba(10,10,18,.88);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.07)}
+.dx-logo{display:flex;align-items:center;gap:9px;font-size:19px;font-weight:700;color:#fff}
+.dx-bolt{width:22px;height:22px;color:#7c5cff;animation:boltFlash 2.2s infinite}
+.dx-bolt.big{width:64px;height:64px;margin-bottom:18px}
+.dx-bolt svg{width:100%;height:100%;display:block}
+@keyframes boltFlash{0%,100%{opacity:1;filter:drop-shadow(0 0 8px rgba(124,92,255,.9))}12%{opacity:.2}22%{opacity:1}38%{opacity:.35}52%{opacity:1;filter:drop-shadow(0 0 16px rgba(124,92,255,1))}}
+.dx-links{display:flex;gap:22px;font-size:12px;font-weight:700;letter-spacing:.09em}
+.dx-links button{color:#b9bcc8;transition:color .15s}
+.dx-links button:hover{color:#fff}
+.dx-dlnav{margin-left:auto;height:36px;padding:0 22px;border-radius:9px;background:#6d28d9;color:#fff;font-size:13px;font-weight:700;transition:background .28s ease}
+.dx-dlnav:hover{background:#a855f7}
+.dx-hero{position:relative;flex:1;min-height:420px;display:flex;align-items:center;justify-content:center;text-align:center;padding:60px 24px;overflow:hidden}
+.dx-in{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center}
+.dx-tag{font-size:12.5px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#8f95b3;margin-bottom:14px}
+.dx-title{font-size:44px;font-weight:700;line-height:1.12;max-width:780px}
+.dx-title em{font-style:normal;color:#a78bfa}
+.dx-sub{margin-top:16px;font-size:15px;color:#a6aac2;max-width:560px;line-height:1.6}
+.dx-cta{margin-top:34px;display:flex;align-items:center;gap:20px}
+.dx-btn{height:48px;padding:0 36px;border-radius:11px;background:#6d28d9;color:#fff;font-size:15px;font-weight:700;transition:background .28s ease}
+.dx-btn:hover{background:#a855f7}
+.dx-learn{color:#a78bfa;font-size:14px;font-weight:600;display:flex;align-items:center;gap:6px;transition:color .15s}
+.dx-learn:hover{color:#c4b5fd}
+.dx-box{position:absolute;border-radius:9px;background:rgba(96,165,250,.15);border:1px solid rgba(96,165,250,.4);animation:dxFloat 7s ease-in-out infinite;pointer-events:none}
+@keyframes dxFloat{0%,100%{transform:translateY(0) rotate(0deg);opacity:.3}50%{transform:translateY(-28px) rotate(9deg);opacity:.95}}
+.dx-cols{display:flex;gap:44px;align-items:flex-start;padding:48px 48px 70px;max-width:1040px;margin:0 auto}
+.dx-left{flex:1;min-width:0}
+.dx-h1{font-size:36px;font-weight:700;line-height:1.15}
+.dx-p{margin-top:14px;font-size:14.5px;color:#a6aac2;line-height:1.65;max-width:470px}
+.dx-note{margin-top:12px;font-size:12px;color:#6b7089}
+.dx-right{flex:none;width:430px;max-width:46%}
+.dx-code{border-radius:14px;overflow:hidden;background:#111220;border:1px solid rgba(255,255,255,.09);box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.dxc-tabs{display:flex;align-items:center;background:#171830;border-bottom:1px solid rgba(255,255,255,.08);font-size:12px;font-weight:600}
+.dxc-tab{padding:10px 18px;color:#8f95b3}
+.dxc-tab.on{color:#fff;background:rgba(167,139,250,.09);box-shadow:inset 0 -2px 0 #a78bfa}
+.dxc-body{display:flex;font:400 12px/1.75 'Roboto Mono',monospace}
+.dxc-ln{padding:12px 0 14px;color:#4a4f6b;text-align:right;background:rgba(0,0,0,.2);min-width:34px}
+.dxc-ln div{padding-right:12px}
+.dxc-code{padding:12px 16px 14px;color:#c9cfe6;white-space:pre;overflow-x:auto}
+.dxc-code .k{color:#c792ea}.dxc-code .s{color:#a5e07f}.dxc-code .f{color:#82aaff}.dxc-code .c{color:#5b607e}
+.dxc-foot{display:flex;gap:10px;padding:10px 14px;background:#171830;border-top:1px solid rgba(255,255,255,.08)}
+.dxc-run{height:34px;padding:0 24px;border-radius:8px;background:#6d28d9;color:#fff;font-size:12px;font-weight:700;transition:background .28s ease}
+.dxc-run:hover{background:#a855f7}
+.dxc-clr{height:34px;padding:0 18px;border-radius:8px;background:#262840;color:#b9bcc8;font-size:12px;font-weight:700}
+.dxc-wrap{position:relative;min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 24px 100px}
+.dxc-count{position:absolute;left:0;right:0;bottom:0;height:56px;display:flex;align-items:center;justify-content:center;gap:7px;background:#15162a;border-top:1px solid rgba(255,255,255,.08);font-size:14.5px;color:#c9cfe6}
+.dxc-count b{color:#7ab8ff;font-variant-numeric:tabular-nums}
+.dx.dx-white{background:#fff}
+.dx.dx-white .dxc-wrap,.dx.dx-white .dxc-count{display:none}
+
+/* ============ FILES APP ============ */
+.fapp{position:absolute;inset:0;background:#101216;color:#e6e8ec;font-family:'Roboto','Segoe UI',sans-serif;display:flex;flex-direction:column;animation:avIn .4s var(--ease) both}
+.fa-top{flex:none;display:flex;align-items:center;gap:14px;padding:18px 22px 10px}
+.fa-back{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;color:#c9cfe6;transition:background .13s}
+.fa-back:hover{background:rgba(255,255,255,.08)}
+.fa-back svg{width:18px;height:18px}
+.fa-title{font-size:21px;font-weight:600}
+.fa-cats{flex:none;display:flex;gap:8px;padding:6px 22px 12px;overflow-x:auto;scrollbar-width:none}
+.fa-cats::-webkit-scrollbar{display:none}
+.fa-cat{flex:none;height:32px;padding:0 16px;border-radius:16px;background:#1d2027;color:#9aa0b2;font-size:12.5px;font-weight:600;transition:background .15s,color .15s}
+.fa-cat:hover{background:#262a33;color:#fff}
+.fa-body{flex:1;overflow-y:auto;padding:4px 22px 24px;scrollbar-width:thin;scrollbar-color:#2c2f38 transparent}
+.fa-sec{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#7d8296;margin:14px 2px 10px}
+.fa-folder{display:flex;align-items:center;gap:15px;width:100%;padding:12px 14px;border-radius:12px;text-align:left;transition:background .13s}
+.fa-folder:hover{background:rgba(255,255,255,.06)}
+.fa-folder .fi{width:42px;height:42px;border-radius:10px;background:#1d2027;display:flex;align-items:center;justify-content:center;color:#f0c14b;flex:none}
+.fa-folder .fi svg{width:22px;height:22px}
+.fa-folder .ft{flex:1;min-width:0}
+.fa-folder .ft b{display:block;font-size:14.5px;font-weight:500;color:#fff}
+.fa-folder .ft small{font-size:11.5px;color:#7d8296}
+.fa-chev{color:#5b6070;flex:none;display:flex}
+.fa-chev svg{width:15px;height:15px}
+.fa-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:16px 10px}
+.fa-file{display:flex;flex-direction:column;align-items:center;gap:7px;padding:10px 6px;border-radius:12px;text-align:center;transition:background .13s}
+.fa-file:hover{background:rgba(255,255,255,.06)}
+.fa-file .fic{width:46px;height:46px;flex:none;display:flex;align-items:center;justify-content:center}
+.fa-file .fic svg{width:40px;height:40px}
+.fa-file .fn{font-size:11.5px;color:#dfe2e8;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fa-file small{font-size:10px;color:#7d8296}
+.fa-empty{color:#7d8296;font-size:13.5px;padding:26px 8px}
 </style>
 </head>
 <body>
@@ -1175,6 +1257,39 @@ const GARDENDLESS = { id: 'gardendless', name: 'Gardendless',
   icon: 'https://pvzge.com/pvz_logo@200.webp',
   url:  'https://cfpju876whm.make-by-vann-dont-steal-it-gooners-3351dcb3.nip.io/games/92.html' };
 const GARDENDLESS_RELEASE_URL = 'https://github.com/Cateners/gardendless-android/releases';
+const DELTA_APP = { id: 'delta', name: 'Roblox',
+  icon: 'https://m.media-amazon.com/images/I/21aoUPG3svL.png',
+  url:  'https://deltaexploits-dev.github.io/home' };
+const GARD_FILE = { name: 'gardendless-mobile.apk', size: '48 MB' };
+const DELTA_FILE = { name: 'Delta-2.727.1199-02.apk', size: '210 MB' };
+/* every mock file downloaded from a browser lands here (also feeds the Files app) */
+const DLFILES = [
+  { name: 'Android Update.apk', size: '99.84 kB', date: 'Aug 3', app: null },
+  { name: 'app-release.apk',    size: '1.14 GB',  date: 'Sep 7', app: null },
+  { name: 'shopping-list.txt',  size: '1.2 kB',   date: 'May 30', app: null }
+];
+function fileDate(){
+  const d = new Date();
+  const M = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return M[d.getMonth()] + ' ' + d.getDate();
+}
+/* duplicates get (1), (2), ... before the extension */
+function addDownloadFile(base, size, app){
+  const dot = base.lastIndexOf('.');
+  const stem = dot > -1 ? base.slice(0, dot) : base;
+  const ext = dot > -1 ? base.slice(dot) : '';
+  let name = base, n = 0;
+  while (DLFILES.some(f => f.name === name)){
+    n++;
+    name = stem + '(' + n + ')' + ext;
+  }
+  DLFILES.unshift({ name, size, date: fileDate(), app });
+  return name;
+}
+const ANDROID_IC = `<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="#3DDC84"><path d="M7.2 9.3 h9.6 v6.6 a1.9 1.9 0 0 1 -1.9 1.9 H9.1 a1.9 1.9 0 0 1 -1.9 -1.9 Z"/><rect x="7.7" y="18.5" width="1.3" height="2.5" rx=".65"/><rect x="10.85" y="18.5" width="1.3" height="2.5" rx=".65"/><rect x="14" y="18.5" width="1.3" height="2.5" rx=".65"/><rect x="5.1" y="9.3" width="1.4" height="5.8" rx=".7" opacity=".9"/><rect x="17.5" y="9.3" width="1.4" height="5.8" rx=".7" opacity=".9"/><path d="M12 3.1 c-3.2 0 -5.8 2.3 -6.1 5.3 h12.2 c-.3 -3 -2.9 -5.3 -6.1 -5.3 Z"/><path d="M9.5 4.3 l-1.1 -1.7 a.45.45 0 0 1 .76 -.48 l1.1 1.7 a.45.45 0 0 1 -.76 .48 Z"/><path d="M14.5 4.3 a.45.45 0 0 1 -.76 -.48 l1.1 -1.7 a.45.45 0 0 1 .76 .48 Z"/></g><circle cx="9.9" cy="6.7" r=".62" fill="#0c0f14"/><circle cx="14.1" cy="6.7" r=".62" fill="#0c0f14"/></svg>`;
+const DOC_IC = `<svg viewBox="0 0 24 24" fill="none" stroke="#8f95a6" stroke-width="1.6" aria-hidden="true"><path d="M6 3.5 h8 l4 4 v13 a1 1 0 0 1 -1 1 H7 a1 1 0 0 1 -1 -1 Z"/><path d="M14 3.5 V7.5 h4"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="15" x2="13.5" y2="15"/></svg>`;
+const FA_FOLDER_IC = `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.5 6.8 A1.8 1.8 0 0 1 5.3 5 h4.1 l2 2.2 h7.3 a1.8 1.8 0 0 1 1.8 1.8 v.4 H5.6 A2.1 2.1 0 0 0 3.5 11.5 Z" opacity=".7"/><path d="M3.9 9.4 h16.9 a1.15 1.15 0 0 1 1.12 1.4 l-1.55 7.1 A2 2 0 0 1 18.4 19.3 H5.6 a2 2 0 0 1 -1.97 -1.4 l-1.55 -7.1 A1.15 1.15 0 0 1 3.9 9.4 Z"/></svg>`;
+const APK_GENERIC_ICON = `<svg viewBox="0 0 64 64" aria-hidden="true"><rect x="3" y="3" width="58" height="58" rx="14" fill="#23262e"/><g transform="translate(14 14) scale(1.5)">${ANDROID_IC.replace('<svg viewBox="0 0 24 24" aria-hidden="true">','').replace('</svg>','')}</g></svg>`;
 const BASE = [
   { id: 'store',  name: 'MuMu Store' },
   { id: 'cloner', name: 'App Cloner' }
@@ -1208,7 +1323,6 @@ function fixIcon(id, icon){ return ICON_FIXES[id] || icon; }
 function fixUrl(id, url){ return URL_FIXES[id] || url; }
 let installed = [];
 function appById(id){ return REG[id] || installed.find(a => a.id === id) || null; }
-
 /* ============ per-device persistence (labels + paused included) ============ */
 let pages = [new Array(18).fill(null)];
 let dockSlots = new Array(4).fill(null);
@@ -2137,7 +2251,7 @@ function openAppFromRect(app, r){
 }
 function openApp(app, iconEl){ openAppFromRect(app, iconEl.getBoundingClientRect()); }
 
-let chRoot = null, storeRoot = null, setRoot = null, psRoot = null, phEl = null, embedEl = null, embedUrl = null;
+let chRoot = null, storeRoot = null, setRoot = null, psRoot = null, filesRoot = null, filesFolder = null, phEl = null, embedEl = null, embedUrl = null;
 const AD_BLOCKED = new Set(['clusterduck', 'pvz2']);
 function showView(v){
   const home = v === 'home';
@@ -2162,6 +2276,7 @@ function showView(v){
   if (storeRoot) storeRoot.style.display = (v === 'store') ? '' : 'none';
   if (setRoot) setRoot.style.display = (v === 'settings') ? '' : 'none';
   if (psRoot) psRoot.style.display = (v === 'g-playstore') ? '' : 'none';
+  if (filesRoot) filesRoot.style.display = (v === 'files') ? '' : 'none';
   const app = appById(v);
   if (embedEl) embedEl.style.display = (app && app.url) ? '' : 'none';
   if (phEl) phEl.style.display = 'none';
@@ -2203,6 +2318,11 @@ function showView(v){
   if (v === 'g-playstore'){
     if (!psRoot){ psRoot = buildPlayStore(); avEl.appendChild(psRoot); }
     else if (psRoot.parentElement !== avEl) avEl.appendChild(psRoot);
+    return;
+  }
+  if (v === 'files'){
+    if (!filesRoot){ filesRoot = buildFilesApp(); avEl.appendChild(filesRoot); }
+    else if (filesRoot.parentElement !== avEl) avEl.appendChild(filesRoot);
     return;
   }
   if (app && app.url){
@@ -2295,7 +2415,6 @@ topedge.addEventListener('pointerup', e => {
   edgeDrag = null;
 });
 topedge.addEventListener('pointercancel', () => { edgeDrag = null; });
-
 /* ============ CHROMIUM (engine shared with the Chrome app) ============ */
 const CH_HOME  = `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M3.2 9.4 L10 3.4 L16.8 9.4"/><path d="M5.2 8.2 V16.2 H14.8 V8.2"/></svg>`;
 const CH_LEFT  = `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 10 H6"/><path d="M9.8 5.6 L5.4 10 L9.8 14.4"/></svg>`;
@@ -2763,6 +2882,12 @@ function renderChContent(ent){
   if (ent.type === 'downloads'){ c.appendChild(buildDownloadsPage()); return; }
   /* the github releases url is never really loaded — show the mock page */
   if (ent.url === GARDENDLESS_RELEASE_URL){ c.appendChild(buildGardendlessPage()); return; }
+  const dh = hostOf(ent.url);
+  if (dh === 'deltaexploits.gg' || dh === 'deltaexploits.dev'){
+    c.appendChild(/delta-executor-android/.test(ent.url) ? buildDeltaAndroidPage(dh) : buildDeltaLanding(dh));
+    return;
+  }
+  if (dh === 'delta.filenetwork.vip'){ c.appendChild(buildDeltaCountdown()); return; }
   const fr = document.createElement('iframe');
   fr.className = 'ch-frame';
   fr.src = ent.url;
@@ -3154,10 +3279,10 @@ function buildGardendlessPage(){
         </div>
       </div>
     </div>`;
-  d.querySelector('.gh-file').addEventListener('click', startGardendlessDownload);
+  d.querySelector('.gh-file').addEventListener('click', () => startFileDownload(GARD_FILE, GARDENDLESS));
   return d;
 }
-function startGardendlessDownload(){
+function startFileDownload(file, app){
   if (!chRoot) return;
   const c = chRoot.querySelector('.ch-content');
   if (!c || c.querySelector('.dlp')) return;   /* one download at a time */
@@ -3172,7 +3297,7 @@ function startGardendlessDownload(){
   let done = false;
   pop.addEventListener('click', e => {
     if (e.target.closest('.dlp-act')){
-      if (done) openGardendlessInstall();
+      if (done) openAppInstall(app);
       else chGo({ type: 'downloads' });
       return;
     }
@@ -3180,7 +3305,7 @@ function startGardendlessDownload(){
   });
   setTimeout(() => {
     done = true;
-    if (!CH.downloads.includes('app-release.apk')) CH.downloads.push('app-release.apk');
+    addDownloadFile(file.name, file.size, app);
     if (!pop.isConnected) return;
     pop.querySelector('b').textContent = 'File Downloaded';
     pop.querySelector('.dlp-act').textContent = 'Open';
@@ -3193,25 +3318,32 @@ function buildDownloadsPage(){
   d.className = 'ch-dl';
   d.innerHTML = `<div class="ch-dl-in"><h2>Downloads</h2><div class="dl-list"></div></div>`;
   const list = d.querySelector('.dl-list');
-  if (!CH.downloads.length){
+  if (!DLFILES.length){
     const p = document.createElement('p');
     p.className = 'hh-empty';
     p.textContent = 'No downloads yet';
     list.appendChild(p);
-  } else CH.downloads.forEach(fn => {
+  } else DLFILES.forEach(f => {
+    if (!/\.apk$/i.test(f.name)){
+      const row = document.createElement('div');
+      row.className = 'dlf';
+      row.style.cursor = 'default';
+      row.innerHTML = `${DOC_IC}<span></span><small style="color:var(--cT4);font-weight:400;font-size:11px;margin-left:auto">${f.size}</small>`;
+      row.querySelector('span').textContent = f.name;
+      list.appendChild(row);
+      return;
+    }
     const row = document.createElement('button');
     row.className = 'dlf';
-    row.innerHTML = `${CH_DL}<span></span>`;
-    row.querySelector('span').textContent = fn;
-    row.addEventListener('click', () => {
-      if (fn === 'app-release.apk') openGardendlessInstall();
-    });
+    row.innerHTML = `<span style="width:17px;height:17px;flex:none;color:#3DDC84;display:flex">${ANDROID_IC}</span><span></span><small style="color:var(--cT4);font-weight:400;font-size:11px;margin-left:auto">${f.size}</small>`;
+    row.querySelector('span:last-of-type').textContent = f.name;
+    row.addEventListener('click', () => openAppInstall(f.app || null));
     list.appendChild(row);
   });
   return d;
 }
-function openGardendlessInstall(){
-  if (!chRoot || chRoot.querySelector('.inst-ovl')) return;
+function openAppInstall(app){
+  if (avEl.hidden || document.querySelector('.inst-ovl')) return;
   const ov = document.createElement('div');
   ov.className = 'inst-ovl';
   ov.innerHTML = `
@@ -3223,50 +3355,94 @@ function openGardendlessInstall(){
       <div class="inst-bar"><i></i></div>
       <div class="inst-btns"></div>
     </div>`;
-  chRoot.appendChild(ov);
+  avEl.appendChild(ov);
   let closed = false;
   const box = ov.querySelector('.inst-box');
   const btns = ov.querySelector('.inst-btns');
   const kill = () => { closed = true; ov.remove(); };
   ov.addEventListener('mousedown', e => { if (e.target === ov) kill(); });
+  const icon = app ? appIconSVG(app) : APK_GENERIC_ICON;
   const showHead = name => {
     ov.querySelector('.inst-top').innerHTML = `
-      <span class="inst-ic">${appIconSVG(GARDENDLESS)}</span>
+      <span class="inst-ic">${icon}</span>
       <span class="inst-t">${name}</span>`;
   };
+  const removeBar = () => { const b = ov.querySelector('.inst-bar'); if (b) b.remove(); };
+  const addBar = () => { const bar = document.createElement('div'); bar.className = 'inst-bar'; bar.innerHTML = '<i></i>'; box.insertBefore(bar, btns); return bar; };
+  const mid = txt => { const m = ov.querySelector('.inst-mid'); if (m) m.remove(); const p = document.createElement('p'); p.className = 'inst-mid'; p.textContent = txt; box.insertBefore(p, btns); };
   setTimeout(() => {
     if (closed || !ov.isConnected) return;
-    /* stage 2: icon + name + question, no bar, CANCEL / INSTALL */
-    showHead(GARDENDLESS.name);
-    ov.querySelector('.inst-bar').remove();
-    const q = document.createElement('p');
-    q.className = 'inst-mid';
-    q.textContent = 'Do you want to install this app?';
-    box.insertBefore(q, btns);
+    /* unknown apk: package invalid */
+    if (!app){
+      removeBar();
+      showHead('App');
+      mid('App not installed as package is invalid');
+      btns.innerHTML = `<button class="inst-btn" data-b="ok">OK</button>`;
+      btns.querySelector('[data-b="ok"]').addEventListener('click', kill);
+      return;
+    }
+    /* delta cannot coexist with the store roblox → fake "update" that fails */
+    const conflict = app.id === 'delta' && installed.some(a => a.id === 'roblox');
+    const already = installed.some(a => a.id === app.id);
+    if (conflict || already){
+      removeBar();
+      showHead(app.name);
+      mid('Are you sure you want to update this app?');
+      btns.innerHTML = `
+        <button class="inst-btn" data-b="cancel">CANCEL</button>
+        <button class="inst-btn" data-b="up">UPDATE</button>`;
+      btns.querySelector('[data-b="cancel"]').addEventListener('click', kill);
+      btns.querySelector('[data-b="up"]').addEventListener('click', () => {
+        if (closed) return;
+        showHead('Updating...');
+        const m = ov.querySelector('.inst-mid'); if (m) m.remove();
+        const bar = addBar();
+        btns.innerHTML = '';
+        setTimeout(() => {
+          if (closed || !ov.isConnected) return;
+          bar.remove();
+          if (conflict){
+            showHead(app.name);
+            mid('App not installed as package is invalid');
+            btns.innerHTML = `<button class="inst-btn" data-b="ok">OK</button>`;
+            btns.querySelector('[data-b="ok"]').addEventListener('click', kill);
+          } else {
+            showHead(app.name);
+            mid(`${app.name} was installed.`);
+            btns.innerHTML = `
+              <button class="inst-btn" data-b="ok">OK</button>
+              <button class="inst-btn" data-b="open">OPEN</button>`;
+            btns.querySelector('[data-b="ok"]').addEventListener('click', kill);
+            btns.querySelector('[data-b="open"]').addEventListener('click', () => {
+              const r = ov.querySelector('.inst-ic').getBoundingClientRect();
+              const existing = installed.find(a => a.id === app.id);
+              kill();
+              if (existing) openAppFromRect(existing, r);
+            });
+          }
+        }, 1000);
+      });
+      return;
+    }
+    /* fresh install */
+    removeBar();
+    showHead(app.name);
+    mid('Do you want to install this app?');
     btns.innerHTML = `
       <button class="inst-btn" data-b="cancel">CANCEL</button>
       <button class="inst-btn" data-b="install">INSTALL</button>`;
     btns.querySelector('[data-b="cancel"]').addEventListener('click', kill);
     btns.querySelector('[data-b="install"]').addEventListener('click', () => {
       if (closed) return;
-      /* stage 3: Installing... with the bar back, no buttons */
       showHead('Installing...');
-      const qq = ov.querySelector('.inst-mid');
-      if (qq) qq.remove();
-      const bar = document.createElement('div');
-      bar.className = 'inst-bar';
-      bar.innerHTML = '<i></i>';
-      box.insertBefore(bar, btns);
+      const m = ov.querySelector('.inst-mid'); if (m) m.remove();
+      const bar = addBar();
       btns.innerHTML = '';
       setTimeout(() => {
         if (closed || !ov.isConnected) return;
-        /* stage 4: installed — icon + name, message, OK / OPEN */
         bar.remove();
-        showHead(GARDENDLESS.name);
-        const mid = document.createElement('p');
-        mid.className = 'inst-mid';
-        mid.textContent = `${GARDENDLESS.name} was installed.`;
-        box.insertBefore(mid, btns);
+        showHead(app.name);
+        mid(`${app.name} was installed.`);
         btns.innerHTML = `
           <button class="inst-btn" data-b="ok">OK</button>
           <button class="inst-btn" data-b="open">OPEN</button>`;
@@ -3274,22 +3450,233 @@ function openGardendlessInstall(){
         btns.querySelector('[data-b="open"]').addEventListener('click', () => {
           const r = ov.querySelector('.inst-ic').getBoundingClientRect();
           kill();
-          /* register on the home screen like any installed app (never in the stores), then launch */
-          let app = installed.find(a => a.id === GARDENDLESS.id);
-          if (!app){
-            app = { ...GARDENDLESS };
-            installed.push(app);
-            newBadges.add(GARDENDLESS.id);
+          let inst = installed.find(a => a.id === app.id);
+          if (!inst){
+            inst = { ...app };
+            installed.push(inst);
+            newBadges.add(app.id);
             const slot = firstEmptySlot();
-            pages[slot.page][slot.idx] = app;
+            pages[slot.page][slot.idx] = inst;
             persistDev();
             renderHome();
           }
-          openAppFromRect(app, r);
+          openAppFromRect(inst, r);
         });
       }, 1000);
     });
   }, 1000);
+}
+
+/* ---- Delta mock sites: landing · android · countdown ---- */
+const DX_BOLT = `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.2 2 L4.8 13.6 h5.9 L9.2 22 L19.4 9.6 h-6.6 Z"/></svg>`;
+function buildDeltaNav(host){
+  const nav = document.createElement('div');
+  nav.className = 'dx-nav';
+  nav.innerHTML = `
+    <span class="dx-logo"><span class="dx-bolt">${DX_BOLT}</span>Delta</span>
+    <nav class="dx-links">
+      <button data-go="android">ANDROID</button>
+      <button>IOS</button>
+      <button>SHOP</button>
+      <button>FAQ</button>
+    </nav>
+    <button class="dx-dlnav">Download</button>`;
+  const go = () => chGo({ type: 'web', url: 'https://' + host + '/delta-executor-android' });
+  nav.querySelector('[data-go="android"]').addEventListener('click', go);
+  nav.querySelector('.dx-dlnav').addEventListener('click', go);
+  return nav;
+}
+function buildDeltaLanding(host){
+  const d = document.createElement('div');
+  d.className = 'dx';
+  d.style.display = 'flex';
+  d.style.flexDirection = 'column';
+  d.appendChild(buildDeltaNav(host));
+  const hero = document.createElement('div');
+  hero.className = 'dx-hero';
+  hero.innerHTML = `
+    <span class="dx-box" style="left:7%;top:16%;width:58px;height:58px;animation-delay:0s"></span>
+    <span class="dx-box" style="right:9%;top:22%;width:86px;height:86px;animation-delay:1.2s"></span>
+    <span class="dx-box" style="left:15%;bottom:16%;width:72px;height:72px;animation-delay:2.1s"></span>
+    <span class="dx-box" style="right:17%;bottom:24%;width:50px;height:50px;animation-delay:.6s"></span>
+    <span class="dx-box" style="left:45%;top:9%;width:38px;height:38px;animation-delay:1.7s"></span>
+    <span class="dx-box" style="right:38%;bottom:11%;width:64px;height:64px;animation-delay:2.8s"></span>
+    <div class="dx-in">
+      <span class="dx-tag">The sky is the limit</span>
+      <h1 class="dx-title">Revolutionizing the future of <em>execution</em></h1>
+      <p class="dx-sub">Our cutting-edge technology takes your scripting experience to the next level — faster, smoother, and more powerful than ever before.</p>
+      <div class="dx-cta">
+        <button class="dx-btn">Download</button>
+        <button class="dx-learn">Learn more <span>→</span></button>
+      </div>
+    </div>`;
+  hero.querySelector('.dx-btn').addEventListener('click', () =>
+    chGo({ type: 'web', url: 'https://' + host + '/delta-executor-android' }));
+  d.appendChild(hero);
+  return d;
+}
+function buildDeltaAndroidPage(host){
+  const d = document.createElement('div');
+  d.className = 'dx';
+  d.style.display = 'flex';
+  d.style.flexDirection = 'column';
+  d.appendChild(buildDeltaNav(host));
+  const cols = document.createElement('div');
+  cols.className = 'dx-cols';
+  cols.innerHTML = `
+    <div class="dx-left">
+      <h1 class="dx-h1">Download Delta for Android</h1>
+      <p class="dx-p">Get the most powerful script execution experience on mobile. Delta brings full Lua support, a built-in editor, and one-tap injection — all optimized for Android.</p>
+      <p class="dx-note">Requires Android 8.0 or above. Delta is updated frequently to stay compatible with the latest Roblox updates.</p>
+      <div class="dx-cta" style="margin-top:26px">
+        <button class="dx-btn">Download for Android</button>
+      </div>
+    </div>
+    <div class="dx-right">
+      <div class="dx-code">
+        <div class="dxc-tabs">
+          <span class="dxc-tab on">script.lua</span>
+          <span class="dxc-tab">autoexec</span>
+        </div>
+        <div class="dxc-body">
+          <div class="dxc-ln"><div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div><div>8</div><div>9</div></div>
+          <div class="dxc-code"><span class="k">local</span> Delta <span class="k">=</span> <span class="f">require</span>(<span class="s">"delta"</span>)
+
+<span class="k">local</span> player = game.Players.LocalPlayer
+<span class="f">print</span>(<span class="s">"Delta loaded — "</span> .. player.Name)
+
+<span class="c">-- Execute your script</span>
+Delta:<span class="f">Execute</span>(<span class="k">function</span>()
+    <span class="f">print</span>(<span class="s">"Hello from Delta!"</span>)
+<span class="k">end</span>)</div>
+        </div>
+        <div class="dxc-foot">
+          <button class="dxc-run">EXECUTE</button>
+          <button class="dxc-clr">Clear</button>
+        </div>
+      </div>
+    </div>`;
+  cols.querySelector('.dx-btn').addEventListener('click', () =>
+    chGo({ type: 'web', url: 'https://delta.filenetwork.vip/android.html' }));
+  d.appendChild(cols);
+  return d;
+}
+function buildDeltaCountdown(){
+  const d = document.createElement('div');
+  d.className = 'dx';
+  d.innerHTML = `
+    <div class="dxc-wrap">
+      <span class="dx-bolt big">${DX_BOLT}</span>
+      <h1 class="dx-h1">Delta for Android</h1>
+      <p class="dx-p" style="max-width:none">Delta-2.727.1199-02.apk · 210 MB</p>
+      <div class="dx-cta" style="margin-top:26px">
+        <button class="dx-btn dxc-dl">Download</button>
+      </div>
+    </div>
+    <div class="dxc-count">Download will start in <b>10</b> seconds</div>`;
+  const b = d.querySelector('.dxc-count b');
+  let n = 10, started = false, t = null;
+  const begin = () => {
+    if (started) return;
+    started = true;
+    clearInterval(t);
+    if (!d.isConnected) return;
+    d.querySelector('.dxc-count').textContent = 'Download is starting';
+    d.classList.add('dx-white');
+    setTimeout(() => startFileDownload(DELTA_FILE, DELTA_APP), 350);
+  };
+  t = setInterval(() => {
+    if (!d.isConnected){ clearInterval(t); return; }
+    n--;
+    if (n <= 0) begin();
+    else b.textContent = n;
+  }, 1000);
+  d.querySelector('.dxc-dl').addEventListener('click', begin);
+  return d;
+}
+
+/* ---- Files app ---- */
+const FA_FOLDERS = ['Camera', 'Download', 'Movies', 'Music', 'Pictures', 'Screenshots'];
+function fileTile(f){
+  const isApk = /\.apk$/i.test(f.name);
+  const el = document.createElement(isApk ? 'button' : 'div');
+  el.className = 'fa-file';
+  el.innerHTML = `
+    <span class="fic">${isApk ? ANDROID_IC : DOC_IC}</span>
+    <span class="fn"></span>
+    <small>${f.size} · ${f.date}</small>`;
+  el.querySelector('.fn').textContent = f.name;
+  if (isApk) el.addEventListener('click', () => openAppInstall(f.app || null));
+  return el;
+}
+function buildFilesApp(){
+  const root = document.createElement('div');
+  root.className = 'fapp';
+  filesRoot = root;
+  root.innerHTML = `
+    <div class="fa-top">
+      <button class="fa-back" aria-label="Back" hidden>${CH_LEFT}</button>
+      <span class="fa-title">MuMu Shared Files</span>
+    </div>
+    <div class="fa-cats">
+      <button class="fa-cat">Images</button>
+      <button class="fa-cat">Audio</button>
+      <button class="fa-cat">Videos</button>
+      <button class="fa-cat">Documents</button>
+      <button class="fa-cat">Large files</button>
+      <button class="fa-cat">This week</button>
+    </div>
+    <div class="fa-body"></div>`;
+  root.querySelector('.fa-back').addEventListener('click', () => { filesFolder = null; renderFilesView(); });
+  renderFilesView();
+  return root;
+}
+function renderFilesView(){
+  if (!filesRoot) return;
+  const body = filesRoot.querySelector('.fa-body');
+  const back = filesRoot.querySelector('.fa-back');
+  const title = filesRoot.querySelector('.fa-title');
+  body.innerHTML = '';
+  if (!filesFolder){
+    back.hidden = true;
+    title.textContent = 'MuMu Shared Files';
+    const sec = document.createElement('div');
+    sec.className = 'fa-sec';
+    sec.textContent = 'Folders';
+    body.appendChild(sec);
+    FA_FOLDERS.forEach(name => {
+      const b = document.createElement('button');
+      b.className = 'fa-folder';
+      const sub = name === 'Download'
+        ? (DLFILES.length ? DLFILES.length + ' files' : 'Empty')
+        : 'Empty';
+      b.innerHTML = `
+        <span class="fi">${FA_FOLDER_IC}</span>
+        <span class="ft"><b>${name}</b><small>${sub}</small></span>
+        <span class="fa-chev">${CH_CHEV}</span>`;
+      b.addEventListener('click', () => { filesFolder = name; renderFilesView(); });
+      body.appendChild(b);
+    });
+    return;
+  }
+  back.hidden = false;
+  title.textContent = filesFolder;
+  const sec = document.createElement('div');
+  sec.className = 'fa-sec';
+  sec.textContent = 'Files in ' + filesFolder;
+  body.appendChild(sec);
+  const files = filesFolder === 'Download' ? DLFILES : [];
+  if (!files.length){
+    const p = document.createElement('p');
+    p.className = 'fa-empty';
+    p.textContent = 'No files';
+    body.appendChild(p);
+    return;
+  }
+  const grid = document.createElement('div');
+  grid.className = 'fa-grid';
+  files.forEach(f => grid.appendChild(fileTile(f)));
+  body.appendChild(grid);
 }
 
 /* ============ MUMU STORE ============ */
@@ -5471,9 +5858,9 @@ addEventListener('keydown', e => {
     if (pbox){ pbox.remove(); return; }
     if (psDetail){ psCloseDetail(); return; }
   }
+  const instDlg = document.querySelector('.inst-ovl');
+  if (instDlg){ instDlg.remove(); return; }
   if (chRoot){
-    const inst = chRoot.querySelector('.inst-ovl');
-    if (inst){ inst.remove(); return; }
     const dlg = chRoot.querySelector('.ch-dlg');
     if (dlg){ dlg.remove(); return; }
     const pop = chRoot.querySelector('.ch-popwrap');
