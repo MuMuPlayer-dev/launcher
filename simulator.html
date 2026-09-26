@@ -528,6 +528,66 @@ svg.dl-ov.zoom{transition:transform .32s ease,opacity .3s ease;transform:scale(1
 .set-sec .sec-tx small{font-size:12.5px;color:#9aa0a6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .set-sec.no-ic{padding-left:54px}
 
+/* ============ SETTINGS: WALLPAPER ============ */
+.set-content.from-l{transform:translateX(-46px)}
+.set-content.from-l.in{transform:none;opacity:1}
+.set-content.fade-out{opacity:0!important;transform:translateX(24px)!important;pointer-events:none}
+.wp-back{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#9aa0a6;transition:background .13s;margin:0 0 16px -10px}
+.wp-back:hover{background:rgba(255,255,255,.07)}
+.wp-back svg{width:22px;height:22px}
+.wp-title{color:#fff;font-size:22px;font-weight:600;margin:0 0 16px}
+.wp-opt{display:flex;align-items:center;gap:15px;width:100%;min-height:62px;padding:9px 16px;border-radius:12px;text-align:left;transition:background .14s}
+.wp-opt:hover{background:rgba(255,255,255,.06)}
+.wp-opt .wic{width:27px;height:27px;flex:none;display:flex;align-items:center;justify-content:center}
+.wp-opt .wic svg{width:27px;height:27px;display:block}
+.wp-opt .wic img{width:27px;height:27px;border-radius:7px;object-fit:cover;display:block}
+.wp-opt b{font-size:15px;font-weight:500;color:#fff}
+.wp-bigbox{background:#22262d;border-radius:24px;padding:22px;display:flex;gap:20px;justify-content:center}
+.wp-rect{position:relative;flex:1 1 0;max-width:330px;aspect-ratio:1152/672;border-radius:14px;overflow:hidden;background:#000;box-shadow:0 5px 18px rgba(0,0,0,.35)}
+.wpscale{position:absolute;inset:0;overflow:hidden}
+.wprev{position:absolute;left:0;top:0;width:576px;height:336px;transform-origin:0 0;background:#000;overflow:hidden}
+.wprev .wallcv{position:absolute;left:0;top:0;width:576px;height:336px}
+.wprev .wps{position:absolute;top:0;left:0;right:0;height:21px;display:flex;align-items:center;justify-content:space-between;padding:0 13px;font-size:7.5px;font-weight:600;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.6);z-index:2}
+.wprev .wps .r{display:flex;align-items:center;gap:4px}
+.wprev .wpsearch{position:absolute;top:29px;left:50%;transform:translateX(-50%);width:250px;height:21px;border-radius:7px;background:rgba(38,40,46,.55);border:1px solid rgba(255,255,255,.22);display:flex;align-items:center;gap:6px;padding:0 9px;font-size:7.2px;color:rgba(255,255,255,.55);z-index:2}
+.wprev .wpsearch svg{width:10px;height:10px;flex:none;opacity:.65}
+.wprev .wpgrid{position:absolute;left:0;right:0;top:58px;bottom:66px;display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(3,1fr);z-index:2}
+.wprev .wpcell{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-width:0}
+.wprev .wpcell .ic{position:relative;width:33px;height:33px;flex:none}
+.wprev .wpcell .ic svg{width:100%;height:100%;display:block}
+.wprev .wpcell .lb{font-size:6.5px;font-weight:500;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.6);max-width:84px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center}
+.wprev .wpcell .lb i{width:3.5px;height:3.5px;border-radius:50%;background:#46d67f;margin-right:2.5px;flex:none}
+.wprev .wpdots{position:absolute;left:0;right:0;bottom:57px;display:flex;justify-content:center;gap:3.5px;z-index:2}
+.wprev .wpdots span{width:3.5px;height:3.5px;border-radius:99px;background:#6d747d}
+.wprev .wpdots span.on{background:#d9dde2}
+.wprev .wpdock{position:absolute;left:0;right:0;bottom:15px;display:flex;justify-content:center;gap:9px;z-index:2}
+.wprev .wpdock .ic{width:39px;height:39px;flex:none}
+.wprev .wpdock .ic svg{width:100%;height:100%;display:block}
+.wprev .wpgest{position:absolute;left:50%;bottom:4px;transform:translateX(-50%);width:59px;height:2px;border-radius:99px;background:rgba(255,255,255,.55);z-index:2}
+.wprev .wpdate{position:absolute;top:11px;left:13px;font-size:10.5px;font-weight:500;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.55);z-index:2}
+.wprev .wpclock{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:2}
+.wprev .wpclock b{display:block;font-size:64px;font-weight:500;line-height:1.04;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.4)}
+.wp-chg{display:flex;align-items:center;justify-content:center;gap:11px;margin:24px auto 0;color:#8cb4f9;font-size:15px;font-weight:700;letter-spacing:.06em;padding:12px 26px;border-radius:12px;transition:background .14s}
+.wp-chg:hover{background:rgba(140,180,249,.12)}
+.wp-chg svg{width:23px;height:23px;flex:none}
+.wp-pickbox{width:100%;height:118px;border-radius:18px;background:#22262d;display:flex;align-items:center;justify-content:center;color:#8f959d;transition:background .14s}
+.wp-pickbox:hover{background:#293040}
+.wp-pickbox svg{width:42px;height:42px}
+.wp-plabel{color:#c9ccd1;font-size:14px;font-weight:500;margin:12px 2px 0}
+.wp-square{display:block;width:170px;height:170px;border-radius:16px;overflow:hidden;position:relative;background:#000;box-shadow:0 5px 16px rgba(0,0,0,.35);margin-top:14px;transition:box-shadow .14s}
+.wp-square:hover{box-shadow:0 5px 16px rgba(0,0,0,.35),0 0 0 2px #8cb4f9}
+.wp-square canvas{width:100%;height:100%;display:block}
+.wp-prevwrap{position:relative;width:100%;max-width:620px;aspect-ratio:1152/672;margin:6px auto 0;border-radius:18px;overflow:hidden;background:#000;box-shadow:0 8px 30px rgba(0,0,0,.4)}
+.wp-check{position:absolute;right:14px;bottom:14px;width:46px;height:46px;border-radius:50%;background:#8cb4f9;color:#0c1016;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.45);transition:filter .15s,transform .12s;z-index:5}
+.wp-check:hover{filter:brightness(1.1)}
+.wp-check:active{transform:scale(.93)}
+.wp-check svg{width:23px;height:23px}
+.wp-ovl{position:absolute;inset:0;z-index:90;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;animation:avIn .18s ease both}
+.wp-setcard{width:330px;max-width:86%;background:#2a2e35;border-radius:18px;padding:22px;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.wp-settitle{color:#fff;font-size:17px;font-weight:600;margin-bottom:6px}
+.wp-setbtn{display:block;width:100%;height:46px;margin-top:10px;border-radius:12px;background:rgba(140,180,249,.13);color:#8cb4f9;font-size:13px;font-weight:700;letter-spacing:.08em;transition:background .14s}
+.wp-setbtn:hover{background:rgba(140,180,249,.24)}
+
 /* ============ GOOGLE PLAY ============ */
 .play{position:absolute;inset:0;display:flex;background:#000;animation:avIn .4s var(--ease) both;font-family:'Roboto','Segoe UI',system-ui,Arial,sans-serif}
 .play,.play *{scrollbar-width:thin;scrollbar-color:#3a3d42 transparent}
@@ -1023,13 +1083,83 @@ function paintWall(g, W, H){
   const topBand = Math.max(8, (pcy - pr) - 18);
   for (let i = 0; i < 5; i++) star(pcx - pr * 1.05 + rnd() * pr * 2.1, 10 + rnd() * topBand, 0.7 + rnd() * 1.1, 0.9);
 }
+
+/* ============ wallpaper state (home + lock) ============ */
+let wallState = { home: null, lock: null };   /* null = the default painted wallpaper */
+const wallImgCache = {};
+function wallSrc(side){ const st = wallState[side]; return st && st.src ? st.src : null; }
+/* paints a wallpaper (custom image cover-cropped, or the default scene) into any canvas */
+/* paints a wallpaper (custom image cover-cropped, or the default scene) into any canvas */
+function paintWallLayer(cv2, src){
+  const g = cv2.getContext('2d');
+  const W = cv2.width, H = cv2.height;
+  if (!src){ paintWall(g, W, H); return; }
+  const cover = im => {
+    const iw = im.naturalWidth, ih = im.naturalHeight;
+    const s = Math.max(W / iw, H / ih);
+    g.clearRect(0, 0, W, H);
+    g.drawImage(im, (W - iw * s) / 2, (H - ih * s) / 2, iw * s, ih * s);
+  };
+  const c = wallImgCache[src];
+  if (c && c.complete && c.naturalWidth){ cover(c); return; }
+  paintWall(g, W, H);   /* shown until the custom image loads */
+  const im = new Image();
+  im.onload = () => { wallImgCache[src] = im; if (cv2.isConnected) cover(im); };
+  im.onerror = () => { if (cv2.isConnected) paintWall(g, W, H); };
+  im.src = src;
+}
+/* pick an image file, downscale it, hand the dataURL to cb */
+function pickWallImage(cb){
+  const inp = document.createElement('input');
+  inp.type = 'file';
+  inp.accept = 'image/*';
+  inp.style.display = 'none';
+  document.body.appendChild(inp);
+  inp.addEventListener('change', () => {
+    const f = inp.files && inp.files[0];
+    inp.remove();
+    if (!f || !/^image\//.test(f.type)) return;
+    const fr = new FileReader();
+    fr.onload = () => {
+      const im = new Image();
+      im.onload = () => {
+        const MAX = 1600;
+        const k = Math.min(1, MAX / Math.max(im.naturalWidth, im.naturalHeight));
+        const w = Math.max(1, Math.round(im.naturalWidth * k));
+        const h = Math.max(1, Math.round(im.naturalHeight * k));
+        const c2 = document.createElement('canvas');
+        c2.width = w; c2.height = h;
+        c2.getContext('2d').drawImage(im, 0, 0, w, h);
+        let out;
+        try { out = c2.toDataURL('image/jpeg', 0.86); } catch (e) { out = fr.result; }
+        cb(out);
+      };
+      im.src = fr.result;
+    };
+    fr.readAsDataURL(f);
+  });
+  inp.click();
+}
+
 function draw(){
   const dpr = window.devicePixelRatio || 1;
   const W = innerWidth, H = innerHeight;
   cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
   cv.style.width = W + 'px'; cv.style.height = H + 'px';
   cx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  paintWall(cx, W, H);
+  const src = wallSrc('home');
+  if (!src){ paintWall(cx, W, H); return; }
+  const cover = im => {
+    const iw = im.naturalWidth, ih = im.naturalHeight;
+    const s = Math.max(W / iw, H / ih);
+    cx.drawImage(im, (W - iw * s) / 2, (H - ih * s) / 2, iw * s, ih * s);
+  };
+  const c = wallImgCache[src];
+  if (c && c.complete && c.naturalWidth){ cover(c); return; }
+  paintWall(cx, W, H);   /* shown until the custom image loads */
+  const im = new Image();
+  im.onload = () => { wallImgCache[src] = im; if (wallSrc('home') === src) cover(im); };
+  im.src = src;
 }
 const uiEl = $('#ui');
 function setScale(){
@@ -1317,7 +1447,9 @@ const REG = {};
 [...BASE, ...DOCK_BASE, ...GADGETS].forEach(a => REG[a.id] = a);
 /* default apps can't be uninstalled */
 const PROTECTED = new Set([...BASE, ...DOCK_BASE, ...GADGETS].map(a => a.id));
-const ICON_FIXES = { 'gd-subzero': SUBZERO_ICON, 'gd-meltdown': MELTDOWN_ICON, 'subway': SUBWAY_ICON, 'pvz2': PVZ2_ICON, 'clusterduck': CLUSTERDUCK_ICON };
+/* installed apps may use a different icon than the store listing (e.g. Minecraft) */
+const ICON_FIXES = { 'gd-subzero': SUBZERO_ICON, 'gd-meltdown': MELTDOWN_ICON, 'subway': SUBWAY_ICON, 'pvz2': PVZ2_ICON, 'clusterduck': CLUSTERDUCK_ICON,
+  'minecraft': 'https://static.wikia.nocookie.net/logopedia/images/0/0f/Minecraft_Bedrock_2023.svg/revision/latest/scale-to-width-down/250?cb=20230920113315' };
 const URL_FIXES = { 'pvz2': PVZ2_URL, 'gacha-life': GACHA_LIFE_URL, 'granny': GRANNY_URL };
 function fixIcon(id, icon){ return ICON_FIXES[id] || icon; }
 function fixUrl(id, url){ return URL_FIXES[id] || url; }
@@ -1368,7 +1500,7 @@ const deSlot = d => {
   return deApp(d);
 };
 function persistDev(){
-  const payload = { installed, pages: pages.map(p => p.map(serSlot)), dock: dockSlots.map(serSlot), newApps: [...newBadges], settings: { google: setAccount } };
+  const payload = { installed, pages: pages.map(p => p.map(serSlot)), dock: dockSlots.map(serSlot), newApps: [...newBadges], wallpaper: { home: wallState.home, lock: wallState.lock }, settings: { google: setAccount } };
   try { localStorage.setItem(DEVKEY, JSON.stringify(payload)); } catch (e) {}
   try { parent.postMessage({ type: 'mumu-dev-save', id: devId(), state: payload }, '*'); } catch (e) {}
 }
@@ -1446,6 +1578,8 @@ function virtualPage(side){
   return d;
 }
 const HOME_NAMES = { 'temple-run': 'TempleRun', 'temple-run-2': 'TempleRun2' };
+/* some apps get a shorter name once installed (home screen + window tab) */
+const INSTALL_NAMES = { 'minecraft': 'Minecraft' };
 const homeName = s => HOME_NAMES[s.id] || s.name;
 function appBtn(s){
   const b = document.createElement('button');
@@ -2219,6 +2353,12 @@ function closeCustomizeSheet(){
 /* ============ app open animation + view switching ============ */
 function openAppFromRect(app, r){
   if (app.paused){ showPausedDialog(app, r); return; }
+  /* opening an app permanently removes its "new" badge */
+  if (newBadges.has(app.id)){
+    newBadges.delete(app.id);
+    persistDev();
+    renderHome();
+  }
   const ov = document.createElement('div');
   ov.className = 'appanim';
   ov.innerHTML = `<div class="aa-ic">${app.fid ? folderIconSVG(app) : appIconSVG(app)}</div>`;
@@ -2354,7 +2494,7 @@ function showView(v){
     phEl.querySelector('.avname').textContent = app.name;
   }
 }
-/* resets one browser app's tabs (chromium or chrome); shared settings stay */
+/* resets one browser app's tabs (chromium or chrome); per-app settings stay */
 function resetBrowserApp(key){
   const p = CH.profiles[key];
   if (!p) return;
@@ -2367,10 +2507,26 @@ function resetBrowserApp(key){
     CH.mode = 'n';
   }
 }
+/* closes an in-simulator app view and tells the launcher to drop its tab */
+function closeAppView(appId){
+  showView('home');
+  if (window.parent !== window){
+    try { parent.postMessage({ type: 'mumu-close-app', id: DEV && DEV.id, app: appId }, '*'); } catch (e) {}
+  }
+}
 addEventListener('message', e => {
   const d = e.data;
   if (!d || typeof d !== 'object') return;
-  if (d.type === 'mumu-view') showView(d.view === 'app' ? d.id : 'home');
+  if (d.type === 'mumu-view'){
+    const v = d.view === 'app' ? d.id : 'home';
+    /* opening an app clears its "new" badge for good */
+    if (v !== 'home' && newBadges.has(v)){
+      newBadges.delete(v);
+      persistDev();
+      renderHome();
+    }
+    showView(v);
+  }
   if (d.type === 'mumu-app-closed' && (d.id === 'chromium' || d.id === 'g-chrome')){
     resetBrowserApp(d.id === 'g-chrome' ? 'chrome' : 'chromium');
   }
@@ -2414,7 +2570,20 @@ topedge.addEventListener('pointerup', e => {
   }
   edgeDrag = null;
 });
-topedge.addEventListener('pointercancel', () => { edgeDrag = null; });
+/* ---- Minecraft's wide logo looks best fully visible (meet) on its dark tile.
+        This later definition replaces iconInner from above. ---- */
+const MEET_ICONS = new Set(['minecraft']);
+const _iconInnerBase = iconInner;
+iconInner = function(app){
+  if (app && app.url && MEET_ICONS.has(app.id) && app.icon){
+    const n = 'mi' + (++_uid);
+    return `<defs><clipPath id="${n}"><rect x="3" y="3" width="58" height="58" rx="14"/></clipPath></defs>` +
+      `<rect x="3" y="3" width="58" height="58" rx="14" fill="#1c2027"/>` +
+      `<image clip-path="url(#${n})" href="${app.icon}" x="6" y="6" width="52" height="52" preserveAspectRatio="xMidYMid meet"/>`;
+  }
+  return _iconInnerBase(app);
+};
+
 /* ============ CHROMIUM (engine shared with the Chrome app) ============ */
 const CH_HOME  = `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M3.2 9.4 L10 3.4 L16.8 9.4"/><path d="M5.2 8.2 V16.2 H14.8 V8.2"/></svg>`;
 const CH_LEFT  = `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 10 H6"/><path d="M9.8 5.6 L5.4 10 L9.8 14.4"/></svg>`;
@@ -2473,7 +2642,9 @@ const ENGINES = {
 };
 
 /* engine state: 'chromium' = the Chromium dock app, 'chrome' = the Chrome gadget app.
-   Both apps share one rendering engine, but keep separate tab sets. */
+   Both apps share one rendering engine, but keep separate tab sets AND
+   completely separate settings (bookmarks, search engine, theme, homepage,
+   history). Downloads are shared (device-wide). */
 const CH = {
   app: 'chromium',
   mode: 'n',
@@ -2481,16 +2652,16 @@ const CH = {
     chromium: { n: { tabs: [], cur: 0 }, i: { tabs: [], cur: 0 } },
     chrome:   { n: { tabs: [], cur: 0 }, i: { tabs: [], cur: 0 } }
   },
-  marks: new Map(),
-  downloads: [],
-  engine: 'google',
-  theme: 'dark',
-  homepage: { on: true, mode: 'default', custom: '' },
-  history: []
+  prefs: {
+    chromium: { marks: new Map(), engine: 'google', theme: 'dark', homepage: { on: true, mode: 'default', custom: '' }, history: [] },
+    chrome:   { marks: new Map(), engine: 'google', theme: 'dark', homepage: { on: true, mode: 'default', custom: '' }, history: [] }
+  },
+  downloads: []
 };
+const chPrefs = () => CH.prefs[CH.app];
 const closedStack = [];
 function newEntry(){
-  const h = CH.homepage;
+  const h = chPrefs().homepage;
   if (!h.on) return { type: 'blank' };
   if (h.mode === 'custom' && h.custom) return { type: 'web', url: h.custom };
   return { type: 'newtab' };
@@ -2516,14 +2687,14 @@ function entTitle(e){
 }
 function addrOf(e){
   /* Chrome app: the new tab page shows no URL in the address bar */
-  if (e.type === 'newtab') return isChromeApp() ? '' : ENGINES[CH.engine].host;
+  if (e.type === 'newtab') return isChromeApp() ? '' : ENGINES[chPrefs().engine].host;
   if (e.type === 'blank') return 'about:blank';
   if (e.type === 'history') return 'chrome://history';
   if (e.type === 'downloads') return 'chrome://downloads';
   return e.url.replace(/^https?:\/\//, '');
 }
 function entHost(e){
-  if (e.type === 'newtab') return ENGINES[CH.engine].host;
+  if (e.type === 'newtab') return ENGINES[chPrefs().engine].host;
   return hostOf(e.url);
 }
 function tabIcon(ent){
@@ -2550,7 +2721,7 @@ function setAddrIcon(kind){
   else if (kind === 'globe') el.innerHTML = CH_GLOBE;
   else if (kind === 'dl') el.innerHTML = CH_DL;
   else if (kind === 'history') el.innerHTML = `<img src="${HIST_FAV}" style="filter:brightness(0) invert(1)" alt="">`;
-  else el.innerHTML = `<img src="${ENGINES[CH.engine].fav}" alt="">`;
+  else el.innerHTML = `<img src="${ENGINES[chPrefs().engine].fav}" alt="">`;
 }
 function chGo(ent){
   const t = chCur();
@@ -2558,8 +2729,9 @@ function chGo(ent){
   t.hist.push(ent);
   t.idx++;
   if (CH.mode === 'n' && (ent.type === 'web' || ent.type === 'search')){
-    CH.history.unshift({ name: entTitle(ent), url: ent.url });
-    if (CH.history.length > 60) CH.history.length = 60;
+    const h = chPrefs().history;
+    h.unshift({ name: entTitle(ent), url: ent.url });
+    if (h.length > 60) h.length = 60;
   }
   renderCh();
 }
@@ -2576,7 +2748,7 @@ function goFromText(txt){
   if (t.toLowerCase() === 'chrome://history'){ chGo({ type: 'history' }); return; }
   if (t.toLowerCase() === 'chrome://downloads'){ chGo({ type: 'downloads' }); return; }
   if (isUrlLike(t)) chGo({ type: 'web', url: /^([a-z][a-z0-9+.-]*:\/\/)/i.test(t) ? t : 'https://' + t });
-  else chGo({ type: 'search', url: ENGINES[CH.engine].q + encodeURIComponent(t) });
+  else chGo({ type: 'search', url: ENGINES[chPrefs().engine].q + encodeURIComponent(t) });
 }
 function tabWidthFor(){
   const strip = chRoot.querySelector('.ch-strip');
@@ -2758,10 +2930,11 @@ function buildChromium(){
   root.querySelector('.ch-star').addEventListener('click', () => {
     const ent = chEnt();
     if (ent.type !== 'web' && ent.type !== 'search') return;
+    const marks = chPrefs().marks;
     const k = entKey(ent);
-    if (CH.marks.has(k)) CH.marks.delete(k);
-    else CH.marks.set(k, { name: entTitle(ent), host: entHost(ent), url: ent.url });
-    root.querySelector('.ch-star').classList.toggle('marked', CH.marks.has(k));
+    if (marks.has(k)) marks.delete(k);
+    else marks.set(k, { name: entTitle(ent), host: entHost(ent), url: ent.url });
+    root.querySelector('.ch-star').classList.toggle('marked', marks.has(k));
     renderBmBar();
   });
   const inp = root.querySelector('.ch-addr-in');
@@ -2833,11 +3006,11 @@ function renderStrip(anim){
 function syncChromeState(){
   if (!chRoot) return;
   const a = curArr(), ent = chEnt();
-  chRoot.classList.toggle('light', CH.theme === 'light');
+  chRoot.classList.toggle('light', chPrefs().theme === 'light');
   chRoot.classList.toggle('incognito', CH.mode === 'i');
   chRoot.querySelector('.ch-back').classList.toggle('dis', chCur().idx === 0);
   chRoot.querySelector('.ch-fwd').classList.toggle('dis', chCur().idx >= chCur().hist.length - 1);
-  chRoot.querySelector('.ch-star').classList.toggle('marked', CH.marks.has(entKey(ent)));
+  chRoot.querySelector('.ch-star').classList.toggle('marked', chPrefs().marks.has(entKey(ent)));
   chRoot.querySelector('.ch-count').textContent = String(a.tabs.length);
   const inp = chRoot.querySelector('.ch-addr-in');
   if (document.activeElement !== inp) inp.value = addrOf(ent);
@@ -2856,7 +3029,7 @@ function renderBmBar(){
   if (!chRoot) return;
   const bar = chRoot.querySelector('.ch-bmbar');
   bar.innerHTML = '';
-  CH.marks.forEach(bm => {
+  chPrefs().marks.forEach(bm => {
     const b = document.createElement('button');
     b.className = 'bm';
     b.innerHTML = `<img src="${FAV(bm.host)}" alt="" onerror="this.style.visibility='hidden'"><span></span>`;
@@ -2865,7 +3038,7 @@ function renderBmBar(){
     b.addEventListener('click', () => chGo({ type: 'web', url: bm.url }));
     bar.appendChild(b);
   });
-  bar.style.display = CH.marks.size ? '' : 'none';
+  bar.style.display = chPrefs().marks.size ? '' : 'none';
 }
 function renderChContent(ent){
   if (!chRoot) return;
@@ -2919,7 +3092,7 @@ function renderChContent(ent){
   c.appendChild(fr);
 }
 function buildNewTab(){
-  const e = ENGINES[CH.engine];
+  const e = ENGINES[chPrefs().engine];
   const d = document.createElement('div');
   d.className = 'ch-nt';
   d.innerHTML = `
@@ -2950,15 +3123,16 @@ function buildHistoryPage(){
   d.className = 'ch-hist';
   d.innerHTML = `<div class="ch-hist-in"><h2>History</h2><div class="hh-list"></div></div>`;
   const list = d.querySelector('.hh-list');
-  if (!CH.history.length){
+  const h = chPrefs().history;
+  if (!h.length){
     list.innerHTML = `<p class="hh-empty">No history yet</p>`;
-  } else CH.history.forEach(h => {
+  } else h.forEach(it => {
     const row = document.createElement('button');
     row.className = 'hh';
-    row.innerHTML = `<img src="${FAV(hostOf(h.url))}" alt="" onerror="this.style.visibility='hidden'"><span class="hh-n"></span><span class="hh-u"></span>`;
-    row.querySelector('.hh-n').textContent = h.name || hostOf(h.url);
-    row.querySelector('.hh-u').textContent = h.url;
-    row.addEventListener('click', () => chGo({ type: 'web', url: h.url }));
+    row.innerHTML = `<img src="${FAV(hostOf(it.url))}" alt="" onerror="this.style.visibility='hidden'"><span class="hh-n"></span><span class="hh-u"></span>`;
+    row.querySelector('.hh-n').textContent = it.name || hostOf(it.url);
+    row.querySelector('.hh-u').textContent = it.url;
+    row.addEventListener('click', () => chGo({ type: 'web', url: it.url }));
     list.appendChild(row);
   });
   return d;
@@ -3040,7 +3214,7 @@ function openTabsMenu(){
         <span class="tm-x" role="button" aria-label="Close tab">${TM_X}</span>
       </span>
       <span class="tm-prev">${ent.type === 'newtab'
-        ? `<span class="tm-g"><img src="${ENGINES[CH.engine].logo}" alt="" draggable="false"></span>`
+        ? `<span class="tm-g"><img src="${ENGINES[chPrefs().engine].logo}" alt="" draggable="false"></span>`
         : (ent.type === 'blank' || ent.type === 'history' || ent.type === 'downloads') ? ''
         : `<iframe src="${ent.url.replace(/"/g, '&quot;')}" loading="lazy" tabindex="-1" sandbox="allow-scripts allow-same-origin"></iframe>`}</span>`;
     box.querySelector('.tm-name').textContent = entTitle(ent);
@@ -3148,8 +3322,8 @@ function openSettings(){
       <button class="chp-row" data-s="theme"><span class="chp-l">Theme<small class="sub-th"></small></span><span class="chp-chev">${CH_CHEV}</span></button>
       <div class="chp-cat">Advanced</div>
       <button class="chp-row" data-s="home"><span class="chp-l">Homepage</span><span class="chp-chev">${CH_CHEV}</span></button>`;
-    col.querySelector('.sub-eng').textContent = ENGINES[CH.engine].name;
-    col.querySelector('.sub-th').textContent = CH.theme === 'light' ? 'Light' : 'Dark';
+    col.querySelector('.sub-eng').textContent = ENGINES[chPrefs().engine].name;
+    col.querySelector('.sub-th').textContent = chPrefs().theme === 'light' ? 'Light' : 'Dark';
     col.querySelector('[data-s="engine"]').addEventListener('click', openEnginePage);
     col.querySelector('[data-s="theme"]').addEventListener('click', openThemePage);
     col.querySelector('[data-s="home"]').addEventListener('click', openHomepagePage);
@@ -3165,11 +3339,11 @@ function openEnginePage(){
       Object.keys(ENGINES).forEach(id => {
         const e = ENGINES[id];
         const row = document.createElement('button');
-        row.className = 'chp-eng' + (CH.engine === id ? ' on' : '');
+        row.className = 'chp-eng' + (chPrefs().engine === id ? ' on' : '');
         row.innerHTML = `<span class="rad"><i></i></span><span class="chp-l">${e.name}<small>${e.host}</small></span>`;
         row.addEventListener('click', () => {
-          if (CH.engine === id) return;
-          CH.engine = id;
+          if (chPrefs().engine === id) return;
+          chPrefs().engine = id;
           render();
           setAddrIcon(entryIconKind(chEnt()));
           const inp = chRoot.querySelector('.ch-addr-in');
@@ -3192,11 +3366,11 @@ function openThemePage(){
       col.innerHTML = '';
       [['light', 'Light'], ['dark', 'Dark']].forEach(([id, name]) => {
         const row = document.createElement('button');
-        row.className = 'chp-eng' + (CH.theme === id ? ' on' : '');
+        row.className = 'chp-eng' + (chPrefs().theme === id ? ' on' : '');
         row.innerHTML = `<span class="rad"><i></i></span><span class="chp-l">${name}</span>`;
         row.addEventListener('click', () => {
-          if (CH.theme === id) return;
-          CH.theme = id;
+          if (chPrefs().theme === id) return;
+          chPrefs().theme = id;
           chRoot.classList.toggle('light', id === 'light');
           render();
         });
@@ -3212,26 +3386,27 @@ function openHomepagePage(){
     const col = document.createElement('div');
     col.className = 'chp-col';
     const render = () => {
+      const hp = chPrefs().homepage;
       col.innerHTML = `
-        <div class="chp-row2"><span>On</span><button class="chsw${CH.homepage.on ? ' on' : ''}" aria-label="Homepage on"><i></i></button></div>
+        <div class="chp-row2"><span>On</span><button class="chsw${hp.on ? ' on' : ''}" aria-label="Homepage on"><i></i></button></div>
         <div class="chp-div"></div>
-        <button class="chp-eng${CH.homepage.mode === 'default' ? ' on' : ''}" data-h="default"><span class="rad"><i></i></span><span class="chp-l">Chrome's homepage</span></button>
-        <div class="chp-eng${CH.homepage.mode === 'custom' ? ' on' : ''}" data-h="custom"><span class="rad"><i></i></span><input class="chp-url" placeholder="Enter custom web address" spellcheck="false"></div>`;
+        <button class="chp-eng${hp.mode === 'default' ? ' on' : ''}" data-h="default"><span class="rad"><i></i></span><span class="chp-l">Chrome's homepage</span></button>
+        <div class="chp-eng${hp.mode === 'custom' ? ' on' : ''}" data-h="custom"><span class="rad"><i></i></span><input class="chp-url" placeholder="Enter custom web address" spellcheck="false"></div>`;
       col.querySelector('.chsw').addEventListener('click', () => {
-        CH.homepage.on = !CH.homepage.on;
+        chPrefs().homepage.on = !chPrefs().homepage.on;
         render();
       });
       col.querySelector('[data-h="default"]').addEventListener('click', () => {
-        CH.homepage.mode = 'default';
+        chPrefs().homepage.mode = 'default';
         render();
       });
       const inp = col.querySelector('.chp-url');
-      if (CH.homepage.custom) inp.value = CH.homepage.custom;
+      if (chPrefs().homepage.custom) inp.value = chPrefs().homepage.custom;
       inp.addEventListener('input', () => {
         const v = inp.value.trim();
         if (v && isUrlLike(v)){
-          CH.homepage.mode = 'custom';
-          CH.homepage.custom = /^([a-z][a-z0-9+.-]*:\/\/)/i.test(v) ? v : 'https://' + v;
+          chPrefs().homepage.mode = 'custom';
+          chPrefs().homepage.custom = /^([a-z][a-z0-9+.-]*:\/\/)/i.test(v) ? v : 'https://' + v;
           col.querySelectorAll('.chp-eng').forEach(r => r.classList.toggle('on', r.dataset.h === 'custom'));
         }
       });
@@ -3740,7 +3915,10 @@ const GAMES = [
     url:  'https://cfpju876whm.make-by-vann-dont-steal-it-gooners-3351dcb3.nip.io/games/166.html' },
   { id: 'fnaf-2',     name: "Five Nights at Freddy's 2", rating: 4.6, cat: 'strategy',
     icon: 'https://play-lh.googleusercontent.com/ax7Yy0SvZ9GUS5o0MHtXFD0vEPqK5BEadf2a5O0I_36GYaUkZ29PYGQNxktEflYOFsG34n5PWVCyAlKD7n-9Ww=w240-h480-rw',
-    url:  'https://cfpju876whm.make-by-vann-dont-steal-it-gooners-3351dcb3.nip.io/games/167.html' }
+    url:  'https://cfpju876whm.make-by-vann-dont-steal-it-gooners-3351dcb3.nip.io/games/167.html' },
+  { id: 'minecraft',  name: 'Minecraft, Dream it, Build it!', rating: 4.3, cat: 'adventure',
+    icon: 'https://play-lh.googleusercontent.com/tI4StRSPVhpGJH5R013naszLUawOjao1ya8FvyaNO7XY_cJFHFqo1EFaEJv_7zz3rRJ5lEpLiw14ZqQLCOYc',
+    url:  'https://eaglercraft-26-2-client.u2471966200.workers.dev/?=v0.6' }
 ];
 const CAT_IC = {
   adventure: `<svg viewBox="0 0 20 20" fill="none" stroke="#fff" stroke-width="1.6" aria-hidden="true"><rect x="1.6" y="1.6" width="16.8" height="16.8" rx="4.2"/><g fill="#fff" stroke="none"><rect x="5.4" y="6.6" width="2.3" height="6.8" rx="1.15" transform="rotate(15 6.55 10)"/><rect x="8.6" y="6.6" width="2.3" height="6.8" rx="1.15" transform="rotate(15 9.75 10)"/><circle cx="13.9" cy="12.3" r="1.2"/></g></svg>`,
@@ -3836,7 +4014,7 @@ const DETAILS = {
     ],
     shots: [
       'https://play-lh.googleusercontent.com/l7fzSqRPdWbbr6-CkJFdb_ItD-BvTNgUc6twYpCWJ7Azx0wseJ0ysxzwYKAlYwxUPMOhWZ4RyB_iRrNW1thVUKw=w1052-h592-rw',
-      'https://play-lh.googleusercontent.com/bomIET_0NcQw4kiA80f7H5_MNPRDfTGJXsK_zvhy_blTgrBu1YMhVP1ftsOCsG4farOoPrNtsqocgeHCrEhLmg=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/bomIET_0NcQw4kiA80f7H5_MNPRDfTGJXsK_zvhy_blFgrBu1YMhVP1ftsOCsG4farOoPrNtsqocgeHCrEhLmg=w1052-h592-rw',
       'https://play-lh.googleusercontent.com/Qk67HxrbKWyyaZPk92pcfRxF2BARXNQDlZuoSM9CO6WOw9Wb0o_vruWZMgBoZeMTY1TPJ1GBivlMo80lb8AGjQ=w1052-h592-rw',
       'https://play-lh.googleusercontent.com/RgGCSay4foy3HpHS1A2rTXVBWSxzr0h1tjKmsjpQ774jtoJYmjsbgb2m8IKNEUK1-0mBHTJGBPxsiPl3fAZqO_k=w1052-h592-rw',
       'https://play-lh.googleusercontent.com/26B2qWuK3wq4zXOqVo94pNESZOEqE8TazTgB8hqrsgHTw9p5bH8ekfxBsiL5tX5mQs96tY0QSanExhbT2-Eh2Yg=w1052-h592-rw',
@@ -4070,7 +4248,7 @@ const DETAILS = {
     ],
     shots: [
       'https://play-lh.googleusercontent.com/vvbKtrftDskCmQmUCmJYcQhDLJx5UtaRaxTSLYDW_PYgLvCjpwpu7s_XeUlCbDXTj0ON5SaVerlXq2KQo2GiYA=w1052-h592-rw',
-      'https://play-lh.googleusercontent.com/J_4_0IG4bg9bD3gSbdqnnxxlz4WtLxhERp-NbKSYaY9i1Tbx1GWV2iZfzifTxApUc3MZC_WNG8aRD0SFhpoUtA=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/J_4_0IG4bg9bD3gSbdqnnxxlz4wWtLxhERp-NbKSYaY9i1Tbx1GWV2iZfzifTxApUc3MZC_WNG8aRD0SFhpoUtA=w1052-h592-rw',
       'https://play-lh.googleusercontent.com/8h2yj8b_6gWfcWCEQ7hcQ_RnELmXkN6w0l3FHcTNtml-DyC_9dnTxnaf1soliMs3eVpkeITynS6y65temK4JGQ=w1052-h592-rw',
       'https://play-lh.googleusercontent.com/UKPSEfexG2NeKstehhTprj7ur9BdiORDRNXnSkJ9VUgG980pMSnsGcVDKX-RsVy1IuKkwxv3apMl7l-r3C_H=w1052-h592-rw',
       'https://play-lh.googleusercontent.com/djdebkgxSB8p5cFwAAz3dyT1-kmRUU4uqktPQ6bQmjaNI92YF_KtBnRE5gwkCdiVX9aZPF3wyW5-ueacJDOY=w1052-h592-rw'
@@ -4092,7 +4270,7 @@ const DETAILS = {
     ],
     shots: [
       'https://play-lh.googleusercontent.com/u6IUfY6mpRp4F8ejCJFOZvcA4weTlSYcL9zhlmIdAJ5Ryk3HwXwMnk0Rolyb384-7MErjEp8GLV-JLBqRuBDacY=w1052-h592-rw',
-      'https://play-lh.googleusercontent.com/8mkI42-DYLl_hrSPqUGtVZ3D8xUPsmTY03A-mSDcNvRqZb0CZKJvAAUnxydc8OcqYDrYc64qaZ_ybEhSVszdPmE=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/8mkI42-DYLl_hrSPqUGtVZ3D8xUPsmTY03A-mSDcNvRqZb0CZKJvAAUnxydc8OcqYDrYc64qaZ_yEhSVszdPmE=w1052-h592-rw',
       'https://play-lh.googleusercontent.com/-9t5JBlTVyd2nynBh18S702hfmSlXd72NDphtz4XTyjWuaNSAhOD4juyx22I3wWc0QePY5sO4kXKn1eLe4hWB-M=w1052-h592-rw',
       'https://play-lh.googleusercontent.com/T8VDOBCLhg-VZIN0O1V_adNpoLB2wQURj9vEUKq1YfrC2nrj8xxxA-D8H-p_H8Bnim9UOYcDwXTRxeGViTzJ=w1052-h592-rw',
       'https://play-lh.googleusercontent.com/DtwoT9wweIRbCzsl_tn98b_j0y2d_P4Bx1y6JJHX_zSXTfZJwyIUdi0RPOWgKV7kAhfWElC4tLJN_vjmuYIA59s=w1052-h592-rw',
@@ -4191,7 +4369,7 @@ const DETAILS = {
       'https://play-lh.googleusercontent.com/CjD3Do7438VCP7v0szDWPojJNopxFolVZX3WmwftAOD2HGLmJiDd2HuUOV1nnJm00XpHqLMVQPXUELiiDzbhhg=w1052-h592-rw',
       'https://play-lh.googleusercontent.com/f8HOFjRAyUknscmshcftytc_7Xjtewas6abOkAN1v0GmvCOmr9tGyNkNkRB6FVaDh15WTOB8vbiLK5l4ItrcAYk=w1052-h592-rw',
       'https://play-lh.googleusercontent.com/OI36iDhQoFEaCD2X5mkQjc-DkHx_goQImr55kXeZobVE1i165U2SU25qY5unBeoKmRd6guitkrqDGEEgNGhL7g=w1052-h592-rw',
-      'https://play-lh.googleusercontent.com/I8i7HbXxw_zy7HoZhoG724pysAus1YDjoE_p47wdfdqG61X9zG3pvvahCKqtAcqcYwlXwHkrNUb5uNeHWJhzRg=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/I8i7HbXxw_zy7HoZhoG724pysAus1DjoE_p47wdfdqG61X9zG3pvvahCKqtAcqcYwlXwHkrNUb5uNeHWJhzRg=w1052-h592-rw',
       'https://play-lh.googleusercontent.com/9UK1s-BlJd95v1sy-aCvqx-9UU24K4t4FA-8JD3sHEkmMdUCIOmk1vYycl88G3SxurZblJJgdLXlTfAqv__d=w1052-h592-rw',
       'https://play-lh.googleusercontent.com/FE4lkUBVCp1lR6Yd9CHSK5hgA_ys0CnTnpG4eEq8llrFzhdHgOgUD37CBXKYEhB9fdWHfRw4fLWgkQAub0y3cw=w1052-h592-rw',
       'https://play-lh.googleusercontent.com/k4GCoPMCutJesSdbPECPkm891LqACQwo97xMRBBuoBOXUmmj82R6-Y1zA4JOGW_2b3OflQAyBm0kyQw5dONS8g=w1052-h592-rw',
@@ -4212,7 +4390,7 @@ const DETAILS = {
     ],
     shots: [
       'https://play-lh.googleusercontent.com/mSqj79AobKtW8SQ3OfGRetS6yAw90aEwRa8LdBAfgpDKPYI4RruVSP2enhZiN2XHCse8DgxfIK2iWoRktxgMiw=w1052-h592-rw',
-      'https://play-lh.googleusercontent.com/CqKtwQJDNLKCpPXRKZYVqg77re9Vx3-F1dCQkRgWyoQkGQLLHG9tPrD5kyE0kYKrJSTqzUYCYO6BafT39bJc=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/CqKtwQJDNLKCpPXRKZYVqg77re9Vx3-F1dCQkRgWyoQkGQLLLHG9tPrD5kyE0kYKrJSTqzUYCYO6BafT39bJc=w1052-h592-rw',
       'https://play-lh.googleusercontent.com/WuQLCEHmyvrnGQvQ5MGQsTdAslS-5fYCe7tgG2XaJ_GwY4XOqjqLZfGibSKxN910ufjiMGWFKU6m5GBpIzWsJQ=w1052-h592-rw',
       'https://play-lh.googleusercontent.com/nnXqaAevKimJItIbanLwlfobMV3rdgr46q0iSXbd-y1noNexi2ps9uPOAgngOKhq2oe3BZHUYuoIYeR5B6SR2OE=w1052-h592-rw',
       'https://play-lh.googleusercontent.com/C4QzxLKlwh5oSm3n_iliES1dKUFKN68EV0n-2m939lfq7909EnRJXAqgbHwsGdNAf3qlvdtS19C9kKax5SAc=w1052-h592-rw',
@@ -4236,6 +4414,31 @@ const DETAILS = {
       'Explore the caves and uncover their secrets'
     ],
     shots: []
+  },
+  'minecraft': {
+    size: '804.9MB', dev: 'Mojang', ver: '10,000,000+', upd: '2026-05-29',
+    desc: [
+      'Minecraft is a game made up of blocks, creatures, and community — where you can create anything you can possibly imagine!',
+      'Dream it, build it! Craft tools, build shelter, mine deep, and survive the night in an infinite, procedurally generated world. Play solo or with friends across platforms.'
+    ],
+    bullets: [
+      'Build anything from simple homes to grand castles',
+      'Explore infinite, procedurally generated worlds',
+      'Craft weapons and armor to defend against dangerous mobs',
+      'Play in Creative mode with unlimited resources',
+      'Survive, mine, and explore in Survival mode',
+      'Play with friends across platforms — anytime, anywhere'
+    ],
+    shots: [
+      'https://play-lh.googleusercontent.com/ywPBuExmYGLE6oL7QENmI7wOxMPOU-XatzosE6M4bgXudBsMQWcKp1QHhHrJM1QeTadoVo7lnpO5O12WyzlYQA=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/BURZszeq4bCuHl-KY-oAALOssOcj_jJmZOrbA21zSQEwtg92fv02Us8pU94cvggw08gBTMKC2bVSVm6opWhl7A=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/_7QkSZSzxD9C_YoFB8kMwW8JYVaLyq5_DYnuG91qf726BE3Gnpq9zlSAZdR2CA3yxgjkjZ4jMzpWXmtQwD3ae2A=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/ysWd5xeUbLSe3XRWuxKbYozNrzDR7Ll_X23hTNROhKT_TIBPloU8h5afdzsT4ytdmogz9gZ-2yFyc7xq96iw=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/M2eTm88EDoUMTBfXFPkOKynJhL2DZR6LiP-E4IaCfmYoSIaKQRQPQjxngp4sfyArJUiQxRij2Oo5NPB7fOWF=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/9e8DydR_MblwDtWRArF5wXu1JII8dRFMziz_7c1glKNfKHpjM-GRVuVcUCCpZtef2uaYj0PTw4thpwhcL-QuCw=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/aYFiYY8DULrlSV8tFlfKI9rSVDLeFvYStV7JTmAVwuQZ-cum1aDq4rPdeeUDk6SZC9jLRCyOlKFtcAsBzlwB=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/Gm3yiL12FdUqfnBQrObZlEHMa8Ql70Nvx5Uy6bSanHVRY8e-aQCUO0ynwcv_gjZn_KbqlvJnwyokt7zv-MM4=w1052-h592-rw'
+    ]
   }
 };
 /* clusterduck: 6 images repeated twice = 12 portrait shots */
@@ -4630,7 +4833,8 @@ function finalizeInstall(g){
   const d = DLS[g.id];
   if (!d || d.phase !== 'inst') return;
   delete DLS[g.id];
-  const app = { id: g.id, name: g.name, icon: g.icon, url: g.url };
+  /* the home-screen app may use a shorter name and a different icon than the store listing */
+  const app = { id: g.id, name: INSTALL_NAMES[g.id] || g.name, icon: fixIcon(g.id, g.icon), url: g.url };
   installed.push(app);
   newBadges.add(g.id);
   if (pages[d.slot.page]) pages[d.slot.page][d.slot.idx] = app;
@@ -5213,13 +5417,14 @@ function selectSetTab(id){
   if (!setRoot) return;
   setRoot.querySelectorAll('.set-tab').forEach(t => t.classList.toggle('sel', t.dataset.st === id));
   const right = setRoot.querySelector('.set-right');
-  const old = right.querySelector('.set-content');
-  if (old) old.remove();
+  right.querySelectorAll('.set-content').forEach(el => el.remove());
+  wpPage = (id === 'wallpaper') ? 'main' : null;
   const c = document.createElement('div');
   c.className = 'set-content';
   c.dataset.st = id;
   if (id === 'google') c.appendChild(googleContent());
   if (id === 'net') c.appendChild(networkContent());
+  if (id === 'wallpaper') c.appendChild(wallpaperMainContent());
   right.appendChild(c);
   /* slide in: starts almost completely moved in, then settles into place */
   requestAnimationFrame(() => requestAnimationFrame(() => c.classList.add('in')));
@@ -5433,6 +5638,241 @@ function networkContent(){
   });
   sync();
   return w;
+}
+
+/* ============ SETTINGS: WALLPAPER ============ */
+const WALLPAPERS_ICON = 'https://play-lh.googleusercontent.com/favM-G9B12oLMYj33lsXDozfC-LdybfDxa_nR9Ug2iRVKr85gca8Fj-mFRg9raNsWEVAMwLzC_mbBv0CAbH_';
+const WP_BACK_IC  = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12 H5"/><path d="M10.5 6.5 L5 12 L10.5 17.5"/></svg>`;
+const WP_CHECK_IC = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5 L10 17.5 L19 7"/></svg>`;
+const WP_PHOTO_IC = `<svg viewBox="0 0 48 48" fill="none" stroke="#8f959d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="9" width="34" height="30" rx="5"/><circle cx="17.5" cy="18.5" r="3.2"/><path d="M10.5 34 L20 24.5 L26 30.5 L31.5 24.5 L37.5 30.5"/></svg>`;
+/* square outline with a cut in the middle of each side ·
+   two equilateral triangles (right one bigger) · circle top-right · nothing touches the outline */
+const WP_CHG_IC = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <path d="M3 3 H9 M15 3 H21 M21 3 V9 M21 15 V21 M21 21 H15 M9 21 H3 M3 21 V15 M3 9 V3"/>
+  <path d="M5.5 16 L7 13.4 L8.5 16 Z" fill="currentColor" stroke="none"/>
+  <path d="M11 16.2 L13.5 11.9 L16 16.2 Z" fill="currentColor" stroke="none"/>
+  <circle cx="16.8" cy="8.2" r="1.9" fill="currentColor" stroke="none"/>
+</svg>`;
+
+let wpPage = null;
+/* navigate inside the wallpaper tab: current page fades out, the new one slides in from the left */
+function wpGo(content, page){
+  const right = setRoot.querySelector('.set-right');
+  const old = right.querySelector('.set-content');
+  if (old){
+    old.classList.add('fade-out');
+    setTimeout(() => { if (old.isConnected) old.remove(); }, 340);
+  }
+  content.classList.add('set-content', 'from-l');
+  right.appendChild(content);
+  wpPage = page;
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    content.classList.add('in');
+    fitWpScales(content);
+  }));
+}
+function wpEscape(){
+  if (!setRoot || setRoot.style.display === 'none') return false;
+  const ovl = setRoot.querySelector('.wp-ovl');
+  if (ovl){ ovl.remove(); return true; }
+  if (wpPage === 'picker' || wpPage === 'preview'){
+    wpGo(wallpaperListContent(), 'list');
+    return true;
+  }
+  return false;
+}
+/* scale the fixed 576x336 previews to fill their rectangles */
+function fitWpScales(scope){
+  (scope || document).querySelectorAll('.wpscale').forEach(sw => {
+    const rect = sw.parentElement;
+    const prev = sw.querySelector('.wprev');
+    if (!rect || !prev || !rect.clientWidth) return;
+    prev.style.transform = 'scale(' + (rect.clientWidth / 576).toFixed(4) + ')';
+  });
+}
+function nowClock(){
+  const d = new Date();
+  let h = d.getHours() % 12; if (h === 0) h = 12;
+  return h + ':' + String(d.getMinutes()).padStart(2, '0');
+}
+function wpDateStr(){
+  const d = new Date();
+  const D = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const M = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return D[d.getDay()] + ', ' + M[d.getMonth()] + ' ' + d.getDate();
+}
+/* a copy of the user's home screen (first page + dock) at 576x336 logical size */
+function buildHomePreviewEl(){
+  const el = document.createElement('div');
+  el.className = 'wprev';
+  el.innerHTML = `
+    <canvas class="wallcv" width="1152" height="672"></canvas>
+    <div class="wps">
+      <span class="l"></span>
+      <span class="r">
+        <svg width="13" height="9" viewBox="0 0 25 17" aria-hidden="true"><path d="M12.5 16.5 L2.8 3.15 A16.5 16.5 0 0 1 22.2 3.15 Z" fill="#fff"/></svg>
+        <svg width="9" height="9" viewBox="0 0 17 17" aria-hidden="true"><path d="M2.6 16.2 H15.2 V3.6 Z" fill="#fff"/></svg>
+        <svg width="7" height="9" viewBox="0 0 13 17" aria-hidden="true"><rect x="4.8" y="0.5" width="3.4" height="2.4" rx="1" fill="#fff"/><rect x="2.6" y="3.4" width="7.8" height="13.1" rx="2.4" fill="#fff"/></svg>
+      </span>
+    </div>
+    <span class="wpsearch"><svg viewBox="0 0 20 20" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="9" r="6.2"/><line x1="13.7" y1="13.7" x2="17" y2="17"/></svg><span>Search games</span></span>
+    <div class="wpgrid"></div>
+    <div class="wpdots"></div>
+    <div class="wpdock"></div>
+    <span class="wpgest"></span>`;
+  el.querySelector('.wps .l').textContent = nowClock();
+  const grid = el.querySelector('.wpgrid');
+  (pages[0] || []).forEach(s => {
+    const c = document.createElement('div');
+    c.className = 'wpcell';
+    if (s){
+      if (s.fid){
+        c.innerHTML = `<span class="ic">${folderIconSVG(s)}</span><span class="lb"></span>`;
+        c.querySelector('.lb').textContent = s.name;
+      } else if (s.dl){
+        const g = GAMES.find(x => x.id === s.id);
+        c.innerHTML = `<span class="ic"><svg viewBox="0 0 64 64" aria-hidden="true">${imgInner(g ? g.icon : '', false, true)}</svg></span><span class="lb">Downloading</span>`;
+      } else {
+        c.innerHTML = `<span class="ic">${appIconSVG(s)}</span><span class="lb"></span>`;
+        const lb = c.querySelector('.lb');
+        if (newBadges.has(s.id)){ const i = document.createElement('i'); lb.appendChild(i); }
+        lb.appendChild(document.createTextNode(homeName(s)));
+      }
+    }
+    grid.appendChild(c);
+  });
+  const dots = el.querySelector('.wpdots');
+  pages.forEach((_, i) => {
+    const d = document.createElement('span');
+    if (!i) d.className = 'on';
+    dots.appendChild(d);
+  });
+  const dock = el.querySelector('.wpdock');
+  dockSlots.forEach(s => {
+    if (!s) return;
+    const d = document.createElement('span');
+    d.className = 'ic';
+    d.innerHTML = s.fid ? folderIconSVG(s) : appIconSVG(s);
+    dock.appendChild(d);
+  });
+  return el;
+}
+/* page: "Choose wallpaper from" */
+function wallpaperMainContent(){
+  const w = document.createElement('div');
+  w.innerHTML = `
+    <button class="wp-back" aria-label="Back">${WP_BACK_IC}</button>
+    <h2 class="wp-title">Choose wallpaper from</h2>
+    <button class="wp-opt" data-wpo="gallery">
+      <span class="wic">${appIconSVG(appById('gallery'))}</span>
+      <b>Gallery</b>
+    </button>
+    <button class="wp-opt" data-wpo="wallpapers">
+      <span class="wic"><img src="${WALLPAPERS_ICON}" alt="" draggable="false"></span>
+      <b>Wallpapers</b>
+    </button>`;
+  w.querySelector('.wp-back').addEventListener('click', () => closeAppView('settings'));
+  w.querySelector('[data-wpo="gallery"]').addEventListener('click', e => {
+    const ic = e.currentTarget.querySelector('.wic');
+    const r = ic.getBoundingClientRect();
+    closeAppView('settings');
+    const g = appById('gallery');
+    if (g) openAppFromRect(g, r);
+  });
+  w.querySelector('[data-wpo="wallpapers"]').addEventListener('click', () => wpGo(wallpaperListContent(), 'list'));
+  return w;
+}
+/* page: the two preview rectangles (lock screen · home screen) */
+function wallpaperListContent(){
+  const w = document.createElement('div');
+  w.innerHTML = `
+    <h2 class="wp-title">Wallpapers</h2>
+    <div class="wp-bigbox">
+      <div class="wp-rect">
+        <div class="wpscale">
+          <div class="wprev">
+            <canvas class="wallcv" width="1152" height="672"></canvas>
+            <div class="wpdate"></div>
+            <div class="wpclock"><b></b><b></b></div>
+          </div>
+        </div>
+      </div>
+      <div class="wp-rect">
+        <div class="wpscale"></div>
+      </div>
+    </div>
+    <button class="wp-chg">${WP_CHG_IC}<span>CHANGE WALLPAPER</span></button>`;
+  w.querySelector('.wpdate').textContent = wpDateStr();
+  const clk = w.querySelectorAll('.wpclock b');
+  const d = new Date();
+  let h = d.getHours() % 12; if (h === 0) h = 12;
+  clk[0].textContent = String(h).padStart(2, '0');
+  clk[1].textContent = String(d.getMinutes()).padStart(2, '0');
+  paintWallLayer(w.querySelector('.wp-rect:nth-child(1) .wallcv'), wallSrc('lock'));
+  const homeRect = w.querySelector('.wp-rect:nth-child(2)');
+  const hp = buildHomePreviewEl();
+  homeRect.querySelector('.wpscale').appendChild(hp);
+  paintWallLayer(hp.querySelector('.wallcv'), wallSrc('home'));
+  w.querySelector('.wp-chg').addEventListener('click', () => wpGo(wallpaperPickerContent(), 'picker'));
+  return w;
+}
+/* page: pick an image (My photos) or the default (On-device wallpapers) */
+function wallpaperPickerContent(){
+  const w = document.createElement('div');
+  w.innerHTML = `
+    <button class="wp-pickbox" aria-label="Choose an image from your files">${WP_PHOTO_IC}</button>
+    <button class="wp-plabel" data-a="photos">My photos</button>
+    <button class="wp-square" aria-label="Default wallpaper"><canvas width="340" height="340"></canvas></button>
+    <button class="wp-plabel" data-a="device">On-device wallpapers</button>`;
+  paintWallLayer(w.querySelector('.wp-square canvas'), null);
+  w.querySelector('.wp-pickbox').addEventListener('click', () => pickWallImage(showWallPreviewPage));
+  w.querySelector('[data-a="photos"]').addEventListener('click', () => pickWallImage(showWallPreviewPage));
+  w.querySelector('.wp-square').addEventListener('click', () => showWallPreviewPage(null));
+  w.querySelector('[data-a="device"]').addEventListener('click', () => showWallPreviewPage(null));
+  return w;
+}
+/* page: full home-screen preview with the candidate wallpaper + checkmark */
+function showWallPreviewPage(src){
+  wpGo(wallpaperPreviewContent(src), 'preview');
+}
+function wallpaperPreviewContent(src){
+  const w = document.createElement('div');
+  w.innerHTML = `
+    <div class="wp-prevwrap">
+      <div class="wpscale"></div>
+      <button class="wp-check" aria-label="Set wallpaper">${WP_CHECK_IC}</button>
+    </div>`;
+  const hp = buildHomePreviewEl();
+  w.querySelector('.wpscale').appendChild(hp);
+  paintWallLayer(hp.querySelector('.wallcv'), src);
+  w.querySelector('.wp-check').addEventListener('click', () => openSetWallpaperMenu(src));
+  return w;
+}
+function openSetWallpaperMenu(src){
+  const right = setRoot.querySelector('.set-right');
+  if (right.querySelector('.wp-ovl')) return;
+  const ov = document.createElement('div');
+  ov.className = 'wp-ovl';
+  ov.innerHTML = `
+    <div class="wp-setcard">
+      <div class="wp-settitle">Set wallpaper as</div>
+      <button class="wp-setbtn" data-w="lock">LOCK SCREEN</button>
+      <button class="wp-setbtn" data-w="home">HOME SCREEN</button>
+      <button class="wp-setbtn" data-w="both">LOCK SCREEN AND HOME SCREEN</button>
+    </div>`;
+  ov.addEventListener('mousedown', e => { if (e.target === ov) ov.remove(); });
+  ov.querySelectorAll('.wp-setbtn').forEach(b => b.addEventListener('click', () => {
+    ov.remove();
+    applyWallpaper(src, b.dataset.w);
+  }));
+  right.appendChild(ov);
+}
+function applyWallpaper(src, which){
+  if (which !== 'home') wallState.lock = src ? { src } : null;
+  if (which !== 'lock') wallState.home = src ? { src } : null;
+  persistDev();
+  draw();
+  wpGo(wallpaperListContent(), 'list');
 }
 
 /* ============ GOOGLE PLAY STORE ============ */
@@ -5805,6 +6245,7 @@ addEventListener('resize', () => {
   setScale();
   setTrackX(false);
   if (chRoot && chRoot.isConnected && chRoot.style.display !== 'none') layoutTabs();
+  if (setRoot && setRoot.isConnected && setRoot.style.display !== 'none') fitWpScales(setRoot);
 });
 loadDevState(st => {
   if (st && Array.isArray(st.installed)){
@@ -5835,7 +6276,12 @@ loadDevState(st => {
     }
     while (dockSlots.length < 4) dockSlots.push(null);
     if (Array.isArray(st.newApps)) newBadges = new Set(st.newApps.map(String));
+    if (st.wallpaper){
+      wallState.home = st.wallpaper.home || null;
+      wallState.lock = st.wallpaper.lock || null;
+    }
     pageIdx = 0;
+    draw();
     renderHome();
   }
 });
@@ -5853,6 +6299,7 @@ addEventListener('keydown', e => {
   if (document.querySelector('.am-dlg')){ document.querySelector('.am-dlg').remove(); return; }
   if (appMenu){ closeAppMenu(); return; }
   if (document.querySelector('.sg-ovl')){ document.querySelector('.sg-ovl').remove(); return; }
+  if (wpEscape()) return;
   if (psRoot){
     const pbox = psRoot.querySelector('.ps-dboxovl');
     if (pbox){ pbox.remove(); return; }
