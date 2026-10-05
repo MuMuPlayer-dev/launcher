@@ -573,7 +573,7 @@ svg.dl-ov.zoom{transition:transform .32s ease,opacity .3s ease;transform:scale(1
 .wp-pickbox{width:100%;height:118px;border-radius:18px;background:#22262d;display:flex;align-items:center;justify-content:center;color:#8f959d;transition:background .14s}
 .wp-pickbox:hover{background:#293040}
 .wp-pickbox svg{width:42px;height:42px}
-.wp-plabel{color:#c9ccd1;font-size:14px;font-weight:500;margin:12px 2px 0}
+.wp-plabel{display:block;color:#c9ccd1;font-size:14px;font-weight:500;margin:12px 2px 0;width:100%;text-align:left;padding:4px}
 .wp-square{display:block;width:170px;height:170px;border-radius:16px;overflow:hidden;position:relative;background:#000;box-shadow:0 5px 16px rgba(0,0,0,.35);margin-top:14px;transition:box-shadow .14s}
 .wp-square:hover{box-shadow:0 5px 16px rgba(0,0,0,.35),0 0 0 2px #8cb4f9}
 .wp-square canvas{width:100%;height:100%;display:block}
@@ -1088,7 +1088,6 @@ function paintWall(g, W, H){
 let wallState = { home: null, lock: null };   /* null = the default painted wallpaper */
 const wallImgCache = {};
 function wallSrc(side){ const st = wallState[side]; return st && st.src ? st.src : null; }
-/* paints a wallpaper (custom image cover-cropped, or the default scene) into any canvas */
 /* paints a wallpaper (custom image cover-cropped, or the default scene) into any canvas */
 function paintWallLayer(cv2, src){
   const g = cv2.getContext('2d');
@@ -2570,6 +2569,7 @@ topedge.addEventListener('pointerup', e => {
   }
   edgeDrag = null;
 });
+topedge.addEventListener('pointercancel', () => { edgeDrag = null; });
 /* ---- Minecraft's wide logo looks best fully visible (meet) on its dark tile.
         This later definition replaces iconInner from above. ---- */
 const MEET_ICONS = new Set(['minecraft']);
@@ -3855,17 +3855,20 @@ function renderFilesView(){
 }
 
 /* ============ MUMU STORE ============ */
+/* cat = the original category (the only one the MuMu Store ever shows).
+   cat2 = a second category, shown ONLY in the Google Play Store.
+   psOnly = listed in the Play Store but never in the MuMu Store / home search. */
 const GAMES = [
-  { id: 'gd',         name: 'Geometry Dash',         rating: 4.7, cat: 'arcade',
+  { id: 'gd',         name: 'Geometry Dash',         rating: 4.7, cat: 'arcade', cat2: 'action',
     icon: 'https://m.media-amazon.com/images/I/61mVIP6Oo1L.png',
     url:  'https://web-dashers.github.io' },
-  { id: 'gd-world',   name: 'Geometry Dash World',    rating: 4.5, cat: 'arcade',
+  { id: 'gd-world',   name: 'Geometry Dash World',    rating: 4.5, cat: 'arcade', cat2: 'action',
     icon: 'https://play-lh.googleusercontent.com/CNg8B28ItxcoMaWMEG5bF7T4BmJz3F2sli0H4PqoWa_IFUgVAV8lSBzOymZksqSPgBvmDsLsanz-MZWI9rSEgq0=w240-h480-rw',
     url:  'https://monkeyworm-tech.github.io/world' },
-  { id: 'gd-subzero', name: 'Geometry Dash SubZero',  rating: 4.5, cat: 'arcade',
+  { id: 'gd-subzero', name: 'Geometry Dash SubZero',  rating: 4.5, cat: 'arcade', cat2: 'action',
     icon: SUBZERO_ICON,
     url:  'https://monkeyworm-tech.github.io/subzero' },
-  { id: 'gd-meltdown',name: 'Geometry Dash Meltdown', rating: 4.6, cat: 'arcade',
+  { id: 'gd-meltdown',name: 'Geometry Dash Meltdown', rating: 4.6, cat: 'arcade', cat2: 'action',
     icon: MELTDOWN_ICON,
     url:  'https://monkeyworm-tech.github.io/meltdown' },
   { id: 'roblox',     name: 'Roblox',                 rating: 4.2, cat: 'adventure',
@@ -3918,8 +3921,13 @@ const GAMES = [
     url:  'https://cfpju876whm.make-by-vann-dont-steal-it-gooners-3351dcb3.nip.io/games/167.html' },
   { id: 'minecraft',  name: 'Minecraft, Dream it, Build it!', rating: 4.3, cat: 'adventure',
     icon: 'https://play-lh.googleusercontent.com/tI4StRSPVhpGJH5R013naszLUawOjao1ya8FvyaNO7XY_cJFHFqo1EFaEJv_7zz3rRJ5lEpLiw14ZqQLCOYc',
-    url:  'https://eaglercraft-26-2-client.u2471966200.workers.dev/?=v0.6' }
+    url:  'https://eaglercraft-26-2-client.u2471966200.workers.dev/?=v0.6' },
+  { id: 'gd-lite',    name: 'Geometry Dash Lite',     rating: 4.2, cat: 'arcade', cat2: 'action', psOnly: true,
+    icon: 'https://play-lh.googleusercontent.com/StEbdIF-rV4EoYfIdaP07zClA50KSs-i9o12kceyecfw8R0nwYfzqV64h3UlEzh_fCqxyNCj7Bb7ro86pfYDsSU',
+    url:  'https://monkeyworm-tech.github.io/lite' }
 ];
+/* the MuMu Store (and the home screen search) never list Play-Store-only games */
+const MGAMES = GAMES.filter(g => !g.psOnly);
 const CAT_IC = {
   adventure: `<svg viewBox="0 0 20 20" fill="none" stroke="#fff" stroke-width="1.6" aria-hidden="true"><rect x="1.6" y="1.6" width="16.8" height="16.8" rx="4.2"/><g fill="#fff" stroke="none"><rect x="5.4" y="6.6" width="2.3" height="6.8" rx="1.15" transform="rotate(15 6.55 10)"/><rect x="8.6" y="6.6" width="2.3" height="6.8" rx="1.15" transform="rotate(15 9.75 10)"/><circle cx="13.9" cy="12.3" r="1.2"/></g></svg>`,
   action: `<svg viewBox="0 0 20 20" fill="none" stroke="#fff" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M6.2 17.5 v-2.6 c-2.6-1.5-3.9-4.4-3-7.1 .8-2.4 3.1-4 5.7-4 h.8 c3 0 5.4 2.3 5.6 5.3 .1 2.2-1.1 4.2-3.1 5.2 v3.2 Z"/><path d="M6.2 15.2 c1.2-.8 2.5-.8 3.6 0" stroke-linecap="round"/></svg>`,
@@ -4014,7 +4022,7 @@ const DETAILS = {
     ],
     shots: [
       'https://play-lh.googleusercontent.com/l7fzSqRPdWbbr6-CkJFdb_ItD-BvTNgUc6twYpCWJ7Azx0wseJ0ysxzwYKAlYwxUPMOhWZ4RyB_iRrNW1thVUKw=w1052-h592-rw',
-      'https://play-lh.googleusercontent.com/bomIET_0NcQw4kiA80f7H5_MNPRDfTGJXsK_zvhy_blFgrBu1YMhVP1ftsOCsG4farOoPrNtsqocgeHCrEhLmg=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/bomIET_0NcQw4kiA80f7H5_MNPRDfTGJXsK_zvhy_blTgrBu1YMhVP1ftsOCsG4farOoPrNtsqocgeHCrEhLmg=w1052-h592-rw',
       'https://play-lh.googleusercontent.com/Qk67HxrbKWyyaZPk92pcfRxF2BARXNQDlZuoSM9CO6WOw9Wb0o_vruWZMgBoZeMTY1TPJ1GBivlMo80lb8AGjQ=w1052-h592-rw',
       'https://play-lh.googleusercontent.com/RgGCSay4foy3HpHS1A2rTXVBWSxzr0h1tjKmsjpQ774jtoJYmjsbgb2m8IKNEUK1-0mBHTJGBPxsiPl3fAZqO_k=w1052-h592-rw',
       'https://play-lh.googleusercontent.com/26B2qWuK3wq4zXOqVo94pNESZOEqE8TazTgB8hqrsgHTw9p5bH8ekfxBsiL5tX5mQs96tY0QSanExhbT2-Eh2Yg=w1052-h592-rw',
@@ -4040,6 +4048,27 @@ const DETAILS = {
       'https://play-lh.googleusercontent.com/V1stvabZOFfme5ZxgQ5apMtNDTOJ8VnL-zW9CCnJrumtWjwyQnp4R69jm4REP791vTEibv-5V5WoB2c1hja2iyM=w1052-h592-rw',
       'https://play-lh.googleusercontent.com/c4a9NzwTgZdOoIA7ZIwie0AAMAaa8SmVsi5KhKX_WDFRLT6XNtLkhgd90iOeDOpKtfbRV-2s4SHkUvghpZMz=w1052-h592-rw',
       'https://play-lh.googleusercontent.com/AAUCiJYIWLdVvqZ6FpUcC7ACvNlcob2XNX-Z46R5vvL4H_kY1cPc41yx1pieFCLyZ3nLyXdrVjeMqLtLTI101w=w1052-h592-rw'
+    ]
+  },
+  'gd-lite': {
+    size: '77.2MB', dev: 'RobTop Games', ver: '2.2.147', upd: '2026-06-09',
+    desc: [
+      'Jump and fly your way through danger in this rhythm-based action platformer!',
+      'Simple one touch game play that will keep you entertained for hours! Check out the full version for the complete experience — with many more levels, soundtracks and much much more!'
+    ],
+    bullets: [
+      'Rhythm-based Action Platforming!',
+      'Unlock new icons and colors to customize your character!',
+      'Fly rockets, flip gravity and much more!',
+      'Use practice mode to sharpen your skills!',
+      'Challenge yourself with the near impossible!'
+    ],
+    note: 'Contains ads',
+    shots: [
+      'https://play-lh.googleusercontent.com/bX2Wz4jdga0sVrzi4Fil27DHqPl9mcyqtpvRnNkn0vDJbqF8P6sxNkduUXH0SzXm1TtwAaEiig7fBjZsWq1p=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/NCZrWzgzwXib8qO-rH_75W3SBEgrQs2k8nLmL6-2qz3OaTUoyMavsFYKTxrv_10rb3k-9Beaam6pR-YcZ3YUlg=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/Obb-8opSdMNfCZdf8YANmePY_dq10s-NISkvDQJot1Mz69q_bd2f8BCsKdxE3NlnPhSf5vhYRb4pTDRTbwS6qQ=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/jfRkydoMl-W8SiE2tnJXRbssc-RqoDH50yhuDl0R-hnB_hMvxKmXiyzOMsnc4B5B-HW58gLevYooWPUYByJydw=w1052-h592-rw'
     ]
   },
   'temple-run': {
@@ -4510,7 +4539,7 @@ function miniCard(x){
   return b;
 }
 
-/* ---- game detail page ---- */
+/* ---- game detail page (MuMu Store) ---- */
 function openGameDetail(g){
   if (gdOpen) return;
   const d = DETAILS[g.id] || {};
@@ -4596,7 +4625,7 @@ function openGameDetail(g){
   const dev = d.dev;
   const mdev = root.querySelector('.gd-mdev');
   if (dev && dev !== '—'){
-    const sameDev = GAMES.filter(x => x.id !== g.id && (DETAILS[x.id] || {}).dev === dev);
+    const sameDev = MGAMES.filter(x => x.id !== g.id && (DETAILS[x.id] || {}).dev === dev);
     if (sameDev.length){
       mdev.innerHTML = `<h3></h3><div class="gd-more-list"></div>`;
       mdev.querySelector('h3').textContent = `More Games by ${dev} Limited`;
@@ -4604,7 +4633,7 @@ function openGameDetail(g){
     }
   }
   const mcat = root.querySelector('.gd-mcat');
-  const sameCat = GAMES.filter(x => x.id !== g.id && x.cat === g.cat && (DETAILS[x.id] || {}).dev !== dev);
+  const sameCat = MGAMES.filter(x => x.id !== g.id && x.cat === g.cat && (DETAILS[x.id] || {}).dev !== dev);
   if (sameCat.length){
     mcat.innerHTML = `<h3></h3><div class="gd-more-list"></div>`;
     mcat.querySelector('h3').textContent = `More ${catName(g.cat)} Games`;
@@ -4753,9 +4782,10 @@ function matchGame(q, g){
   if (j === s.length) return { score: 3, idx, exact: false };
   return null;
 }
+/* MuMu Store + home search only ever see non-Play-exclusive games */
 function search(q){
   const scored = [];
-  GAMES.forEach(g => {
+  MGAMES.forEach(g => {
     const m = matchGame(q, g);
     if (m) scored.push({ g, m });
   });
@@ -5023,7 +5053,7 @@ function buildFeatured(view){
   const feat = document.createElement('div');
   feat.className = 'feat';
   /* ---- hero: 5 random games, auto-advance every 10s ---- */
-  const picks = shuffle(GAMES).slice(0, 5);
+  const picks = shuffle(MGAMES).slice(0, 5);
   const top = document.createElement('div');
   top.className = 'feat-top';
   const hero = document.createElement('div');
@@ -5126,7 +5156,7 @@ function buildFeatured(view){
     renderCatGrid();
   });
   const flist = boxEl.querySelector('.fc-list');
-  GAMES.filter(g2 => g2.cat === cat.id).slice(0, 3).forEach(g2 => {
+  MGAMES.filter(g2 => g2.cat === cat.id).slice(0, 3).forEach(g2 => {
     const it = document.createElement('button');
     it.className = 'fc-item';
     it.innerHTML = `<img src="${g2.icon}" alt="" draggable="false"><span class="tx"><b></b><small></small></span>`;
@@ -5144,7 +5174,7 @@ function buildFeatured(view){
   feat.appendChild(h1);
   const pop = document.createElement('div');
   pop.className = 'feat-pop';
-  shuffle(GAMES).slice(0, 10).forEach(g2 => {
+  shuffle(MGAMES).slice(0, 10).forEach(g2 => {
     const c = document.createElement('button');
     c.className = 'fpop';
     c.innerHTML = `<img src="${g2.icon}" alt="" draggable="false"><span></span>`;
@@ -5160,7 +5190,7 @@ function buildFeatured(view){
   feat.appendChild(h2);
   const latest = document.createElement('div');
   latest.className = 'feat-latest';
-  GAMES.slice(-5).forEach(g2 => {
+  MGAMES.slice(-5).forEach(g2 => {
     const d = DETAILS[g2.id] || {};
     const shot = (d.shots && d.shots[0]) || g2.icon;
     const card = document.createElement('div');
@@ -5297,7 +5327,7 @@ function renderCatGrid(){
   if (!storeRoot) return;
   const cg = storeRoot.querySelector('.st-catgrid');
   cg.innerHTML = '';
-  const list = curCat === 'all' ? GAMES : GAMES.filter(g => g.cat === curCat);
+  const list = curCat === 'all' ? MGAMES : MGAMES.filter(g => g.cat === curCat);
   list.forEach(g => {
     const el = document.createElement('div');
     el.className = 'sr';
@@ -5909,6 +5939,12 @@ function psBtnLabel(g){
   const st = gameState(g);
   return st === 'installed' ? 'Play' : (st === 'idle' ? 'Install' : 'Cancel');
 }
+/* the Play Store shows both categories (e.g. "Action · Arcade"); the MuMu Store shows only g.cat */
+function psCatLabel(g){
+  if (!g.cat2) return catName(g.cat);
+  const parts = [catName(g.cat), catName(g.cat2)].sort((a, b) => a.localeCompare(b));
+  return parts.join(' · ');
+}
 function psBtnAction(g, el){
   const st = gameState(g);
   if (st === 'idle') startInstall(g);
@@ -5977,7 +6013,7 @@ function buildPlayStore(){
 }
 function buildPsList(box){
   box.innerHTML = '';
-  /* top: 8 random games, 2 visible before scrolling */
+  /* top: 8 random games (Play-Store exclusives included), 2 visible before scrolling */
   const car = document.createElement('div');
   car.className = 'ps-carousel';
   shuffle(GAMES).slice(0, 8).forEach(g => {
@@ -6018,7 +6054,7 @@ function buildPsList(box){
         <div class="ps-itx"><b></b><small></small></div>
         <span class="ps-rate"><span>${g.rating.toFixed(1)}</span>${PS_STAR_R}</span>`;
       it.querySelector('b').textContent = g.name;
-      it.querySelector('small').textContent = catName(g.cat);
+      it.querySelector('small').textContent = psCatLabel(g);
       row.appendChild(it);
     });
     wireDragScroll(row);
