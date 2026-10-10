@@ -24,7 +24,7 @@ input{user-select:text;-webkit-user-select:text;caret-color:#A5C2FF}
 #ui{position:fixed;top:0;left:0;width:calc(100% / var(--s,1));height:calc(100% / var(--s,1));z-index:1;opacity:0;transform:scale(var(--s,1));transform-origin:0 0;transition:opacity .7s var(--ease),transform .16s ease-out}
 #ui.ready{opacity:1}
 
-#statusbar{position:absolute;top:0;left:0;right:0;height:42px;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font-size:15px;font-weight:600;text-shadow:0 1px 3px rgba(0,0,0,.5);transition:background .25s ease,transform .34s var(--ease)}
+#statusbar{position:absolute;top:0;left:0;right:0;height:42px;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font-size:15px;font-weight:600;text-shadow:0 1px 3px rgba(0,0,0,.5);transition:background .25s ease,transform .34s var(--ease);touch-action:none}
 #statusbar.hidebar{transform:translateY(-100%)}
 #statusbar.peek{background:rgba(0,0,0,.58);backdrop-filter:blur(5px)}
 #topedge{position:absolute;top:0;left:0;right:0;height:20px;z-index:400;display:none;touch-action:none}
@@ -151,6 +151,7 @@ svg.dl-ov.zoom{transition:transform .32s ease,opacity .3s ease;transform:scale(1
   --cA:#0e0f12;--cB:#121317;--cS:#191b21;--cAdr:#282e38;--cAdrT:#c7ccd4;--cCnt:#1c1d21;--cNts:#474b52;
   --cTm:#030305;--cBox:#272e37;--cPop:#2c323f;--cDlg:#20262e;--cSnk:#2b2d33;--cBm:#1d1f24;
   --cT1:#e8eaee;--cT2:#b9bdc3;--cT3:#cfd4da;--cT4:#8f939b;--cT5:#d6dade;--hov:rgba(255,255,255,.09)}
+.chromium.belowbar{top:42px}
 .chromium.light{--cA:#f1f0ed;--cB:#edebe8;--cS:#e6e4de;--cAdr:#d7d1c7;--cAdrT:#38332b;--cCnt:#e3e2de;--cNts:#b8b4ad;
   --cTm:#fcfcfa;--cBox:#d8d1c8;--cPop:#d3cdc0;--cDlg:#dfd9d1;--cSnk:#d4d2cc;--cBm:#e2e0db;
   --cT1:#17151f;--cT2:#46423c;--cT3:#302b25;--cT4:#706c64;--cT5:#292521;--hov:rgba(0,0,0,.08)}
@@ -907,6 +908,69 @@ svg.dl-ov.zoom{transition:transform .32s ease,opacity .3s ease;transform:scale(1
 .fa-file .fn{font-size:11.5px;color:#dfe2e8;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .fa-file small{font-size:10px;color:#7d8296}
 .fa-empty{color:#7d8296;font-size:13.5px;padding:26px 8px}
+
+/* ============ LIGHT THEME (dark theme turned off in the settings center) ============
+   inverts the whole shell's grays/blacks/whites into light mode;
+   images and iframe (app/browser) content are double-filtered back to normal */
+html.lightui body{filter:invert(1) hue-rotate(180deg)}
+html.lightui img,html.lightui svg image{filter:invert(1) hue-rotate(180deg)}
+html.lightui iframe{filter:invert(1) hue-rotate(180deg)}
+
+/* ============ SETTINGS / NOTIFICATION CENTER (pull-down) ============ */
+#ncenter{position:absolute;inset:0;z-index:500;visibility:hidden;pointer-events:none;transition:visibility 0s .5s}
+#ncenter.open{visibility:visible;pointer-events:auto;transition:visibility 0s 0s}
+.nc-back{position:absolute;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);opacity:0;transition:opacity .45s ease}
+#ncenter.open .nc-back{opacity:1}
+.nc-panel{position:absolute;inset:0;background:#000;display:flex;flex-direction:column;transform:translateY(-100%);opacity:.4;transition:transform .45s cubic-bezier(.16,1,.3,1),opacity .35s ease}
+#ncenter.open .nc-panel{transform:none;opacity:1}
+.nc-top{flex:none;height:46px;display:flex;align-items:center;gap:10px;padding:0 26px;color:#fff;font-size:15px;font-weight:600}
+.nc-clock{font-variant-numeric:tabular-nums}
+.nc-gap{flex:1}
+.nc-carrier{font-size:12px;font-weight:600;letter-spacing:.05em}
+.nc-batt{font-size:12px;font-weight:600}
+.nc-mid{flex:1;min-height:0;display:flex;gap:16px;padding:8px 22px 20px}
+.nc-left{flex:1;display:flex;flex-direction:column;min-width:0}
+.nc-right{flex:1;display:flex;min-width:0}
+.nc-notif{flex:1;background:#22262d;border-radius:22px;display:flex;align-items:center;justify-content:center;color:#8f959d;font-size:14px;font-weight:600;letter-spacing:.06em}
+.nc-bright{position:relative;height:46px;flex:none;margin:4px 0 16px;touch-action:none;cursor:pointer}
+.nc-btrack{position:absolute;left:6px;right:6px;top:50%;height:5px;transform:translateY(-50%);border-radius:99px;background:#2b3444}
+.nc-bfill{position:absolute;left:6px;top:50%;transform:translateY(-50%);height:32px;border-radius:99px;background:#8cb4f9;min-width:32px}
+.nc-bfill svg{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:19px;height:19px;color:#000;display:block}
+.nc-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:none}
+.nc-btn{display:flex;align-items:center;gap:12px;height:68px;padding:0 14px;border-radius:16px;background:#262b33;color:#a7b0bc;text-align:left;transition:background .25s ease,color .25s ease}
+.nc-btn.on{background:#8cb4f9;color:#0c1016}
+.nc-btn .ic{width:23px;height:23px;flex:none;display:flex}
+.nc-btn .ic svg{width:100%;height:100%;display:block}
+.nc-btn .tx{display:flex;flex-direction:column;justify-content:center;gap:2px;min-width:0;flex:1}
+.nc-btn .tx b{font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nc-btn .tx small{font-size:11.5px;font-weight:500;opacity:.72;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nc-btn .arr{margin-left:auto;flex:none;display:flex;opacity:.85}
+.nc-btn .arr svg{width:14px;height:14px;display:block}
+.nc-foot{display:flex;align-items:center;gap:12px;margin-top:16px;flex:none}
+.nc-count{flex:1;height:40px;border-radius:99px;background:#262b33;color:#a7b0bc;display:flex;align-items:center;padding:0 16px;font-size:12.5px;font-weight:600}
+.nc-circ{width:44px;height:44px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;transition:filter .15s}
+.nc-circ:hover{filter:brightness(1.15)}
+.nc-circ svg{width:21px;height:21px;display:block}
+.nc-circ.set{background:#262b33;color:#8cb4f9}
+.nc-circ.pow{background:#8cb4f9;color:#0c1016}
+
+/* ============ FONT SIZE MENU ============ */
+#fmenu{position:absolute;inset:0;z-index:560;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .25s ease,visibility 0s .25s}
+#fmenu.open{opacity:1;visibility:visible;pointer-events:auto;transition:opacity .25s ease}
+.fm-box{width:440px;max-width:88%;background:#33343a;border-radius:18px;padding:22px 24px 20px;transform:scale(.95);transition:transform .25s var(--ease)}
+#fmenu.open .fm-box{transform:none}
+.fm-title{color:#c9ccd1;font-size:14px;font-weight:600;text-align:center;margin-bottom:20px}
+.fm-row{display:flex;align-items:center;gap:16px}
+.fm-pm{width:22px;flex:none;color:#8cb4f9;font-size:22px;font-weight:700;text-align:center;line-height:1;transition:filter .15s}
+.fm-pm:hover{filter:brightness(1.2)}
+.fm-track{flex:1;position:relative;height:30px;touch-action:none;cursor:pointer}
+.fm-line{position:absolute;left:0;right:0;top:50%;height:4px;transform:translateY(-50%);border-radius:99px;background:#4a4f58}
+.fm-fill{position:absolute;left:0;top:50%;height:4px;transform:translateY(-50%);border-radius:99px;background:#8cb4f9}
+.fm-dots span{position:absolute;top:50%;width:9px;height:9px;border-radius:50%;background:#8cb4f9;transform:translate(-50%,-50%)}
+.fm-thumb{position:absolute;top:50%;width:17px;height:17px;border-radius:50%;background:#8cb4f9;transform:translate(-50%,-50%);box-shadow:0 0 0 3px rgba(0,0,0,.35)}
+.fm-btns{display:flex;margin-top:22px}
+.fm-done{height:40px;padding:0 32px;border-radius:99px;background:#8cb4f9;color:#0c1016;font-size:13px;font-weight:700;letter-spacing:.08em;transition:filter .15s}
+.fm-done:hover{filter:brightness(1.1)}
 </style>
 </head>
 <body>
@@ -1162,8 +1226,9 @@ function draw(){
 }
 const uiEl = $('#ui');
 function setScale(){
-  const s = Math.max(0.7, Math.min(1.22, Math.min(innerWidth / 1152, innerHeight / 672)));
-  uiEl.style.setProperty('--s', s.toFixed(4));
+  const base = Math.max(0.7, Math.min(1.22, Math.min(innerWidth / 1152, innerHeight / 672)));
+  /* the font-size setting multiplies the whole UI scale */
+  uiEl.style.setProperty('--s', (base * fontScale).toFixed(4));
 }
 
 /* ============ typing cursor teardrop ============ */
@@ -1376,7 +1441,7 @@ function dlOverlaySVG(pct){
 /* ============ app registry ============ */
 const SUBZERO_ICON = 'https://play-lh.googleusercontent.com/TU7evnDya31k2v4vcWrMhBmcNUd4e1-egTqfZ3ELv_xZrvsvL2BxZj7RVnbhVvcaYXpE-TOXWDE4iI2vcDKZ8A=w240-h480-rw';
 const PVZ2_ICON = 'https://play-lh.googleusercontent.com/r8kGrEySHDwfk2bv1HYmk4K76ioLYeDgr6W5SEAsNhoYlHdu-4kVJdaK9NIyVv9z__0_WOOQpSa2qMkaR9m5JQ';
-const PVZ2_URL = 'https://en.gameslol.net/data/pvzge/index.html';
+const PVZ2_URL = 'https://freeonlinewebtools.github.io/gamelist2.github.io/Plants-Vs-Zombies-2/';
 const CLUSTERDUCK_ICON = 'https://play-lh.googleusercontent.com/cTwDY_r_9paKRsbTHXV-ShALxhsBg8wrJDG-EdeeGhvmPNJGjeefmx6lf0ZRHK-mO3j-QrSxA0emNJ4yZTVDvg';
 const MELTDOWN_ICON = 'https://play-lh.googleusercontent.com/eGwVBfqYTO-BUs757RxOJYW2SvchNu3s1ivN3nmYF9lDW04SRSg5VWY0-D14nugE1A7XJk0omENU5BL3RkbmGQ';
 const SUBWAY_ICON = 'https://play-lh.googleusercontent.com/T7az9M7td7A24vOr7Jp3C9NG16kyWA1NnlUySyl_mbDV9BtlrFbxps5TD5DzT7kCBxpNeTbIIju2_aFN4xtFoYM';
@@ -1448,8 +1513,10 @@ const REG = {};
 const PROTECTED = new Set([...BASE, ...DOCK_BASE, ...GADGETS].map(a => a.id));
 /* installed apps may use a different icon than the store listing (e.g. Minecraft) */
 const ICON_FIXES = { 'gd-subzero': SUBZERO_ICON, 'gd-meltdown': MELTDOWN_ICON, 'subway': SUBWAY_ICON, 'pvz2': PVZ2_ICON, 'clusterduck': CLUSTERDUCK_ICON,
-  'minecraft': 'https://static.wikia.nocookie.net/logopedia/images/0/0f/Minecraft_Bedrock_2023.svg/revision/latest/scale-to-width-down/250?cb=20230920113315' };
-const URL_FIXES = { 'pvz2': PVZ2_URL, 'gacha-life': GACHA_LIFE_URL, 'granny': GRANNY_URL };
+  'minecraft': 'https://www.nocookie.net/logopedia/images/0/0f/Minecraft_Bedrock_2023.svg/revision/latest/scale-to-width-down/250?cb=20230920113315' };
+const URL_FIXES = { 'pvz2': PVZ2_URL, 'gacha-life': GACHA_LIFE_URL, 'granny': GRANNY_URL,
+  'blockblast': 'https://ubghyper.github.io/GameList.github.io/Block-Blast/',
+  'fnaf': 'https://freeonlinewebtools.github.io/gamelist8.github.io/FNAF-1/' };
 function fixIcon(id, icon){ return ICON_FIXES[id] || icon; }
 function fixUrl(id, url){ return URL_FIXES[id] || url; }
 let installed = [];
@@ -1499,7 +1566,7 @@ const deSlot = d => {
   return deApp(d);
 };
 function persistDev(){
-  const payload = { installed, pages: pages.map(p => p.map(serSlot)), dock: dockSlots.map(serSlot), newApps: [...newBadges], wallpaper: { home: wallState.home, lock: wallState.lock }, settings: { google: setAccount } };
+  const payload = { installed, pages: pages.map(p => p.map(serSlot)), dock: dockSlots.map(serSlot), newApps: [...newBadges], wallpaper: { home: wallState.home, lock: wallState.lock }, theme: darkTheme ? 'dark' : 'light', font: fontSavedIdx, settings: { google: setAccount } };
   try { localStorage.setItem(DEVKEY, JSON.stringify(payload)); } catch (e) {}
   try { parent.postMessage({ type: 'mumu-dev-save', id: devId(), state: payload }, '*'); } catch (e) {}
 }
@@ -2376,6 +2443,7 @@ function openAppFromRect(app, r){
   }));
   setTimeout(() => {
     showView(app.id);
+    activeApps.add(app.id);
     if (window.parent !== window){
       try {
         parent.postMessage({
@@ -2392,20 +2460,28 @@ function openApp(app, iconEl){ openAppFromRect(app, iconEl.getBoundingClientRect
 
 let chRoot = null, storeRoot = null, setRoot = null, psRoot = null, filesRoot = null, filesFolder = null, phEl = null, embedEl = null, embedUrl = null;
 const AD_BLOCKED = new Set(['clusterduck', 'pvz2']);
+/* top bar behavior per view: 'game' (store games incl. GD Lite, Gardendless,
+   the modified Roblox) → hidden · 'system' (settings, stores, files, gallery,
+   cloner, contacts…) → always visible, no background · 'browser' (chromium,
+   chrome) → visible with a solid black bar under it */
+let barMode = 'system';
+function viewKind(v){
+  if (v === 'chromium' || v === 'g-chrome') return 'browser';
+  if (v === 'gardendless' || v === 'delta') return 'game';
+  if (GAMES.some(g => g.id === v)) return 'game';
+  return 'system';
+}
 function showView(v){
   const home = v === 'home';
   const sb = $('#statusbar');
   clearTimeout(peekTO);
-  if (home){
-    sb.classList.remove('hidebar', 'peek');
-    topedge.style.display = 'none';
-    topedge.style.height = '';
-  } else {
-    sb.classList.remove('peek');
-    sb.classList.add('hidebar');
-    topedge.style.display = '';
-    topedge.style.height = '';
-  }
+  peeking = false;
+  barMode = home ? 'system' : viewKind(v);
+  sb.classList.remove('hidebar', 'peek', 'appbg');
+  if (barMode === 'game') sb.classList.add('hidebar');
+  else if (barMode === 'browser') sb.classList.add('appbg');
+  topedge.style.display = '';
+  topedge.style.height = '';
   wrapEl.style.display = home ? '' : 'none';
   dotsEl.style.display = home ? '' : 'none';
   dockEl.style.display = home ? '' : 'none';
@@ -2526,50 +2602,342 @@ addEventListener('message', e => {
     }
     showView(v);
   }
-  if (d.type === 'mumu-app-closed' && (d.id === 'chromium' || d.id === 'g-chrome')){
-    resetBrowserApp(d.id === 'g-chrome' ? 'chrome' : 'chromium');
+  if (d.type === 'mumu-app-closed'){
+    activeApps.delete(String(d.id));
+    if (d.id === 'chromium' || d.id === 'g-chrome'){
+      resetBrowserApp(d.id === 'g-chrome' ? 'chrome' : 'chromium');
+    }
   }
 });
 
-/* ============ top bar: hidden in apps · swipe down to peek ============ */
+/* ============ top bar: per-app behavior + pull-down gesture ============ */
 const topedge = $('#topedge');
-let peekTO = null, edgeDrag = null;
+let peekTO = null, peeking = false;
 function barPeek(){
+  if (barMode !== 'game' || peeking) return;
+  peeking = true;
   const sb = $('#statusbar');
   sb.classList.remove('hidebar');
   sb.classList.add('peek');
   topedge.style.height = '42px';
+  scheduleIdleHide();
+}
+function scheduleIdleHide(){
   clearTimeout(peekTO);
-  peekTO = setTimeout(barUnpeek, 4000);
+  peekTO = setTimeout(barUnpeek, 5000);
 }
 function barUnpeek(){
   clearTimeout(peekTO);
+  peeking = false;
   const sb = $('#statusbar');
   sb.classList.remove('peek');
   topedge.style.height = '';
-  if (!avEl.hidden) sb.classList.add('hidebar');
+  if (barMode === 'game') sb.classList.add('hidebar');
 }
-topedge.addEventListener('pointerdown', e => {
-  if (avEl.hidden) return;
-  edgeDrag = { y0: e.clientY };
-});
-topedge.addEventListener('pointermove', e => {
-  /* any interaction while revealed resets the 4s timer */
-  if ($('#statusbar').classList.contains('peek')){ barPeek(); return; }
-  if (!edgeDrag) return;
-  if (e.clientY - edgeDrag.y0 > 16){ edgeDrag = null; barPeek(); }
-});
-topedge.addEventListener('pointerup', e => {
-  if (edgeDrag && Math.abs(e.clientY - edgeDrag.y0) < 6 && !$('#statusbar').classList.contains('peek')){
-    /* plain tap: pass it through to the app underneath */
-    topedge.style.display = 'none';
-    const el = document.elementFromPoint(e.clientX, e.clientY);
-    topedge.style.display = '';
-    if (el && el.click) el.click();
+/* any interaction while the bar is peeked restarts the 5s inactivity timer */
+['pointerdown', 'pointermove', 'keydown', 'wheel'].forEach(ev =>
+  addEventListener(ev, () => { if (peeking) scheduleIdleHide(); }, { passive: true }));
+/* pull-down: >16px reveals the bar (game apps, translucent black backing) ·
+   >80px opens the settings/notification center */
+function wirePullDown(el, passTap){
+  el.addEventListener('pointerdown', e => {
+    if (e.button !== 0) return;
+    try { el.setPointerCapture(e.pointerId); } catch (err) {}
+    const y0 = e.clientY;
+    let opened = false;
+    const move = ev => {
+      const dy = ev.clientY - y0;
+      if (dy > 16) barPeek();
+      if (dy > 80 && !opened){ opened = true; end(); openCenter(); }
+    };
+    const up = ev => {
+      end();
+      /* plain tap while the bar is hidden: pass it through to the app underneath */
+      if (passTap && ev && Math.abs(ev.clientY - y0) < 6 && !peeking && barMode === 'game'){
+        topedge.style.display = 'none';
+        const t = document.elementFromPoint(ev.clientX, ev.clientY);
+        topedge.style.display = '';
+        if (t && t.click) t.click();
+      }
+    };
+    const end = () => {
+      el.removeEventListener('pointermove', move);
+      el.removeEventListener('pointerup', up);
+      el.removeEventListener('pointercancel', end);
+    };
+    el.addEventListener('pointermove', move);
+    el.addEventListener('pointerup', up);
+    el.addEventListener('pointercancel', end);
+  });
+}
+wirePullDown(topedge, true);
+wirePullDown($('#statusbar'), false);
+
+/* ============ settings / notification center (pulled from the top bar) ============ */
+const WIFI_NAME = 'Cisco_c726cd28af83';
+let darkTheme = true, internetOn = true, brightVal = 1;
+const FONT_STEPS = [0.85, 1, 1.12, 1.25, 1.4, 1.6, 1.8];
+let fontIdx = 1, fontSavedIdx = 1, fontScale = FONT_STEPS[1];
+const activeApps = new Set();
+let centerEl = null, centerOpen = false, fmEl = null, fmOpen = false;
+
+function applyBright(){
+  const f = 'brightness(' + brightVal.toFixed(3) + ')';
+  cv.style.filter = f;
+  uiEl.style.filter = f;
+}
+function applyTheme(){
+  document.documentElement.classList.toggle('lightui', !darkTheme);
+}
+function applyFontScale(){
+  fontScale = FONT_STEPS[fontIdx];
+  setScale();
+}
+
+const NC_WIFI   = `<svg viewBox="0 0 25 17" fill="currentColor" aria-hidden="true"><path d="M12.5 16.5 L2.8 3.15 A16.5 16.5 0 0 1 22.2 3.15 Z"/></svg>`;
+const NC_PLANE  = `<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5 L11.1 6.2 L11.1 8.8 L18.6 12.4 L18.6 13.9 L11.1 12.2 L11.1 15.2 L13.4 16.9 L13.4 18.2 L10 17.3 L6.6 18.2 L6.6 16.9 L8.9 15.2 L8.9 12.2 L1.4 13.9 L1.4 12.4 L8.9 8.8 L8.9 6.2 Z" fill="currentColor"/></svg>`;
+const NC_DARK   = `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 3.6 A8.4 8.4 0 0 1 12 20.4 Z" fill="currentColor"/></svg>`;
+const NC_LOCK   = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="5" y="10.5" width="14" height="9.5" rx="2.4"/><path d="M8.2 10.5 V8 a3.8 3.8 0 0 1 7.6 0 v2.5"/></svg>`;
+const NC_SHIELD = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 L19.2 5.9 V11.3 C19.2 16 16.1 19.7 12 21.1 C7.9 19.7 4.8 16 4.8 11.3 V5.9 Z"/><path d="M12 5.5 C9.6 8.4 14.4 10.2 12 13.2 C10.4 15.2 12.8 16.8 12 19" stroke-linecap="round"/></svg>`;
+const NC_FONT   = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" aria-hidden="true"><path d="M4 7 H11.6 M7.8 7 V19" stroke-width="2.6"/><path d="M14.5 12 H20 M17.25 12 V19" stroke-width="2.2"/></svg>`;
+const NC_SUN    = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor" stroke="none"/><path d="M12 2.8 V5.2 M12 18.8 V21.2 M2.8 12 H5.2 M18.8 12 H21.2 M5.4 5.4 L7.1 7.1 M16.9 16.9 L18.6 18.6 M18.6 5.4 L16.9 7.1 M7.1 16.9 L5.4 18.6"/></svg>`;
+const NC_POWER  = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 3 V10.5"/><path d="M6.6 6.2 a8 8 0 1 0 10.8 0"/></svg>`;
+const NC_GEAR   = `<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="currentColor"><rect x="10.9" y="2.6" width="2.2" height="4.2" rx="1"/><rect x="10.9" y="2.6" width="2.2" height="4.2" rx="1" transform="rotate(60 12 12)"/><rect x="10.9" y="2.6" width="2.2" height="4.2" rx="1" transform="rotate(120 12 12)"/><rect x="10.9" y="2.6" width="2.2" height="4.2" rx="1" transform="rotate(180 12 12)"/><rect x="10.9" y="2.6" width="2.2" height="4.2" rx="1" transform="rotate(240 12 12)"/><rect x="10.9" y="2.6" width="2.2" height="4.2" rx="1" transform="rotate(300 12 12)"/><circle cx="12" cy="12" r="6.9"/></g><circle cx="12" cy="12" r="3.4" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>`;
+const NC_ARR    = `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5 L10.5 8 L6 12.5"/></svg>`;
+
+function buildCenter(){
+  const el = document.createElement('div');
+  el.id = 'ncenter';
+  el.innerHTML = `
+    <div class="nc-back"></div>
+    <div class="nc-panel">
+      <div class="nc-top">
+        <span class="nc-clock"></span>
+        <span class="nc-date"></span>
+        <span class="nc-gap"></span>
+        <span class="nc-carrier">CHINA MOBILE</span>
+        <svg width="25" height="17" viewBox="0 0 25 17" aria-hidden="true"><path d="M12.5 16.5 L2.8 3.15 A16.5 16.5 0 0 1 22.2 3.15 Z" fill="currentColor"/></svg>
+        <svg width="17" height="17" viewBox="0 0 17 17" aria-hidden="true"><path d="M2.6 16.2 H15.2 V3.6 Z" fill="currentColor"/></svg>
+        <svg width="13" height="17" viewBox="0 0 13 17" aria-hidden="true"><rect x="4.8" y="0.5" width="3.4" height="2.4" rx="1" fill="currentColor"/><rect x="2.6" y="3.4" width="7.8" height="13.1" rx="2.4" fill="currentColor"/></svg>
+        <span class="nc-batt">99%</span>
+      </div>
+      <div class="nc-mid">
+        <div class="nc-left">
+          <div class="nc-bright" aria-label="Screen brightness">
+            <div class="nc-btrack"></div>
+            <div class="nc-bfill">${NC_SUN}</div>
+          </div>
+          <div class="nc-grid"></div>
+          <div class="nc-foot">
+            <div class="nc-count"></div>
+            <button class="nc-circ set" aria-label="Settings">${NC_GEAR}</button>
+            <button class="nc-circ pow" aria-label="Power">${NC_POWER}</button>
+          </div>
+        </div>
+        <div class="nc-right"><div class="nc-notif">NO NOTIFICATIONS</div></div>
+      </div>
+    </div>`;
+  const grid = el.querySelector('.nc-grid');
+  const mk = (id, ic, label, sub) => {
+    const b = document.createElement('button');
+    b.className = 'nc-btn';
+    b.dataset.nc = id;
+    b.innerHTML = `<span class="ic">${ic}</span><span class="tx"><b>${label}</b>${sub != null ? '<small></small>' : ''}</span>`;
+    if (sub != null) b.querySelector('small').textContent = sub;
+    grid.appendChild(b);
+    return b;
+  };
+  const bNet  = mk('net',  NC_WIFI,   'Internet', '');
+  const bAir  = mk('air',  NC_PLANE,  'Airplane mode', 'Off');
+  const bDark = mk('dark', NC_DARK,   'Dark theme', 'On');
+  mk('lock', NC_LOCK, 'Lock screen', 'Not enabled');
+  const bSec  = mk('sec',  NC_SHIELD, 'Security & privacy', 'Check status');
+  bSec.classList.add('on', 'arr');
+  const bFont = mk('font', NC_FONT,   'Font size', null);
+  bFont.classList.add('arr');
+  bNet.addEventListener('click', () => { internetOn = !internetOn; syncCenter(); });
+  bAir.addEventListener('click', () => {
+    airplaneMode = !airplaneMode;
+    setStatusAirplane(airplaneMode);
+    syncCenter();
+  });
+  bDark.addEventListener('click', () => { darkTheme = !darkTheme; applyTheme(); syncCenter(); });
+  bFont.addEventListener('click', () => { closeCenter(); setTimeout(openFontMenu, 260); });
+  /* the dark settings circle opens the Settings app (and its launcher tab) */
+  el.querySelector('.nc-circ.set').addEventListener('click', () => {
+    closeCenter();
+    setTimeout(() => {
+      showView('settings');
+      activeApps.add('settings');
+      if (window.parent !== window){
+        try {
+          parent.postMessage({
+            type: 'mumu-open', id: DEV && DEV.id,
+            app: { id: 'settings', name: 'Settings', icon: appIconSVG(appById('settings')) }
+          }, '*');
+        } catch (e) {}
+      }
+    }, 260);
+  });
+  /* brightness slider: right = brighter, left = darker */
+  const br = el.querySelector('.nc-bright');
+  const setBright = clientX => {
+    const r = br.getBoundingClientRect();
+    const f = Math.max(0, Math.min(1, (clientX - r.left) / r.width));
+    brightVal = 0.25 + f * 0.75;
+    br.querySelector('.nc-bfill').style.width = 'calc((100% - 12px) * ' + f.toFixed(4) + ')';
+    applyBright();
+  };
+  br.querySelector('.nc-bfill').style.width = 'calc((100% - 12px) * 1.0000)';
+  br.addEventListener('pointerdown', e => {
+    if (e.button !== 0) return;
+    try { br.setPointerCapture(e.pointerId); } catch (err) {}
+    setBright(e.clientX);
+    const move = ev => setBright(ev.clientX);
+    const up = () => {
+      br.removeEventListener('pointermove', move);
+      br.removeEventListener('pointerup', up);
+      br.removeEventListener('pointercancel', up);
+    };
+    br.addEventListener('pointermove', move);
+    br.addEventListener('pointerup', up);
+    br.addEventListener('pointercancel', up);
+  });
+  /* swipe up anywhere on the panel (outside the controls) closes it */
+  const panel = el.querySelector('.nc-panel');
+  panel.addEventListener('pointerdown', e => {
+    if (e.button !== 0) return;
+    if (e.target.closest('.nc-bright, .nc-btn, .nc-circ, .nc-count')) return;
+    try { panel.setPointerCapture(e.pointerId); } catch (err) {}
+    const y0 = e.clientY;
+    const move = ev => { if (ev.clientY - y0 < -70){ end(); closeCenter(); } };
+    const end = () => {
+      panel.removeEventListener('pointermove', move);
+      panel.removeEventListener('pointerup', end);
+      panel.removeEventListener('pointercancel', end);
+    };
+    panel.addEventListener('pointermove', move);
+    panel.addEventListener('pointerup', end);
+    panel.addEventListener('pointercancel', end);
+  });
+  return el;
+}
+function syncCenter(){
+  if (!centerEl) return;
+  centerEl.querySelector('.nc-clock').textContent = nowClock();
+  centerEl.querySelector('.nc-date').textContent = wpDateStr();
+  const net = centerEl.querySelector('[data-nc="net"]');
+  const netOn = internetOn && !airplaneMode;
+  net.classList.toggle('on', netOn);
+  net.querySelector('small').textContent = netOn ? WIFI_NAME : 'Off';
+  const air = centerEl.querySelector('[data-nc="air"]');
+  air.classList.toggle('on', airplaneMode);
+  air.querySelector('small').textContent = airplaneMode ? 'On' : 'Off';
+  const dk = centerEl.querySelector('[data-nc="dark"]');
+  dk.classList.toggle('on', darkTheme);
+  dk.querySelector('small').textContent = darkTheme ? 'On' : 'Off';
+  const n = activeApps.size;
+  const cnt = centerEl.querySelector('.nc-count');
+  cnt.style.display = n ? '' : 'none';
+  cnt.textContent = n + (n === 1 ? ' app is active' : ' apps are active');
+}
+function openCenter(){
+  if (centerOpen) return;
+  centerOpen = true;
+  if (!centerEl){ centerEl = buildCenter(); uiEl.appendChild(centerEl); }
+  syncCenter();
+  requestAnimationFrame(() => requestAnimationFrame(() => centerEl.classList.add('open')));
+}
+function closeCenter(){
+  if (!centerOpen) return;
+  centerOpen = false;
+  centerEl.classList.remove('open');
+}
+
+/* ============ font size menu ============ */
+function openFontMenu(){
+  if (fmOpen) return;
+  fontIdx = fontSavedIdx;
+  if (!fmEl){ fmEl = buildFontMenu(); uiEl.appendChild(fmEl); }
+  syncFontMenu();
+  fmOpen = true;
+  requestAnimationFrame(() => requestAnimationFrame(() => fmEl.classList.add('open')));
+}
+function buildFontMenu(){
+  const el = document.createElement('div');
+  el.id = 'fmenu';
+  el.innerHTML = `
+    <div class="fm-box" role="dialog" aria-modal="true">
+      <div class="fm-title">Font size</div>
+      <div class="fm-row">
+        <button class="fm-pm" data-d="-1" aria-label="Smaller">−</button>
+        <div class="fm-track" aria-label="Font size slider">
+          <div class="fm-line"></div><div class="fm-fill"></div>
+          <div class="fm-dots"></div><div class="fm-thumb"></div>
+        </div>
+        <button class="fm-pm" data-d="1" aria-label="Bigger">+</button>
+      </div>
+      <div class="fm-btns"><button class="fm-done">DONE</button></div>
+    </div>`;
+  const dots = el.querySelector('.fm-dots');
+  for (let i = 0; i < 7; i++){
+    const d = document.createElement('span');
+    d.style.left = (i / 6 * 100) + '%';
+    dots.appendChild(d);
   }
-  edgeDrag = null;
-});
-topedge.addEventListener('pointercancel', () => { edgeDrag = null; });
+  const track = el.querySelector('.fm-track');
+  const setFromX = clientX => {
+    const r = track.getBoundingClientRect();
+    const f = Math.max(0, Math.min(1, (clientX - r.left) / r.width));
+    setFontIdx(Math.round(f * 6));
+  };
+  track.addEventListener('pointerdown', e => {
+    if (e.button !== 0) return;
+    try { track.setPointerCapture(e.pointerId); } catch (err) {}
+    setFromX(e.clientX);
+    const move = ev => setFromX(ev.clientX);
+    const up = () => {
+      track.removeEventListener('pointermove', move);
+      track.removeEventListener('pointerup', up);
+      track.removeEventListener('pointercancel', up);
+    };
+    track.addEventListener('pointermove', move);
+    track.addEventListener('pointerup', up);
+    track.addEventListener('pointercancel', up);
+  });
+  el.querySelectorAll('.fm-pm').forEach(b => b.addEventListener('click', () => setFontIdx(fontIdx + (+b.dataset.d))));
+  el.querySelector('.fm-done').addEventListener('click', () => {
+    fontSavedIdx = fontIdx;
+    persistDev();
+    closeFontMenu();
+  });
+  /* clicking outside the box cancels and reverts to the last saved size */
+  el.addEventListener('pointerdown', e => { if (e.target === el) cancelFontMenu(); });
+  return el;
+}
+function setFontIdx(i){
+  i = Math.max(0, Math.min(6, i));
+  if (i === fontIdx) return;
+  fontIdx = i;
+  applyFontScale();
+  syncFontMenu();
+}
+function syncFontMenu(){
+  if (!fmEl) return;
+  fmEl.querySelector('.fm-thumb').style.left = (fontIdx / 6 * 100) + '%';
+  fmEl.querySelector('.fm-fill').style.width = (fontIdx / 6 * 100) + '%';
+}
+function closeFontMenu(){
+  if (!fmOpen) return;
+  fmOpen = false;
+  fmEl.classList.remove('open');
+}
+function cancelFontMenu(){
+  if (!fmOpen) return;
+  fontIdx = fontSavedIdx;
+  applyFontScale();
+  closeFontMenu();
+}
 /* ---- Minecraft's wide logo looks best fully visible (meet) on its dark tile.
         This later definition replaces iconInner from above. ---- */
 const MEET_ICONS = new Set(['minecraft']);
@@ -2582,6 +2950,19 @@ iconInner = function(app){
       `<image clip-path="url(#${n})" href="${app.icon}" x="6" y="6" width="52" height="52" preserveAspectRatio="xMidYMid meet"/>`;
   }
   return _iconInnerBase(app);
+};
+
+/* ---- track open apps for the center's "# apps are active" pill ---- */
+const _showViewBase = showView;
+showView = function(v){
+  _showViewBase(v);
+  if (v !== 'home') activeApps.add(String(v));
+  if (centerOpen) syncCenter();
+};
+const _closeCenterBase = closeCenter;
+closeCenter = function(){
+  _closeCenterBase();
+  barUnpeek();
 };
 
 /* ============ CHROMIUM (engine shared with the Chrome app) ============ */
@@ -2894,7 +3275,8 @@ function hideSnack(){
 let tabDrag = null;
 function buildChromium(){
   const root = document.createElement('div');
-  root.className = 'chromium';
+  /* browsers keep the top bar: content starts 42px lower (belowbar) */
+  root.className = 'chromium belowbar';
   root.innerHTML = `
     <div class="ch-strip">
       <div class="ch-tabs"></div>
@@ -3912,10 +4294,10 @@ const GAMES = [
     url:  'https://tocabocaworld.io/wp-content/uploads/games/html5/T/Toca%20Boca%20World/index.html' },
   { id: 'blockblast', name: 'Block Blast!',           rating: 4.8, cat: 'casual',
     icon: 'https://play-lh.googleusercontent.com/Abzm9CjXi_DZjGzalQqVFMNZL8Wcx4uxtT5wcGOBaclbjvb3UYA2Bi6s6ff2SFRktdXehBsocFKkGUeIffUkLg',
-    url:  'https://block-blast.io/block-blast.embed' },
+    url:  'https://ubghyper.github.io/GameList.github.io/Block-Blast/' },
   { id: 'fnaf',       name: "Five Nights at Freddy's",   rating: 4.7, cat: 'action',
     icon: 'https://play-lh.googleusercontent.com/AI5JwVmiXgkAvySoyHcIIsQAZjAsX3C0GfOIeTx6MM2AyGP02DwPlx29IZUi4JzGnpUJJhQYwRnu8rd0IwmMbg',
-    url:  'https://cfpju876whm.make-by-vann-dont-steal-it-gooners-3351dcb3.nip.io/games/166.html' },
+    url:  'https://freeonlinewebtools.github.io/gamelist8.github.io/FNAF-1/' },
   { id: 'fnaf-2',     name: "Five Nights at Freddy's 2", rating: 4.6, cat: 'strategy',
     icon: 'https://play-lh.googleusercontent.com/ax7Yy0SvZ9GUS5o0MHtXFD0vEPqK5BEadf2a5O0I_36GYaUkZ29PYGQNxktEflYOFsG34n5PWVCyAlKD7n-9Ww=w240-h480-rw',
     url:  'https://cfpju876whm.make-by-vann-dont-steal-it-gooners-3351dcb3.nip.io/games/167.html' },
@@ -5659,12 +6041,13 @@ function networkContent(){
     sw.classList.toggle('on', airplaneMode);
     sw.setAttribute('aria-checked', String(airplaneMode));
     inet.querySelector('.sec-ic').innerHTML = airplaneMode ? NET_IC.globe : NET_IC.wifi;
-    inet.querySelector('small').textContent = airplaneMode ? 'Airplane mode is on' : 'Cisco_c726cd28af83';
+    inet.querySelector('small').textContent = airplaneMode ? 'Airplane mode is on' : (internetOn ? WIFI_NAME : 'Off');
   };
   w.querySelector('[data-sec="airplane"]').addEventListener('click', () => {
     airplaneMode = !airplaneMode;
     sync();
     setStatusAirplane(airplaneMode);
+    if (centerOpen) syncCenter();
   });
   sync();
   return w;
@@ -6273,6 +6656,8 @@ setTimeout(() => {
 }, 2600);
 
 /* ============ init ============ */
+applyTheme();
+applyFontScale();
 draw();
 setScale();
 renderHome();
@@ -6316,9 +6701,17 @@ loadDevState(st => {
       wallState.home = st.wallpaper.home || null;
       wallState.lock = st.wallpaper.lock || null;
     }
+    if (st.theme === 'light') darkTheme = false;
+    if (Number.isInteger(st.font)){
+      fontSavedIdx = Math.max(0, Math.min(6, st.font));
+      fontIdx = fontSavedIdx;
+    }
     pageIdx = 0;
+    applyTheme();
+    applyFontScale();
     draw();
     renderHome();
+    if (centerOpen) syncCenter();
   }
 });
 
@@ -6330,6 +6723,8 @@ addEventListener('keydown', e => {
     if (k === 'w'){ e.preventDefault(); closeChTab(curArr().cur); return; }
   }
   if (e.key !== 'Escape') return;
+  if (fmOpen){ cancelFontMenu(); return; }
+  if (centerOpen){ closeCenter(); return; }
   if (hsOpen){ hsClose(); return; }
   if (custSheet){ closeCustomizeSheet(); return; }
   if (document.querySelector('.am-dlg')){ document.querySelector('.am-dlg').remove(); return; }
