@@ -146,7 +146,7 @@ svg.dl-ov.zoom{transition:transform .32s ease,opacity .3s ease;transform:scale(1
 .cs-in{width:100%;height:44px;border-radius:10px;background:#fff;color:#111;font:inherit;font-size:15px;padding:0 14px;outline:0;border:0}
 .cs-in::selection{background:rgba(90,170,255,.35)}
 
-/* ============ CHROMIUM ============ */
+/* ============ CHROMIUM (engine shared with the Chrome/Edge/Firefox apps) ============ */
 .chromium{position:absolute;inset:0;display:flex;flex-direction:column;background:var(--cA);animation:avIn .4s var(--ease) both;
   --cA:#0e0f12;--cB:#121317;--cS:#191b21;--cAdr:#282e38;--cAdrT:#c7ccd4;--cCnt:#1c1d21;--cNts:#474b52;
   --cTm:#030305;--cBox:#272e37;--cPop:#2c323f;--cDlg:#20262e;--cSnk:#2b2d33;--cBm:#1d1f24;
@@ -168,14 +168,20 @@ svg.dl-ov.zoom{transition:transform .32s ease,opacity .3s ease;transform:scale(1
 .ch-tab .hv{position:absolute;left:5px;right:5px;top:5px;bottom:5px;border-radius:7px;background:var(--hov);opacity:0;transition:opacity .15s;pointer-events:none}
 .ch-tab:not(.sel):hover .hv{opacity:1}
 .ch-tab>*:not(.hv){position:relative}
-.ch-tab.sel::before{content:"";position:absolute;left:-10px;bottom:0;width:10px;height:10px;background:radial-gradient(circle 10px at 0% 0%, rgba(0,0,0,0) 9.4px, var(--cS) 9.5px)}
-.ch-tab.sel::after{content:"";position:absolute;right:-10px;bottom:0;width:10px;height:10px;background:radial-gradient(circle 10px at 100% 0%, rgba(0,0,0,0) 9.4px, var(--cS) 9.5px)}
-.ch-tab:not(.sel)::before{content:"";position:absolute;left:-10px;bottom:0;width:10px;height:10px;background:radial-gradient(circle 10px at 0% 0%, rgba(0,0,0,0) 9.4px, var(--cB) 9.5px)}
-.ch-tab:not(.sel)::after{content:"";position:absolute;right:-10px;bottom:0;width:10px;height:10px;background:radial-gradient(circle 10px at 100% 0%, rgba(0,0,0,0) 9.4px, var(--cB) 9.5px)}
+/* reverse curves on the bottom corners, like the simulator window tabs */
+.ch-tab.sel::before{content:"";position:absolute;left:-12px;bottom:0;width:12px;height:12px;background:radial-gradient(circle 12px at 0% 0%, rgba(0,0,0,0) 11.3px, var(--cS) 11.4px)}
+.ch-tab.sel::after{content:"";position:absolute;right:-12px;bottom:0;width:12px;height:12px;background:radial-gradient(circle 12px at 100% 0%, rgba(0,0,0,0) 11.3px, var(--cS) 11.4px)}
+.ch-tab:not(.sel)::before{content:"";position:absolute;left:-12px;bottom:0;width:12px;height:12px;background:radial-gradient(circle 12px at 0% 0%, rgba(0,0,0,0) 11.3px, var(--cB) 11.4px)}
+.ch-tab:not(.sel)::after{content:"";position:absolute;right:-12px;bottom:0;width:12px;height:12px;background:radial-gradient(circle 12px at 100% 0%, rgba(0,0,0,0) 11.3px, var(--cB) 11.4px)}
 .ch-tab.in{animation:chTabIn .34s var(--ease) both}
 .ch-tab.out{animation:chTabOut .19s ease both}
 @keyframes chTabIn{from{opacity:0;transform:translateY(38px)}}
 @keyframes chTabOut{to{opacity:0;transform:translateY(38px)}}
+/* Firefox: pill-shaped tabs, not connected to the toolbar */
+.chromium.ffx .ch-tabs{align-items:center}
+.chromium.ffx .ch-tab{height:30px;margin-right:8px;border-radius:999px}
+.chromium.ffx .ch-tab.sel::before,.chromium.ffx .ch-tab.sel::after,
+.chromium.ffx .ch-tab:not(.sel)::before,.chromium.ffx .ch-tab:not(.sel)::after{display:none}
 .ch-tic{position:relative;width:16px;height:16px;flex:none;color:var(--cT4)}
 .ch-tab.sel .ch-tic{color:var(--cT3)}
 .ch-tic svg{position:absolute;inset:0;width:100%;height:100%}
@@ -213,6 +219,10 @@ svg.dl-ov.zoom{transition:transform .32s ease,opacity .3s ease;transform:scale(1
 .ch-blankk{position:absolute;inset:0;background:#000}
 .ch-nt{position:absolute;inset:0;background:var(--cCnt);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px}
 .nt-logo{width:220px;max-width:64%;height:auto;object-fit:contain;user-select:none;-webkit-user-drag:none}
+/* Firefox new tab: logo top-left with "Firefox" beside it */
+.nt-ffhead{position:absolute;top:26px;left:34px;display:flex;align-items:center;gap:14px}
+.nt-ffhead img{height:38px;width:auto;display:block}
+.nt-ffhead span{color:#fff;font-size:27px;font-weight:600;letter-spacing:.01em}
 .nt-search{width:560px;max-width:84%;height:46px;border-radius:999px;background:var(--cNts);display:flex;align-items:center;gap:14px;padding:0 20px;color:#fff}
 .nt-search svg{width:17px;height:17px;flex:none}
 .nt-search span{font-size:14px;color:var(--cT4);text-align:left;flex:1}
@@ -632,7 +642,8 @@ svg.dl-ov.zoom{transition:transform .32s ease,opacity .3s ease;transform:scale(1
 .ps-rate{display:inline-flex;align-items:center;gap:5px;height:24px;padding:0 10px;border-radius:999px;background:#2e3034;flex:none}
 .ps-rate span{font-size:11.5px;font-weight:700;color:#e8eaee}
 .ps-rate svg{width:12px;height:12px;display:block}
-.ps-detail{position:absolute;inset:0;z-index:20;background:#000;transform:translateY(100%);transition:transform .4s var(--ease);overflow-y:auto;scrollbar-width:thin}
+/* app details: slides in from the right, with a bigger gap above the screenshots */
+.ps-detail{position:absolute;inset:0;z-index:20;background:#000;transform:translateX(100%);transition:transform .4s var(--ease);overflow-y:auto;scrollbar-width:thin}
 .ps-detail.open{transform:none}
 .ps-dbg{position:absolute;top:0;left:0;right:0;height:360px;background-size:cover;background-position:center top;pointer-events:none}
 .ps-dbg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.5) 0%,rgba(0,0,0,.06) 26%,rgba(0,0,0,.14) 55%,#000 97%)}
@@ -646,7 +657,7 @@ svg.dl-ov.zoom{transition:transform .32s ease,opacity .3s ease;transform:scale(1
 .ps-dicon{width:88px;height:88px;border-radius:20px;object-fit:cover;flex:none}
 .ps-drate{display:flex;align-items:center;gap:7px;color:#fff;font-size:20px;font-weight:700}
 .ps-drate svg{width:20px;height:20px;display:block}
-.ps-dbtnwrap{margin:20px 0 24px}
+.ps-dbtnwrap{margin:38px 0 32px}
 .ps-dshots{display:flex;gap:10px;overflow-x:auto;padding-bottom:6px}
 .ps-dshot{flex:0 0 calc(50% - 5px);aspect-ratio:1052/592;border-radius:12px;object-fit:cover}
 .ps-daboutrow{display:flex;align-items:center;justify-content:space-between;gap:14px;border-radius:10px;padding:4px 6px;margin:10px -6px 0;width:calc(100% + 12px)}
@@ -670,6 +681,46 @@ svg.dl-ov.zoom{transition:transform .32s ease,opacity .3s ease;transform:scale(1
 .ps-dname2{color:#fff;font-size:16px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ps-dsub{color:#9aa0a6;font-size:12px;font-weight:500}
 .ps-dline{height:1px;background:rgba(255,255,255,.14);margin:14px 0}
+
+/* ---- Play Store: search tab ---- */
+.pss{height:100%;display:flex;flex-direction:column}
+.pss-top{flex:none;display:flex;align-items:center;gap:16px;padding:18px 22px 14px}
+.pss-bar{flex:1;height:46px;border-radius:999px;background:#1f2023;display:flex;align-items:center;gap:12px;padding:0 18px;border:1.5px solid transparent;transition:border-color .2s,background .2s}
+.pss-bar:focus-within{border-color:#8cb4f9;background:rgba(22,32,46,.65)}
+.pss-bar svg{width:20px;height:20px;color:#9aa0a6;flex:none}
+.pss-bar input{flex:1;min-width:0;background:none;border:0;outline:0;color:#fff;font:inherit;font-size:14.5px}
+.pss-bar input::placeholder{color:#9aa0a6}
+.pss-ava{width:42px;height:42px;border-radius:50%;flex:none;background:#3a3d42;display:flex;align-items:center;justify-content:center;color:#c9ccd1;overflow:hidden;font-size:17px;font-weight:600}
+.pss-ava svg{width:22px;height:22px;display:block}
+.pss-body{flex:1;min-height:0;display:flex;flex-direction:column}
+.pss-home{flex:1;overflow-y:auto;padding:0 22px 30px}
+.pss-res{flex:1;min-height:0;display:flex}
+.pss-res[hidden]{display:none}
+.pss-left{width:44%;min-width:300px;overflow-y:auto;border-right:1px solid #232528;padding:8px 16px 30px 0}
+.pss-right{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;color:#8f959d;padding:0 20px}
+.pss-rcirc{width:78px;height:78px;border-radius:50%;background:#26282c;display:flex;align-items:center;justify-content:center;color:#8cb4f9}
+.pss-rcirc svg{width:36px;height:36px;display:block}
+.pss-rtext{font-size:14px;font-weight:600}
+.pss-h{color:#fff;font-size:18px;font-weight:600;margin:10px 2px 14px}
+.pss-cats{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.pss-cat{display:flex;align-items:center;height:64px;padding:0 18px 0 12px;border-radius:16px;background:#1f2023;text-align:left;transition:background .15s}
+.pss-cat:hover{background:#282a2e}
+.pss-cat .ic{position:relative;width:72px;height:40px;flex:none}
+.pss-cat .ic img{position:absolute;top:0;width:40px;height:40px;border-radius:10px;object-fit:cover}
+.pss-cat b{margin-left:18px;font-size:14.5px;font-weight:600;color:#fff}
+.pss-cat .arr{margin-left:auto;color:#9aa0a6;display:flex}
+.pss-cat .arr svg{width:14px;height:14px;display:block}
+.pss-sug .ps-item{flex:0 0 calc((100% - 10px)/2)}
+.pss-item{display:flex;align-items:center;gap:13px;width:100%;padding:10px 12px;border-radius:14px;text-align:left;transition:background .14s}
+.pss-item:hover{background:rgba(255,255,255,.07)}
+.pss-item.sel{background:rgba(139,180,249,.16)}
+.pss-item>img{width:52px;height:52px;border-radius:13px;object-fit:cover;flex:none}
+.pss-item .tx{min-width:0;flex:1}
+.pss-item .tx b{display:block;font-size:14px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pss-item .tx small{display:block;font-size:11.5px;color:#9aa0a6;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pss-rate{display:inline-flex;align-items:center;gap:5px;margin-top:6px;color:#e8eaee;font-size:12px;font-weight:700}
+.pss-rate svg{width:12px;height:12px;display:block}
+.pss-none{color:#8f959d;font-size:13.5px;padding:16px 10px}
 /* touch support */
 #dock{touch-action:none}
 
@@ -946,7 +997,8 @@ html.lightui iframe{filter:invert(1) hue-rotate(180deg)}
 .nc-btn .tx small{font-size:11.5px;font-weight:500;opacity:.72;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .nc-btn .arr{margin-left:auto;flex:none;display:flex;opacity:.85}
 .nc-btn .arr svg{width:14px;height:14px;display:block}
-.nc-foot{display:flex;align-items:center;gap:12px;margin-top:16px;flex:none}
+/* power / settings / active-apps pinned to the bottom of the left half */
+.nc-foot{display:flex;align-items:center;gap:12px;margin-top:auto;padding-top:16px;flex:none}
 .nc-count{flex:1;height:40px;border-radius:99px;background:#262b33;color:#a7b0bc;display:flex;align-items:center;padding:0 16px;font-size:12.5px;font-weight:600}
 .nc-circ{width:44px;height:44px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;transition:filter .15s}
 .nc-circ:hover{filter:brightness(1.15)}
@@ -1334,14 +1386,19 @@ const ICONS = {
     </g>
   </g>
 </svg>`,
+  /* the translucent pieces share ONE group opacity, so overlapping bars
+     stay a uniform 45% white instead of doubling up */
   cloner: () => `
 <svg viewBox="0 0 64 64" aria-hidden="true">
   <defs><linearGradient id="ac-g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4d90f2"/><stop offset="1" stop-color="#3065d4"/></linearGradient></defs>
   <rect x="2" y="2" width="60" height="60" rx="15" fill="url(#ac-g)"/>
   <rect x="15" y="15" width="16" height="16" rx="4.5" fill="#fff"/>
-  <g fill="rgba(255,255,255,.45)"><rect x="38.4" y="16" width="5.2" height="16" rx="2.6"/><rect x="33" y="21.4" width="16" height="5.2" rx="2.6"/></g>
-  <rect x="15" y="33" width="16" height="16" rx="4.5" fill="rgba(255,255,255,.45)"/>
   <rect x="33" y="33" width="16" height="16" rx="4.5" fill="#fff"/>
+  <g opacity=".45">
+    <rect x="38.4" y="16" width="5.2" height="16" rx="2.6" fill="#fff"/>
+    <rect x="33" y="21.4" width="16" height="5.2" rx="2.6" fill="#fff"/>
+    <rect x="15" y="33" width="16" height="16" rx="4.5" fill="#fff"/>
+  </g>
 </svg>`,
   settings: () => `
 <svg viewBox="0 0 64 64" aria-hidden="true">
@@ -2417,6 +2474,10 @@ function closeCustomizeSheet(){
 }
 
 /* ============ app open animation + view switching ============ */
+/* the four browser apps all share one rendering engine, each with its own
+   tab set + settings: chromium (dock) · g-chrome (gadget) · ms-edge · firefox */
+const BROWSER_APPS = { 'chromium': 'chromium', 'g-chrome': 'chrome', 'ms-edge': 'edge', 'firefox': 'firefox' };
+const APP_ID_BY_KEY = { chromium: 'chromium', chrome: 'g-chrome', edge: 'ms-edge', firefox: 'firefox' };
 function openAppFromRect(app, r){
   if (app.paused){ showPausedDialog(app, r); return; }
   /* opening an app permanently removes its "new" badge */
@@ -2463,10 +2524,10 @@ const AD_BLOCKED = new Set(['clusterduck', 'pvz2']);
 /* top bar behavior per view: 'game' (store games incl. GD Lite, Gardendless,
    the modified Roblox) → hidden · 'system' (settings, stores, files, gallery,
    cloner, contacts…) → always visible, no background · 'browser' (chromium,
-   chrome) → visible with a solid black bar under it */
+   chrome, edge, firefox) → visible with a solid black bar under it */
 let barMode = 'system';
 function viewKind(v){
-  if (v === 'chromium' || v === 'g-chrome') return 'browser';
+  if (BROWSER_APPS[v]) return 'browser';
   if (v === 'gardendless' || v === 'delta') return 'game';
   if (GAMES.some(g => g.id === v)) return 'game';
   return 'system';
@@ -2487,7 +2548,7 @@ function showView(v){
   dockEl.style.display = home ? '' : 'none';
   gestEl.style.display = home ? '' : 'none';
   hsrchEl.style.display = home ? '' : 'none';
-  if (chRoot) chRoot.style.display = (v === 'chromium' || v === 'g-chrome') ? '' : 'none';
+  if (chRoot) chRoot.style.display = BROWSER_APPS[v] ? '' : 'none';
   if (storeRoot) storeRoot.style.display = (v === 'store') ? '' : 'none';
   if (setRoot) setRoot.style.display = (v === 'settings') ? '' : 'none';
   if (psRoot) psRoot.style.display = (v === 'g-playstore') ? '' : 'none';
@@ -2507,9 +2568,9 @@ function showView(v){
     if (storeRoot.parentElement !== avEl) avEl.appendChild(storeRoot);
     return;
   }
-  if (v === 'chromium' || v === 'g-chrome'){
-    /* the Chrome gadget reuses the Chromium engine, with its own tab state */
-    const want = v === 'g-chrome' ? 'chrome' : 'chromium';
+  if (BROWSER_APPS[v]){
+    /* every browser app reuses the Chromium engine, with its own tab state */
+    const want = BROWSER_APPS[v];
     const switched = CH.app !== want;
     if (switched){ CH.app = want; CH.mode = 'n'; }
     if (!chRoot){
@@ -2569,7 +2630,7 @@ function showView(v){
     phEl.querySelector('.avname').textContent = app.name;
   }
 }
-/* resets one browser app's tabs (chromium or chrome); per-app settings stay */
+/* resets one browser app's tabs; per-app settings stay */
 function resetBrowserApp(key){
   const p = CH.profiles[key];
   if (!p) return;
@@ -2604,9 +2665,8 @@ addEventListener('message', e => {
   }
   if (d.type === 'mumu-app-closed'){
     activeApps.delete(String(d.id));
-    if (d.id === 'chromium' || d.id === 'g-chrome'){
-      resetBrowserApp(d.id === 'g-chrome' ? 'chrome' : 'chromium');
-    }
+    const k = BROWSER_APPS[String(d.id)];
+    if (k) resetBrowserApp(k);
   }
 });
 
@@ -2965,7 +3025,7 @@ closeCenter = function(){
   barUnpeek();
 };
 
-/* ============ CHROMIUM (engine shared with the Chrome app) ============ */
+/* ============ CHROMIUM (engine shared with Chrome, Edge, and Firefox) ============ */
 const CH_HOME  = `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M3.2 9.4 L10 3.4 L16.8 9.4"/><path d="M5.2 8.2 V16.2 H14.8 V8.2"/></svg>`;
 const CH_LEFT  = `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 10 H6"/><path d="M9.8 5.6 L5.4 10 L9.8 14.4"/></svg>`;
 const CH_RIGHT = `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 10 H14"/><path d="M10.2 5.6 L14.6 10 L10.2 14.4"/></svg>`;
@@ -3021,24 +3081,23 @@ const ENGINES = {
     logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Logo_Ecosia_2022.svg/1280px-Logo_Ecosia_2022.svg.png',
     fav: 'https://play-lh.googleusercontent.com/Ric37SXVuhw-1uK7TzgUvERNCxOMg9WvjNnCfbzQ4tUZgvzDj-bY6RIfEdaAnltr' }
 };
+/* per-browser-app defaults: Edge ships with Bing; the rest with Google */
+const DEFAULT_ENGINE = { chromium: 'google', chrome: 'google', edge: 'bing', firefox: 'google' };
 
-/* engine state: 'chromium' = the Chromium dock app, 'chrome' = the Chrome gadget app.
-   Both apps share one rendering engine, but keep separate tab sets AND
-   completely separate settings (bookmarks, search engine, theme, homepage,
-   history). Downloads are shared (device-wide). */
+/* engine state: 4 browser apps (chromium · chrome · edge · firefox) share one
+   rendering engine, each with its own tab set AND its own settings
+   (bookmarks, search engine, theme, homepage, history). */
 const CH = {
   app: 'chromium',
   mode: 'n',
-  profiles: {
-    chromium: { n: { tabs: [], cur: 0 }, i: { tabs: [], cur: 0 } },
-    chrome:   { n: { tabs: [], cur: 0 }, i: { tabs: [], cur: 0 } }
-  },
-  prefs: {
-    chromium: { marks: new Map(), engine: 'google', theme: 'dark', homepage: { on: true, mode: 'default', custom: '' }, history: [] },
-    chrome:   { marks: new Map(), engine: 'google', theme: 'dark', homepage: { on: true, mode: 'default', custom: '' }, history: [] }
-  },
+  profiles: {},
+  prefs: {},
   downloads: []
 };
+['chromium', 'chrome', 'edge', 'firefox'].forEach(k => {
+  CH.profiles[k] = { n: { tabs: [], cur: 0 }, i: { tabs: [], cur: 0 } };
+  CH.prefs[k] = { marks: new Map(), engine: DEFAULT_ENGINE[k], theme: 'dark', homepage: { on: true, mode: 'default', custom: '' }, history: [] };
+});
 const chPrefs = () => CH.prefs[CH.app];
 const closedStack = [];
 function newEntry(){
@@ -3048,7 +3107,7 @@ function newEntry(){
   return { type: 'newtab' };
 }
 function chTab(){ return { hist: [newEntry()], idx: 0 }; }
-['chromium', 'chrome'].forEach(k => {
+Object.keys(CH.profiles).forEach(k => {
   CH.profiles[k].n.tabs = [chTab()];
   CH.profiles[k].i.tabs = [chTab()];
 });
@@ -3067,7 +3126,6 @@ function entTitle(e){
   return hostOf(e.url);
 }
 function addrOf(e){
-  /* Chrome app: the new tab page shows no URL in the address bar */
   if (e.type === 'newtab') return isChromeApp() ? '' : ENGINES[chPrefs().engine].host;
   if (e.type === 'blank') return 'about:blank';
   if (e.type === 'history') return 'chrome://history';
@@ -3275,8 +3333,9 @@ function hideSnack(){
 let tabDrag = null;
 function buildChromium(){
   const root = document.createElement('div');
-  /* browsers keep the top bar: content starts 42px lower (belowbar) */
-  root.className = 'chromium belowbar';
+  /* browsers keep the top bar: content starts 42px lower (belowbar);
+     Firefox additionally gets pill-shaped tabs (ffx) */
+  root.className = 'chromium belowbar' + (CH.app === 'firefox' ? ' ffx' : '');
   root.innerHTML = `
     <div class="ch-strip">
       <div class="ch-tabs"></div>
@@ -3473,14 +3532,32 @@ function renderChContent(ent){
   }, 200));
   c.appendChild(fr);
 }
+/* the new tab page: Google/Chromium show the centered engine logo;
+   Edge shows the Microsoft logo; Firefox shows its logo top-left + name */
+const NEWTAB_LOGOS = {
+  edge: 'https://www.nocookie.net/windows/images/3/33/Microsoft-logo.png/revision/latest?cb=20231201023319'
+};
+const FIREFOX_LOGO = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Firefox_logo%2C_2019.svg/240px-Firefox_logo%2C_2019.svg.png';
 function buildNewTab(){
   const e = ENGINES[chPrefs().engine];
   const d = document.createElement('div');
   d.className = 'ch-nt';
-  d.innerHTML = `
-    <img class="nt-logo" alt="" draggable="false" src="${e.logo}">
-    <button class="nt-search">${CH_SEARCH}<span></span></button>`;
-  d.querySelector('.nt-search span').textContent = `Search ${e.name} or type a URL`;
+  if (CH.app === 'firefox'){
+    d.innerHTML = `
+      <div class="nt-ffhead"><img src="${FIREFOX_LOGO}" alt="" draggable="false"><span>Firefox</span></div>
+      <button class="nt-search">${CH_SEARCH}<span></span></button>`;
+    d.querySelector('.nt-search span').textContent = `Search ${e.name} or type a URL`;
+  } else if (CH.app === 'edge'){
+    d.innerHTML = `
+      <img class="nt-logo" alt="" draggable="false" src="${NEWTAB_LOGOS.edge}">
+      <button class="nt-search">${CH_SEARCH}<span></span></button>`;
+    d.querySelector('.nt-search span').textContent = `Search ${e.name} or type a URL`;
+  } else {
+    d.innerHTML = `
+      <img class="nt-logo" alt="" draggable="false" src="${e.logo}">
+      <button class="nt-search">${CH_SEARCH}<span></span></button>`;
+    d.querySelector('.nt-search span').textContent = `Search ${e.name} or type a URL`;
+  }
   d.querySelector('.nt-search').addEventListener('click', () => {
     const m = document.createElement('div');
     m.className = 'ch-ntm';
@@ -3672,7 +3749,7 @@ function openCloseAllDlg(){
       a.cur = 0;
       renderCh();
     } else {
-      const appId = CH.app === 'chrome' ? 'g-chrome' : 'chromium';
+      const appId = APP_ID_BY_KEY[CH.app] || 'chromium';
       resetBrowserApp(CH.app);
       try { parent.postMessage({ type: 'mumu-close-app', id: DEV && DEV.id, app: appId }, '*'); } catch (e) {}
     }
@@ -4239,7 +4316,8 @@ function renderFilesView(){
 /* ============ MUMU STORE ============ */
 /* cat = the original category (the only one the MuMu Store ever shows).
    cat2 = a second category, shown ONLY in the Google Play Store.
-   psOnly = listed in the Play Store but never in the MuMu Store / home search. */
+   psOnly = listed in the Play Store but never in the MuMu Store / home search.
+   browser = a store listing that installs a full browser app (edge/firefox). */
 const GAMES = [
   { id: 'gd',         name: 'Geometry Dash',         rating: 4.7, cat: 'arcade', cat2: 'action',
     icon: 'https://m.media-amazon.com/images/I/61mVIP6Oo1L.png',
@@ -4301,12 +4379,24 @@ const GAMES = [
   { id: 'fnaf-2',     name: "Five Nights at Freddy's 2", rating: 4.6, cat: 'strategy',
     icon: 'https://play-lh.googleusercontent.com/ax7Yy0SvZ9GUS5o0MHtXFD0vEPqK5BEadf2a5O0I_36GYaUkZ29PYGQNxktEflYOFsG34n5PWVCyAlKD7n-9Ww=w240-h480-rw',
     url:  'https://cfpju876whm.make-by-vann-dont-steal-it-gooners-3351dcb3.nip.io/games/167.html' },
+  { id: 'fnaf-4',     name: "Five Nights at Freddy's 4", rating: 4.6, cat: 'action',
+    icon: 'https://play-lh.googleusercontent.com/uND9auR58VWaFSjBHWEHDRxm7VzUZOrhBwxvTfNse76e4-_UOXDbk1w9JVMVUuDSntUpfN1KnBclGzqE3AgNQNI=w480-h960-rw',
+    url:  'https://freeonlinewebtools.github.io/gamelist6.github.io/FNAF-4/' },
+  { id: 'amongus',    name: 'Among Us',               rating: 3.9, cat: 'action',
+    icon: 'https://play-lh.googleusercontent.com/pfGArJJx-vtMRVu2-ziedzAhTLsHgks6N3mNyyOC0oxRdsXINGwdd9h4ZutdTG7MfgiqlDXBXnk-kNo-Fns70Q=s96-rw',
+    url:  'https://ubghyper.github.io/GameList.github.io/AmongUs-Online/' },
   { id: 'minecraft',  name: 'Minecraft, Dream it, Build it!', rating: 4.3, cat: 'adventure',
     icon: 'https://play-lh.googleusercontent.com/tI4StRSPVhpGJH5R013naszLUawOjao1ya8FvyaNO7XY_cJFHFqo1EFaEJv_7zz3rRJ5lEpLiw14ZqQLCOYc',
     url:  'https://eaglercraft-26-2-client.u2471966200.workers.dev/?=v0.6' },
   { id: 'gd-lite',    name: 'Geometry Dash Lite',     rating: 4.2, cat: 'arcade', cat2: 'action', psOnly: true,
     icon: 'https://play-lh.googleusercontent.com/StEbdIF-rV4EoYfIdaP07zClA50KSs-i9o12kceyecfw8R0nwYfzqV64h3UlEzh_fCqxyNCj7Bb7ro86pfYDsSU',
-    url:  'https://monkeyworm-tech.github.io/lite' }
+    url:  'https://monkeyworm-tech.github.io/lite' },
+  { id: 'ms-edge',    name: 'Microsoft Edge',         rating: 4.7, cat: 'productivity', psOnly: true, browser: 'edge',
+    icon: 'https://play-lh.googleusercontent.com/4Z1Nt1I9HUDevt5VJ7BmgpqSTUpsC0Ei1K-IiXSmkH5Dzorz_isDzq4qdpb75RA1SfOV7v6csav-atWBur1wJQM=w480-h960-rw',
+    url:  '' },
+  { id: 'firefox',    name: 'Firefox',               rating: 4.6, cat: 'productivity', psOnly: true, browser: 'firefox',
+    icon: 'https://play-lh.googleusercontent.com/jQAmlGUkuJGc4TjZs2OEUeB5Gy3dCpKCWqfgVmab5NvM_43oed2qhVhrlEajccjJV6VkDFCEXws_6t6StKKLTY4=w480-h960-rw',
+    url:  '' }
 ];
 /* the MuMu Store (and the home screen search) never list Play-Store-only games */
 const MGAMES = GAMES.filter(g => !g.psOnly);
@@ -4316,16 +4406,18 @@ const CAT_IC = {
   strategy: `<svg viewBox="0 0 20 20" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 17.5 V2.5"/><path d="M5 3.6 h9.5 l-2.6 3.2 2.6 3.2 H5"/></svg>`,
   simulation: `<svg viewBox="0 0 20 20" fill="none" stroke="#fff" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M10 2.8 L16.2 6.4 V13.6 L10 17.2 L3.8 13.6 V6.4 Z"/><path d="M10 2.8 V10 M3.8 13.6 L10 10 L16.2 13.6"/></svg>`,
   casual: `<svg viewBox="0 0 20 20" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 2.8 a2.7 2.7 0 0 1 1.9 4.6 c1.6 1.1 2.6 2.9 2.8 5.1 H5.3 c.2-2.2 1.2-4 2.8-5.1 A2.7 2.7 0 0 1 10 2.8 Z"/><path d="M6.3 15.2 h7.4 M5.2 17.4 h9.6"/></svg>`,
-  arcade: `<svg viewBox="0 0 20 20" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12.6" cy="3.6" r="1.9"/><path d="M11.6 6.6 L8.6 11.4 L10.8 16.4"/><path d="M11.6 6.6 L15 9.2 L17.8 8.2"/><path d="M11.3 9.8 L7.2 8.6 L4.4 9.6"/><path d="M8.6 11.4 L4.2 13.2 L5.4 16.4"/></svg>`
+  arcade: `<svg viewBox="0 0 20 20" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12.6" cy="3.6" r="1.9"/><path d="M11.6 6.6 L8.6 11.4 L10.8 16.4"/><path d="M11.6 6.6 L15 9.2 L17.8 8.2"/><path d="M11.3 9.8 L7.2 8.6 L4.4 9.6"/><path d="M8.6 11.4 L4.2 13.2 L5.4 16.4"/></svg>`,
+  productivity: `<svg viewBox="0 0 20 20" fill="none" stroke="#fff" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><rect x="2.6" y="3.6" width="14.8" height="12.8" rx="2.6"/><path d="M6 8 L8.6 10.4 L6 12.8"/><line x1="10.6" y1="12.8" x2="14" y2="12.8" stroke-linecap="round"/></svg>`
 };
 const CATS = [
-  { id: 'all',       name: 'All' },
-  { id: 'adventure', name: 'Adventure',  ic: CAT_IC.adventure },
-  { id: 'action',    name: 'Action',     ic: CAT_IC.action },
-  { id: 'strategy',  name: 'Strategy',   ic: CAT_IC.strategy },
-  { id: 'simulation',name: 'Simulation', ic: CAT_IC.simulation },
-  { id: 'casual',    name: 'Casual',     ic: CAT_IC.casual },
-  { id: 'arcade',    name: 'Arcade',     ic: CAT_IC.arcade }
+  { id: 'all',        name: 'All' },
+  { id: 'adventure',  name: 'Adventure',  ic: CAT_IC.adventure },
+  { id: 'action',     name: 'Action',     ic: CAT_IC.action },
+  { id: 'strategy',   name: 'Strategy',   ic: CAT_IC.strategy },
+  { id: 'simulation', name: 'Simulation', ic: CAT_IC.simulation },
+  { id: 'casual',     name: 'Casual',     ic: CAT_IC.casual },
+  { id: 'arcade',     name: 'Arcade',     ic: CAT_IC.arcade },
+  { id: 'productivity', name: 'Productivity', ic: CAT_IC.productivity }
 ];
 const catName = id => (CATS.find(c => c.id === id) || {}).name || '';
 
@@ -4810,6 +4902,59 @@ const DETAILS = {
       'https://play-lh.googleusercontent.com/FiwRNo4ABllxr8JREaJVvcKjadTfeA8vdv3DN4DOZF6iN3Upkd-7lkggpwB1j5O_8FHvVChh5A7-uxJ2WoCdvxg=w1052-h592-rw'
     ]
   },
+  'fnaf-4': {
+    size: '121.7MB', dev: 'Clickteam USA LLC', ver: '500,000+', upd: '2025-06-11',
+    desc: [
+      "This is the final chapter of Five Nights at Freddy's. You play as an unknown character who must defend themselves against Freddy, Chica, Foxy, Bonnie, and other terrifying creatures that lurk in the shadows.",
+      'Your only defense is a flashlight, which you can use to ward off anything that might be creeping down the hall. Be careful — sound is your only guide, and every mistake could be your last. This version comes directly from the PC version and requires at least 2GB of RAM to run.'
+    ],
+    bullets: [
+      "The final chapter of Five Nights at Freddy's",
+      'Defend yourself against Freddy, Chica, Foxy, and Bonnie',
+      'Your only defense is a flashlight — use it wisely',
+      'Sound is your only guide through the darkness',
+      'Interface and audio in English; subtitles include English, French, German, Dutch, Spanish, Italian, Portuguese, and Russian',
+      'This version comes directly from the PC version and requires at least 2GB of RAM'
+    ],
+    shots: [
+      'https://play-lh.googleusercontent.com/QvkGqW_cpcTRO1QwGBkHa0gJSS_4M3X38irivQ2W822SnD4fDPlNkY13kdrE7SZ_MbYMTwgm3bsgzYlvp9gy=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/4nQAdkT0PpKCJ4G8PgAfNQ8EvA-wwLIaymszvaPHpne1djl_JmT7ES5e9PeTu21-PcWW_bF5X-islzcTUlrU=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/wLrSlI2DxNvhNbtTDtRmZOC7lFsZs5VzOzwAIn-PcNsxVzFqx6KBq6s-a6HloK3fkIwLfPJwlB-F33DidXLcKLI=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/qVihkHHfuBVrO3u-dLQ0DBaTOxBAy9qkrAdsNriXWxOYzbP6g8qwy_3A4qy6LCjKH_UtJHzKgX3BsGutX2wN7g=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/yaoLoQIcSOF2iSHFuOvIr1SrmahxQdQyXe_VAWn4zF1wl5h3lCrUhHrjUd8kkkbL3OqiknuHPz2Pcm_VlILi=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/rqG2b8BucwUYN8-RLVv22y4zgvc652-gnUjvYi0K02Bp3M7GULx-Qm_cfuZ0WJ-TaEjIWPSGCTKSpQezUoFO=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/2fyVaHXpE0BEYxeydn3P8ijLr4n0l5IhLpBJp-LvJG67ywF0wdu9Xk395HqrJhuz3PeH7MeXZjdY4dixDZwNSA=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/7OcujHFIZF4HSNI6TbutNLtgomBZ7lTAbDC6P8yg5ZM1vEaQz6W_XJFx6gJr9u9BCN4G_bJMTHCZ1CpBCqWWtTY=w1052-h592-rw'
+    ]
+  },
+  'amongus': {
+    size: '262.4MB', dev: 'Innershot LLC', ver: '2026.6.5', upd: '2026-06-02',
+    desc: [
+      'Play with 4-15 players online or via local WiFi as you attempt to hold your spaceship together and return back to civilization. But beware — one or more random players among the crew are Impostors bent on killing everyone!',
+      'Crewmates win by completing all tasks or discovering and voting the Impostors off the ship. The Impostor can use sabotage to cause chaos, making for easier kills and better alibis. Nothing is more fun than lying to your friends!'
+    ],
+    bullets: [
+      'Play online or over local WiFi with 4-15 players',
+      'Complete tasks to hold the ship together',
+      'Find the Impostor and vote them off the ship',
+      'Use sabotage to cause chaos and divide the crew',
+      'Customize your crewmate with hats, skins, and pets'
+    ],
+    shots: [
+      'https://play-lh.googleusercontent.com/uEPCzWv0NzazyK4CQ9uc_UVKuGkoSPgc4iBEOYSaX7ba3PwNcLOo90bERqdJFbNrIiUvwDJre3Hyg6gMikifXg=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/ggnEAOMe9T8IphSBQpkjzXLXG2dUWnBdX8-xfxahYFaaS5HuDLrBK_5NX5tUAoYHKy_2LpYXdeipeX7xEdGLh-4=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/ggjYpmC8kW45RsCB-y7LndlYYTChMICygjRbOXHDtPlz25RwZa0gGwuk2vUtaoI5rvzbR5G_BowtBsRocGKJhTk=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/dqHy_C8bRYGZe6jqok59XKcgwOxWk9r4saBFTUjZQku57UoZ-VjFY6eehN-BRIwlDH2DHbdkn2QLdk0ErhaxJA=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/FOkMPDmENUT2t9iSy5henVECMRWtlKZW8il6wuc7x6mp6mvbwvb_9F6gRn1rVF54zahRkNJ7Zf2p5WMf2yyHcSY=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/cZ2bL4m-S7Fx276pGr7d_lenwLTj0qvXX3aoPb3oq0Zn2-R5PSzKH1_-jjzLNOs8TYXW2vKjgi7itj-1IxOJdak=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/79I2pCDqgPyxdleuEixtkGm5E7IF9h-_z5p7xKn7t6wWCCs-TRTG45JdxY3zceNj_2RAzxpMLhG71CY9w6eS=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/CvhPkjWrf-6MVNcmJv2uivyIkb0ztpZOTEUGpTU_2JYAvmXmT0LQ1-Dsq6vmxG49fVshTeACFl6izOhNAL2w=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/6v-kRi9GLpBxi3VKHQQM60Ynv-he9sU-_6Wg089lh1ZspY4WMAAfiwonYwndPJH6gnHO301rwgrQ72Bt9hMDheY=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/dqHy_C8bRYGZe6jqok59XKcgwOxWk9r4saBFTUjZQku57UoZ-VjFY6eehN-BRIwlDH2DHbdkn2QLdk0ErhaxJA=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/FOkMPDmENUT2t9iSy5henVECMRWtlKZW8il6wuc7x6mp6mvbwvb_9F6gRn1rVF54zahRkNJ7Zf2p5WMf2yyHcSY=w1052-h592-rw',
+      'https://play-lh.googleusercontent.com/ggjYpmC8kW45RsCB-y7LndlYYTChMICygjRbOXHDtPlz25RwZa0gGwuk2vUtaoI5rvzbR5G_BowtBsRocGKJhTk=w1052-h592-rw'
+    ]
+  },
   'clusterduck': {
     size: '131.8MB', dev: 'PIKPOK', ver: '2.8.1', upd: '2026-06-12',
     desc: [
@@ -4850,6 +4995,36 @@ const DETAILS = {
       'https://play-lh.googleusercontent.com/aYFiYY8DULrlSV8tFlfKI9rSVDLeFvYStV7JTmAVwuQZ-cum1aDq4rPdeeUDk6SZC9jLRCyOlKFtcAsBzlwB=w1052-h592-rw',
       'https://play-lh.googleusercontent.com/Gm3yiL12FdUqfnBQrObZlEHMa8Ql70Nvx5Uy6bSanHVRY8e-aQCUO0ynwcv_gjZn_KbqlvJnwyokt7zv-MM4=w1052-h592-rw'
     ]
+  },
+  'ms-edge': {
+    size: '168.4MB', dev: 'Microsoft Corporation', ver: '138.0.3351.84092', upd: '2026-06-09',
+    desc: [
+      'Microsoft Edge is the fast and secure browser built for the everyday web, now with Copilot built in — your AI companion that helps you search, browse, and get things done.',
+      'Stay protected with built-in security tools like tracking prevention, AdBlock Plus, and InPrivate browsing mode. Browse the web faster and more safely, wherever you go.'
+    ],
+    bullets: [
+      'Copilot — your AI companion for search, browsing, and content',
+      'Tracking prevention and AdBlock Plus built in',
+      'InPrivate browsing keeps your history private',
+      'Search the web with Bing by default',
+      'Browse faster with performance mode'
+    ],
+    shots: []
+  },
+  'firefox': {
+    size: '96.3MB', dev: 'Mozilla', ver: '140.0.2', upd: '2026-06-04',
+    desc: [
+      'Private by default. Less tracking. Peace of mind built in. The internet. As it should be.',
+      'Firefox is the private browser that protects your data and blocks the trackers that follow you around the web. Browse privately, sync your passwords, and enjoy fast performance with less baggage.'
+    ],
+    bullets: [
+      'Private browsing — your history is not saved',
+      'Blocks trackers for faster pages and less data',
+      'Password management built in',
+      'Tab management that keeps you organized',
+      'Search with Google by default'
+    ],
+    shots: []
   }
 };
 /* clusterduck: 6 images repeated twice = 12 portrait shots */
@@ -5245,10 +5420,12 @@ function finalizeInstall(g){
   const d = DLS[g.id];
   if (!d || d.phase !== 'inst') return;
   delete DLS[g.id];
-  /* the home-screen app may use a shorter name and a different icon than the store listing */
-  const app = { id: g.id, name: INSTALL_NAMES[g.id] || g.name, icon: fixIcon(g.id, g.icon), url: g.url };
+  /* browser listings install a full browser app; games install a url app */
+  const app = g.browser
+    ? { id: APP_ID_BY_KEY[g.browser], name: g.name, icon: g.icon, white: false, browser: true }
+    : { id: g.id, name: INSTALL_NAMES[g.id] || g.name, icon: fixIcon(g.id, g.icon), url: g.url };
   installed.push(app);
-  newBadges.add(g.id);
+  newBadges.add(app.id);
   if (pages[d.slot.page]) pages[d.slot.page][d.slot.idx] = app;
   persistDev();
   renderHome();
@@ -5427,7 +5604,7 @@ function instAction(g, el){
   if (st === 'idle') startInstall(g);
   else if (st === 'dl' || st === 'inst') cancelInstall(g);
   else {
-    const app = installed.find(a => a.id === g.id);
+    const app = installed.find(a => a.id === (g.browser ? APP_ID_BY_KEY[g.browser] : g.id));
     if (app && el) openApp(app, el);
   }
 }
@@ -5518,7 +5695,7 @@ function buildFeatured(view){
   });
   top.appendChild(hero);
   /* ---- category box: one random category ---- */
-  const cpool = CATS.filter(c => c.id !== 'all');
+  const cpool = CATS.filter(c => c.id !== 'all' && c.id !== 'productivity');
   const cat = cpool[Math.floor(Math.random() * cpool.length)];
   const boxEl = document.createElement('div');
   boxEl.className = 'feat-cat';
@@ -5692,7 +5869,7 @@ function buildStore(){
       if (st === 'idle') startInstall(g);
       else if (st === 'dl' || st === 'inst') cancelInstall(g);
       else {
-        const app = installed.find(a => a.id === g.id);
+        const app = installed.find(a => a.id === (g.browser ? APP_ID_BY_KEY[g.browser] : g.id));
         if (app) openApp(app, row.querySelector('.sr-icwrap'));
       }
       return;
@@ -6301,6 +6478,8 @@ const PS_IC = {
 const PS_STAR_R = `<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.9 L12.3 6.7 L17.5 7.4 L13.7 11.1 L14.7 16.2 L10 13.8 L5.3 16.2 L6.3 11.1 L2.5 7.4 L7.7 6.7 Z" fill="#8cb4f9" stroke="#8cb4f9" stroke-width="2.2" stroke-linejoin="round"/></svg>`;
 const PS_STAR_S = `<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6 L12.5 6.9 L18.2 7.7 L14.1 11.7 L15.1 17.4 L10 14.7 L4.9 17.4 L5.9 11.7 L1.8 7.7 L7.5 6.9 Z" fill="#8cb4f9"/></svg>`;
 const PS_ARROW = `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 10 H15"/><path d="M10.6 5.4 L15.2 10 L10.6 14.6"/></svg>`;
+/* the placeholder icon in the empty right half of the search results */
+const PSS_BOX_SEARCH = `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><rect x="6" y="12" width="26" height="20" rx="3.5"/><line x1="12" y1="10" x2="12" y2="8" stroke-linecap="round" stroke-width="2.6"/><line x1="18" y1="10" x2="18" y2="8" stroke-linecap="round" stroke-width="2.6"/><line x1="24" y1="10" x2="24" y2="8" stroke-linecap="round" stroke-width="2.6"/><line x1="12" y1="36" x2="12" y2="34" stroke-linecap="round" stroke-width="2.6"/><line x1="18" y1="36" x2="18" y2="34" stroke-linecap="round" stroke-width="2.6"/><line x1="24" y1="36" x2="24" y2="34" stroke-linecap="round" stroke-width="2.6"/><line x1="6" y1="18" x2="4" y2="18" stroke-linecap="round" stroke-width="2.6"/><line x1="6" y1="26" x2="4" y2="26" stroke-linecap="round" stroke-width="2.6"/><line x1="34" y1="18" x2="36" y2="18" stroke-linecap="round" stroke-width="2.6"/><line x1="34" y1="26" x2="36" y2="26" stroke-linecap="round" stroke-width="2.6"/><circle cx="17" cy="20.5" r="4.2"/><line x1="20.2" y1="23.7" x2="25.4" y2="28.9" stroke-linecap="round" stroke-width="2.6"/></svg>`;
 const PS_TABS = [
   { id: 'games',  name: 'Games',  ic: PS_IC.games },
   { id: 'apps',   name: 'Apps',   ic: PS_IC.apps },
@@ -6309,7 +6488,7 @@ const PS_TABS = [
   { id: 'you',    name: 'You',    ic: PS_IC.you },
   { id: 'kids',   name: 'Kids',   ic: PS_IC.kids }
 ];
-let psDetail = null;
+let psDetail = null, psSearchCat = null, psSearchSel = null;
 function shuffle(arr){
   const a = arr.slice();
   for (let i = a.length - 1; i > 0; i--){
@@ -6333,7 +6512,7 @@ function psBtnAction(g, el){
   if (st === 'idle') startInstall(g);
   else if (st === 'dl' || st === 'inst') cancelInstall(g);
   else {
-    const app = installed.find(a => a.id === g.id);
+    const app = installed.find(a => a.id === (g.browser ? APP_ID_BY_KEY[g.browser] : g.id));
     if (app) openApp(app, el);
   }
 }
@@ -6364,6 +6543,7 @@ function buildPlayStore(){
     <div class="ps-body">
       <div class="ps-pane on" data-p="games"><div class="ps-games"></div></div>
       <div class="ps-pane" data-p="apps"><div class="ps-games"></div></div>
+      <div class="ps-pane" data-p="search"><div class="pss"></div></div>
     </div>`;
   const tabsEl = root.querySelector('.ps-tabs');
   const setTab = id => {
@@ -6379,6 +6559,7 @@ function buildPlayStore(){
     tabsEl.appendChild(b);
   });
   root.querySelectorAll('.ps-games').forEach(buildPsList);
+  buildPsSearch(root.querySelector('.pss'));
   root.addEventListener('click', e => {
     const btn = e.target.closest('.ps-btn');
     if (btn){
@@ -6444,6 +6625,159 @@ function buildPsList(box){
     box.appendChild(row);
   }
 }
+
+/* ---- Play Store: the Search tab ---- */
+function buildPsSearch(box){
+  box.innerHTML = `
+    <div class="pss-top">
+      <div class="pss-bar">
+        ${PS_IC.search}
+        <input type="text" placeholder="Search apps &amp; games" spellcheck="false" autocomplete="off" aria-label="Search apps & games">
+      </div>
+      <div class="pss-ava" aria-hidden="true"></div>
+    </div>
+    <div class="pss-body">
+      <div class="pss-home"></div>
+      <div class="pss-res" hidden>
+        <div class="pss-left"></div>
+        <div class="pss-right">
+          <div class="pss-rcirc">${PSS_BOX_SEARCH}</div>
+          <div class="pss-rtext">Select an app to view its details</div>
+        </div>
+      </div>
+    </div>`;
+  /* profile avatar: initial when signed in, gray person otherwise */
+  const ava = box.querySelector('.pss-ava');
+  const syncAva = () => {
+    ava.textContent = setAccount ? (setAccount.name || '?').charAt(0).toUpperCase() : '';
+    ava.style.background = setAccount ? avatarColor(setAccount.email) : '#3a3d42';
+  };
+  syncAva();
+  const inp = box.querySelector('.pss-bar input');
+  const home = box.querySelector('.pss-home');
+  const res = box.querySelector('.pss-res');
+  const left = box.querySelector('.pss-left');
+  /* home: "What are you looking for?" + category rows + "Suggested for you" */
+  const buildHome = () => {
+    home.innerHTML = '';
+    const h1 = document.createElement('h2');
+    h1.className = 'pss-h';
+    h1.textContent = 'What are you looking for?';
+    home.appendChild(h1);
+    const cats = document.createElement('div');
+    cats.className = 'pss-cats';
+    CATS.filter(c => c.id !== 'all').forEach(c => {
+      const b = document.createElement('button');
+      b.className = 'pss-cat';
+      const picks = shuffle(GAMES.filter(g => g.cat === c.id)).slice(0, 3);
+      let ic = `<span class="ic">`;
+      picks.forEach((g, i) => { ic += `<img src="${g.icon}" alt="" draggable="false" style="right:${i * 26}px">`; });
+      ic += `</span>`;
+      b.innerHTML = `${ic}<b>${catName(c.id)} games</b><span class="arr">${PS_ARROW}</span>`;
+      b.addEventListener('click', () => { inp.value = catName(c.id); doSearch(); });
+      cats.appendChild(b);
+    });
+    home.appendChild(cats);
+    const h2 = document.createElement('h2');
+    h2.className = 'pss-h';
+    h2.textContent = 'Suggested for you';
+    home.appendChild(h2);
+    const sug = document.createElement('div');
+    sug.className = 'pss-sug';
+    const list = shuffle(GAMES).slice(0, 24);
+    for (let r = 0; r < 2; r++){
+      const row = document.createElement('div');
+      row.className = 'ps-row';
+      list.slice(r * 12, r * 12 + 12).forEach(g => {
+        const it = document.createElement('button');
+        it.className = 'ps-item';
+        it.dataset.g = g.id;
+        it.innerHTML = `
+          <img class="ps-iicon" src="${g.icon}" alt="" draggable="false">
+          <div class="ps-itx"><b></b><small></small></div>
+          <span class="ps-rate"><span>${g.rating.toFixed(1)}</span>${PS_STAR_R}</span>`;
+        it.querySelector('b').textContent = g.name;
+        it.querySelector('small').textContent = psCatLabel(g);
+        row.appendChild(it);
+      });
+      wireDragScroll(row);
+      sug.appendChild(row);
+    }
+    home.appendChild(sug);
+  };
+  buildHome();
+  /* searching: split into left results / right placeholder, detail slides in from the right */
+  const clearSel = () => {
+    psSearchSel = null;
+    left.querySelectorAll('.pss-item.sel').forEach(el => el.classList.remove('sel'));
+  };
+  const doSearch = () => {
+    const q = inp.value.trim();
+    if (!q){
+      res.hidden = true;
+      home.style.display = '';
+      return;
+    }
+    home.style.display = 'none';
+    res.hidden = false;
+    clearSel();
+    left.innerHTML = '';
+    const ql = q.toLowerCase();
+    const cat = CATS.find(c => c.id !== 'all' &&
+      (c.name.toLowerCase() === ql || c.name.toLowerCase() + ' games' === ql || c.id === ql));
+    let hits;
+    if (cat){
+      psSearchCat = cat.id;
+      hits = GAMES.filter(g => g.cat === cat.id || g.cat2 === cat.id)
+        .sort((a, b) => b.rating - a.rating);
+    } else {
+      psSearchCat = null;
+      hits = GAMES.map(g => ({ g, m: matchGame(q, g) })).filter(x => x.m)
+        .sort((a, b) => a.m.score - b.m.score || b.g.rating - a.g.rating)
+        .map(x => x.g);
+    }
+    hits.forEach(g => {
+      const d = DETAILS[g.id] || {};
+      const it = document.createElement('button');
+      it.className = 'pss-item';
+      it.dataset.g = g.id;
+      it.innerHTML = `
+        <img src="${g.icon}" alt="" draggable="false">
+        <span class="tx">
+          <b></b>
+          <small>${(d.dev || '')}${d.dev ? ' · ' : ''}${psCatLabel(g)}</small>
+          <span class="pss-rate"><span>${g.rating.toFixed(1)}</span>${PS_STAR_R}</span>
+        </span>`;
+      it.querySelector('b').textContent = g.name;
+      it.addEventListener('click', () => {
+        clearSel();
+        it.classList.add('sel');
+        psSearchSel = g.id;
+        openPsDetail(g);
+      });
+      left.appendChild(it);
+    });
+    if (!hits.length){
+      const p = document.createElement('p');
+      p.className = 'pss-none';
+      p.textContent = 'No results';
+      left.appendChild(p);
+    }
+  };
+  inp.addEventListener('input', () => {
+    if (!inp.value.trim()){
+      inp.blur();
+      res.hidden = true;
+      home.style.display = '';
+      return;
+    }
+    doSearch();
+  });
+  inp.addEventListener('keydown', e => {
+    if (e.key === 'Enter'){ e.preventDefault(); inp.blur(); doSearch(); }
+  });
+}
+/* app details page — slides in from the right, with a bigger gap above the screenshots */
 function openPsDetail(g){
   if (psDetail) return;
   const d = DETAILS[g.id] || {};
@@ -6675,7 +7009,8 @@ loadDevState(st => {
       setAccount = { email: em, name: String(st.settings.google.name || '') || nameFromEmail(em) };
     }
     installed = st.installed.filter(d => d && d.id)
-      .map(d => ({ id: String(d.id), name: String(d.name || 'App'), icon: fixIcon(String(d.id), String(d.icon || '')), url: URL_FIXES[d.id] || fixUrl(String(d.id), String(d.url || '')) }));
+      .map(d => ({ id: String(d.id), name: String(d.name || 'App'), icon: String(d.icon || ''), white: !!d.white, tabName: d.tabName || '', url: URL_FIXES[d.id] || fixUrl(String(d.id), String(d.url || '')) }))
+      .map(d => (d.url ? d : { ...d, icon: fixIcon(d.id, d.icon), url: d.url }));
     if (Array.isArray(st.pages)){
       pages = st.pages.map(p => {
         const arr = (p || []).slice(0, 18).map(deSlot);
